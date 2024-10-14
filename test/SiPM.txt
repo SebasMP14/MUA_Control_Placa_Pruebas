@@ -1,0 +1,76 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parámetros del fotodiodo en avalancha (APD) para la simulación
+I_oscura = 1e-9  # Corriente oscura (en amperios)
+V_BR = 90  # Tensión de avalancha (en voltios)
+alpha = 1e-6  # Constante de proporcionalidad para la corriente de avalancha
+beta = 2  # Exponente en la región de avalancha
+
+# Crear una función que modele la corriente inversa en función de la tensión inversa
+def corriente_inversa(V):
+    # Condiciones para las diferentes regiones de la curva
+    if V < V_BR:
+        return I_oscura  # Región de corriente oscura (subumbral)
+    else:
+        return I_oscura + alpha * (V - V_BR)**beta  # Región de avalancha
+
+# Generar un rango de tensiones inversas
+V = np.linspace(0, 120, 500)  # Rango de tensión inversa (en voltios)
+
+# Calcular la corriente inversa para cada valor de tensión
+I = np.array([corriente_inversa(v) for v in V])
+
+# Crear la gráfica
+plt.figure(figsize=(8, 6))
+plt.plot(V, I, label="I-V inversa (APD)", color="blue", lw=2)
+
+# Configuración de la gráfica
+plt.yscale('log')  # Escala logarítmica en el eje Y
+plt.xlabel('Tensión inversa (V)', fontsize=12)
+plt.ylabel('Corriente inversa (A)', fontsize=12)
+plt.title('Curva de Corriente Inversa vs Tensión Inversa para un Fotodiodo en Avalancha', fontsize=14)
+plt.axvline(x=V_BR, color='red', linestyle='--', label=f"Tensión de avalancha (V_BR = {V_BR} V)")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+
+###########################################################################
+###########################################################################
+
+
+
+# Nuevos parámetros para la función suavizada antes de V_BR
+I_0 = 1e-8  # Corriente de pre-avalancha que crece suavemente
+lambda_ = 0.1  # Parámetro de suavidad para el crecimiento exponencial modificado
+
+# Función ajustada con una exponencial suavizada antes de la tensión de avalancha
+def corriente_inversa_suave(V):
+    if V < V_BR:
+        # Corriente oscura con crecimiento exponencial suavizado antes de V_BR
+        return I_oscura_ajustada + I_0 * (1 - np.exp(-lambda_ * V))
+    else:
+        # Corriente en la región de avalancha
+        corriente_avalancha = I_oscura_ajustada + I_0 * (1 - np.exp(-lambda_ * V_BR)) + alpha * (V - V_BR)**beta
+        corriente_avalancha *= 1 / (1 + saturacion_corriente * (V - V_BR))  # Aplicar saturación
+        corriente_avalancha *= (1 + ruido_avalancha * np.random.normal())  # Añadir ruido
+        return corriente_avalancha
+
+# Calcular la corriente inversa ajustada con la nueva curva suave para cada valor de tensión
+I_suave = np.array([corriente_inversa_suave(v) for v in V])
+
+# Crear la gráfica mejorada con la nueva curva
+plt.figure(figsize=(8, 6))
+plt.plot(V, I_suave, label="I-V inversa (APD) Suave y Realista", color="darkorange", lw=2)
+
+# Configuración de la gráfica
+plt.yscale('log')  # Escala logarítmica en el eje Y
+plt.xlabel('Tensión inversa (V)', fontsize=12)
+plt.ylabel('Corriente inversa (A)', fontsize=12)
+plt.title('Curva de Corriente Inversa vs Tensión Inversa (Mejorada y Suavizada)', fontsize=14)
+plt.axvline(x=V_BR, color='red', linestyle='--', label=f"Tensión de avalancha (V_BR = {V_BR} V)")
+plt.legend()
+plt.grid(True)
+plt.show()

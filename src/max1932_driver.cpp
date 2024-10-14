@@ -30,7 +30,7 @@ void start_max1932(void) {
  * @return  true exitoso - false fallido
  */
 bool write_max_reg(uint8_t command) {
-  #ifdef DEBUG_MODE
+  #ifdef DEBUG_MAX
   Serial.print("0x");
   Serial.println(command, HEX);
   #endif

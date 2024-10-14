@@ -15,7 +15,7 @@
 #include <SPI.h>
 #include "hardware_pins.h"
 
-#define DEBUG_MODE
+#define DEBUG_MAX
 #define SPI_CLK_Speed 1000000
 
 void start_max1932(void);

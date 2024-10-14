@@ -12,7 +12,7 @@
 #ifndef TMP100_DRIVER_H
 #define TMP100_DRIVER_H
 
-#define DEBUG_MODE
+#define DEBUG_TMP
 
 #include <Arduino.h>
 #include <Wire.h>

@@ -24,7 +24,7 @@
  * SD: Shut-down mode 1
  */
 bool start_tmp100(void) {
-	uint8_t configRegister = 0b01100000;  // Default configuration
+	uint8_t configRegister = 0b01100000;  // Default configuration 12 bits
 
 	Wire.begin();
 	// Wire.setClock(400000); // Velocidad 400 KHz 
@@ -34,8 +34,8 @@ bool start_tmp100(void) {
 	Wire.beginTransmission(TMP100_ADDRESS);
 	Wire.write(0b00001000);
 	uint8_t status = Wire.endTransmission();
-	if (status != 0) {
-		#ifdef DEBUG_MODE
+	if (status != 3) { // 3 para HIGH SPEED
+		#ifdef DEBUG_TMP
 		Serial.print("ERROR (start_tmp100) HSM: Error en la transmisión I2C: ");
 		Serial.println(status);
 		return false;  // Detener si hay error en la transmisión
@@ -61,7 +61,7 @@ bool start_tmp100(void) {
 			break;
 		default:
 			configRegister = configRegister;
-			#ifdef DEBUG_MODE
+			#ifdef DEBUG_TMP
 			Serial.println("ERROR (start_tmp100): Resolución no válida, debe estar entre 9 y 12.");
 			#endif
 	}
@@ -70,7 +70,7 @@ bool start_tmp100(void) {
 
 	status = Wire.endTransmission();
 	if (status != 0) {
-		#ifdef DEBUG_MODE
+		#ifdef DEBUG_TMP
 		Serial.print("ERROR (start_tmp100): Error en la transmisión I2C: ");
 		Serial.println(status);
 		return false;  // Detener si hay error en la transmisión
@@ -109,6 +109,8 @@ float read_tmp100(void) {
 				rawTemp = (msb << 3) | (lsb >> 5);  // Se usan 3 bits del LSB
 				break;
 			case 12:
+				rawTemp = (msb << 4) | (lsb >> 4);  // Se usan 4 bits del LSB (12 bits)
+				break;
 			default:
 				rawTemp = (msb << 4) | (lsb >> 4);  // Se usan 4 bits del LSB (12 bits)
 				break;
@@ -118,7 +120,11 @@ float read_tmp100(void) {
 		if (rawTemp > (1 << (resolution - 1)) - 1) {
 				rawTemp |= ~((1 << resolution) - 1);  // Para valores negativos
 		}
-
+		/* 
+			El TMP10X tiene un registro de 16 bits, de los cuáles los 12 bits MSB son relevantes para la mayor
+		resolución. Estos 12 bits (con signo) dan un valor entero, este se multiplica por el factor correspondiente
+		a cada resolución mostrado abajo para tener el valor en grados celcius.
+		*/
 		switch (resolution) {
 			case 9:
 				return rawTemp * 0.5;  // Conversión a Celsius para 9 bits
