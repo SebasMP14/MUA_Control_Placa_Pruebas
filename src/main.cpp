@@ -6,9 +6,10 @@
 #include "flash_driver.h"
 #include "tmp100_driver.h"
 // #include "max1932_driver.h"
+// #include "calculos.h"
 
 #define DEBUG_MAIN
-#define P PB09 // Blink
+#define P PA20 // Blink
 #define PULSE PB08
 
 // uint8_t status = 0;
@@ -17,73 +18,135 @@ union FloatToUint32 { // para evitar aliasing y no violar las reglas del compila
   float f;
   uint32_t u;
 };
-unsigned long time_ini;
+unsigned long time_ini = 0x0;
+enum OperationMode {
+    COUNT_MODE,
+    TRANSFER_MODE,
+    UNKNOWN_MODE
+};
+OperationMode currentMode = UNKNOWN_MODE;
+unsigned long timestamp = 0;
+bool setup_state = false;
+
+void requestOperationMode(void);
+void getTimestampFromGPS(void);
+void setupCOUNT(void);
+void loopCOUNT(void);
+void setupTRANSFER(void);
+void loopTRANSFER(void);
 
 void setup() {
   delay(4000);
 
-  Serial.begin(115200);
-  Serial.println("Iniciado");
+  Serial.begin(115200);                 // USB
+  Serial.println("Serial Iniciado");
+  Serial1.begin(9600);                // OBC
+  Serial.println("Serial1 Iniciado");
 
-  pinMode(PULSE, INPUT_PULLDOWN);
+  requestOperationMode();
+  // currentMode = COUNT_MODE;
+
+  if ( !start_flash() ) { // Se utiliza en ambos modos
+    #ifdef DEBUG_MAIN
+    Serial.println("Comunicar al OBC que el flash no conecta.");
+    #endif
+  }
+
+  switch ( currentMode ) {
+    case COUNT_MODE:
+      setupCOUNT();
+      break;
+    case TRANSFER_MODE:
+      setupTRANSFER();
+      break;
+    default:
+      /* Modo no seleccionado o incorrecto, manejar... */
+      break;
+  }
+  Serial.println("Setup finalizado...");
+}
+
+void loop() {
+  switch ( currentMode ) {
+  case COUNT_MODE:
+    loopCOUNT();
+    break;
+  case TRANSFER_MODE:
+    loopTRANSFER();
+    break;
+  default:
+    Serial.println("DEBUG (loop): UNKNOWN_MODE");
+    delay(5000);
+    requestOperationMode();
+    if ( !setup_state && currentMode != UNKNOWN_MODE) {
+      setupCOUNT();
+    }
+    /* Modo no seleccionado o incorrecto, manejar... */
+    break;
+  }
+}
+
+void setupCOUNT(void) {
+  setup_state = true;
+
+  Serial2.begin(9600);                // GPS
+  Serial.println("Serial2 Iniciado");
+  getTimestampFromGPS();
+
+  pinMode(PULSE_1, INPUT_PULLDOWN);
   // pinMode(PULSE_2, INPUT_PULLDOWN);
   pinMode(P, OUTPUT);
   // pinMode(SCL_Sensor, OUTPUT); // salida para Timer Control 2 
-  pinMode(PA01, OUTPUT); // Salida para TC2 (utiliza también PA15)
+  // pinMode(PA01, OUTPUT); // Salida para TC2 (utiliza también PA15)
   
   digitalWrite(P, LOW);
 
-  attachInterrupt(digitalPinToInterrupt(PULSE), handlePulse1, RISING);
+  attachInterrupt(digitalPinToInterrupt(PULSE_1), handlePulse1, RISING);
+  // attachInterrupt(digitalPinToInterrupt(PULSE), handlePulse1, CHANGE);
   // attachInterrupt(digitalPinToInterrupt(PULSE), handlePulse1_FALLING, FALLING);
-  setupTC2();
-  setupTC_Pulse1();
+  setupTC2(); 
+  // setupTC4();
 
   // Configuración del TMP100
   if ( !start_tmp100() ) {
     #ifdef DEBUG_MAIN
-    Serial.println("Inicialización de TMP100 fallida");
-    #endif
-  }
-
-  if ( !start_flash() ) {
-    #ifdef DEBUG_MAIN
-    Serial.println("Comunicar al OBC que el flash no conecta.");
+    Serial.println("DEBUG (setupCOUNT): Inicialización de TMP100 fallida");
     #endif
   }
 
   // erase_all();
 
   time_ini = millis();
-
-  Serial.println("Setup finalizado...");
+  Serial.println("setupCount finalizado...");
 }
 
-void loop() {
+void loopCOUNT(void) {
 
-  digitalWrite(P, HIGH);
-  delay(100);
-  digitalWrite(P, LOW);
-
-  if (detect1) {
+  if ( detect1 ) {
     #ifdef DEBUG_MAIN
     Serial.print("Pulsos: ");
     Serial.print(pulse_count1);
     Serial.print(", ");
     // Serial.println(pulse_count2);
     Serial.print("Duración: ");
-    Serial.print(pulse_duration);
+    Serial.print(pulse_Width);
     Serial.println(" ticks");
     #endif
     detect1 = false;
     // detect2 = false;
   }
 
-  if ( detect_TC ) {
-    read_all();
-    detect_TC = false;
+  if ( (millis() - time_ini) >= 5000 ) {
+    // read_all();
+    digitalWrite(P, HIGH); // Blink
+    delay(100);
+    digitalWrite(P, LOW);
+    Serial.print("millis: ");
+    time_ini = millis();
+    Serial.println(time_ini);
   }
 
-  if ( (millis() - time_ini) >= 5000 ) {
+  if ( detect_TC ) {
     temperature = read_tmp100();
     FloatToUint32 temp;
     temp.f = temperature;
@@ -118,9 +181,55 @@ void loop() {
     //   }
     }
     // read_all();
-    time_ini = millis();
+    digitalWrite(P, HIGH);
+    delay(200);
+    digitalWrite(P, LOW);
+    // delay(100);
+    detect_TC = false;
   }
 
+}
 
+void setupTRANSFER(void) {
+
+}
+
+void loopTRANSFER(void) {
+
+
+}
+
+void requestOperationMode(void) {
+  Serial1.write(0xAA);  // Comando para solicitar el modo
   
+  while (Serial1.available() < 0) ;
+  delay(100);
+  uint8_t response;
+  Serial1.readBytes(&response, 1); // TRAMA del OBC
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (requestOperationMode): Recibido de Serial1 0x");
+  Serial.println(response, HEX);
+  #endif
+  
+  if (response == 0xA1) { // Decodificar la respuesta y establecer el modo
+    currentMode = COUNT_MODE;
+  } else if (response == 0xA4) {
+    currentMode = TRANSFER_MODE;
+  } else {
+    currentMode = UNKNOWN_MODE;
+  }
+}
+
+void getTimestampFromGPS(void) {
+  Serial2.write(0xBB);  // Comando para solicitar el timestamp
+  
+  while ( Serial2.available() < sizeof(uint32_t) ) ;
+
+  uint32_t timestamp;
+  Serial2.readBytes((char *)&timestamp, sizeof(timestamp));
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (getTimestampFromGPS) -> Timestamp recibido: ");
+  Serial.println(timestamp);
+  #endif
+  /* Actualizar timestamp. */
 }

@@ -16,12 +16,15 @@
 #define DEBUG_TC
 
 extern bool detect_TC;
+extern bool detect1_TC;
+extern unsigned long pulse_Width;
 
 void setupTC0(void);        // Interrupción para algoritmo de polarización
 void setupTC2(void);        
 void TC0_Handler(void);     // Aplicación del algoritmo
 void TC2_Handler(void);
-void setupTC_Pulse1(void);
+void setupTC4(void);
+void TC4_Handler(void);
 
 #endif 
 

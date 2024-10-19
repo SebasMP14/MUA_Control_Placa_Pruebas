@@ -15,6 +15,8 @@
 #include "hardware_pins.h"
 
 bool detect_TC = false;
+bool detect1_TC = false;
+unsigned long pulse_Width = 0x00;
 
 /************************************************************************************************************
  * @fn      setupTC()
@@ -36,8 +38,9 @@ void setupTC2(void) {
   TC2->COUNT32.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1024; // Prescaler de 1024
   TC2->COUNT32.CTRLA.reg |= TC_CTRLA_MODE_COUNT32; // Modo de 32 bits
 
-  // Configurar la comparación para generar una interrupción
-  TC2->COUNT32.CC[1].reg = (120000000 * 10 / 1024); // CC_Value = clk_frec * Tiempo_deseado / prescaler
+  /* Configurar la comparación para generar una interrupción.
+  El orden de los factores, altera el manejo de la variable. */
+  TC2->COUNT32.CC[1].reg = ((120000000 / 1024) * 30); // CC_Value = clk_frec * Tiempo_deseado / prescaler
   while (TC2->COUNT32.SYNCBUSY.bit.CC1);
 
   // Habilitar interrupciones por comparación
@@ -68,15 +71,48 @@ void TC2_Handler(void) {
   }
 }
 
-void setupTC_Pulse1(void) {
-  GCLK->PCHCTRL[TC4_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0 | GCLK_PCHCTRL_CHEN; // Usar GCLK0
+void setupTC4(void) {
+  // Habilitar el bus para el TC4
+  MCLK->APBCMASK.reg |= MCLK_APBCMASK_TC4;
 
-  TC4->COUNT16.CTRLA.reg = TC_CTRLA_SWRST; // Resetear TC4
-  while (TC4->COUNT16.SYNCBUSY.bit.SWRST);
+  // Configurar el TC4 para usar el clock gen (usar GCLK0 a 120MHz por ejemplo)
+  GCLK->PCHCTRL[TC4_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0 | GCLK_PCHCTRL_CHEN;
+  while (GCLK->PCHCTRL[TC4_GCLK_ID].bit.CHEN == 0); // Esperar hasta que esté listo
 
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV16; // Ajustar el prescaler
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16; // Modo de 16 bits
+  // Configuración del pin PB08 como entrada para la captura (TC4_CH0)
+  // PORT->Group[PORTB].PINCFG[8].reg |= PORT_PINCFG_PMUXEN;       // Habilitar el multiplexer
+  // PORT->Group[PORTB].PMUX[8 >> 1].reg &= ~PORT_PMUX_PMUXE_Msk;  // Limpiar los bits anteriores de PMUXE
+  // PORT->Group[PORTB].PMUX[8 >> 1].reg |= PORT_PMUX_PMUXE(0x05); // TC4_CH0 en PB08
 
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE; // Habilitación
-  while (TC4->COUNT16.SYNCBUSY.bit.ENABLE);
+  // Configuración del CTRLA (modo de 16 bits, prescaler 8 y habilitar captura CH0)
+  // TC4->COUNT16.CTRLA.reg = TC_CTRLA_MODE_COUNT16 | TC_CTRLA_PRESCALER_DIV8 | TC_CTRLA_CAPTEN0;
+  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_CAPTEN0 | TC_CTRLA_COPEN0;
+
+  // Configuración de la captura de eventos
+  // TC4->COUNT16.EVCTRL.reg = TC_EVCTRL_EVACT_PW | TC_EVCTRL_TCEI;  // Capture pulse-width
+  TC4->COUNT16.INTENSET.reg = TC_INTENSET_MC0;  // Habilitar interrupción en capture match
+  TC4->COUNT16.EVCTRL.reg = TC_EVCTRL_TCEI;
+  NVIC_EnableIRQ(TC4_IRQn);  // Habilitar la interrupción global del TC4
+
+
+
+  TC4->COUNT16.CTRLA.bit.ENABLE = 1;
+  while (TC4->COUNT16.SYNCBUSY.bit.ENABLE); // Esperar hasta que esté sincronizado
+
+  #ifdef DEBUG_TC
+  Serial.println("DEBUG (setupTC4): Setup exitoso?");
+  #endif
+
+}
+
+void TC4_Handler(void) {
+  if (TC4->COUNT16.INTFLAG.bit.MC0) {
+    pulse_Width = TC4->COUNT16.CC[0].reg;  // Leer el valor capturado en el canal 0
+    
+    TC4->COUNT16.INTFLAG.reg = TC_INTFLAG_MC0;  // Limpiar la bandera de interrupción
+    #ifdef DEBUG_TC
+    Serial.println("DEBUG (TC4_Handler): Pulse width.");
+    #endif
+    detect1_TC = true;
+  }
 }

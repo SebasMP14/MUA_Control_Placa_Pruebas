@@ -89,7 +89,14 @@ bool start_tmp100(void) {
 float read_tmp100(void) {
   Wire.beginTransmission(TMP100_ADDRESS);
   Wire.write(0x00);  // Puntero al registro de temperatura
-  Wire.endTransmission();
+  uint8_t status = Wire.endTransmission();
+	if (status != 0) {
+		#ifdef DEBUG_TMP
+		Serial.print("ERROR (start_tmp100): Error en la transmisión I2C: ");
+		Serial.println(status);
+		return false;  // Detener si hay error en la transmisión
+		#endif
+	}
 
   Wire.requestFrom(TMP100_ADDRESS, 2);  // Solicita 2 bytes (MSB y LSB)
   if ( Wire.available() == 2 ) {
@@ -120,11 +127,9 @@ float read_tmp100(void) {
 		if (rawTemp > (1 << (resolution - 1)) - 1) {
 				rawTemp |= ~((1 << resolution) - 1);  // Para valores negativos
 		}
-		/* 
-			El TMP10X tiene un registro de 16 bits, de los cuáles los 12 bits MSB son relevantes para la mayor
+		/* 	El TMP10X tiene un registro de 16 bits, de los cuáles los 12 bits MSB son relevantes para la mayor
 		resolución. Estos 12 bits (con signo) dan un valor entero, este se multiplica por el factor correspondiente
-		a cada resolución mostrado abajo para tener el valor en grados celcius.
-		*/
+		a cada resolución mostrado abajo para tener el valor en grados celcius.	*/
 		switch (resolution) {
 			case 9:
 				return rawTemp * 0.5;  // Conversión a Celsius para 9 bits
