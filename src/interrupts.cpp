@@ -15,27 +15,32 @@ volatile uint16_t pulse_count1 = 0;  // Contador de pulsos
 volatile uint16_t pulse_count2 = 0;
 volatile bool detect1 = false;
 volatile bool detect2 = false;
-volatile unsigned long pulse_start = 0;
-volatile unsigned long pulse_width = 0;
+volatile uint16_t pulse_start = 0;
+volatile uint16_t pulse_width = 0;
+volatile uint16_t aux = 0;
 
-void handlePulse1(void) {
+void handlePulse1_R(void) {
 	pulse_count1++;
 	detect1 = true;
-	// if (digitalRead(PB08) == HIGH) {
-	// 	// Capturar el tiempo del flanco ascendente
-	// 	while (TC4->COUNT16.SYNCBUSY.bit.COUNT);
-	// 	pulse_start = TC4->COUNT16.COUNT.reg;
-	// } else {
-	// 	// Capturar el tiempo del flanco descendente
-	// 	while (TC4->COUNT16.SYNCBUSY.bit.COUNT);
-
-	// 	// Calcular el ancho del pulso
-	// 	pulse_width = TC4->COUNT16.COUNT.reg - pulse_start;
-	// 	// detect1 = true;
-	// }
 }
 
-void handlePulse2(void) {
+void handlePulse1_F(void) {
+	pulse_count1++;
+	detect1 = true;
+}
+
+void handlePulse2_R(void) {
 	pulse_count2++;
 	detect2 = true;
+}
+
+void activeInterrupt(void) {
+	attachInterrupt(digitalPinToInterrupt(PULSE_1), handlePulse1_R, RISING);
+	// attachInterrupt(digitalPinToInterrupt(PULSE_1), handlePulse1_F, FALLING);
+  // attachInterrupt(digitalPinToInterrupt(PULSE_2), handlePulse1_R, RISING);
+}
+
+void desactiveInterrupt(void) {
+	detachInterrupt(digitalPinToInterrupt(PULSE_1));
+	// detachInterrupt(digitalPinToInterrupt(PULSE_2));
 }

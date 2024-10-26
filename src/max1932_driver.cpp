@@ -31,16 +31,16 @@ void start_max1932(void) {
  */
 bool write_max_reg(uint8_t command) {
   #ifdef DEBUG_MAX
-  Serial.print("0x");
+  Serial.print("DEBUG (write_max_reg) -> 0x");
   Serial.println(command, HEX);
   #endif
 
   SPI.beginTransaction(SPISettings(SPI_CLK_Speed, MSBFIRST, SPI_MODE0)); // 2 MHz máximo
   digitalWrite(SPI_CS_MAX, LOW);  // selección
   SPI.transfer(command);          // Envio de comando
-  SPI.endTransaction();
-  delayMicroseconds(2);
+  delayMicroseconds(2 * SPI_CLK_Speed / 1000000);
   digitalWrite(SPI_CS_MAX, HIGH);
+  SPI.endTransaction();
 
   return true;
 }

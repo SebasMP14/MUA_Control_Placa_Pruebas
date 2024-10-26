@@ -36,7 +36,7 @@ bool start_tmp100(void) {
 	uint8_t status = Wire.endTransmission();
 	if (status != 3) { // 3 para HIGH SPEED
 		#ifdef DEBUG_TMP
-		Serial.print("ERROR (start_tmp100) HSM: Error en la transmisión I2C: ");
+		Serial.print("ERROR (start_tmp100) HSM -> Error en la transmisión I2C: ");
 		Serial.println(status);
 		return false;  // Detener si hay error en la transmisión
 		#endif
@@ -62,7 +62,7 @@ bool start_tmp100(void) {
 		default:
 			configRegister = configRegister;
 			#ifdef DEBUG_TMP
-			Serial.println("ERROR (start_tmp100): Resolución no válida, debe estar entre 9 y 12.");
+			Serial.println("ERROR (start_tmp100) -> Resolución no válida, debe estar entre 9 y 12.");
 			#endif
 	}
 
@@ -71,7 +71,7 @@ bool start_tmp100(void) {
 	status = Wire.endTransmission();
 	if (status != 0) {
 		#ifdef DEBUG_TMP
-		Serial.print("ERROR (start_tmp100): Error en la transmisión I2C: ");
+		Serial.print("ERROR (start_tmp100) -> Error en la transmisión I2C: ");
 		Serial.println(status);
 		return false;  // Detener si hay error en la transmisión
 		#endif
@@ -92,9 +92,9 @@ float read_tmp100(void) {
   uint8_t status = Wire.endTransmission();
 	if (status != 0) {
 		#ifdef DEBUG_TMP
-		Serial.print("ERROR (start_tmp100): Error en la transmisión I2C: ");
+		Serial.print("ERROR (start_tmp100) -> Error en la transmisión I2C: ");
 		Serial.println(status);
-		return false;  // Detener si hay error en la transmisión
+		return NAN;  // Detener si hay error en la transmisión
 		#endif
 	}
 

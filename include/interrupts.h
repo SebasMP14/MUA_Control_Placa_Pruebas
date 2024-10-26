@@ -23,12 +23,13 @@ extern volatile uint16_t pulse_count1;  // Contador de pulsos
 extern volatile uint16_t pulse_count2;
 extern volatile bool detect1;  // Flag para indicar detección de pulso
 extern volatile bool detect2;
-extern volatile unsigned long pulse_start;
-extern volatile unsigned long pulse_width;
+extern volatile uint16_t pulse_start;
+extern volatile uint16_t pulse_width;
+extern volatile uint16_t aux;
 
 void handlePulse1(void);
 void handlePulse2(void);
-
-void handlePulse1_FALLING(void);
+void activeInterrupt(void);
+void desactiveInterrupt(void);
 
 #endif

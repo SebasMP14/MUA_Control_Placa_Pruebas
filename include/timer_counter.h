@@ -13,18 +13,18 @@
 #ifndef TIMER_COUNTER_H
 #define TIMER_COUNTER_H
 
+#include "interrupts.h"
 #define DEBUG_TC
 
 extern bool detect_TC;
 extern bool detect1_TC;
-extern unsigned long pulse_Width;
 
-void setupTC0(void);        // Interrupción para algoritmo de polarización
-void setupTC2(void);        
-void TC0_Handler(void);     // Aplicación del algoritmo
-void TC2_Handler(void);
-void setupTC4(void);
-void TC4_Handler(void);
+void setupTC0(void);        
+void setupTC2(void);        // Para algoritmo de polarización
+void setupTC4(void);        // Para pulsos
+void TC0_Handler(void);     
+void TC2_Handler(void);     // Aplicación del algoritmo
+void TC4_Handler(void);     // Calculo del pulso
 
 #endif 
 

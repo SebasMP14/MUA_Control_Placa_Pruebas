@@ -41,6 +41,7 @@ bool start_flash(void);
 bool write_mem(uint8_t *buffer, uint32_t len);
 bool get_address(uint32_t *write_address);
 void read_all(void);
+void read_until(uint32_t data_length);
 bool erase_all(void);
 bool update_address(uint32_t *adress);
 
