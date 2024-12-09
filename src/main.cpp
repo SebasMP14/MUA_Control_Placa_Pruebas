@@ -1,31 +1,43 @@
 #include <Arduino.h>
+#include <Adafruit_ADS1X15.h>
 
 #include "hardware_pins.h"
 #include "interrupts.h"
 #include "timer_counter.h"
 #include "flash_driver.h"
 #include "tmp100_driver.h"
-// #include "max1932_driver.h"
-// #include "calculos.h"
+#include "max1932_driver.h"
+#include "calculos.h"
 #include "obc_comm.h"
 
 #define DEBUG_MAIN
+#define MAX_ITER 10
+#define Elementos 100
+#define OverVoltage 3                     // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define Switching_Time_MAX 4              // Microseconds
 #define P PA20 // Blink
 #define PULSE PB08
 
 // uint8_t status = 0;
 float temperature = 0.0;
-union FloatToUint32 { // para evitar aliasing y no violar las reglas del compilador
+union FloatToUint32 {                     // Para evitar aliasing y no violar las reglas del compilador
   float f;
   uint32_t u;
 };
 unsigned long time_ini = 0x00;
 unsigned long timestamp = 0x00;
 
+Adafruit_ADS1115 ads;
+float inverseVoltage[Elementos];          // Tensión inversa aplicada al SiPM para obtener "inverseCurrent_I"
+float inverseCurrent_V[Elementos];        // Tensión leída, correspondiente a la corriente inversa
+float inverseCurrent_I[Elementos];        // Corriente inversa, convertida de "inverseCurrent_V[]"
+
 void setupCOUNT(void);
 void loopCOUNT(void);
 void setupTRANSFER(void);
 void loopTRANSFER(void);
+
+void obtain_Curve_inverseVI(float Temperature);
 
 void setup() {
   delay(4000);
@@ -38,10 +50,13 @@ void setup() {
   requestOperationMode();               // Solicitud del modo de operación
   // currentMode = COUNT_MODE;
 
-  if ( !start_flash() ) {               // Se utiliza en ambos modos de operación
-    #ifdef DEBUG_MAIN
-    Serial.println("DEBUG (setup) -> Comunicar al OBC que el flash no conecta.");
-    #endif
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( !start_flash() ) {               // Se utiliza en ambos modos de operación
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (setup) -> La flash no conecta, intento: ");
+      Serial.println(iter_counter);
+      #endif
+    }
   }
 
   switch ( currentMode ) {
@@ -92,7 +107,21 @@ void loop() {
 void setupCOUNT(void) {
   setup_state = true;
 
-  rtc.begin();
+  // rtc.begin();
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( rtc.begin() ) { // Configuración del RTC, HACER EN VARIOS INTENTOS
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.");
+      #endif
+      break;
+    } else {
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (setupCOUNT) -> Inicialización de RTC fallida: ");
+      Serial.println(iter_counter);
+      #endif
+      delay(10);
+    }
+  }
   getTimestampFromGPS();
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
@@ -105,15 +134,25 @@ void setupCOUNT(void) {
 
   activeInterrupt();
 
-  setupTC2(); 
+  setupTC2();
   // setupTC4();
 
-  
-  if ( !start_tmp100() ) { // Configuración del TMP100, HACER EN VARIOS INTENTOS
-    #ifdef DEBUG_MAIN
-    Serial.println("DEBUG (setupCOUNT) -> Inicialización de TMP100 fallida");
-    #endif
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( start_tmp100() ) { // Configuración del TMP100, HACER EN VARIOS INTENTOS
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.");
+      #endif
+      break;
+    } else {
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (setupCOUNT) -> Inicialización de TMP100 fallida: ");
+      Serial.println(iter_counter);
+      #endif
+      delay(10);
+    }
   }
+
+  ads.begin();
 
   // erase_all();
 
@@ -126,7 +165,7 @@ void setupCOUNT(void) {
 }
 
 void loopCOUNT(void) {
-  if ( detect1 ) { // Se debe obtener el ancho del pulso...
+  if ( detect1 ) { // Se debe obtener el ancho del pulso?
     detect1 = false;
     #ifdef DEBUG_MAIN
     Serial.print("COUNT1: ");
@@ -160,11 +199,11 @@ void loopCOUNT(void) {
     Serial.println(rtc.now().unixtime());
   }
 
-  /* Interrupción del TC2 cada 60 seg: Primeramente se deben desactivar las interrupciones de los pulso,
-  luego se debe guardar en memoria -> timestamp(4B) - temperature(4B) - Vbias1y2(2x1B) - Count1y2(2x2B),
-  realizar el algoritmo de polarización y obtener Vbias1y2, 
-  inicializar las variables globales y activar las interrupciones de los pulsos. 
-      El proceso se espera que tarde 5 segundos.*/
+  /**   Interrupción del TC2 cada 60 seg: Primeramente se deben desactivar las interrupciones de los pulso,
+   * luego se debe guardar en memoria -> timestamp(4B) - temperature(4B) - Vbias1y2(2x1B) - Count1y2(2x2B),
+   * realizar el algoritmo de polarización y obtener Vbias1y2, 
+   * inicializar las variables globales y activar las interrupciones de los pulsos. 
+   *    El proceso se espera que tarde 5 segundos. */
   if ( detect_TC ) {
     temperature = read_tmp100();
     FloatToUint32 temp;
@@ -231,9 +270,10 @@ void loopCOUNT(void) {
   //     #endif
   //   }
 
+    
+
     detect_TC = false;
   }
-
 }
 
 /******************************************************
@@ -280,3 +320,34 @@ void loopTRANSFER(void) {
 
   /* Al finalizar la transferencia, terminamos el proceso o hacemos conteos?? */
 }
+
+/************************************************************************************************************
+ * @fn      obtain_Curve_inverseVI
+ * @brief   Se obtiene la curva I-V inversa del SiPM aplicando un filtro de butterworth a las lecturas del
+ *          ADC.
+ * @param   Temperature: obtenido del sensor TMP100 para la estimación teorica
+ * @return  ---todo
+ */
+void obtain_Curve_inverseVI(float Temperature) {
+  float Vbd_Teo = Vbd_teorical(Temperature);
+  float Vlimite_inferior = Vbd_Teo - 6;
+  float Vlimite_superior = Vbd_Teo + 4;
+  float Vbarrido = Vlimite_inferior;
+  float paso = (Vlimite_superior - Vlimite_superior) / Elementos;
+
+  for (int i = 0; i < Elementos; i++) {
+    write_max_reg(VMax_command(Vbarrido));
+    delayMicroseconds(Switching_Time_MAX);
+    // Aquí se debe validar la tensión seteada en la salida del max con el ADC
+    // inverseVoltage[i] = ads.computeVolts(ads.readADC_SingleEnded(0));
+    inverseCurrent_V[i] = ads.computeVolts(ads.readADC_SingleEnded(1));
+    // convertir a los valores de corriente correspondientes en "inverseCurrent_I"
+    // inverseCurrent_I[i] = ?;
+    Vbarrido += paso;
+  }
+  
+  float Vbias = obtain_Vbd(inverseCurrent_I, inverseVoltage, Elementos) + OverVoltage;
+}
+
+
+// pio device monitor -p COM17

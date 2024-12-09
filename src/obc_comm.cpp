@@ -9,6 +9,8 @@ RTC_SAMD51 rtc;
  * @brief   Solicita al OBC el modo de operación de la misión.
  * @param   NONE
  * @return  NONE
+ * TODO:
+ * - Cambiar los baudios en los protocolos UART a 9600
  */
 void requestOperationMode(void) {
   Serial1.begin(115200);                // OBC
@@ -53,7 +55,6 @@ void requestOperationMode(void) {
  * @return  NONE
  */
 void getTimestampFromGPS(void) {
-  
   Serial2.begin(115200);                // GPS
   #ifdef DEBUG_OBC
   Serial.println("DEBUG (getTimestampFromGPS) -> Serial2 Iniciado");

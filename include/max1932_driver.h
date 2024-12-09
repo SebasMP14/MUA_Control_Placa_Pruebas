@@ -17,8 +17,11 @@
 
 #define DEBUG_MAX
 #define SPI_CLK_Speed 1000000
+#define SPI_CS_delay 2 * SPI_CLK_Speed / 1000000
 
 void start_max1932(void);
 bool write_max_reg(uint8_t command);
+uint8_t VMax_command(float valor);
+float HexMax_command(uint8_t valor);
 
 #endif

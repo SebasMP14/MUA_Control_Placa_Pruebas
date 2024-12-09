@@ -38,8 +38,8 @@ bool start_tmp100(void) {
 		#ifdef DEBUG_TMP
 		Serial.print("ERROR (start_tmp100) HSM -> Error en la transmisión I2C: ");
 		Serial.println(status);
-		return false;  // Detener si hay error en la transmisión
 		#endif
+		return false;  // Detener si hay error en la transmisión
 	}
 
 	Wire.beginTransmission(TMP100_ADDRESS);
@@ -73,8 +73,8 @@ bool start_tmp100(void) {
 		#ifdef DEBUG_TMP
 		Serial.print("ERROR (start_tmp100) -> Error en la transmisión I2C: ");
 		Serial.println(status);
-		return false;  // Detener si hay error en la transmisión
 		#endif
+		return false;  // Detener si hay error en la transmisión
 	}
 
 	return true;  // Configuración exitosa
@@ -94,14 +94,14 @@ float read_tmp100(void) {
 		#ifdef DEBUG_TMP
 		Serial.print("ERROR (start_tmp100) -> Error en la transmisión I2C: ");
 		Serial.println(status);
-		return NAN;  // Detener si hay error en la transmisión
 		#endif
+		return NAN;  // Detener si hay error en la transmisión
 	}
 
   Wire.requestFrom(TMP100_ADDRESS, 2);  // Solicita 2 bytes (MSB y LSB)
   if ( Wire.available() == 2 ) {
-		int msb = Wire.read();  // Primer byte (MSB)
-		int lsb = Wire.read();  // Segundo byte (LSB)
+		uint8_t msb = Wire.read();  // Primer byte (MSB)
+		uint8_t lsb = Wire.read();  // Segundo byte (LSB)
 		
 		// Combinar MSB y LSB en base a la resolución
 		int16_t rawTemp = 0;
@@ -127,9 +127,9 @@ float read_tmp100(void) {
 		if (rawTemp > (1 << (resolution - 1)) - 1) {
 				rawTemp |= ~((1 << resolution) - 1);  // Para valores negativos
 		}
-		/* 	El TMP10X tiene un registro de 16 bits, de los cuáles los 12 bits MSB son relevantes para la mayor
-		resolución. Estos 12 bits (con signo) dan un valor entero, este se multiplica por el factor correspondiente
-		a cada resolución mostrado abajo para tener el valor en grados celcius.	*/
+		/**		El TMP10X tiene un registro de 16 bits, de los cuáles los 12 bits MSB son relevantes para la mayor
+		 * resolución. Estos 12 bits (con signo) dan un valor entero, este se multiplica por el factor correspondiente
+		 * a cada resolución mostrado abajo para tener el valor en grados celcius.	*/
 		switch (resolution) {
 			case 9:
 				return rawTemp * 0.5;  // Conversión a Celsius para 9 bits
