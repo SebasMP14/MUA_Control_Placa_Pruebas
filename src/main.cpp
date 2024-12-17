@@ -1,3 +1,16 @@
+/**
+ * main.cpp
+ * Control de la misión M.U.A, ...
+ * 
+ * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
+ * 
+ * Made by:
+ * - Sebas Monje <2024> (github)
+ * 
+ * TODO:
+ * 
+ */
+
 #include <Arduino.h>
 #include <Adafruit_ADS1X15.h>
 
@@ -26,16 +39,21 @@ union FloatToUint32 {                     // Para evitar aliasing y no violar la
 };
 unsigned long time_ini = 0x00;
 unsigned long timestamp = 0x00;
+uint8_t ack_OBC_to_MUA = 0x04;
+
 
 Adafruit_ADS1115 ads;
 float inverseVoltage[Elementos];          // Tensión inversa aplicada al SiPM para obtener "inverseCurrent_I"
 float inverseCurrent_V[Elementos];        // Tensión leída, correspondiente a la corriente inversa
 float inverseCurrent_I[Elementos];        // Corriente inversa, convertida de "inverseCurrent_V[]"
 
+uint8_t sendTrama[TRAMA_SIZE] = {0x03};
+
 void setupCOUNT(void);
 void loopCOUNT(void);
 void setupTRANSFER(void);
 void loopTRANSFER(void);
+uint8_t lastSTATE(void);
 
 void obtain_Curve_inverseVI(float Temperature);
 
@@ -47,51 +65,89 @@ void setup() {
   Serial.println("DEBUG (setup) -> Serial Iniciado");
   #endif
 
-  requestOperationMode();               // Solicitud del modo de operación
-  // currentMode = COUNT_MODE;
+  Serial1.begin(115200);                // OBC
+  #ifdef DEBUG_OBC
+  Serial.println("DEBUG (setup) -> Serial1 Iniciado");
+  #endif
 
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
-    if ( !start_flash() ) {               // Se utiliza en ambos modos de operación
-      #ifdef DEBUG_MAIN
-      Serial.print("DEBUG (setup) -> La flash no conecta, intento: ");
-      Serial.println(iter_counter);
-      #endif
+    if ( start_flash() ) {               // Se utiliza en ambos modos de operación
+      break;
     }
+    #ifdef DEBUG_MAIN
+    Serial.print("DEBUG (setup) -> La flash no conecta, intento: ");
+    Serial.println(iter_counter);
+    #endif
   }
 
-  switch ( currentMode ) {
-    case COUNT_MODE:
+  // Restaurar último estado guardado en memoria
+  uint8_t state = lastSTATE();
+  switch ( state ) {
+    case 0x00:          // STAND_BY
+    case 0xFF:
+      currentMode = STAND_BY;
+      requestOperationMode();               // Espera del modo de operación
+      if ( currentMode == COUNT_MODE ) {
+        setupCOUNT();
+      } else if ( currentMode == TRANSFER_MODE ) {
+        setupTRANSFER();
+      }
+      break;
+
+    case 0x01:          // COUNT_MODE
+      currentMode = COUNT_MODE;
       setupCOUNT();
       break;
-    case TRANSFER_MODE:
+
+    case 0x02:          // TRANSFER_MODE
+      currentMode = TRANSFER_MODE;
       setupTRANSFER();
       break;
+
     default:
       /* Modo no seleccionado o incorrecto, manejar... */
+      currentMode = STAND_BY;
       break;
   }
-  Serial.println("Setup finalizado...");
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (setup) -> Setup finalizado...");
+  #endif
 }
 
 void loop() {
   switch ( currentMode ) {
-  case COUNT_MODE:
-    loopCOUNT();
-    break;
-  case TRANSFER_MODE:
-    loopTRANSFER();
-    break;
-  default:
-    #ifdef DEBUG_MAIN
-    Serial.println("DEBUG (loop) -> UNKNOWN_MODE");
-    #endif
-    delay(5000);
-    requestOperationMode();
-    if ( !setup_state && currentMode != UNKNOWN_MODE) {
-      setupCOUNT();
-    }
-    /* Modo no seleccionado o incorrecto, manejar... */
-    break;
+    case STAND_BY:
+      requestOperationMode();
+      if (currentMode == COUNT_MODE) {
+        setupCOUNT();
+      } else if (currentMode == TRANSFER_MODE) {
+        setupTRANSFER();
+      }
+      break;
+    case COUNT_MODE:
+      loopCOUNT();
+      if ( Serial1.available() ) {
+        requestOperationMode();
+        if (currentMode == TRANSFER_MODE) {
+          setupTRANSFER();
+        }
+      }
+      break;
+    case TRANSFER_MODE:
+      loopTRANSFER();
+      break;
+    default:
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loop) -> UNKNOWN_MODE");
+      #endif
+      delay(5000);
+      requestOperationMode();
+      if ( !setup_state && currentMode != UNKNOWN_MODE) {
+        setupCOUNT();
+      }
+      /* Modo no seleccionado o incorrecto, manejar... */
+      break;
   }
 }
 
@@ -105,7 +161,6 @@ void loop() {
  *        interrupcion del timer counter
  */
 void setupCOUNT(void) {
-  setup_state = true;
 
   // rtc.begin();
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
@@ -114,13 +169,12 @@ void setupCOUNT(void) {
       Serial.println("DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.");
       #endif
       break;
-    } else {
-      #ifdef DEBUG_MAIN
-      Serial.print("DEBUG (setupCOUNT) -> Inicialización de RTC fallida: ");
-      Serial.println(iter_counter);
-      #endif
-      delay(10);
     }
+    #ifdef DEBUG_MAIN
+    Serial.print("DEBUG (setupCOUNT) -> Inicialización de RTC fallida: ");
+    Serial.println(iter_counter);
+    #endif
+    delay(10);
   }
   getTimestampFromGPS();
 
@@ -152,20 +206,20 @@ void setupCOUNT(void) {
     }
   }
 
-  ads.begin();
+  // ads.begin();
 
   // erase_all();
 
-  time_ini = millis();
-  Serial.println("setupCount finalizado...");
   setup_state = true;
+  Serial.println("setupCount finalizado...");
+  time_ini = millis();
 
   /* Activar Placa Interfaz: 
   digitalWrite(Interface_EN, HIGH); */
 }
 
 void loopCOUNT(void) {
-  if ( detect1 ) { // Se debe obtener el ancho del pulso?
+  if ( detect1 ) {                  // Se debe obtener el ancho del pulso?
     detect1 = false;
     #ifdef DEBUG_MAIN
     Serial.print("COUNT1: ");
@@ -197,6 +251,8 @@ void loopCOUNT(void) {
     Serial.println(time_ini);
     Serial.print("timestamp: ");
     Serial.println(rtc.now().unixtime());
+    Serial.print("Temperatura: ");
+    Serial.println(read_tmp100(), 4);
   }
 
   /**   Interrupción del TC2 cada 60 seg: Primeramente se deben desactivar las interrupciones de los pulso,
@@ -205,6 +261,7 @@ void loopCOUNT(void) {
    * inicializar las variables globales y activar las interrupciones de los pulsos. 
    *    El proceso se espera que tarde 5 segundos. */
   if ( detect_TC ) {
+    desactiveInterrupt();
     temperature = read_tmp100();
     FloatToUint32 temp;
     temp.f = temperature;
@@ -273,6 +330,7 @@ void loopCOUNT(void) {
     
 
     detect_TC = false;
+    activeInterrupt();
   }
 }
 
@@ -285,26 +343,15 @@ void loopCOUNT(void) {
  * TODO: - Se debe determinar cuantos Bytes se van a transferir al OBC
  */
 void setupTRANSFER(void) {
-  unsigned long timeout = 1000;
 
-  Serial1.begin(115200); // Establecer conexión
+  // unsigned long timeOUT = 1000;
+
+  // Serial1.begin(115200); // Establecer conexión
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setupTRANSFER) -> Serial1 Iniciado");
   #endif
 
-  // Obtener la cantidad de datos a ser transferida
-  Serial1.write(0xC1); // Comando para solicitar cantidad de datos a transferir
-  unsigned long start_time = millis();
-  while ( Serial1.available() < sizeof(uint32_t) ) {
-    if ( millis() - start_time > timeout ) {
-      #ifdef DEBUG_MAIN
-      Serial.println("DEBUG (setupTRANSFER) -> timeout esperando length_data - Serial1");
-      #endif
-      return;
-    }
-  }
-  uint32_t length_data;
-  Serial1.readBytes((uint8_t *)&length_data, sizeof(uint32_t));
+  
 
   Serial.println("setupTRANSFER finalizado...");
   setup_state = true;
@@ -313,8 +360,46 @@ void setupTRANSFER(void) {
 void loopTRANSFER(void) {
   // transferir datos
   // read_all();
+  delay(1000);
+  uint8_t data_size = 4;
+  uint8_t data[data_size];
+  read_until(data, data_size);
+  for ( uint8_t i = 1; i < data_size+2; i++) {
+    if ( i == 1 ) {
+      sendTrama[i] = data_size;
+    } else {
+      sendTrama[i] = data[i-2];
+    }
+  }
+  Serial.println("Calculando CRC");
+  uint16_t CRC = calcularCRC(sendTrama, TRAMA_SIZE-2);
+  sendTrama[TRAMA_SIZE-2] = (CRC >> 8) & 0xFF; // CRCH
+  sendTrama[TRAMA_SIZE-1] =  CRC & 0xFF;        // CRCL
+  Serial1.write(sendTrama, TRAMA_SIZE);
+  Serial.println("Datos enviados");
 
-  // revisar errores de transmisión
+  while ( Serial1.available() < TRAMA_SIZE ); // esperando ACK de OBC
+  uint8_t recibido[44] = {};
+  Serial1.readBytes(recibido, TRAMA_SIZE);
+  Serial.println("Trama recibida");
+  for (int i = 0; i < 44; i++) {
+    Serial.print("0x");
+    Serial.print(recibido[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  CRC = calcularCRC(recibido, TRAMA_SIZE-2);
+  uint16_t CRC_OBC = (recibido[42] << 8) | recibido[43];
+  if ( CRC == CRC_OBC && recibido[0] == ack_OBC_to_MUA) {
+    #ifdef DEBUG_MAIN
+    Serial.println("ACK recibido con exito");
+    #endif
+    currentMode = STAND_BY;
+  } else {
+    #ifdef DEBUG_MAIN
+    Serial.println("Transmisión fallida");
+    #endif
+  }
 
   // borrar datos transferidos de la memoria flash
 
@@ -347,6 +432,11 @@ void obtain_Curve_inverseVI(float Temperature) {
   }
   
   float Vbias = obtain_Vbd(inverseCurrent_I, inverseVoltage, Elementos) + OverVoltage;
+}
+
+uint8_t lastSTATE(void) {
+  uint8_t state = 0x00;
+  return state;
 }
 
 

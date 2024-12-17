@@ -5,6 +5,8 @@
 float Fc = 5.0;                 // Frecuencia de corte en Hz (ajustable)
 float Fs = 100.0;               // Frecuencia de muestreo en Hz (ajustable)
 float a1, a2, b0, b1, b2;       // Coeficientes del filtro Butterworth
+float x[3] = {0.0, 0.0, 0.0};     // Últimos valores de entrada
+float y[3] = {0.0, 0.0, 0.0};     // Últimos valores de salida
 
 /************************************************************************************************************
  * @fn      init_butterworth
@@ -24,6 +26,14 @@ void init_butterworth(void) {
   b2 = (1 - cs) / 2;
   a1 = -2 * cs;
   a2 = 1 - alpha;
+
+  float norm = 1 + a1 + a2;     // Normalización de coeficientes
+
+  b0 /= norm;
+  b1 /= norm;
+  b2 /= norm;
+  a1 /= norm;
+  a2 /= norm;
 }
 
 /************************************************************************************************************
@@ -32,17 +42,34 @@ void init_butterworth(void) {
  * @param   
  * @return  
  */
-float apply_butterworth(float new_input) {
-  // Desplazar las muestras anteriores
-  x[2] = x[1];
-  x[1] = x[0];
-  x[0] = new_input;
+float* apply_butterworth(float *input, uint8_t Elementos) {
+  // Crear un nuevo arreglo para almacenar la salida filtrada
+  float *filtered_output = (float*)malloc(Elementos * sizeof(float));
+  if (filtered_output == NULL) {
+    Serial.println("Error: No se pudo asignar memoria para la salida del filtro.");
+    return NULL;
+  }
 
-  y[2] = y[1];
-  y[1] = y[0];
+  // Reiniciar las variables del filtro
+  for (int i = 0; i < 3; i++) {
+    x[i] = 0.0;
+    y[i] = 0.0;
+  }
 
-  // Filtro de segundo orden
-  return b0 * x[0] + b1 * x[1] + b2 * x[2] - a1 * y[1] - a2 * y[2];
+  // Aplicar el filtro a cada elemento
+  for (uint8_t i = 0; i < Elementos; i++) {
+    x[2] = x[1];
+    x[1] = x[0];
+    x[0] = input[i];
+
+    y[2] = y[1];
+    y[1] = y[0];
+    y[0] = b0 * x[0] + b1 * x[1] + b2 * x[2] - a1 * y[1] - a2 * y[2];
+
+    filtered_output[i] = y[0];
+  }
+
+  return filtered_output;
 }
 
 /************************************************************************************************************

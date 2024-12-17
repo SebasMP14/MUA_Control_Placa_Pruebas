@@ -16,8 +16,8 @@ extern float Fc;                    // Frecuencia de corte en Hz (ajustable)
 extern float Fs;                    // Frecuencia de muestreo en Hz (ajustable)
 extern float a1, a2, b0, b1, b2;    // Coeficientes del filtro Butterworth
 
-float x[3];                         // Últimos 3 valores de entrada (corriente)
-float y[3];                         // Últimos 3 valores de salida (corriente filtrada)
+extern float x[3];                         // Últimos 3 valores de entrada (corriente)
+extern float y[3];                         // Últimos 3 valores de salida (corriente filtrada)
 
 void init_butterworth(void);
 float* apply_butterworth(float *input, uint8_t Elementos);

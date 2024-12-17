@@ -19,6 +19,8 @@
  * @return  NONE
  */
 void start_max1932(void) {
+  pinMode(SPI_CS_MAX, OUTPUT);
+  digitalWrite(SPI_CS_MAX, HIGH);
   SPI.begin();  
 }
 
@@ -38,7 +40,6 @@ bool write_max_reg(uint8_t command) {
   SPI.beginTransaction(SPISettings(SPI_CLK_Speed, MSBFIRST, SPI_MODE0)); // 2 MHz máximo
   digitalWrite(SPI_CS_MAX, LOW);  // selección
   SPI.transfer(command);          // Envio de comando
-  delayMicroseconds(SPI_CS_delay);
   digitalWrite(SPI_CS_MAX, HIGH);
   SPI.endTransaction();
 

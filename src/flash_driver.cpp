@@ -60,7 +60,7 @@ void read_all(void) {
       Serial.print(read_byte, HEX);
       Serial.print(" ");
       #endif
-      Serial1.write(read_byte);     // Transferencia de dato al OBC
+      // Serial1.write(read_byte);     // Transferencia de dato al OBC
     } else {
       #ifdef DEBUG_FLASH
       Serial.println("DEBUG (read_all) -> Error al leer de la memoria.");
@@ -78,8 +78,9 @@ void read_all(void) {
  * @param   NONE
  * @return  NONE
  * TODO: - Analizar si es necesario...
+ *  - ver si data_length es x4
  */
-void read_until(uint32_t data_length) {
+void read_until(uint8_t *data, uint32_t data_length) {
   uint32_t write_address = 0; // Posición actual de escritura
   uint8_t read_byte = 0;          // Almacenamiento de datos leídos
 
@@ -89,34 +90,32 @@ void read_until(uint32_t data_length) {
 
   get_address(&write_address);
   if ( data_length < write_address ) {
-    for (uint32_t address = 0x00; address < data_length; address++) { // Se lee hasta data length
-      if (Flash_QSPI.readBuffer(address, &read_byte, 1)) {
-        #ifdef DEBUG_FLASH
-        Serial.print("0x");
-        Serial.print(read_byte, HEX);
-        Serial.print(" ");
-        Serial1.write(read_byte); // Transferencia de byte al OBC
-        #endif
-      } else {
-        #ifdef DEBUG_FLASH
-        Serial.println("DEBUG (read_until) -> Error al leer de la memoria.");
-        #endif
-      }
+    if (Flash_QSPI.readBuffer(0x00, data, data_length)) {
+      #ifdef DEBUG_FLASH
+      Serial.print("0x");
+      Serial.print(read_byte, HEX);
+      Serial.print(" ");
+      // Serial1.write(read_byte); // Transferencia de byte al OBC
+      #endif
+      return ;
+    } else {
+      #ifdef DEBUG_FLASH
+      Serial.println("DEBUG (read_until) -> Error al leer de la memoria.");
+      #endif
     }
   } else {
-    for (uint32_t address = 0x00; address < write_address; address++) { // Se leen todos los datos disponibles
-      if (Flash_QSPI.readBuffer(address, &read_byte, 1)) {
-        #ifdef DEBUG_FLASH
-        Serial.print("0x");
-        Serial.print(read_byte, HEX);
-        Serial.print(" ");
-        Serial1.write(read_byte); // Transferencia de byte al OBC
-        #endif
-      } else {
-        #ifdef DEBUG_FLASH
-        Serial.println("DEBUG (read_until) -> Error al leer de la memoria.");
-        #endif
-      }
+    if (Flash_QSPI.readBuffer(0x00, data, write_address)) {
+      #ifdef DEBUG_FLASH
+      Serial.print("0x");
+      Serial.print(read_byte, HEX);
+      Serial.print(" ");
+      // Serial1.write(read_byte); // Transferencia de byte al OBC
+      #endif
+      return ;
+    } else {
+      #ifdef DEBUG_FLASH
+      Serial.println("DEBUG (read_until) -> Error al leer de la memoria.");
+      #endif
     }
   }
   Serial.println();
@@ -212,7 +211,7 @@ bool get_address( uint32_t *write_address ) {
    *  reservado para almacenar la ultima dirección de memoria 
    */ 
   len_bytes = Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t*)write_address, ADDRESS_SIZE);   
-  if (len_bytes == 0 ) {                      /* Si existe un error en la lectura */ 
+  if ( len_bytes == 0 ) {                      /* Si existe un error en la lectura */ 
     #ifdef DEBUG_FLASH
     Serial.println("ERROR (get_address) -> Error en la lectura de la memoria FLASH.");
     #endif
