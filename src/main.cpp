@@ -39,7 +39,7 @@ union FloatToUint32 {                     // Para evitar aliasing y no violar la
 };
 unsigned long time_ini = 0x00;
 unsigned long timestamp = 0x00;
-uint8_t ack_OBC_to_MUA = 0x04;
+uint8_t ACK_OBC_to_MUA = 0x04;
 
 
 Adafruit_ADS1115 ads;
@@ -53,7 +53,6 @@ void setupCOUNT(void);
 void loopCOUNT(void);
 void setupTRANSFER(void);
 void loopTRANSFER(void);
-uint8_t lastSTATE(void);
 
 void obtain_Curve_inverseVI(float Temperature);
 
@@ -81,7 +80,11 @@ void setup() {
   }
 
   // Restaurar último estado guardado en memoria
-  uint8_t state = lastSTATE();
+  // if ( erase_all() ) {
+  //   Serial.println("Flash borrada");
+  // }
+  // write_OPstate(0x00);
+  uint8_t state = read_OPstate();
   switch ( state ) {
     case 0x00:          // STAND_BY
     case 0xFF:
@@ -89,7 +92,7 @@ void setup() {
       requestOperationMode();               // Espera del modo de operación
       if ( currentMode == COUNT_MODE ) {
         setupCOUNT();
-      } else if ( currentMode == TRANSFER_MODE ) {
+      } else if ( currentMode == TRANSFER_DATA_MODE ) {
         setupTRANSFER();
       }
       break;
@@ -99,8 +102,8 @@ void setup() {
       setupCOUNT();
       break;
 
-    case 0x02:          // TRANSFER_MODE
-      currentMode = TRANSFER_MODE;
+    case 0x02:          // TRANSFER_DATA_MODE
+      currentMode = TRANSFER_DATA_MODE;
       setupTRANSFER();
       break;
 
@@ -121,7 +124,7 @@ void loop() {
       requestOperationMode();
       if (currentMode == COUNT_MODE) {
         setupCOUNT();
-      } else if (currentMode == TRANSFER_MODE) {
+      } else if (currentMode == TRANSFER_DATA_MODE) {
         setupTRANSFER();
       }
       break;
@@ -129,12 +132,12 @@ void loop() {
       loopCOUNT();
       if ( Serial1.available() ) {
         requestOperationMode();
-        if (currentMode == TRANSFER_MODE) {
+        if (currentMode == TRANSFER_DATA_MODE) {
           setupTRANSFER();
         }
       }
       break;
-    case TRANSFER_MODE:
+    case TRANSFER_DATA_MODE:
       loopTRANSFER();
       break;
     default:
@@ -273,15 +276,15 @@ void loopCOUNT(void) {
     }
 
     #ifdef DEBUG_MAIN
-    Serial.print("TRAMA -> TMP: (");
-    Serial.print(temp.f, 4);
-    Serial.print(" ºC, 0x");
-    Serial.print(temp.u, HEX); // Interpretado como entero sin signo de 32 bit
-    Serial.print("), time: (");
+    Serial.print("TRAMA -> time: (");
     uint32_t tiempo = getTime();
     Serial.print(tiempo);
     Serial.print(", 0x");
     Serial.print(tiempo, HEX);
+    Serial.print("), TMP: (");
+    Serial.print(temp.f, 4);
+    Serial.print(" ºC, 0x");
+    Serial.print(temp.u, HEX); // Interpretado como entero sin signo de 32 bit
     Serial.print("), Vbr1: (), Vbr2: (), Count1: (");
     Serial.print(pulse_count1);
     Serial.print(", 0x");
@@ -296,16 +299,16 @@ void loopCOUNT(void) {
     read_all();
     
     /* GUARDADO Little-Endian */
-  //   if ( !write_mem((uint8_t *)&tiempo, sizeof(tiempo)) ) {
-  //     #ifdef DEBUG_MAIN
-  //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura tiempo.");
-  //     #endif
-  //   }
-  //   if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
-  //     #ifdef DEBUG_MAIN
-  //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura temperatura.");
-  //     #endif
-  //   }
+    // if ( !write_mem((uint8_t *)&tiempo, sizeof(tiempo)) ) {
+    //   #ifdef DEBUG_MAIN
+    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura tiempo.");
+    //   #endif
+    // }
+    // if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
+    //   #ifdef DEBUG_MAIN
+    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura temperatura.");
+    //   #endif
+    // }
   //   if ( !write_mem((uint8_t *)&Vbr1, sizeof(Vbr1)) ) {
   //     #ifdef DEBUG_MAIN
   //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbr1.");
@@ -316,16 +319,16 @@ void loopCOUNT(void) {
   //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbr2.");
   //     #endif
   //   }
-  //   if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
-  //     #ifdef DEBUG_MAIN
-  //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count1.");
-  //     #endif
-  //   }
-  //   if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
-  //     #ifdef DEBUG_MAIN
-  //     Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count2.");
-  //     #endif
-  //   }
+    // if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
+    //   #ifdef DEBUG_MAIN
+    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count1.");
+    //   #endif
+    // }
+    // if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
+    //   #ifdef DEBUG_MAIN
+    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count2.");
+    //   #endif
+    // }
 
     
 
@@ -361,49 +364,50 @@ void loopTRANSFER(void) {
   // transferir datos
   // read_all();
   delay(1000);
-  uint8_t data_size = 4;
+  uint8_t data_size = 10;
   uint8_t data[data_size];
   read_until(data, data_size);
-  for ( uint8_t i = 1; i < data_size+2; i++) {
+  for ( uint8_t i = 1; i < data_size+2; i++ ) {
     if ( i == 1 ) {
       sendTrama[i] = data_size;
     } else {
       sendTrama[i] = data[i-2];
     }
   }
+  #ifdef DEBUG_MAIN
   Serial.println("Calculando CRC");
+  #endif
   uint16_t CRC = calcularCRC(sendTrama, TRAMA_SIZE-2);
-  sendTrama[TRAMA_SIZE-2] = (CRC >> 8) & 0xFF; // CRCH
+  sendTrama[TRAMA_SIZE-2] = (CRC >> 8) & 0xFF;  // CRCH
   sendTrama[TRAMA_SIZE-1] =  CRC & 0xFF;        // CRCL
   Serial1.write(sendTrama, TRAMA_SIZE);
+  #ifdef DEBUG_MAIN
   Serial.println("Datos enviados");
+  #endif
 
-  while ( Serial1.available() < TRAMA_SIZE ); // esperando ACK de OBC
-  uint8_t recibido[44] = {};
-  Serial1.readBytes(recibido, TRAMA_SIZE);
-  Serial.println("Trama recibida");
-  for (int i = 0; i < 44; i++) {
-    Serial.print("0x");
-    Serial.print(recibido[i], HEX);
-    Serial.print(" ");
-  }
-  Serial.println();
-  CRC = calcularCRC(recibido, TRAMA_SIZE-2);
-  uint16_t CRC_OBC = (recibido[42] << 8) | recibido[43];
-  if ( CRC == CRC_OBC && recibido[0] == ack_OBC_to_MUA) {
+  while ( Serial1.available() != 1 ); // esperando ACK de OBC
+  uint8_t recibido;
+  Serial1.readBytes(&recibido, 1);
+  #ifdef DEBUG_MAIN
+  Serial.println("respuesta: 0x");
+  Serial.print(recibido, HEX);
+  #endif
+
+  if ( recibido == ACK_OBC_to_MUA ) {
     #ifdef DEBUG_MAIN
     Serial.println("ACK recibido con exito");
     #endif
     currentMode = STAND_BY;
+    write_OPstate(0x00);
   } else {
     #ifdef DEBUG_MAIN
     Serial.println("Transmisión fallida");
     #endif
   }
 
-  // borrar datos transferidos de la memoria flash
+  // borrar datos transferidos de la memoria flash, no, mantener...
 
-  /* Al finalizar la transferencia, terminamos el proceso o hacemos conteos?? */
+  /* Al finalizar la transferencia, terminamos el proceso */
 }
 
 /************************************************************************************************************
@@ -431,13 +435,10 @@ void obtain_Curve_inverseVI(float Temperature) {
     Vbarrido += paso;
   }
   
-  float Vbias = obtain_Vbd(inverseCurrent_I, inverseVoltage, Elementos) + OverVoltage;
+  // float Vbias = obtain_Vbd(inverseCurrent_I, inverseVoltage, Elementos) + OverVoltage;
 }
 
-uint8_t lastSTATE(void) {
-  uint8_t state = 0x00;
-  return state;
-}
+
 
 
 // pio device monitor -p COM17

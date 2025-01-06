@@ -20,6 +20,105 @@
 Adafruit_FlashTransport_QSPI flashTransport(QSPI_SCK, QSPI_CS, QSPI_D0, QSPI_D1, QSPI_D2, QSPI_D3);
 Adafruit_SPIFlash Flash_QSPI(&flashTransport);
 
+
+/************************************************************************************************************
+ * @fn      write_DATAinfo
+ * @brief   Lee el espacio de memoria donde se guarda el último estado de operación del sistema.
+ * @param   NONE
+ * @return  true: exito - false: fallo
+ */
+bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index) {
+  if ( index + len > SIZE_INFO ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (write_DATAinfo) -> Datos exceden el tamaño permitido.");
+    #endif
+    return false;
+  }
+
+  uint8_t saved[SIZE_INFO];
+
+  // Leer los datos actuales del sector
+  if ( !Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, saved, SIZE_INFO) ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (write_DATAinfo) -> Error al leer los datos existentes.");
+    #endif
+    return false;
+  }
+
+  #ifdef DEBUG_FLASH
+  Serial.println("DEBUG (write_DATAinfo) -> Datos existentes antes de la actualización: ");
+  for ( uint8_t i = 0; i < SIZE_INFO; i++ ) {
+    Serial.print("0x");
+    Serial.print(saved[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+
+  // Actualizar los datos en memoria temporal
+  memcpy(&saved[index], buffer, len);         // Se escribe desde index hasta index + len
+
+  // Borrar el sector
+  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (write_DATAinfo) -> Falló el borrado del sector.");
+    #endif
+    return false;
+  }
+
+  // Escribir los datos actualizados
+  uint32_t len_bytes = Flash_QSPI.writeBuffer(SAVED_ADDRESS_SECTOR_DIR, saved, SIZE_INFO);
+  if ( len_bytes == 0 ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (write_DATAinfo) -> Error al escribir los datos actualizados.");
+    #endif
+    return false;
+  }
+
+  #ifdef DEBUG_FLASH
+  Serial.println("DEBUG (write_DATAinfo) -> Datos actualizados correctamente:");
+  for ( uint8_t i = 0; i < SIZE_INFO; i++ ) {
+    Serial.print("0x");
+    Serial.print(saved[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+
+  return true;
+}
+
+/************************************************************************************************************
+ * @fn      read_OPstate
+ * @brief   Lee el espacio de memoria donde se guarda el último estado de operación del sistema.
+ * @param   NONE
+ * @return  NONE
+ */
+uint8_t read_OPstate(void) {
+  uint8_t read_byte;
+  Flash_QSPI.readBuffer(ADDRESS_OP_STATE, &read_byte, 1);
+  #ifdef DEBUG_FLASH
+  Serial.print("DEBUG (read_OPstate) -> Dirección: 0x");
+  Serial.print(ADDRESS_OP_STATE, HEX);
+  Serial.print(" Estado leído: 0x");
+  Serial.println(read_byte, HEX);
+  #endif
+  return read_byte;
+}
+
+/************************************************************************************************************
+ * @fn      write_OPstate
+ * @brief   escribe el último estado de operación del sistema.
+ * @param   NONE
+ * @return  NONE
+ */
+bool write_OPstate(uint8_t state) {
+  #ifdef DEBUG_FLASH
+  Serial.println("DEBUG (write_OPstate) -> ");
+  #endif
+  return write_DATAinfo(&state, 1, 11); // Índice 11 para el estado de operación
+}
+
 /************************************************************************************************************
  * @fn      read_all
  * @brief   lee todos los datos de la memoria
@@ -27,6 +126,9 @@ Adafruit_SPIFlash Flash_QSPI(&flashTransport);
  * @return  NONE
  */
 bool erase_all(void) {
+  #ifdef DEBUG_FLASH
+  Serial.println("DEBUG (erase_all) -> Borrando...");
+  #endif
   return Flash_QSPI.eraseChip();
 }
 
@@ -90,8 +192,8 @@ void read_until(uint8_t *data, uint32_t data_length) {
 
   get_address(&write_address);
   if ( data_length < write_address ) {
-    if (Flash_QSPI.readBuffer(0x00, data, data_length)) {
-      #ifdef DEBUG_FLASH
+    if ( Flash_QSPI.readBuffer(0x00, data, data_length) ) {
+      #ifdef DEBUG_FLASH_INFO
       Serial.print("0x");
       Serial.print(read_byte, HEX);
       Serial.print(" ");
@@ -104,8 +206,8 @@ void read_until(uint8_t *data, uint32_t data_length) {
       #endif
     }
   } else {
-    if (Flash_QSPI.readBuffer(0x00, data, write_address)) {
-      #ifdef DEBUG_FLASH
+    if (Flash_QSPI.readBuffer(0x00, data, write_address)) { // leer hasta la ultima dir de mem escrita
+      #ifdef DEBUG_FLASH_INFO
       Serial.print("0x");
       Serial.print(read_byte, HEX);
       Serial.print(" ");
@@ -123,7 +225,7 @@ void read_until(uint8_t *data, uint32_t data_length) {
 
 /************************************************************************************************************
  * @fn      write_mem
- * @brief   escribe los datos en la primera posición disponible
+ * @brief   escribe los datos en la primera posición disponible. Se guarda de LSB a MSB (little-endian).
  * @param   buffer, len: buffer con los datos a escribir y la longitud total de estos
  * @return  true exitoso - false fallido
  */
@@ -156,46 +258,10 @@ bool write_mem(uint8_t *buffer, uint32_t len) {
  * @return  true exitoso - false fallido
  */
 bool update_address(uint32_t *address) {
-  uint32_t len_bytes = 0;
-  uint32_t read_data = 0;
-
-  /**  Se borra el sector donde es almacenada la ultima direccion de escritura
-   * esto se debe a que no se permite la sobreescritura de datos, y solamente esta habilitado
-   * borrar datos por sectores, no por páginas.
-   */
-  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
-    #ifdef DEBUG_FLASH
-    Serial.println("DEBUG (update_address) -> Borrado de sector fallido.");
-    #endif
-    return false;
-  }
-
-  /* Se actualiza la dirección con la cantidad de bytes escritos */
-  len_bytes = Flash_QSPI.writeBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t*)address, ADDRESS_SIZE);
-  if (len_bytes == 0) {
-    #ifdef DEBUG_FLASH
-    Serial.println("DEBUG (update_address) -> Error al guardar dirección en la memoria.");
-    #endif
-    /* TODO: retornar error en una funcion */
-    return false;
-  }
   #ifdef DEBUG_FLASH
-  Serial.print("DEBUG (update_address) -> Dirección a almacenar: 0x");
-  Serial.println(*address, HEX);
+  Serial.println("DEBUG (update_address) -> ...");
   #endif
-  
-  len_bytes = Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t *)&read_data, ADDRESS_SIZE);
-  if (len_bytes == 0) {
-    Serial.print("DEBUG (update_address) -> Error leyendo de la memoria FLASH");
-    /* TODO: retornar error en una funcion */
-    return false;
-  }
-  #ifdef DEBUG_FLASH
-  Serial.print("DEBUG (update_address) -> Dirección almacenada: 0x");
-  Serial.println(read_data, HEX);
-  #endif
-
-  return true;
+  return write_DATAinfo((uint8_t *)address, ADDRESS_SIZE, 0);
 }
 
 /************************************************************************************************************
@@ -280,3 +346,110 @@ bool start_flash(void) {
   #endif
   return false;
 }
+
+/************************************************************************************************************
+ * @fn      write_OPstate1
+ * @brief   escribe el último estado de operación del sistema.
+ * @param   NONE
+ * @return  NONE
+ *
+bool write_OPstate1(uint8_t state) {
+  uint8_t saved[SIZE_INFO];
+  if ( Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, saved, SIZE_INFO) ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (write_OPstate) -> Datos leídos: ");
+    for (uint8_t i = 0; i < SIZE_INFO; i++) {
+      Serial.print("0x");
+      Serial.print(saved[i], HEX);
+      Serial.print(" ");
+    }
+    #endif
+  } else {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (read_all) -> Error al leer de la memoria.");
+    #endif
+  }
+
+  saved[11] = state;
+
+  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (update_address) -> Borrado de sector fallido.");
+    #endif
+    return false;
+  }
+
+  uint8_t len_bytes = Flash_QSPI.writeBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t*)saved, SIZE_INFO);
+  if (len_bytes == 0) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (update_address) -> Error al guardar dirección en la memoria.");
+    #endif
+    // TODO: retornar error en una funcion 
+    return false;
+  }
+
+  #ifdef DEBUG_FLASH
+  if ( Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, saved, 1) ) {
+    Serial.println("DEBUG (write_OPstate) -> Datos actualizados: ");
+    for (uint8_t i = 0; i < SIZE_INFO; i++) {
+      Serial.print("0x");
+      Serial.print(saved[i], HEX);
+      Serial.print(" ");
+    }
+  } else {
+    Serial.println("DEBUG (read_all) -> Error al leer de la memoria.");
+  }
+  #endif
+
+  return true;
+}*/
+
+/************************************************************************************************************
+ * @fn      update_address1
+ * @brief   Se actualiza la siguiente dirección disponible para escritura en la memoria (al inicio del último
+ * sector)
+ * @param   address: Dirección a alamacenar
+ * @return  true exitoso - false fallido
+ *
+bool update_address1(uint32_t *address) {
+  uint32_t len_bytes = 0;
+  uint32_t read_data = 0;
+
+  **  Se borra el sector donde es almacenada la ultima direccion de escritura
+   * esto se debe a que no se permite la sobreescritura de datos, y solamente esta habilitado
+   * borrar datos por sectores, no por páginas.
+   *
+  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (update_address) -> Borrado de sector fallido.");
+    #endif
+    return false;
+  }
+
+  // Se actualiza la dirección con la cantidad de bytes escritos 
+  len_bytes = Flash_QSPI.writeBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t*)address, ADDRESS_SIZE);
+  if (len_bytes == 0) {
+    #ifdef DEBUG_FLASH
+    Serial.println("DEBUG (update_address) -> Error al guardar dirección en la memoria.");
+    #endif
+    // TODO: retornar error en una funcion 
+    return false;
+  }
+  #ifdef DEBUG_FLASH
+  Serial.print("DEBUG (update_address) -> Dirección a almacenar: 0x");
+  Serial.println(*address, HEX);
+  #endif
+  
+  len_bytes = Flash_QSPI.readBuffer(SAVED_ADDRESS_SECTOR_DIR, (uint8_t *)&read_data, ADDRESS_SIZE);
+  if (len_bytes == 0) {
+    Serial.print("DEBUG (update_address) -> Error leyendo de la memoria FLASH");
+    // TODO: retornar error en una funcion 
+    return false;
+  }
+  #ifdef DEBUG_FLASH
+  Serial.print("DEBUG (update_address) -> Dirección almacenada: 0x");
+  Serial.println(read_data, HEX);
+  #endif
+
+  return true;
+}*/

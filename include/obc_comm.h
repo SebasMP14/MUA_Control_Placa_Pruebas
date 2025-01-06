@@ -16,22 +16,30 @@
 
 #include "Arduino.h"
 #include "RTC_SAMD51.h"
+#include "flash_driver.h"
 
 #define DEBUG_OBC
-#define TRAMA_SIZE 44
+#define TRAMA_SIZE          44
+/*** Modos de operación ***/
+#define ID_STANDBY          0x00
+#define ID_COUNT_MODE       0x01
+#define ID_TRANSFER_MODE    0x02
+#define ACK_MUA_TO_OBC      0x07
+
 
 enum OperationMode {
     INICIO,
     STAND_BY,
     COUNT_MODE,
-    TRANSFER_MODE,
+    TRANSFER_DATA_MODE,
     FINISH,
+    TRANSFER_INFO_MODE,
     UNKNOWN_MODE
 };
 extern OperationMode currentMode;
 extern bool setup_state;
 extern RTC_SAMD51 rtc;
-extern uint8_t ack_MUA_to_OBC[TRAMA_SIZE]; //  = {0x07, 0x01, 0x00};
+ //  = {0x07, 0x01, 0x00};
 extern unsigned long timeOUT;
 
 void requestOperationMode(void);

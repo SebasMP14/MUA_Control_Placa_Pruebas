@@ -17,68 +17,70 @@
 OperationMode currentMode = INICIO;
 bool setup_state = false;
 RTC_SAMD51 rtc;
-uint8_t ack_MUA_to_OBC[TRAMA_SIZE] = {0x07, 0x01, 0x00}; // De esta forma, Los demás valores se inicializan en cero
+uint8_t ack_MUA_to_OBC = 0x07; // De esta forma, Los demás valores se inicializan en cero
 unsigned long timeOUT = 3000;
 
 /************************************************************************************************************
  * @fn      requestOperationMode
- * @brief   Espera el modo de operación de la misión establecida por el OBC
+ * @brief   Espera el modo de operación de la misión, establecida por el OBC
  * @param   NONE
  * @return  NONE
  * TODO:
  * - Cambiar los baudios en los protocolos UART a 9600
+ * - Agregar Timeout
+ * - Agregar estado TRANSFER_INFO_MODE
  */
 void requestOperationMode(void) {
-  uint8_t response[TRAMA_SIZE];
-  while (Serial1.available() < TRAMA_SIZE) ;
+  uint8_t response;
+  
+  while (Serial1.available() != 1) ;               // Esperar respuesta, agregar TimeOut
   delay(100);
-  Serial1.readBytes(response, TRAMA_SIZE);      // TRAMA del OBC
 
-  uint16_t CRC_OBC = (response[TRAMA_SIZE-2] << 8) | response[TRAMA_SIZE-1];
-  uint16_t CRC = calcularCRC(response, TRAMA_SIZE-2);
-  if ( CRC != CRC_OBC ) {
+  Serial1.readBytes(&response, 1);                //  Se recibe un byte indicando el modo de operación
+  if ( response != ID_COUNT_MODE && response != ID_TRANSFER_MODE ) {   //  Si la respuesta no corresponde a ningún estado de operación
     #ifdef DEBUG_OBC
-    Serial.println("DEBUG (requestOperationMode) -> El CRC no coincide");
+    Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
+    #endif
+    return ;                                      //  No se envía ACK
+  }
+  if ( response == ID_TRANSFER_MODE ) {
+    currentMode = TRANSFER_DATA_MODE;
+    #ifdef DEBUG_OBC
+    Serial.println("TRANSFER MODE ACTIVATED");
     #endif
     return ;
   }
-
-  uint16_t CRC_ACK = calcularCRC(ack_MUA_to_OBC, TRAMA_SIZE-2);
-  ack_MUA_to_OBC[TRAMA_SIZE-2] = (CRC_ACK >> 8) & 0xFF; // CRCH
-  ack_MUA_to_OBC[TRAMA_SIZE-1] = CRC_ACK & 0xFF;        // CRCL
-  Serial1.write(ack_MUA_to_OBC, TRAMA_SIZE);
+  Serial1.write(ACK_MUA_TO_OBC);
 
   #ifdef DEBUG_OBC
-  Serial.print("DEBUG (requestOperationMode) -> Recibido de Serial1 ");
-  for (int i = 0; i < TRAMA_SIZE; i++) {
-    Serial.print("0x");
-    Serial.print(response[i], HEX);
-    Serial.print(" ");
-  }
-  Serial.println();
+  Serial.print("DEBUG (requestOperationMode) -> Recibido de Serial1: 0x");
+  Serial.println(response, HEX);
   #endif
   
-  switch (response[0]) {
+  switch (response) {
     case 0x00:
       currentMode = STAND_BY;
       #ifdef DEBUG_OBC
       Serial.println("STAND_BY ACTIVATED");
       #endif
+      write_OPstate(0x00);
       break;
     case 0x01:
       currentMode = COUNT_MODE;
       #ifdef DEBUG_OBC
       Serial.println("COUNT MODE ACTIVATED");
       #endif
+      write_OPstate(0x01);
       break;
     case 0x02:
-      currentMode = TRANSFER_MODE;
+      currentMode = TRANSFER_DATA_MODE;
       #ifdef DEBUG_OBC
       Serial.println("TRANSFER MODE ACTIVATED");
       #endif
+      write_OPstate(0x02);
       break;
     default:
-      currentMode = UNKNOWN_MODE;
+      currentMode = STAND_BY;
       #ifdef DEBUG_OBC
       Serial.println("UNKNOWN MODE ACTIVATED");
       #endif
@@ -161,3 +163,73 @@ uint16_t calcularCRC(const uint8_t *data, size_t length) {
   
   return crc ^ 0xFFFF;
 }
+
+
+/************************************************************************************************************
+ * @fn      requestOperationMode (CRC en cada trama)
+ * @brief   Espera el modo de operación de la misión establecida por el OBC
+ * @param   NONE
+ * @return  NONE
+ * TODO:
+ * - Cambiar los baudios en los protocolos UART a 9600
+ *
+void requestOperationMode(void) {
+  uint8_t response[TRAMA_SIZE];
+  while (Serial1.available() < TRAMA_SIZE) ;
+  delay(100);
+  Serial1.readBytes(response, TRAMA_SIZE);      // TRAMA del OBC
+
+  uint16_t CRC_OBC = (response[TRAMA_SIZE-2] << 8) | response[TRAMA_SIZE-1];
+  uint16_t CRC = calcularCRC(response, TRAMA_SIZE-2);
+  if ( CRC != CRC_OBC ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (requestOperationMode) -> El CRC no coincide");
+    #endif
+    return ;
+  }
+
+  uint16_t CRC_ACK = calcularCRC(ACK_MUA_TO_OBC, TRAMA_SIZE-2);
+  ACK_MUA_TO_OBC[TRAMA_SIZE-2] = (CRC_ACK >> 8) & 0xFF; // CRCH
+  ACK_MUA_TO_OBC[TRAMA_SIZE-1] = CRC_ACK & 0xFF;        // CRCL
+  Serial1.write(ACK_MUA_TO_OBC, TRAMA_SIZE);
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (requestOperationMode) -> Recibido de Serial1 ");
+  for (int i = 0; i < TRAMA_SIZE; i++) {
+    Serial.print("0x");
+    Serial.print(response[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+  
+  switch (response[0]) {
+    case 0x00:
+      currentMode = STAND_BY;
+      #ifdef DEBUG_OBC
+      Serial.println("STAND_BY ACTIVATED");
+      #endif
+      break;
+    case 0x01:
+      currentMode = COUNT_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("COUNT MODE ACTIVATED");
+      #endif
+      break;
+    case 0x02:
+      currentMode = TRANSFER_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("TRANSFER MODE ACTIVATED");
+      #endif
+      break;
+    default:
+      currentMode = UNKNOWN_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("UNKNOWN MODE ACTIVATED");
+      #endif
+      break;
+  }
+
+  // 
+}
+*/

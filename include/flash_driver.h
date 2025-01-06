@@ -37,6 +37,8 @@ extern Adafruit_SPIFlash Flash_QSPI;
 #define EXT_FLASH_SIZE            (16UL * 1024 * 1024)            /* 16 MB o 128 Mb */
 #define LAST_PAGE_ADDR            (EXT_FLASH_SIZE - PAGE_SIZE)    /* Contiene la última posición escrita */
 #define LAST_ADDRESS_SENDED       SAVED_ADDRESS_SECTOR_DIR + ADDRESS_SIZE // 
+#define ADDRESS_OP_STATE          LAST_ADDRESS_SENDED + ADDRESS_SIZE * 2 - 1
+#define SIZE_INFO                 12                              // Bytes de variables/info de sistema
 
 
 bool start_flash(void);
@@ -44,7 +46,9 @@ bool write_mem(uint8_t *buffer, uint32_t len);
 bool get_address(uint32_t *write_address);
 void read_all(void);
 void read_until(uint8_t *data, uint32_t data_length);
+bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index);
 uint8_t read_OPstate(void);
+bool write_OPstate(uint8_t state);
 bool erase_all(void);
 bool update_address(uint32_t *adress);
 
