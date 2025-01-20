@@ -1,12 +1,76 @@
 #include "calculos.h"
 
-// Adafruit_ADS1115 ads;
+
 
 float Fc = 5.0;                 // Frecuencia de corte en Hz (ajustable)
 float Fs = 100.0;               // Frecuencia de muestreo en Hz (ajustable)
 float a1, a2, b0, b1, b2;       // Coeficientes del filtro Butterworth
 float x[3] = {0.0, 0.0, 0.0};     // Últimos valores de entrada
 float y[3] = {0.0, 0.0, 0.0};     // Últimos valores de salida
+
+/************************************************************************************************************
+ * @fn      sliding_moving_average
+ * @brief   
+ * @param   
+ * @return  
+ * TODO: - 
+ */
+void sliding_moving_average(float* input, uint8_t N, uint8_t M, float* output) {
+  float accumulator = 0.0;
+  uint8_t aux = (M - 1) / 2;
+
+  // Para las primeras aux+1 muestras
+  for ( uint8_t i = 0; i < M; i++ ) {
+    accumulator += input[i];
+    if ( i >= aux ) {
+      output[i - aux] = accumulator / (i + 1);
+    }
+  }
+
+  // Para el resto de las muestras (ventanas deslizantes completas)
+  for ( uint8_t i = M - aux; i < N - aux; i++ ) {
+    accumulator += input[i + aux] - input[i - aux - 1];  // Actualiza el acumulador
+    output[i] = accumulator / M;  // Calcula el promedio
+  }
+
+  // Para los últimos valores
+  for ( uint8_t i = N - aux; i < N; i++ ) {
+    accumulator -= input[i - aux - 1];  // restar el valor sobrante
+    output[i] = accumulator / (N - i + aux);  // Promedio con los valores restantes
+  }
+}
+
+
+/************************************************************************************************************
+ * @fn      
+ * @brief   
+ * @param   
+ * @return  
+ * TODO: - 
+ */
+float* moving_average(float *input, uint8_t Elementos, uint8_t window_size) {
+  static float output[256];
+  float sum = 0;
+
+  if ( window_size > Elementos ) {
+    window_size = Elementos; // Prevenir ventanas más grandes que la entrada
+  }
+
+  // Inicializar la ventana
+  for ( uint8_t i = 0; i < window_size; i++ ) {
+    sum += input[i];
+    output[i] = sum / (i + 1);  // Promedio para las primeras muestras
+  }
+
+  // Calcular el promedio móvil
+  for ( uint8_t i = window_size; i < Elementos; i++ ) {
+    sum += input[i] - input[i - window_size];
+    output[i] = sum / window_size;
+  }
+
+  return output;
+}
+
 
 /************************************************************************************************************
  * @fn      init_butterworth
@@ -41,12 +105,15 @@ void init_butterworth(void) {
  * @brief   
  * @param   
  * @return  
+ * TODO: - No usar malloc
  */
 float* apply_butterworth(float *input, uint8_t Elementos) {
   // Crear un nuevo arreglo para almacenar la salida filtrada
   float *filtered_output = (float*)malloc(Elementos * sizeof(float));
   if (filtered_output == NULL) {
-    Serial.println("Error: No se pudo asignar memoria para la salida del filtro.");
+    #ifdef DEBUG_CALCULOS
+    Serial.println("Error (apply_butterworth): No se pudo asignar memoria para la salida del filtro.");
+    #endif
     return NULL;
   }
 

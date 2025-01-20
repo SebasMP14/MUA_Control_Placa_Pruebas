@@ -20,6 +20,7 @@
 #include "flash_driver.h"
 #include "tmp100_driver.h"
 #include "max1932_driver.h"
+#include "dac8551_driver.h"
 #include "calculos.h"
 #include "obc_comm.h"
 
@@ -28,7 +29,7 @@
 #define Elementos 100
 #define OverVoltage 3                     // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX 4              // Microseconds
-#define P PA20 // Blink
+#define P LED_BUILTIN // Blink
 #define PULSE PB08
 
 // uint8_t status = 0;
@@ -65,7 +66,7 @@ void setup() {
   #endif
 
   Serial1.begin(115200);                // OBC
-  #ifdef DEBUG_OBC
+  #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
   #endif
 
@@ -165,7 +166,6 @@ void loop() {
  */
 void setupCOUNT(void) {
 
-  // rtc.begin();
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
     if ( rtc.begin() ) { // Configuración del RTC, HACER EN VARIOS INTENTOS
       #ifdef DEBUG_MAIN
@@ -184,7 +184,6 @@ void setupCOUNT(void) {
   pinMode(PULSE_1, INPUT_PULLDOWN);
   // pinMode(PULSE_2, INPUT_PULLDOWN);
   pinMode(P, OUTPUT);
-  // pinMode(SCL_Sensor, OUTPUT); // salida para Timer Control 2 
   pinMode(PA01, OUTPUT); // Salida para TC2 (utiliza también PA15)
   
   digitalWrite(P, LOW);

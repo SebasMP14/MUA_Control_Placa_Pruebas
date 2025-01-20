@@ -15,12 +15,12 @@
 /************************************************************************************************************
  * @fn      start_max1932
  * @brief   Inicializa el puerto SPI
- * @param   NONE
+ * @param   chip_select: Hay dos MAX1932 a elegir, chip_select toma SPI_CS_MAX1 o SPI_CS_MAX2
  * @return  NONE
  */
-void start_max1932(void) {
-  pinMode(SPI_CS_MAX, OUTPUT);
-  digitalWrite(SPI_CS_MAX, HIGH);
+void start_max1932(uint8_t chip_select) {
+  pinMode(chip_select, OUTPUT);
+  digitalWrite(chip_select, HIGH);
   SPI.begin();  
 }
 
@@ -29,18 +29,19 @@ void start_max1932(void) {
  * @brief   Envía el comando de tensión
  * @param   command: valores de cero a 255, siendo 255 la instrucción que genera la menor tensión de salida
  *                   en el max1932 y 1 el mayor valor, 0 apaga el convertidor
+ * @param   chip_select: Hay dos MAX1932 a elegir, chip_select toma SPI_CS_MAX1 o SPI_CS_MAX2
  * @return  true exitoso - false fallido
  */
-bool write_max_reg(uint8_t command) {
+bool write_max_reg(uint8_t command, uint8_t chip_select) {
   #ifdef DEBUG_MAX
   Serial.print("DEBUG (write_max_reg) -> 0x");
   Serial.println(command, HEX);
   #endif
 
   SPI.beginTransaction(SPISettings(SPI_CLK_Speed, MSBFIRST, SPI_MODE0)); // 2 MHz máximo
-  digitalWrite(SPI_CS_MAX, LOW);  // selección
+  digitalWrite(chip_select, LOW);  // selección
   SPI.transfer(command);          // Envio de comando
-  digitalWrite(SPI_CS_MAX, HIGH);
+  digitalWrite(chip_select, HIGH);
   SPI.endTransaction();
 
   return true;
