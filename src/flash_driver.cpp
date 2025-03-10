@@ -1,18 +1,20 @@
 /**
- * flash_driver.cpp
- * Funciones de control de la memoria flash (W25Q128JV_SM) para la misión M.U.A. de FIUNA 
+ * @file flash_driver.cpp
+ * Funciones de control de la memoria flash (MT25QL01GBBB) para la misión M.U.A. de FIUNA 
+ *  La memoria flash se separa en dos secciones de almacenamiento:
+ * - La sección de DATOS almacena las tramas generadas en loopCount y va desde el sector cero hasta 
+ * el penúltimo sector de la memoria flash
+ * - La sección SYSINFO almacena variables importantes de operación del sistema de control y abarca sólo
+ * el último sector de la memoria flash
+ * 
  * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
  * 
  * Made by:
- * - Est. Sebas Monje <2024> (github)
+ * - Est. Sebas Monje <2024-2025> (github: https://github.com/SebasMP14)
  * - Ing. Lucas Cho 
  * 
- * 
- * 
  * TODO:
- * - Escribir mensajes al OBC
- * - read_all() debe transferir los datos por UART
- * - En update_address() intentar escribir varias veces si falla
+ * - 
  */
 
 #include "flash_driver.h"
@@ -20,11 +22,75 @@
 Adafruit_FlashTransport_QSPI flashTransport(QSPI_SCK, QSPI_CS, QSPI_D0, QSPI_D1, QSPI_D2, QSPI_D3);
 Adafruit_SPIFlash Flash_QSPI(&flashTransport);
 
+/************************************************************************************************************
+ * @fn      read
+ * @brief   Se obtiene en el puntero data los bytes desde la dirección since
+ * @param   data: Puntero de datos
+ * @param   data_length: cantidad de datos
+ * @param   since: dirección desde dónde se lee la memoria
+ * @return  True - False
+ */
+bool read(uint8_t *data, uint32_t data_length, uint32_t since) {
+  uint32_t len_bytes;
+  len_bytes = Flash_QSPI.readBuffer(since, data, data_length);
+  if ( len_bytes == 0 ) {                      /* Si existe un error en la lectura */ 
+    #ifdef DEBUG_FLASH
+    Serial.println("ERROR (read_OPstate) -> Error en la lectura de la memoria FLASH.");
+    #endif
+    return false;
+  }
+  #ifdef DEBUG_FLASH
+  Serial.print("DEBUG (read_SENDED_DATAaddress) -> Dirección en memoria: 0x");
+  Serial.print(LAST_ADDRESS_SENT_DIR, HEX);
+  Serial.print(" Ultima dirección enviada: 0x");
+  Serial.println(*data, HEX);
+  #endif
+  return true;
+}
+
+/************************************************************************************************************
+ * @fn      get_SENDED_DATAaddress
+ * @brief   Escribe la dirección del último dato enviado al obc de la sección de datos
+ * @param   address: Dirección a ser almacenada
+ * @return  True - False
+ */
+bool get_SENT_DATAaddress(uint32_t *sent_address) {
+  uint32_t len_bytes;
+  len_bytes = Flash_QSPI.readBuffer(LAST_ADDRESS_SENT_DIR, reinterpret_cast<uint8_t*>(sent_address), ADDRESS_SIZE);
+  if ( len_bytes == 0 ) {                      /* Si existe un error en la lectura */ 
+    #ifdef DEBUG_FLASH
+    Serial.println("ERROR (read_OPstate) -> Error en la lectura de la memoria FLASH.");
+    #endif
+    return false;
+  }
+  #ifdef DEBUG_FLASH
+  Serial.print("DEBUG (read_SENDED_DATAaddress) -> Dirección en memoria: 0x");
+  Serial.print(LAST_ADDRESS_SENT_DIR, HEX);
+  Serial.print(" Ultima dirección enviada: 0x");
+  Serial.println(*sent_address, HEX);
+  #endif
+  return true;
+}
+
+/************************************************************************************************************
+ * @fn      write_SENDED_DATAaddress
+ * @brief   Escribe la dirección del último dato enviado al obc de la sección de datos
+ * @param   address: Dirección a ser almacenada
+ * @return  True - False
+ */
+bool write_SENT_DATAaddress(uint8_t address) {
+  #ifdef DEBUG_FLASH
+  Serial.println("DEBUG (write_SENDED_DATAaddress) -> ...");
+  #endif
+  return write_DATAinfo(&address, ADDRESS_SIZE, SENT_INDEX);
+}
 
 /************************************************************************************************************
  * @fn      write_DATAinfo
- * @brief   Lee el espacio de memoria donde se guarda el último estado de operación del sistema.
- * @param   NONE
+ * @brief   Escribe en el espacio SYSINFO de la memoria (último sector de la flash)
+ * @param   buffer: Puntero de datos a escribir
+ * @param   len: Cantidad de bytes a escribir
+ * @param   index: Desde dónde se escribirá
  * @return  true: exito - false: fallo
  */
 bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index) {
@@ -59,7 +125,7 @@ bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index) {
   memcpy(&saved[index], buffer, len);         // Se escribe desde index hasta index + len
 
   // Borrar el sector
-  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+  if ( !Flash_QSPI.eraseSector(SAVED_SYSINFO_SECTOR) ) {
     #ifdef DEBUG_FLASH
     Serial.println("DEBUG (write_DATAinfo) -> Falló el borrado del sector.");
     #endif
@@ -94,16 +160,22 @@ bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index) {
  * @param   NONE
  * @return  NONE
  */
-uint8_t read_OPstate(void) {
-  uint8_t read_byte;
-  Flash_QSPI.readBuffer(ADDRESS_OP_STATE, &read_byte, 1);
+bool get_OPstate(uint8_t *read) {
+  uint32_t len_bytes;
+  len_bytes = Flash_QSPI.readBuffer(ADDRESS_OP_STATE_DIR, read, 1);
+  if ( len_bytes == 0 ) {                      /* Si existe un error en la lectura */ 
+    #ifdef DEBUG_FLASH
+    Serial.println("ERROR (read_OPstate) -> Error en la lectura de la memoria FLASH.");
+    #endif
+    return false;
+  }
   #ifdef DEBUG_FLASH
   Serial.print("DEBUG (read_OPstate) -> Dirección: 0x");
-  Serial.print(ADDRESS_OP_STATE, HEX);
+  Serial.print(ADDRESS_OP_STATE_DIR, HEX);
   Serial.print(" Estado leído: 0x");
-  Serial.println(read_byte, HEX);
+  Serial.println(*read, HEX);
   #endif
-  return read_byte;
+  return true;
 }
 
 /************************************************************************************************************
@@ -162,7 +234,6 @@ void read_all(void) {
       Serial.print(read_byte, HEX);
       Serial.print(" ");
       #endif
-      // Serial1.write(read_byte);     // Transferencia de dato al OBC
     } else {
       #ifdef DEBUG_FLASH
       Serial.println("DEBUG (read_all) -> Error al leer de la memoria.");
@@ -225,8 +296,9 @@ void read_until(uint8_t *data, uint32_t data_length) {
 
 /************************************************************************************************************
  * @fn      write_mem
- * @brief   escribe los datos en la primera posición disponible. Se guarda de LSB a MSB (little-endian).
- * @param   buffer, len: buffer con los datos a escribir y la longitud total de estos
+ * @brief   Escribe los datos en la primera posición disponible. Se guarda de LSB a MSB (little-endian).
+ * @param   buffer: Buffer con los datos a escribir
+ * @param   len:    Longitud total de estos
  * @return  true exitoso - false fallido
  */
 bool write_mem(uint8_t *buffer, uint32_t len) {
@@ -299,6 +371,8 @@ bool get_address( uint32_t *write_address ) {
   return true;      /* Retornar si no ocurren errores */
 }
 
+
+
 /************************************************************************************************************
  * @fn      start_flash
  * @brief   Inicia la memoria Flash
@@ -307,8 +381,7 @@ bool get_address( uint32_t *write_address ) {
  *          false error al iniciar FLASH
  */
 bool start_flash(void) {
-  flashTransport.begin();
-
+  flashTransport.begin(); // Inicializa QSPI solo en el MCU (SAMD51)
   #ifdef DEBUG_FLASH_INFO
   if (flashTransport.supportQuadMode()) {
     Serial.println("DEBUG (start_flash) -> La memoria Flash soporta QSPI.");
@@ -331,9 +404,9 @@ bool start_flash(void) {
       #endif
       Serial.println("DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.");
       #endif
+      Flash_QSPI.setIndicator(LED_BUILTIN, true);
       return true;
     }
-
     #ifdef DEBUG_FLASH_INFO
     Serial.println("ERROR (start_flash) -> Error al inicializar la memoria Flash.");
     #endif
@@ -344,6 +417,7 @@ bool start_flash(void) {
   #ifdef DEBUG_FLASH
   Serial.println("ERROR (start_flash) -> No se pudo iniciar la memoria Flash.");
   #endif
+
   return false;
 }
 
@@ -372,7 +446,7 @@ bool write_OPstate1(uint8_t state) {
 
   saved[11] = state;
 
-  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+  if ( !Flash_QSPI.eraseSector(SAVED_SYSINFO_SECTOR) ) {
     #ifdef DEBUG_FLASH
     Serial.println("DEBUG (update_address) -> Borrado de sector fallido.");
     #endif
@@ -419,7 +493,7 @@ bool update_address1(uint32_t *address) {
    * esto se debe a que no se permite la sobreescritura de datos, y solamente esta habilitado
    * borrar datos por sectores, no por páginas.
    *
-  if ( !Flash_QSPI.eraseSector(SAVED_ADDRESS_SECTOR) ) {
+  if ( !Flash_QSPI.eraseSector(SAVED_SYSINFO_SECTOR) ) {
     #ifdef DEBUG_FLASH
     Serial.println("DEBUG (update_address) -> Borrado de sector fallido.");
     #endif

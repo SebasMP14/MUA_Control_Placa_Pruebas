@@ -1,7 +1,14 @@
-/*
-    Se declaran los pines útiles del MCU, teniendo de referencia el paquete
-    SparkFun_SAMD51_Micromod. 
-*/
+/**
+ *  @file hardware_pins.h
+ *  
+ * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
+ * 
+ * Made by:
+ * - Est. Sebas Monje <2024-2025>
+ * 
+ * TODO:
+ * - 
+ */
 
 #ifndef HARDWARE_PINS_H
 #define HARDWARE_PINS_H
@@ -87,8 +94,12 @@
 #define PB07    G4
 #define PB09    G5
 #define PA15    G9
+#define PB08    G18
 #define PA20    G33
 #define PA21    G34
+
+#define LED_SiPM2   PB08
+#define LED_SiPM1   PB09
 
 #endif
 

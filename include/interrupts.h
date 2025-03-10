@@ -4,7 +4,7 @@
  * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
  * 
  * Made by:
- * - Est. Sebas Monje <2024> (github)
+ * - Est. Sebas Monje <2024-2025> (github)
  * 
  * TODO:
  * - Si se presenta un overflow, manejarlo. Se puede guardar todo en memoria y liberar las variables o ...
@@ -23,13 +23,12 @@ extern volatile uint16_t pulse_count1;  // Contador de pulsos
 extern volatile uint16_t pulse_count2;
 extern volatile bool detect1;  // Flag para indicar detección de pulso
 extern volatile bool detect2;
-extern volatile uint16_t pulse_start;
-extern volatile uint16_t pulse_width;
-extern volatile uint16_t aux;
 
-void handlePulse1(void);
-void handlePulse2(void);
-void activeInterrupt(void);
-void desactiveInterrupt(void);
+void handlePulse1_R(void);
+void handlePulse2_R(void);
+void activeInterrupt1(void);
+void desactiveInterrupt1(void);
+void activeInterrupt2(void);
+void desactiveInterrupt2(void);
 
 #endif

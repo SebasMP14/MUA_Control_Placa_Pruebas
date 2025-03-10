@@ -16,7 +16,7 @@
 void start_dac8551(uint8_t chip_select) {
   pinMode(chip_select, OUTPUT);
   digitalWrite(chip_select, HIGH);
-  SPI.begin();
+  // SPI.begin();
 }
 
 void write_dac8551_reg(uint16_t command, uint8_t chip_select) {
@@ -35,4 +35,18 @@ void end_dac8551(uint8_t chip_select) {
   SPI.transfer16(0x0000);
   digitalWrite(chip_select, HIGH);
   SPI.endTransaction();
+}
+
+/************************************************************************************************************
+ * @fn      VMax_command
+ * @brief   Conversión de voltaje a commando bin para el MAX
+ * @param   valor: Es el voltaje objetivo en la salida del MAX
+ * @return  comando en binario
+ */
+uint16_t VDAC_command(float voltage) {
+  return static_cast<uint16_t>((36 - voltage) * 32767 / 12);
+}
+
+float out_voltage(uint16_t Vcommand) {
+  return static_cast<float>(36 - (Vcommand * 12 / 32767.0));
 }

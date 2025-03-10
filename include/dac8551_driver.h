@@ -22,5 +22,7 @@
 void start_dac8551(uint8_t chip_select);
 void write_dac8551_reg(uint16_t command, uint8_t chip_select);
 void end_dac8551(uint8_t chip_select);
+uint16_t VDAC_command(float voltage);
+float out_voltage(uint16_t Vcommand);
 
 #endif

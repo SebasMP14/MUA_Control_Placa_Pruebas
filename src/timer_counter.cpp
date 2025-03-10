@@ -1,14 +1,14 @@
 /**
- * timer_counter.cpp
+ * @file timer_counter.cpp
  *  Configuración y manejo de interrupción del timer counter (32bits). Se espera una interrupción cada 60 seg,
  * donde se guardarán los datos, y se iniciará la polarización de los SiPMs.
  * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
  * 
  * Made by:
- * - Est. Sebas Monje <2024> (github)
+ * - Est. Sebas Monje <2024-2025> (github)
  * 
  * TODO:
- * - Implementar la escritura de datos en memoria flash y el algoritmo de polarización
+ * - 
  * - Ajustar el tiempo de interrupción de TC2 de acuerdo a la variación de temperatura.
  *   Esto debido a la tasa de variación del Vbr.
  */
@@ -26,7 +26,7 @@ unsigned long pulse_Width = 0x00;
  * @param   NONE
  * @return  NONE
  */
-void setupTC2(void) {
+void setupTC2(uint8_t segundos) {
   // Habilitar el reloj para TC2
   GCLK->PCHCTRL[TC2_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0 | GCLK_PCHCTRL_CHEN; // Usa el generador de reloj 0
   GCLK->PCHCTRL[TC3_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0 | GCLK_PCHCTRL_CHEN; // Habilitar reloj para TC3 también (parte del contador de 32 bits)
@@ -42,7 +42,7 @@ void setupTC2(void) {
 
   /* Configurar la comparación para generar una interrupción.
   El orden de los factores, altera el manejo de la variable. */
-  TC2->COUNT32.CC[1].reg = ((120000000 / 1024) * 30); // CC_Value = clk_frec * Tiempo_deseado / prescaler
+  TC2->COUNT32.CC[1].reg = ((120000000 / 1024) * segundos); // CC_Value = clk_frec * Tiempo_deseado / prescaler
   while (TC2->COUNT32.SYNCBUSY.bit.CC1);
 
   // Habilitar interrupciones por comparación
@@ -66,7 +66,6 @@ void TC2_Handler(void) {
     TC2->COUNT32.INTFLAG.bit.MC1 = 1; // Limpiar la bandera de interrupción
     TC2->COUNT32.COUNT.reg = 0x0; // Se resetea el registro
     detect_TC = true;
-    // digitalWrite(SCL_Sensor, !digitalRead(SCL_Sensor)); // Alternar el estado del LED
     #ifdef DEBUG_TC
     Serial.println("DEBUG (TC2_Handler) -> Interrupción TC2.");
     #endif
@@ -74,76 +73,21 @@ void TC2_Handler(void) {
 }
 
 /************************************************************************************************************
- * @fn      setupTC()
- * @brief   Configuración de timer counter de 16 bits 
+ * @fn      disableTC2()
+ * @brief   Desabilitación del TC2.
  * @param   NONE
  * @return  NONE
  */
-void setupTC4(void) {
-  // Habilitar el reloj para TC4
-  GCLK->PCHCTRL[TC4_GCLK_ID].reg = GCLK_PCHCTRL_GEN_GCLK0 | GCLK_PCHCTRL_CHEN; // Usa el generador de reloj 0
-  
-  TC4->COUNT16.CTRLA.reg = TC_CTRLA_SWRST;  // Resetear TC4
-  while (TC4->COUNT16.SYNCBUSY.bit.SWRST);  // Esperar hasta que se complete el reseteo
-  
-  // Configurar el prescaler y modo
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_PRESCALER_DIV1024; // Prescaler de 1024
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_MODE_COUNT16; // Modo de 16 bits
-
-  /* Configurar la comparación para generar una interrupción.
-  El orden de los factores, altera el manejo de la variable. */
-  // TC4->COUNT16.CC[0].reg = 0xFFFF; // CC_Value = clk_frec * Tiempo_deseado / prescaler
-  // while (TC4->COUNT16.SYNCBUSY.bit.CC0);
-
-  // // Habilitar interrupciones por comparación
-  // TC4->COUNT16.INTENSET.reg = TC_INTENSET_MC0; // Habilitar interrupción de desbordamiento
-
-  TC4->COUNT16.CTRLBSET.reg |= TC_CTRLBSET_LUPD;    // Habilitar la captura automática en eventos de flanco
-  TC4->COUNT16.CTRLBSET.reg |= TC_CTRLBSET_DIR; 
-  TC4->COUNT16.CC[0].reg = 0;    // Canal de captura 0 (flanco de subida)
-  TC4->COUNT16.CC[1].reg = 0;    // Canal de captura 1 (flanco de bajada)
-  while (TC4->COUNT16.SYNCBUSY.bit.CC0 || TC4->COUNT16.SYNCBUSY.bit.CC1);  // Sincronizar
-  TC4->COUNT16.INTENSET.reg = TC_INTENSET_MC0|TC_INTENSET_MC1;
-
-
-  // Habilitar el TC4
-  TC4->COUNT16.CTRLA.reg |= TC_CTRLA_ENABLE;
-  while (TC4->COUNT16.SYNCBUSY.bit.ENABLE); // Esperar a que TC4 se habilite
-
-  NVIC_EnableIRQ(TC4_IRQn); // Habilitar la interrupción en el NVIC
+void disableTC2(void) {
+  NVIC_DisableIRQ(TC2_IRQn);
 }
 
 /************************************************************************************************************
- * @fn      TC_Handler()
- * @brief   Manejo de la interrupción, se resetea el overflow y el registro de conteo del tiempo.
+ * @fn      enableTC2()
+ * @brief   Habilitación del TC2.
  * @param   NONE
  * @return  NONE
  */
-void TC4_Handler(void) {
-  // if (TC4->COUNT16.INTFLAG.bit.MC0) { // Si ocurre un overflow
-  //   TC4->COUNT16.INTFLAG.bit.MC0 = 1; // Limpiar la bandera de interrupción
-  //   TC4->COUNT16.COUNT.reg = 0x0; // Se resetea el registro
-  //   #ifdef DEBUG_TC
-  //   Serial.println("DEBUG (TC4_Handler) -> Interrupción TC4.");
-  //   #endif
-  // }
-
-  static uint16_t rising_edge_time = 0;
-  static uint16_t falling_edge_time = 0;
-  
-  // Captura en flanco de subida
-  if (TC4->COUNT16.INTFLAG.bit.MC0 == 0) {
-    rising_edge_time = TC4->COUNT16.CC[0].reg;  // Capturar el tiempo en flanco de subida
-    TC4->COUNT16.INTFLAG.bit.MC0 = 1;  // Limpiar la bandera de captura de flanco de subida
-    return;
-  }
-
-  // Captura en flanco de bajada
-  if (TC4->COUNT16.INTFLAG.bit.MC1) {
-    TC4->COUNT16.INTFLAG.bit.MC1 = 1;  // Limpiar la bandera de captura de flanco de bajada
-    falling_edge_time = TC4->COUNT16.CC[1].reg;  // Capturar el tiempo en flanco de bajada
-  }
-    
-    // Calcular el ancho del pulso
-    pulse_width = falling_edge_time - rising_edge_time;
+void enableTC2(void) {
+  NVIC_EnableIRQ(TC2_IRQn);
 }

@@ -1,6 +1,15 @@
+/**
+ * calculos.cpp
+ *  
+ * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
+ * 
+ * Made by:
+ * - Est. Sebas Monje <2024-2025> (github)
+ * 
+ * TODO:
+ * - 
+ */
 #include "calculos.h"
-
-
 
 float Fc = 5.0;                 // Frecuencia de corte en Hz (ajustable)
 float Fs = 100.0;               // Frecuencia de muestreo en Hz (ajustable)
@@ -15,7 +24,7 @@ float y[3] = {0.0, 0.0, 0.0};     // Últimos valores de salida
  * @return  
  * TODO: - 
  */
-void sliding_moving_average(float* input, uint8_t N, uint8_t M, float* output) {
+void sliding_moving_average(float* input, uint16_t N, uint8_t M, float* output) {
   float accumulator = 0.0;
   uint8_t aux = (M - 1) / 2;
 
@@ -28,13 +37,13 @@ void sliding_moving_average(float* input, uint8_t N, uint8_t M, float* output) {
   }
 
   // Para el resto de las muestras (ventanas deslizantes completas)
-  for ( uint8_t i = M - aux; i < N - aux; i++ ) {
+  for ( uint16_t i = M - aux; i < N - aux; i++ ) {
     accumulator += input[i + aux] - input[i - aux - 1];  // Actualiza el acumulador
     output[i] = accumulator / M;  // Calcula el promedio
   }
 
   // Para los últimos valores
-  for ( uint8_t i = N - aux; i < N; i++ ) {
+  for ( uint16_t i = N - aux; i < N; i++ ) {
     accumulator -= input[i - aux - 1];  // restar el valor sobrante
     output[i] = accumulator / (N - i + aux);  // Promedio con los valores restantes
   }
@@ -48,7 +57,7 @@ void sliding_moving_average(float* input, uint8_t N, uint8_t M, float* output) {
  * @return  
  * TODO: - 
  */
-float* moving_average(float *input, uint8_t Elementos, uint8_t window_size) {
+float* moving_average(float *input, uint16_t Elementos, uint8_t window_size) {
   static float output[256];
   float sum = 0;
 
@@ -63,7 +72,7 @@ float* moving_average(float *input, uint8_t Elementos, uint8_t window_size) {
   }
 
   // Calcular el promedio móvil
-  for ( uint8_t i = window_size; i < Elementos; i++ ) {
+  for ( uint16_t i = window_size; i < Elementos; i++ ) {
     sum += input[i] - input[i - window_size];
     output[i] = sum / window_size;
   }
@@ -107,7 +116,7 @@ void init_butterworth(void) {
  * @return  
  * TODO: - No usar malloc
  */
-float* apply_butterworth(float *input, uint8_t Elementos) {
+float* apply_butterworth(float *input, uint16_t Elementos) {
   // Crear un nuevo arreglo para almacenar la salida filtrada
   float *filtered_output = (float*)malloc(Elementos * sizeof(float));
   if (filtered_output == NULL) {
@@ -124,7 +133,7 @@ float* apply_butterworth(float *input, uint8_t Elementos) {
   }
 
   // Aplicar el filtro a cada elemento
-  for (uint8_t i = 0; i < Elementos; i++) {
+  for (uint16_t i = 0; i < Elementos; i++) {
     x[2] = x[1];
     x[1] = x[0];
     x[0] = input[i];
@@ -146,18 +155,18 @@ float* apply_butterworth(float *input, uint8_t Elementos) {
  * @param   Temperature: obtenido del sensor TMP100 para la estimación teorica
  * @return  ---todo
  */
-float obtain_Vbd(float *inverseCurrent_I, float *inverseVoltage, uint8_t Elementos) {
+float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elementos, float *Vcurr) {
   float logarithmicCurrent[Elementos];
   float derivative[Elementos];
   float inverseDerivative[Elementos];
   float BreakdownVoltage = inverseVoltage[0];
-  int indexPeak = 0;
+  uint16_t indexPeak = 0;
 
-  for ( uint8_t i = 0; i < Elementos; i++ ) {            // Logaritmo natural de 
-    logarithmicCurrent[i] = logf(inverseCurrent_I[i]);
+  for ( uint16_t i = 0; i < Elementos; i++ ) {            // Logaritmo natural de 
+    logarithmicCurrent[i] = logf(inverseCurrent[i]);
   }
 
-  for ( uint8_t i = 1; i < Elementos - 1; i++ ) {
+  for ( uint16_t i = 1; i < Elementos - 1; i++ ) {
     derivative[i] = (logarithmicCurrent[i+1] - logarithmicCurrent[i-1]) / 
                     (inverseVoltage[i+1] - inverseVoltage[i-1]);
     inverseDerivative[i] = 1.0 / derivative[i];
@@ -167,7 +176,7 @@ float obtain_Vbd(float *inverseCurrent_I, float *inverseVoltage, uint8_t Element
       indexPeak = i;
     }
   }
-
+  *Vcurr = inverseCurrent[indexPeak];
   return inverseVoltage[indexPeak];
 }
 

@@ -4,7 +4,7 @@
  * -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
  * 
  * Made by:
- * - Est. Sebas Monje <2024> (github)
+ * - Est. Sebas Monje <2024-2025> (github)
  * 
  * TODO:
  * - Command de la función write debería ser la tensión de salida deseada
