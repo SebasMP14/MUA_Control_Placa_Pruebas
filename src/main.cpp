@@ -25,7 +25,7 @@
 #include "obc_comm.h"
 
 #define DEBUG_MAIN
-// #define DEBUG_ // eliminar en todos lados para activar control de placa interfaz
+#define DEBUG_ // eliminar en todos lados para activar control de placa interfaz
 #define MAX_ITER            5             // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5             // Para Sliding Moving Average
@@ -35,7 +35,7 @@
 #define TRAMA_INFO_SIZE     36            // Analizar
 
 // uint8_t status = 0;
-uint8_t state = 0x00;
+uint8_t state = 0x01;                     // 
 uint8_t segundos = 30;                    // Calibración cada tantos segundos
 uint8_t ACK_OBC_to_MUA = 0x04;
 const float Voffset = 3.8;
@@ -58,9 +58,13 @@ float Vbd2 = 0.0;                         // Breakdown Voltage Channel two
 float Vbias2 = 0.0;                       // Polarization Voltage Channel two
 float Vcurr2 = 0.0;                       // Breakdown Current Voltage Channel two
 
+bool flag1 = false;
+bool flag2 = false;
+
 ADS1260 ads1260;
 
 uint8_t sendTrama[TRAMA_DATA_SIZE] = {0x26};
+
 uint16_t inverseVoltage_command[Elementos];   // Comandos a ser enviados a cada DAC
 float inverseVoltage[Elementos];              // Voltages en el SiPM
 float inverseVCurrent[Elementos];             // Corriente
@@ -78,19 +82,21 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE);
 float polarization_settling(float Vbd, uint8_t CS_DAC);
 
 void setup() {
-  delay(4000);
+  delay(6000);
 
   Serial.begin(115200);                 // Puerto USB
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial Iniciado");
   #endif
 
-  Serial1.begin(115200);                // OBC
+  Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD...");
+
+  Serial1.begin(115200);                // OBC (On Board Computer)
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
   #endif
   // pinMode(INTERFACE_EN, OUTPUT);
-  // digitalWrite(INTERFACE_EN, HIGH);
+  // digitalWrite(INTERFACE_EN, LOW);
   // pinMode(LED_BUILTIN, OUTPUT);
   // digitalWrite(LED_BUILTIN, LOW);
 
@@ -126,7 +132,7 @@ void setup() {
   // get_OPstate(&state);
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
-  // pinMode(PULSE_2, INPUT_PULLDOWN);
+  pinMode(PULSE_2, INPUT_PULLDOWN);
   pinMode(PA01, OUTPUT);                            // Salida para TC2 (utiliza también PA15)
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(LED_SiPM1, OUTPUT);
@@ -190,6 +196,7 @@ void loop() {
 
     case COUNT_MODE:
       loopCOUNT();
+      #ifdef DEBUG__
       if ( Serial1.available() ) {
         requestOperationMode();
         if (currentMode == TRANSFER_DATA_MODE) {
@@ -198,6 +205,7 @@ void loop() {
           setupTRANSFER();
         }
       }
+      #endif
       break;
 
     case TRANSFER_DATA_MODE:
@@ -252,7 +260,7 @@ void setupCOUNT(void) {
     #endif
     delay(10);
   }
-  getTimestampFromGPS();                            // 
+  // getTimestampFromGPS();                            // 
 
   digitalWrite(LED_BUILTIN, LOW);
   digitalWrite(LED_SiPM1, LOW);
@@ -287,21 +295,21 @@ void setupCOUNT(void) {
   // ADC Configuration
   ads1260.begin();
   #ifdef DEBUG_MAIN
-  Serial.print("MODE0: ");
+  Serial.print("DEBUG (setupCOUNT) -> MODE0: ");
   Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);   // 00100100
   #endif
   ads1260.writeRegisterData(ADS1260_MODE0, 0b11111100);           // 40 KSPS - FIR (Page 30)
   // ads1260.writeRegisterData(ADS1260_MODE0, 0b01101100);           // 14400 SPS
   delay(50);
   #ifdef DEBUG_MAIN
-  Serial.print("MODE0: ");
+  Serial.print("DEBUG (setupCOUNT) -> MODE0: ");
   Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);   
-  Serial.print("PGA: ");
+  Serial.print("DEBUG (setupCOUNT) -> PGA: ");
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
   // ads1260.writeRegisterData(ADS1260_PGA, 0b10000000);             // BYPASS MODE
   #ifdef DEBUG_MAIN
-  Serial.print("PGA BYPASS MODE: ");
+  Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
   ads1260.writeRegisterData(ADS1260_MODE3, 0b01000000);           // STATENB  REVISARRRRRRRRRRRRRRRRRRRRRRRR
@@ -310,7 +318,7 @@ void setupCOUNT(void) {
 
   // erase_all();
 
-  external_ref = ads1260.readRef();
+  external_ref = ads1260.readRef();                             // Se lee la referencia
   // Primera polarización de los SiPMs
   // Channel 1
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
@@ -321,8 +329,10 @@ void setupCOUNT(void) {
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
-  activeInterrupt1();
+  activeInterrupt1();                                           // Una vez polarizado
+  flag1 = true;
 
+  #ifdef DEBUG__
   // Channel 2
   write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX2);
@@ -332,9 +342,10 @@ void setupCOUNT(void) {
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
-  activeInterrupt2();
+  activeInterrupt2();                                           // Una vez polarizado
   #endif
 
+  #endif
   setupTC2(segundos);
 
   setup_state = true;
@@ -343,13 +354,12 @@ void setupCOUNT(void) {
   #endif
   time_ini = millis();
 
-
 }
 
 void loopCOUNT(void) {
   if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si y no)
     detect1 = false;
-    #ifdef DEBUG_MAIN
+    #ifdef DEBUG_MAIN_
     Serial.print("COUNT1: ");
     Serial.print(pulse_count1);
     #endif
@@ -357,7 +367,7 @@ void loopCOUNT(void) {
 
   if ( detect2 ) {
     detect2 = false;
-    #ifdef DEBUG_MAIN
+    #ifdef DEBUG_MAIN_
     Serial.print("COUNT2: ");
     Serial.print(pulse_count2);
     #endif
@@ -365,7 +375,7 @@ void loopCOUNT(void) {
 
   if ( (millis() - time_ini) >= 5000 ) {      /////////// Rutina de prueba
     // read_all();
-    digitalWrite(LED_BUILTIN, HIGH); // Blink
+    digitalWrite(LED_BUILTIN, HIGH);                      // Blink
     delay(100);
     digitalWrite(LED_BUILTIN, LOW);
     Serial.print("millis: ");
@@ -387,9 +397,9 @@ void loopCOUNT(void) {
    *    El proceso se espera que tarde 5 segundos por SiPM y la calibración se hará individualmente. */
   if ( detect_TC ) {
     desactiveInterrupt1();
-    // desactiveInterrupt2();
+    desactiveInterrupt2();
 
-    temperature = (temperature1 + temperature2) / 2;
+    temperature = (temperature1 );//+ temperature2) / 2;
     FloatToUint32 temp;
     temp.f = temperature;
     if (isnan(temperature)) {
@@ -397,7 +407,6 @@ void loopCOUNT(void) {
       Serial.println("DEBUG (loopCOUNT) -> Error al leer la temperatura.");
       #endif
       // manejar - Se puede leer el del ADC 
-      
     }
 
     uint32_t timestamp = getTime();
@@ -447,7 +456,7 @@ void loopCOUNT(void) {
     Serial.print(")");
     #endif
 
-    #ifdef DEBUG_
+    #ifdef DEBUG__
     read_all();
     #endif
     
@@ -504,19 +513,21 @@ void loopCOUNT(void) {
     // }
 
     #ifdef DEBUG_
-    external_ref = ads1260.readRef();
+    external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
 
     // Channel 1 Polarization
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
     temperature1 = read_tmp100();
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-    Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);
+    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Voltage Filtering 
+    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Current Filtering
+    Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
+    flag1 = true;
 
+    #ifdef DEBUG__
     // Channel 2 Polarization
     write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Vout2 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX2);
@@ -529,8 +540,32 @@ void loopCOUNT(void) {
     activeInterrupt2();
     #endif
 
+    #endif
     detect_TC = false;
   }
+
+  ///////** Para imprimir los puntos */
+  if ( flag1 && !detect_TC ) {
+    flag1 = false;
+    Serial.println("-------------------- DATOS OBTENIDOS --------------------");
+    Serial.println("i, Voltage, VCorriente, (Voltage*12)-3.8-(VCorriente-firstCurrent), (VCorriente-firstCurrent)/2000");
+    for ( uint16_t i = 1; i < Elementos; i++ ) {
+      Serial.print(i);
+      Serial.print(",");
+      Serial.print(inverseVoltage[i], 7);
+      Serial.print(",");
+      Serial.print(inverseVCurrent[i], 7);
+      Serial.print(",");
+      Serial.print(temperatureArray[i]);
+      Serial.print(",");
+      Serial.print((inverseVoltage[i]*12)-3.8-(inverseVCurrent[i]-firstCurrent), 7);
+      Serial.print(",");
+      Serial.println((inverseVCurrent[i]-firstCurrent)/2000, 10);
+    }
+    Serial.print("Vbd Calculado: ");
+    Serial.println(Vbd1, 6);
+  }
+
 }
 
 /******************************************************
@@ -550,7 +585,7 @@ void setupTRANSFER(void) {
   #endif
 
   // write_OPstate(*state);
-  disableTC2();
+  disableTC2(); // Funka
   desactiveInterrupt1();
   desactiveInterrupt2();
   digitalWrite(INTERFACE_EN, LOW);
@@ -566,6 +601,13 @@ void loopTRANSFER(void) {
   // transferir datos
   // read_all();
   delay(1000);
+  /*
+  * Esta sección prueba el envío de los datos al OBC, los únicos datos enviados son los que contiene "trama"
+  * y se envía X veces 
+  */
+ #ifdef DEBUG__
+  uint8_t counter = 0;
+  uint8_t X = 3;
 //////////////////////// Enviar
   uint8_t trama_size = 30 + TRAMA_COMM;
   uint8_t trama[trama_size] = {MISSION_ID, ID_SENT_DATA, 0x1E, 0x4A, 0x47, 0x36, 0x59, 0x42, 
@@ -634,6 +676,11 @@ void loopTRANSFER(void) {
     Serial.print("DEBUG (loopTRANSFER) -> recibido[1] != ACK_OBC_to_MUA");
     #endif
   }
+
+  if (counter == X) {
+    currentMode = FINISH;
+  }
+  #endif
 
   #ifdef DEBUG_
   uint32_t last_address_written = 0xFFFFFFFF;
@@ -757,7 +804,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
   unsigned long start_time, total_time;
 
   #ifdef DEBUG_MAIN
-  Serial.print("Limites (dec, hex): ");
+  Serial.print("DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): ");
   Serial.print(out_voltage(Vlim_inf), 2);
   Serial.print(", ");
   Serial.print(out_voltage(Vlim_sup), 2);
@@ -836,7 +883,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
     i++;
     delayMicroseconds(Switching_Time_MAX); // 4 microseconds
     delay(5); // Settling time of the MAX (Vout)
-    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden...
+    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden... // 354.96 useg
 
     Vbias = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
   }

@@ -152,11 +152,61 @@ float* apply_butterworth(float *input, uint16_t Elementos) {
  * @fn      obtain_Vbias
  * @brief   Se obtiene la curva I-V inversa del SiPM, se aplica la inversa de la derivada del logaritmo neperiano de la curva. El pico de
  *          esta es el Voltaje de ruptura, sumandole el over voltage tenemos Vbias.
- * @param   Temperature: obtenido del sensor TMP100 para la estimación teorica
+ * @param   
  * @return  ---todo
  */
 float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elementos, float *Vcurr) {
+  #ifdef DEBUG_CALCULOS
+  Serial.println("DEBUG (obtain_Vbd) -> Ejecutandose");
+  #endif
+  uint16_t indexPeak = 0;
+  float minInverseDerivative = __FLT_MAX__; 
   float logarithmicCurrent[Elementos];
+  float inverseDerivative[Elementos];
+
+  // Logaritmo natural de la corriente
+  for (uint16_t i = 0; i < Elementos; i++) {
+    if (inverseCurrent[i] > 0.0f) { 
+      logarithmicCurrent[i] = logf(inverseCurrent[i]);            // Calculo del log de la corriente
+    } else {
+      logarithmicCurrent[i] = -__FLT_MAX__; // Valor mínimo para descartar
+    }
+  }
+
+  // Calculo de la derivada y su inversa
+  for (uint16_t i = 1; i < Elementos - 1; i++) {
+    float dV = inverseVoltage[i+1] - inverseVoltage[i-1];
+    if (fabsf(dV) < 1e-6f) continue; // Evitar divisiones por valores muy pequeños
+
+    float dLogI = logarithmicCurrent[i+1] - logarithmicCurrent[i-1];
+    float derivative = dLogI / dV;
+
+    if (derivative > 0.0f) { // Filtrar derivadas negativas
+      inverseDerivative[i] = 1.0f / derivative;
+      if (inverseDerivative[i] < minInverseDerivative) {
+        minInverseDerivative = inverseDerivative[i];
+        indexPeak = i;
+      }
+    }
+  }
+
+  *Vcurr = inverseCurrent[indexPeak];
+  return inverseVoltage[indexPeak];
+}
+
+/************************************************************************************************************
+ * @fn      Vbd_teorical
+ * @brief   Voltaje de ruptura teorica de acuerdo a la temperatura
+ * @param   Temperature
+ * @return  valor del voltaje estimado
+ */
+float Vbd_teorical(float Temperature) {   // Celcius
+  return 23.9985 + 0.0215 * Temperature;  // Curva lineal
+}
+
+
+/* anteriormente en obtain_Vbd
+float logarithmicCurrent[Elementos];
   float derivative[Elementos];
   float inverseDerivative[Elementos];
   float BreakdownVoltage = inverseVoltage[0];
@@ -176,23 +226,4 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
       indexPeak = i;
     }
   }
-  *Vcurr = inverseCurrent[indexPeak];
-  return inverseVoltage[indexPeak];
-}
-
-/************************************************************************************************************
- * @fn      Vbd_teorical
- * @brief   Voltaje de ruptura teorica de acuerdo a la temperatura
- * @param   Temperature
- * @return  valor del voltaje estimado
- */
-float Vbd_teorical(float Temperature) {   // Celcius
-  return 23.9985 + 0.0215 * Temperature;  // Curva lineal
-}
-
-/************************************************************************************************************
- * @fn      V_to_command
- * @brief   Conversión de voltaje a commando bin para el MAX
- * @param   Voltaje: Es el voltaje objetivo en la salida del MAX
- * @return  comando en binario
- */
+*/

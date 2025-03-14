@@ -92,7 +92,7 @@ float read_tmp100(void) {
   uint8_t status = Wire.endTransmission();
 	if (status != 0) {
 		#ifdef DEBUG_TMP
-		Serial.print("ERROR (start_tmp100) -> Error en la transmisión I2C: ");
+		Serial.print("ERROR (read_tmp100) -> Error en la transmisión I2C: ");
 		Serial.println(status);
 		#endif
 		return NAN;  // Detener si hay error en la transmisión
