@@ -172,6 +172,9 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
       logarithmicCurrent[i] = -__FLT_MAX__; // Valor mínimo para descartar
     }
   }
+  #ifdef DEBUG_CALCULOS
+  Serial.println("DEBUG (obtain_Vbd) -> logaritmo calculado");
+  #endif
 
   // Calculo de la derivada y su inversa
   for (uint16_t i = 1; i < Elementos - 1; i++) {
@@ -189,6 +192,10 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
       }
     }
   }
+  #ifdef DEBUG_CALCULOS
+  Serial.print("DEBUG (obtain_Vbd) -> Vbd obtenido: ");
+  Serial.println(inverseVoltage[indexPeak], 6);
+  #endif
 
   *Vcurr = inverseCurrent[indexPeak];
   return inverseVoltage[indexPeak];

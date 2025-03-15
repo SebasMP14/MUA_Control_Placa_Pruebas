@@ -26,22 +26,22 @@
 bool start_tmp100(void) {
 	uint8_t configRegister = 0b01100000;  // Default configuration 12 bits
 
-	Wire.begin();
+	// Wire.begin();
 	// Wire.setClock(400000); // Velocidad 400 KHz 
-	Wire.setClock(2000000); 	// Velocidad de 2 MHz
+	// Wire.setClock(1000000); 	// Velocidad de 2 MHz
 
   /* Activación de HIGH SPEED MODE: status = 3 esperado*/
-	Wire.beginTransmission(TMP100_ADDRESS);
-	Wire.write(0b00001000);
-	uint8_t status = Wire.endTransmission();
-	if (status != 3) { // 3 para HIGH SPEED
-		#ifdef DEBUG_TMP
-		Serial.print("ERROR (start_tmp100) HSM -> Error en la transmisión I2C: ");
-		Serial.println(status);
-		#endif
-		return false;  // Detener si hay error en la transmisión
-	}
-
+	// Wire.beginTransmission(TMP100_ADDRESS);
+	// Wire.write(0b00001000);
+	// uint8_t status = Wire.endTransmission();
+	// if (status != 3) { // 3 para HIGH SPEED
+	// 	#ifdef DEBUG_TMP
+	// 	Serial.print("ERROR (start_tmp100) HSM -> Error en la transmisión I2C: ");
+	// 	Serial.println(status);
+	// 	#endif
+	// 	return false;  // Detener si hay error en la transmisión
+	// }
+	uint8_t status;
 	Wire.beginTransmission(TMP100_ADDRESS);
 	Wire.write(0x01);  // Puntero al registro de configuración
 

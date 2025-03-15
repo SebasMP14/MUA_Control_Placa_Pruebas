@@ -18,6 +18,7 @@
 #include "timer_counter.h"
 #include "flash_driver.h"
 #include "tmp100_driver.h"
+#include "mcp4561_driver.h"
 #include "max1932_driver.h"
 #include "dac8551_driver.h"
 #include "ads1260_driver.h"
@@ -29,17 +30,20 @@
 #define MAX_ITER            5             // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5             // Para Sliding Moving Average
-#define OverVoltage         1             // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define OverVoltage         0.2238233 * 3             // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX  4             // Microseconds
 #define TRAMA_DATA_SIZE     36            // Analizar
 #define TRAMA_INFO_SIZE     36            // Analizar
 
 // uint8_t status = 0;
 uint8_t state = 0x01;                     // 
-uint8_t segundos = 30;                    // Calibración cada tantos segundos
+uint8_t segundos = 60;                    // Calibración cada tantos segundos
 uint8_t ACK_OBC_to_MUA = 0x04;
 const float Voffset = 3.8;
-float firstCurrent = 0.0;
+const float ResisA = 1050;
+const float ResisB = 2000;
+float firstCurrent1 = 0.0;
+float firstCurrent2 = 0.0;
 float temperature1 = 0.0;
 float temperature2 = 0.0;
 float temperature = 0.0;
@@ -95,10 +99,6 @@ void setup() {
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
   #endif
-  // pinMode(INTERFACE_EN, OUTPUT);
-  // digitalWrite(INTERFACE_EN, LOW);
-  // pinMode(LED_BUILTIN, OUTPUT);
-  // digitalWrite(LED_BUILTIN, LOW);
 
   // // /* Inicialización de memoria Flash */
   // if ( !start_flash() ) {              // Se utiliza en ambos modos de operación
@@ -107,26 +107,9 @@ void setup() {
   // }
   // delay(2000);
 
-  // uint8_t escribir[5] = {0x01, 0xA3, 0xF5, 0x12, 0x14};
-  // uint8_t leer[5];
-  // read_until(leer, 5);
-  // Serial.println(leer[0], HEX);
-  // Serial.println(leer[1], HEX);
-  // write_mem(escribir, 5);
-  // delay(1000);
-  // read_all();
-
-  // while(1) {
-  //   delay(500);
-  //   digitalWrite(LED_BUILTIN, HIGH);
-  //   delay(500);
-  //   digitalWrite(LED_BUILTIN, LOW);
-  // }
-
   // if ( erase_all() ) {
   //   Serial.println("Flash borrada");
   // }
-  // write_OPstate(0x00);
 
   // Restaurar último estado guardado en memoria
   // get_OPstate(&state);
@@ -157,6 +140,9 @@ void setup() {
 
     case 0x01:                                // COUNT_MODE
       currentMode = COUNT_MODE;
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (setup) -> COUNT_MODE iniciado");
+      #endif
       setupCOUNT();
       break;
 
@@ -245,7 +231,9 @@ void loop() {
  */
 void setupCOUNT(void) {
   #ifdef DEBUG_
-  SPI.begin();                                      // Bus MAX1y2 & DAC1y2
+  SPI.begin();                                      // BUS MAX1y2 & DAC1y2
+  Wire.begin();                                     // BUS TMP100 y MCP4561
+  Wire.setClock(400000);
   #endif
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
     if ( rtc.begin() ) {                            // Configuración del RTC
@@ -267,6 +255,26 @@ void setupCOUNT(void) {
   digitalWrite(LED_SiPM2, LOW);
   digitalWrite(INTERFACE_EN, HIGH);                 // Activación de Placa Interfaz(5V-3V3) y ADC1260(5V)
 
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (setupCOUNT) -> writing in MCP ");
+  #endif
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( writeMCP(0x9C) ) {                         // Configuración del MCP4561
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
+      #endif
+      break;
+    } else {
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: ");
+      Serial.println(iter_counter);
+      #endif
+      delay(10);
+    }
+  }
+  Serial.print("MCP escrito en: ");
+  Serial.println(readMCP(), HEX);
+
   delay(START_UP_TIME_ADS);                         // Habilitación del ADC (REVISAR TIEMPO)
   
   start_dac8551(SPI_CS_DAC1);                       // SiPM 1
@@ -274,6 +282,7 @@ void setupCOUNT(void) {
 
   start_dac8551(SPI_CS_DAC2);                       // SiPM 2
   start_max1932(SPI_CS_MAX2);
+
   #ifdef DEBUG_
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
     if ( start_tmp100() ) {                         // Configuración del TMP100
@@ -296,7 +305,7 @@ void setupCOUNT(void) {
   ads1260.begin();
   #ifdef DEBUG_MAIN
   Serial.print("DEBUG (setupCOUNT) -> MODE0: ");
-  Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);   // 00100100
+  Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);   // respuesta esperada: 00100100
   #endif
   ads1260.writeRegisterData(ADS1260_MODE0, 0b11111100);           // 40 KSPS - FIR (Page 30)
   // ads1260.writeRegisterData(ADS1260_MODE0, 0b01101100);           // 14400 SPS
@@ -316,9 +325,23 @@ void setupCOUNT(void) {
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
 
+  // while (1) {
+  //   delay(500);
+  //   digitalWrite(LED_BUILTIN, HIGH);
+  //   delay(500);
+  //   digitalWrite(LED_BUILTIN, LOW);
+  //   delay(START_UP_TIME_ADS);
+  //   ads1260.begin();
+  //   Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);
+  // }
+
   // erase_all();
 
   external_ref = ads1260.readRef();                             // Se lee la referencia
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  Serial.println(external_ref, 6);
+  #endif
   // Primera polarización de los SiPMs
   // Channel 1
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
@@ -357,11 +380,11 @@ void setupCOUNT(void) {
 }
 
 void loopCOUNT(void) {
-  if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si y no)
+  if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si, no)
     detect1 = false;
-    #ifdef DEBUG_MAIN_
+    #ifdef DEBUG_MAIN
     Serial.print("COUNT1: ");
-    Serial.print(pulse_count1);
+    Serial.println(pulse_count1);
     #endif
   }
 
@@ -400,8 +423,19 @@ void loopCOUNT(void) {
     desactiveInterrupt2();
 
     temperature = (temperature1 );//+ temperature2) / 2;
+    FloatToUint32 lati;
+    FloatToUint32 longi;
     FloatToUint32 temp;
+    FloatToUint32 vbd1;
+    FloatToUint32 vbd2;
+    FloatToUint32 vcurr1;
+    FloatToUint32 vcurr2;
     temp.f = temperature;
+    vbd1.f = Vbd1;
+    vbd2.f = Vbd2;
+    vcurr1.f = Vcurr1;
+    vcurr2.f = Vcurr2;
+
     if (isnan(temperature)) {
       #ifdef DEBUG_MAIN
       Serial.println("DEBUG (loopCOUNT) -> Error al leer la temperatura.");
@@ -418,13 +452,13 @@ void loopCOUNT(void) {
     Serial.print(", 0x");
     Serial.print(timestamp, HEX);
     Serial.print("), Lat: (");
-    // Serial.print(Lat);
+    // Serial.print(lati.f);
     Serial.print(", 0x");
-    // Serial.print(Lat, HEX);
+    // Serial.print(lati.u, HEX);
     Serial.print("), Long: (");
-    // Serial.print(Long);
+    // Serial.print(longi.f);
     Serial.print(", 0x");
-    // Serial.print(Long, HEX);
+    // Serial.print(longi.u, HEX);
     Serial.print("), TMP: (");
     Serial.print(temp.f, 4);
     Serial.print(" ºC, 0x");
@@ -438,21 +472,21 @@ void loopCOUNT(void) {
     Serial.print(", 0x");
     Serial.print(pulse_count2, HEX);
     Serial.print("), Vbd1: (");
-    Serial.print(Vbd1);
+    Serial.print(vbd1.f);
     Serial.print(", 0x");
-    Serial.print(Vbd1, HEX);
+    Serial.print(vbd1.u, HEX); // hacer FloatTOUINT
     Serial.print("), Vbd2: (");
-    Serial.print(Vbd2);
+    Serial.print(vbd2.f);
     Serial.print(", 0x");
-    Serial.print(Vbd2, HEX);
+    Serial.print(vbd2.u, HEX);
     Serial.print("), Vcurr1: (");
-    Serial.print(Vcurr1);
+    Serial.print(vcurr1.u);
     Serial.print(", 0x");
-    Serial.print(Vcurr1, HEX);
+    Serial.print(vcurr1.f, HEX);
     Serial.print("), Vcurr2: (");
-    Serial.print(Vcurr2);
+    Serial.print(vcurr2.f);
     Serial.print(", 0x");
-    Serial.print(Vcurr2, HEX);
+    Serial.print(vcurr2.u, HEX);
     Serial.print(")");
     #endif
 
@@ -515,6 +549,11 @@ void loopCOUNT(void) {
     #ifdef DEBUG_
     external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
 
+    #ifdef DEBUG_MAIN
+    Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+    Serial.println(external_ref, 6);
+    #endif
+
     // Channel 1 Polarization
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
@@ -547,8 +586,9 @@ void loopCOUNT(void) {
   ///////** Para imprimir los puntos */
   if ( flag1 && !detect_TC ) {
     flag1 = false;
+
     Serial.println("-------------------- DATOS OBTENIDOS --------------------");
-    Serial.println("i, Voltage, VCorriente, (Voltage*12)-3.8-(VCorriente-firstCurrent), (VCorriente-firstCurrent)/2000");
+    Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
     for ( uint16_t i = 1; i < Elementos; i++ ) {
       Serial.print(i);
       Serial.print(",");
@@ -558,12 +598,14 @@ void loopCOUNT(void) {
       Serial.print(",");
       Serial.print(temperatureArray[i]);
       Serial.print(",");
-      Serial.print((inverseVoltage[i]*12)-3.8-(inverseVCurrent[i]-firstCurrent), 7);
+      Serial.print((inverseVoltage[i]*12)-3.8-(ResisA*(inverseVCurrent[i]-firstCurrent1)/ResisB), 7);
       Serial.print(",");
-      Serial.println((inverseVCurrent[i]-firstCurrent)/2000, 10);
+      Serial.println((inverseVCurrent[i]-firstCurrent1)/ResisB, 10);
     }
     Serial.print("Vbd Calculado: ");
     Serial.println(Vbd1, 6);
+    Serial.print("Vbias seteado: ");
+    Serial.println(Vbias1, 6);
   }
 
 }
@@ -794,7 +836,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
   float Vbd_Teo = Vbd_teorical(Temperature);
   #ifdef DEBUG_MAIN
   Serial.print("Vbd teorico: ");
-  Serial.println(Vbd_Teo);
+  Serial.println(Vbd_Teo, 6);
   #endif
   float Vlimite_inferior = max(24.588, Vbd_Teo + Voffset - searchMargin);  // 24.588 es el minimo valor a la salida del MAX
   float Vlimite_superior = min(36, Vbd_Teo + Voffset + searchMargin);      // 36 es el máximo valor a la salida del MAX
@@ -848,11 +890,11 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
   total_time = micros() - start_time;
   write_dac8551_reg(0x7FFF, CS_DAC);
   digitalWrite(led, LOW);
-  firstCurrent = inverseVCurrent[0];
+  firstCurrent1 = inverseVCurrent[0];
   float Ts = (float)total_time / (Elementos * 1000);
   #ifdef DEBUG_MAIN
   Serial.print("First VCurrent: ");
-  Serial.println(firstCurrent, 7);
+  Serial.println(firstCurrent1, 7);
   Serial.print("Tiempo promedio de muestreo [ms]: ");
   Serial.println(Ts, 4);
   #endif
@@ -866,7 +908,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
  * @return  Vbias
  */
 float polarization_settling(float Vbd, uint8_t CS_DAC) {
-  uint8_t muxP0;// muxP1;                   // Configuración de lectura: Canal 1 o 2
+  uint8_t muxP0 = ADS1260_MUXP_AIN0;// muxP1;                   // Configuración de lectura: Canal 1 o 2
   float Vbias = 0.0;
   if ( CS_DAC == SPI_CS_DAC1 ) {
     muxP0 = ADS1260_MUXP_AIN0;
@@ -876,17 +918,38 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
     // muxP1 = ADS1260_MUXP_AIN3;
   }
 
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (polarization_settling) -> iniciando");
+  #endif
+
   uint16_t i = 0x01;
-  uint16_t command = VDAC_command(Vbd + 0.8*OverVoltage/12);
-  while ( Vbias < Vbd + (OverVoltage/12) ) { 
-    write_dac8551_reg(command - i, CS_DAC);       // Disminuir el comando -> aumento de Vout
-    i++;
+  uint16_t command = VDAC_command(Vbd + 0.8*OverVoltage);
+  uint16_t newCommand;
+  while ( Vbias < Vbd + (OverVoltage) ) { 
+    newCommand = command - i;
+    write_dac8551_reg(newCommand, CS_DAC);       // Disminuir el comando -> aumento de Vout
+    i = i + 10; // paso de 10
+    
     delayMicroseconds(Switching_Time_MAX); // 4 microseconds
     delay(5); // Settling time of the MAX (Vout)
     // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden... // 354.96 useg
 
     Vbias = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
+
+    if ( newCommand < 0x000F ) {                // evitamos underflow
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (polarization_settling) -> Limit reached");
+      #endif
+      break;
+    }
   }
+
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (polarization_settling) -> pasos: ");
+  Serial.println(i);
+  Serial.print("DEBUG (polarization_settling) -> Vbias: ");
+  Serial.println(Vbias, 6);
+  #endif
 
   return Vbias;
 }
