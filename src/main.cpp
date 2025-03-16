@@ -353,7 +353,7 @@ void setupCOUNT(void) {
   Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
-  flag1 = true;
+  flag1 = false;
 
   #ifdef DEBUG__
   // Channel 2
@@ -419,6 +419,8 @@ void loopCOUNT(void) {
    * las interrupciones de los pulsos.
    *    El proceso se espera que tarde 5 segundos por SiPM y la calibración se hará individualmente. */
   if ( detect_TC ) {
+    detect_TC = false;
+    disableTC2();
     desactiveInterrupt1();
     desactiveInterrupt2();
 
@@ -480,9 +482,9 @@ void loopCOUNT(void) {
     Serial.print(", 0x");
     Serial.print(vbd2.u, HEX);
     Serial.print("), Vcurr1: (");
-    Serial.print(vcurr1.u);
+    Serial.print(vcurr1.f);
     Serial.print(", 0x");
-    Serial.print(vcurr1.f, HEX);
+    Serial.print(vcurr1.u, HEX);
     Serial.print("), Vcurr2: (");
     Serial.print(vcurr2.f);
     Serial.print(", 0x");
@@ -564,7 +566,7 @@ void loopCOUNT(void) {
     Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
-    flag1 = true;
+    flag1 = false;
 
     #ifdef DEBUG__
     // Channel 2 Polarization
@@ -580,7 +582,7 @@ void loopCOUNT(void) {
     #endif
 
     #endif
-    detect_TC = false;
+    enableTC2();
   }
 
   ///////** Para imprimir los puntos */

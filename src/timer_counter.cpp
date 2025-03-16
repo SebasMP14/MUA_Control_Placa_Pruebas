@@ -18,7 +18,6 @@
 
 bool detect_TC = false;
 bool detect1_TC = false;
-unsigned long pulse_Width = 0x00;
 
 /************************************************************************************************************
  * @fn      setupTC()
@@ -80,6 +79,9 @@ void TC2_Handler(void) {
  */
 void disableTC2(void) {
   NVIC_DisableIRQ(TC2_IRQn);
+  TC2->COUNT32.CTRLA.reg &= ~TC_CTRLA_ENABLE;  // Deshabilitar el TC2
+  while (TC2->COUNT32.SYNCBUSY.bit.ENABLE);  // Esperar a que se deshabilite
+  TC2->COUNT32.INTFLAG.reg = TC_INTFLAG_MC1;  // Limpiar bandera de interrupción
 }
 
 /************************************************************************************************************
@@ -89,5 +91,8 @@ void disableTC2(void) {
  * @return  NONE
  */
 void enableTC2(void) {
+  TC2->COUNT32.CTRLA.reg |= TC_CTRLA_ENABLE;  // Habilitar el TC2
+  while (TC2->COUNT32.SYNCBUSY.bit.ENABLE);   // Esperar a que TC2 se habilite
+  TC2->COUNT32.INTFLAG.reg = TC_INTFLAG_MC1;  // Limpiar bandera de interrupción
   NVIC_EnableIRQ(TC2_IRQn);
 }
