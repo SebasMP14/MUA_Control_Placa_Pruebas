@@ -37,6 +37,7 @@
 
 // uint8_t status = 0;
 uint8_t state = 0x01;                     // 
+// uint32_t timestamp = 0;
 uint8_t segundos = 60;                    // Calibración cada tantos segundos
 uint8_t ACK_OBC_to_MUA = 0x04;
 const float Voffset = 3.8;
@@ -53,8 +54,17 @@ union FloatToUint32 {                     // Para evitar aliasing y no violar la
   float f;
   uint32_t u;
 };
+FloatToUint32 lati;
+FloatToUint32 longi;
+FloatToUint32 temp;
+FloatToUint32 vbd1;
+FloatToUint32 vbd2;
+FloatToUint32 vcurr1;
+FloatToUint32 vcurr2;
 unsigned long time_ini = 0x00;
 unsigned long timestamp = 0x00;
+float Lat = 0.0;
+float Long = 0.0;
 float Vbd1 = 0.0;                         // Breakdown Voltage Channel one
 float Vbias1 = 0.0;                       // Polarization Voltage Channel one
 float Vcurr1 = 0.0;                       // Breakdown Current Voltage Channel one
@@ -95,24 +105,36 @@ void setup() {
 
   Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD...");
 
-  Serial1.begin(115200);                // OBC (On Board Computer)
+  Serial1.begin(9600);                // OBC (On Board Computer)
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
   #endif
 
-  // // /* Inicialización de memoria Flash */
-  // if ( !start_flash() ) {              // Se utiliza en ambos modos de operación
-  //   // break;
-  //   Serial.println("DEBUG (setup) -> Flash con problemss");
+  // /* Inicialización de memoria Flash */
+  if ( !start_flash() ) {              // Se utiliza en ambos modos de operación
+    // break;
+    #ifdef DEBUG_MAIN
+    Serial.println("DEBUG (setup) -> Flash con problemss");
+    #endif
+  }
+  delay(2000);
+
+  // if ( erase_debug() ) {
+  //   #ifdef DEBUG_MAIN
+  //   Serial.println("DEBUG (setup) -> debug borrado");
+  //   #endif
+  // } else {
+  //   #ifdef DEBUG_MAIN
+  //   Serial.println("DEBUG (setup) -> No se pudo borrar debug");
+  //   #endif
   // }
-  // delay(2000);
 
   // if ( erase_all() ) {
   //   Serial.println("Flash borrada");
   // }
 
   // Restaurar último estado guardado en memoria
-  // get_OPstate(&state);
+  get_OPstate(&state);
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -235,6 +257,7 @@ void setupCOUNT(void) {
   Wire.begin();                                     // BUS TMP100 y MCP4561
   Wire.setClock(400000);
   #endif
+
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
     if ( rtc.begin() ) {                            // Configuración del RTC
       #ifdef DEBUG_MAIN
@@ -317,10 +340,10 @@ void setupCOUNT(void) {
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
   // ads1260.writeRegisterData(ADS1260_PGA, 0b10000000);             // BYPASS MODE
-  #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
-  Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
-  #endif
+  // #ifdef DEBUG_MAIN
+  // Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
+  // Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
+  // #endif
   ads1260.writeRegisterData(ADS1260_MODE3, 0b01000000);           // STATENB  REVISARRRRRRRRRRRRRRRRRRRRRRRR
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
@@ -353,7 +376,7 @@ void setupCOUNT(void) {
   Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
-  flag1 = false;
+  flag1 = true;
 
   #ifdef DEBUG__
   // Channel 2
@@ -382,7 +405,7 @@ void setupCOUNT(void) {
 void loopCOUNT(void) {
   if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si, no)
     detect1 = false;
-    #ifdef DEBUG_MAIN
+    #ifdef DEBUG_MAIN_
     Serial.print("COUNT1: ");
     Serial.println(pulse_count1);
     #endif
@@ -399,14 +422,14 @@ void loopCOUNT(void) {
   if ( (millis() - time_ini) >= 5000 ) {      /////////// Rutina de prueba
     // read_all();
     digitalWrite(LED_BUILTIN, HIGH);                      // Blink
-    delay(100);
+    delay(500);
     digitalWrite(LED_BUILTIN, LOW);
     Serial.print("millis: ");
     time_ini = millis();
-    Serial.println(time_ini);
-    Serial.print("timestamp: ");
-    Serial.println(rtc.now().unixtime());
-    Serial.print("Temperatura: ");
+    Serial.print(time_ini);
+    Serial.print(", timestamp: ");
+    Serial.print(rtc.now().unixtime());
+    Serial.print(", Temperatura: ");
     #ifdef DEBUG_
     Serial.println(read_tmp100(), 4);
     #endif
@@ -425,13 +448,10 @@ void loopCOUNT(void) {
     desactiveInterrupt2();
 
     temperature = (temperature1 );//+ temperature2) / 2;
-    FloatToUint32 lati;
-    FloatToUint32 longi;
-    FloatToUint32 temp;
-    FloatToUint32 vbd1;
-    FloatToUint32 vbd2;
-    FloatToUint32 vcurr1;
-    FloatToUint32 vcurr2;
+    
+    timestamp = getTime();
+    lati.f = Lat;
+    longi.f = Long;
     temp.f = temperature;
     vbd1.f = Vbd1;
     vbd2.f = Vbd2;
@@ -445,22 +465,21 @@ void loopCOUNT(void) {
       // manejar - Se puede leer el del ADC 
     }
 
-    uint32_t timestamp = getTime();
     // read lat y long from GPS
-    // timestamp - LatyLong - temperature - Count1y2 - Vbias1y2 - Vcurr1y2
+    // timestamp - Lat - Long - temperature - Count1y2 - Vbd1y2 - Vcurr1y2
     #ifdef DEBUG_MAIN
     Serial.print("TRAMA -> timestamp: (");
     Serial.print(timestamp);
     Serial.print(", 0x");
     Serial.print(timestamp, HEX);
     Serial.print("), Lat: (");
-    // Serial.print(lati.f);
+    Serial.print(lati.f);
     Serial.print(", 0x");
-    // Serial.print(lati.u, HEX);
+    Serial.print(lati.u, HEX);
     Serial.print("), Long: (");
-    // Serial.print(longi.f);
+    Serial.print(longi.f);
     Serial.print(", 0x");
-    // Serial.print(longi.u, HEX);
+    Serial.print(longi.u, HEX);
     Serial.print("), TMP: (");
     Serial.print(temp.f, 4);
     Serial.print(" ºC, 0x");
@@ -497,56 +516,56 @@ void loopCOUNT(void) {
     #endif
     
     /* GUARDADO Little-Endian */
-    // if ( !write_mem((uint8_t *)&timestamp, sizeof(timestamp)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura timestamp.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Lat, sizeof(Lat)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Lat.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Long, sizeof(Long)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Long.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura temperatura.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count1.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count2.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Vbd1, sizeof(Vbd1)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbd1.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Vbd2, sizeof(Vbd2)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbd2.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Vcurr1, sizeof(Vcurr1)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vcurr1.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&Vcurr2, sizeof(Vcurr2)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vcurr2.");
-    //   #endif
-    // }
+    if ( !write_mem((uint8_t *)&timestamp, sizeof(timestamp)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura timestamp.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&lati.u, sizeof(lati.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Lat.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&longi.u, sizeof(longi.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Long.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura temperatura.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count1.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count2.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vbd1.u, sizeof(vbd1.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbd1.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vbd2.u, sizeof(vbd2.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vbd2.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vcurr1.u, sizeof(vcurr1.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vcurr1.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vcurr2.u, sizeof(vcurr2.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura Vcurr2.");
+      #endif
+    }
 
     #ifdef DEBUG_
     external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
@@ -566,7 +585,7 @@ void loopCOUNT(void) {
     Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
-    flag1 = false;
+    flag1 = true;
 
     #ifdef DEBUG__
     // Channel 2 Polarization
@@ -733,9 +752,9 @@ void loopTRANSFER(void) {
   uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
   uint8_t trama[trama_size] = {MISSION_ID, ID_TRANSFER_MODE, TRAMA_DATA_SIZE};
   uint32_t last_sent_address = 0xFFFFFFFF;
-  if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
-    last_sent_address = 0x00;
-  }
+  // if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
+  //   last_sent_address = 0x00;
+  // }
 
   if ( last_address_written == last_sent_address ) { // Indica que se han enviado todos los datos faltantes
     currentMode = FINISH;
@@ -825,11 +844,10 @@ void loopTRANSFERinfo(void) {
  */
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) {
   uint8_t muxP0, muxP1, led;                   // Configuración de lectura: Canal 1 o 2
-  if ( CS_DAC == SPI_CS_DAC1 ) {
-    muxP0 = ADS1260_MUXP_AIN0;
-    muxP1 = ADS1260_MUXP_AIN2;
-    led = LED_SiPM1;
-  } else if ( CS_DAC == SPI_CS_DAC2 ) {
+  muxP0 = ADS1260_MUXP_AIN0;
+  muxP1 = ADS1260_MUXP_AIN2;
+  led = LED_SiPM1;
+  if ( CS_DAC == SPI_CS_DAC2 ) {
     muxP0 = ADS1260_MUXP_AIN1;
     muxP1 = ADS1260_MUXP_AIN3;
     led = LED_SiPM2;
@@ -849,9 +867,9 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
 
   #ifdef DEBUG_MAIN
   Serial.print("DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): ");
-  Serial.print(out_voltage(Vlim_inf), 2);
+  Serial.print(out_voltage(Vlim_inf), 4);
   Serial.print(", ");
-  Serial.print(out_voltage(Vlim_sup), 2);
+  Serial.print(out_voltage(Vlim_sup), 4);
   Serial.print(", ");
   Serial.print(Vlim_inf, HEX);
   Serial.print(", ");
@@ -925,7 +943,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   #endif
 
   uint16_t i = 0x01;
-  uint16_t command = VDAC_command(Vbd + 0.8*OverVoltage);
+  uint16_t command = VDAC_command(Vbd + 0.95*OverVoltage);
   uint16_t newCommand;
   while ( Vbias < Vbd + (OverVoltage) ) { 
     newCommand = command - i;

@@ -36,7 +36,7 @@ extern Adafruit_SPIFlash Flash_QSPI;
 #define SAVED_ADDRESS_SECTOR_DIR  (SAVED_SYSINFO_SECTOR * 4096)   /* Direccion del sector utilizado para almacenar los 4 bytes que indican la última posición de memoria donde se escribieron los datos */
 #define ADDRESS_SIZE              4                               /* Cada direccion de memoria tiene 4 bytes */
 #define SECTOR_SIZE               4096
-#define EXT_FLASH_SIZE            (16UL * 1024 * 1024)            /* 16 MB o 128 Mb */
+#define EXT_FLASH_SIZE            (16UL * 1024 * 1024)            // CAMBIAR a 128MB
 #define LAST_ADDRESS_SENT_DIR     SAVED_ADDRESS_SECTOR_DIR + ADDRESS_SIZE // 
 #define ADDRESS_OP_STATE_DIR      LAST_ADDRESS_SENT_DIR + ADDRESS_SIZE * 2 - 1
 #define SIZE_INFO                 12                              // Bytes de variables/info de sistema
@@ -60,5 +60,6 @@ bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index);
 bool write_OPstate(uint8_t state);
 bool write_SENT_DATAaddress(uint8_t address);
 bool erase_all(void);
+bool erase_debug(void);
 
 #endif

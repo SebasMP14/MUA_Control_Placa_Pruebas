@@ -108,7 +108,7 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
       #endif
-      #ifdef DEBUG_
+      #ifdef DEBUG_OBC
       write_OPstate(0x00);
       #endif
       break;
@@ -117,7 +117,7 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_
+      #ifdef DEBUG_OBC
       write_OPstate(0x01);
       #endif
       break;
@@ -126,7 +126,7 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_
+      #ifdef DEBUG_OBC
       write_OPstate(0x02);
       #endif
       break;
@@ -135,7 +135,7 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_
+      #ifdef DEBUG_OBC
       write_OPstate(0x09);
       #endif
       break;
