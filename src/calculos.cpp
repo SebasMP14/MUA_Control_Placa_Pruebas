@@ -155,11 +155,11 @@ float* apply_butterworth(float *input, uint16_t Elementos) {
  * @param   
  * @return  ---todo
  */
-float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elementos, float *Vcurr) {
+float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elementos, float *Vcurr, uint16_t *indexPeak) {
   #ifdef DEBUG_CALCULOS
   Serial.println("DEBUG (obtain_Vbd) -> Ejecutandose");
   #endif
-  uint16_t indexPeak = 0;
+  *indexPeak = 0;
   float minInverseDerivative = __FLT_MAX__; 
   float logarithmicCurrent[Elementos];
   float inverseDerivative[Elementos];
@@ -188,17 +188,17 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
       inverseDerivative[i] = 1.0f / derivative;
       if (inverseDerivative[i] < minInverseDerivative) {
         minInverseDerivative = inverseDerivative[i];
-        indexPeak = i;
+        *indexPeak = i;
       }
     }
   }
   #ifdef DEBUG_CALCULOS
   Serial.print("DEBUG (obtain_Vbd) -> Vbd obtenido: ");
-  Serial.println(inverseVoltage[indexPeak], 6);
+  Serial.println(inverseVoltage[*indexPeak], 6);
   #endif
 
-  *Vcurr = inverseCurrent[indexPeak];
-  return inverseVoltage[indexPeak];
+  *Vcurr = inverseCurrent[*indexPeak];
+  return inverseVoltage[*indexPeak];
 }
 
 /************************************************************************************************************

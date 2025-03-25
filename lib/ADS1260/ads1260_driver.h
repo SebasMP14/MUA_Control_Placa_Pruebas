@@ -40,7 +40,7 @@ class ADS1260 {
 
   public:
     // Inicialización
-    ADS1260(SPIClass* spiInterface = &SPI1, uint8_t chip_select = SPI_CS_ADC);
+    ADS1260(SPIClass* spiInterface = &SPI1, uint8_t chip_select = SPI_CS_ADC); // Por defecto SPI1
     void begin(void);
     void setStartPin(uint8_t pin); // designate a pin connected to START
 

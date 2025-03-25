@@ -30,7 +30,7 @@ void sliding_moving_average(float *input, uint16_t N, uint8_t M, float* output);
 void init_butterworth(void);
 float* apply_butterworth(float *input, uint16_t Elementos);
 // float apply_butterworth(float new_input);
-float obtain_Vbd(float *inverseCurrent_I, float *inverseVoltage, uint16_t Elemento, float* Vcurr); // se usa
+float obtain_Vbd(float *inverseCurrent_I, float *inverseVoltage, uint16_t Elemento, float* Vcurr, uint16_t* indexPeak); // se usa
 float Vbd_teorical(float Temperature); // se usa
 
 

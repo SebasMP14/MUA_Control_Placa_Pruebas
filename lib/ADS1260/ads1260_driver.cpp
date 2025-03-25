@@ -20,7 +20,7 @@ ADS1260::ADS1260(SPIClass* spiInterface, uint8_t chip_select) : spi(spiInterface
 }
 
 void ADS1260::begin(void) {
-  spi->begin();             // Inicializa la interfaz SPI
+  spi->begin();             // Inicializa la interfaz SPI (SPI1 por defecto)
   delay(10);
   ADS1260::reset();
 }

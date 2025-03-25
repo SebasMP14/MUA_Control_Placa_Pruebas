@@ -30,7 +30,7 @@
 #define MAX_ITER            5             // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5             // Para Sliding Moving Average
-#define OverVoltage         0.2238233 * 3             // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define OverVoltage         0.2238233 * 1.5             // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX  4             // Microseconds
 #define TRAMA_DATA_SIZE     36            // Analizar
 #define TRAMA_INFO_SIZE     36            // Analizar
@@ -48,7 +48,7 @@ float firstCurrent2 = 0.0;
 float temperature1 = 0.0;
 float temperature2 = 0.0;
 float temperature = 0.0;
-float searchMargin = 1.5;                 // 
+float searchMargin = 1.5;                 // Search Vbd window
 const uint16_t Elementos = 400;
 union FloatToUint32 {                     // Para evitar aliasing y no violar las reglas del compilador
   float f;
@@ -72,13 +72,14 @@ float Vbd2 = 0.0;                         // Breakdown Voltage Channel two
 float Vbias2 = 0.0;                       // Polarization Voltage Channel two
 float Vcurr2 = 0.0;                       // Breakdown Current Voltage Channel two
 
-bool flag1 = false;
+bool flag1 = false;                       // Para imprimir las lecturas de ADC de cada canal
 bool flag2 = false;
 
 ADS1260 ads1260;
 
 uint8_t sendTrama[TRAMA_DATA_SIZE] = {0x26};
 
+uint16_t indexPeak = 0;
 uint16_t inverseVoltage_command[Elementos];   // Comandos a ser enviados a cada DAC
 float inverseVoltage[Elementos];              // Voltages en el SiPM
 float inverseVCurrent[Elementos];             // Corriente
@@ -134,7 +135,7 @@ void setup() {
   // }
 
   // Restaurar último estado guardado en memoria
-  get_OPstate(&state);
+  // get_OPstate(&state);
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -271,7 +272,7 @@ void setupCOUNT(void) {
     #endif
     delay(10);
   }
-  // getTimestampFromGPS();                            // 
+  // getTimestampFromGPS();                            // Falta Programar...
 
   digitalWrite(LED_BUILTIN, LOW);
   digitalWrite(LED_SiPM1, LOW);
@@ -339,11 +340,11 @@ void setupCOUNT(void) {
   Serial.print("DEBUG (setupCOUNT) -> PGA: ");
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
-  // ads1260.writeRegisterData(ADS1260_PGA, 0b10000000);             // BYPASS MODE
-  // #ifdef DEBUG_MAIN
-  // Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
-  // Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
-  // #endif
+  ads1260.writeRegisterData(ADS1260_PGA, 0b10000000);             // BYPASS MODE
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
+  Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
+  #endif
   ads1260.writeRegisterData(ADS1260_MODE3, 0b01000000);           // STATENB  REVISARRRRRRRRRRRRRRRRRRRRRRRR
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
@@ -370,13 +371,15 @@ void setupCOUNT(void) {
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX1);
   temperature1 = read_tmp100();
+  // Vbd1 = Vbd_teorical(temperature1);                    // Sin Compensacion
+  // Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);    // Sin Compensacion
   obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
   sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
-  Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);
+  Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
-  flag1 = true;
+  flag1 = false;
 
   #ifdef DEBUG__
   // Channel 2
@@ -386,7 +389,7 @@ void setupCOUNT(void) {
   obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
   sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
-  Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2);
+  Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
   activeInterrupt2();                                           // Una vez polarizado
   #endif
@@ -405,7 +408,7 @@ void setupCOUNT(void) {
 void loopCOUNT(void) {
   if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si, no)
     detect1 = false;
-    #ifdef DEBUG_MAIN_
+    #ifdef DEBUG_MAIN
     Serial.print("COUNT1: ");
     Serial.println(pulse_count1);
     #endif
@@ -579,13 +582,15 @@ void loopCOUNT(void) {
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
     temperature1 = read_tmp100();
+    // Vbd1 = Vbd_teorical(temperature1);                    // Sin Compensacion
+    // Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);    // Sin Compensacion
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Voltage Filtering 
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Current Filtering
-    Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1);    // 
+    Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
-    flag1 = true;
+    flag1 = false;
 
     #ifdef DEBUG__
     // Channel 2 Polarization
@@ -595,7 +600,7 @@ void loopCOUNT(void) {
     obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-    Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2);
+    Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
     Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
     activeInterrupt2();
     #endif
@@ -609,6 +614,7 @@ void loopCOUNT(void) {
     flag1 = false;
 
     Serial.println("-------------------- DATOS OBTENIDOS --------------------");
+    Serial.println("------------------Solo con Vbd teorico-------------------");
     Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
     for ( uint16_t i = 1; i < Elementos; i++ ) {
       Serial.print(i);
@@ -943,7 +949,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   #endif
 
   uint16_t i = 0x01;
-  uint16_t command = VDAC_command(Vbd + 0.95*OverVoltage);
+  uint16_t command = inverseVoltage_command[indexPeak];
   uint16_t newCommand;
   while ( Vbias < Vbd + (OverVoltage) ) { 
     newCommand = command - i;

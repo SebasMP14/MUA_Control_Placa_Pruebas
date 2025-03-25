@@ -2,26 +2,41 @@
 
 bool writeMCP(uint8_t valor) {
   // uint8_t DH = valor/256;
-  uint8_t D1 = 0b00000000 ;//|| DH;
+  uint8_t VW0 = 0b00000000 ;//|| DH;
+  uint8_t VW1 = 0b00000001 ;
   uint8_t D2 = valor;
   #ifdef DEBUG_MCP
-  Serial.print("DEBUG (escribirPot) -> D1: "); Serial.println(D1, BIN);
+  Serial.print("DEBUG (escribirPot) -> VW0: "); Serial.println(VW0, BIN);
   Serial.print("DEBUG (escribirPot) -> D2: "); Serial.println(D2, HEX);
   #endif
 
   Wire.beginTransmission(MCP_ADDRESS); //Dirección del MCP4561
   
-  Wire.write(D1);
+  Wire.write(VW0);
   Wire.write(D2);
 
   uint8_t status = Wire.endTransmission();
   if (status != 0) {
     #ifdef DEBUG_MCP
-    Serial.print("ERROR (writeMCP) -> Error en la transmisión I2C: ");
+    Serial.print("ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: ");
     Serial.println(status);
     #endif
     return false;  // Detener si hay error en la transmisión
   }
+
+  // Wire.beginTransmission(MCP_ADDRESS); //Dirección del MCP4561
+  
+  // Wire.write(VW1);
+  // Wire.write(D2);
+
+  // status = Wire.endTransmission();
+  // if (status != 0) {
+  //   #ifdef DEBUG_MCP
+  //   Serial.print("ERROR (writeMCP) -> Error en la transmisión I2C - Wiper1: ");
+  //   Serial.println(status);
+  //   #endif
+  //   return false;  // Detener si hay error en la transmisión
+  // }
 
   return true;  // Configuración exitosa
 }

@@ -21,7 +21,7 @@
 void start_max1932(uint8_t chip_select) {
   pinMode(chip_select, OUTPUT);
   digitalWrite(chip_select, HIGH);
-  SPI.begin();  
+  // SPI.begin();  
 }
 
 /************************************************************************************************************
