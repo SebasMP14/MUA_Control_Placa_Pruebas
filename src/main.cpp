@@ -30,7 +30,8 @@
 #define MAX_ITER            5             // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5             // Para Sliding Moving Average
-#define OverVoltage         0.2238233 * 1.5             // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define ov                  1.5
+#define OverVoltage         0.2238233 * ov             // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX  4             // Microseconds
 #define TRAMA_DATA_SIZE     36            // Analizar
 #define TRAMA_INFO_SIZE     36            // Analizar
@@ -79,6 +80,7 @@ ADS1260 ads1260;
 
 uint8_t sendTrama[TRAMA_DATA_SIZE] = {0x26};
 
+// Almacenan los datos de un Canal a la vez
 uint16_t indexPeak = 0;
 uint16_t inverseVoltage_command[Elementos];   // Comandos a ser enviados a cada DAC
 float inverseVoltage[Elementos];              // Voltages en el SiPM
@@ -95,6 +97,7 @@ void loopTRANSFERinfo(void);
 
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE);
 float polarization_settling(float Vbd, uint8_t CS_DAC);
+void imprimirArrays(void);
 
 void setup() {
   delay(6000);
@@ -104,7 +107,7 @@ void setup() {
   Serial.println("DEBUG (setup) -> Serial Iniciado");
   #endif
 
-  Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD...");
+  Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD, ambos canales");
 
   Serial1.begin(9600);                // OBC (On Board Computer)
   #ifdef DEBUG_MAIN
@@ -283,7 +286,7 @@ void setupCOUNT(void) {
   Serial.print("DEBUG (setupCOUNT) -> writing in MCP ");
   #endif
   for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
-    if ( writeMCP(0x9C) ) {                         // Configuración del MCP4561
+    if ( writeMCP0(0x9C) ) {                         // Configuración del MCP4561
       #ifdef DEBUG_MAIN
       Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
       #endif
@@ -296,8 +299,28 @@ void setupCOUNT(void) {
       delay(10);
     }
   }
+  #ifdef DEBUG_MAIN
   Serial.print("MCP escrito en: ");
-  Serial.println(readMCP(), HEX);
+  Serial.println(readMCP0(), HEX);
+  #endif
+  // for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+  //   if ( writeMCP1(0x9C) ) {                         // Configuración del MCP4561
+  //     #ifdef DEBUG_MAIN
+  //     Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
+  //     #endif
+  //     break;
+  //   } else {
+  //     #ifdef DEBUG_MAIN
+  //     Serial.print("DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: ");
+  //     Serial.println(iter_counter);
+  //     #endif
+  //     delay(10);
+  //   }
+  // }
+  // #ifdef DEBUG_MAIN
+  // Serial.print("MCP escrito en: 0x");
+  // Serial.println(readMCP1(), HEX);
+  // #endif
 
   delay(START_UP_TIME_ADS);                         // Habilitación del ADC (REVISAR TIEMPO)
   
@@ -345,19 +368,9 @@ void setupCOUNT(void) {
   Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
-  ads1260.writeRegisterData(ADS1260_MODE3, 0b01000000);           // STATENB  REVISARRRRRRRRRRRRRRRRRRRRRRRR
+  // ads1260.writeRegisterData(ADS1260_MODE3, 0b01000000);           // STATENB  REVISARRRRRRRRRRRRRRRRRRRRRRRR
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
-
-  // while (1) {
-  //   delay(500);
-  //   digitalWrite(LED_BUILTIN, HIGH);
-  //   delay(500);
-  //   digitalWrite(LED_BUILTIN, LOW);
-  //   delay(START_UP_TIME_ADS);
-  //   ads1260.begin();
-  //   Serial.println(ads1260.readRegisterData(ADS1260_MODE0), BIN);
-  // }
 
   // erase_all();
 
@@ -371,17 +384,20 @@ void setupCOUNT(void) {
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX1);
   temperature1 = read_tmp100();
-  // Vbd1 = Vbd_teorical(temperature1);                    // Sin Compensacion
-  // Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);    // Sin Compensacion
   obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
   sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
+  imprimirArrays();
   flag1 = false;
+  #ifdef DEBUG_MAIN
+  Serial.print("Over Voltage: ");
+  Serial.println(ov, 2);
+  #endif
 
-  #ifdef DEBUG__
+  #ifdef DEBUG_
   // Channel 2
   write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX2);
@@ -391,7 +407,9 @@ void setupCOUNT(void) {
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
-  activeInterrupt2();                                           // Una vez polarizado
+  activeInterrupt2();                                     // Una vez polarizado
+  imprimirArrays();
+  flag1 = false;      
   #endif
 
   #endif
@@ -402,7 +420,6 @@ void setupCOUNT(void) {
   Serial.println("setupCount finalizado...");
   #endif
   time_ini = millis();
-
 }
 
 void loopCOUNT(void) {
@@ -416,9 +433,9 @@ void loopCOUNT(void) {
 
   if ( detect2 ) {
     detect2 = false;
-    #ifdef DEBUG_MAIN_
+    #ifdef DEBUG_MAIN
     Serial.print("COUNT2: ");
-    Serial.print(pulse_count2);
+    Serial.println(pulse_count2);
     #endif
   }
 
@@ -450,7 +467,7 @@ void loopCOUNT(void) {
     desactiveInterrupt1();
     desactiveInterrupt2();
 
-    temperature = (temperature1 );//+ temperature2) / 2;
+    temperature = (temperature1 + temperature2) / 2;
     
     timestamp = getTime();
     lati.f = Lat;
@@ -516,7 +533,7 @@ void loopCOUNT(void) {
 
     #ifdef DEBUG__
     read_all();
-    #endif
+    #endif  // descomentar
     
     /* GUARDADO Little-Endian */
     if ( !write_mem((uint8_t *)&timestamp, sizeof(timestamp)) ) {
@@ -582,17 +599,15 @@ void loopCOUNT(void) {
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
     temperature1 = read_tmp100();
-    // Vbd1 = Vbd_teorical(temperature1);                    // Sin Compensacion
-    // Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);    // Sin Compensacion
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Voltage Filtering 
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Current Filtering
     Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
-    flag1 = false;
+    // flag1 = false;
 
-    #ifdef DEBUG__
+    #ifdef DEBUG_
     // Channel 2 Polarization
     write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Vout2 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX2);
@@ -603,18 +618,19 @@ void loopCOUNT(void) {
     Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
     Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
     activeInterrupt2();
+    flag1 = false;
     #endif
 
     #endif
-    enableTC2();
+    enableTC2();  // activar
   }
 
-  ///////** Para imprimir los puntos */
+  ///////** Para imprimir los puntos de la curva*/
   if ( flag1 && !detect_TC ) {
     flag1 = false;
 
     Serial.println("-------------------- DATOS OBTENIDOS --------------------");
-    Serial.println("------------------Solo con Vbd teorico-------------------");
+    Serial.println("------------------ -------------------");
     Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
     for ( uint16_t i = 1; i < Elementos; i++ ) {
       Serial.print(i);
@@ -630,9 +646,12 @@ void loopCOUNT(void) {
       Serial.println((inverseVCurrent[i]-firstCurrent1)/ResisB, 10);
     }
     Serial.print("Vbd Calculado: ");
-    Serial.println(Vbd1, 6);
+    Serial.println(Vbd2, 6);
     Serial.print("Vbias seteado: ");
-    Serial.println(Vbias1, 6);
+    Serial.println(Vbias2, 6);
+    Serial.print("IndexPeak: ");
+    Serial.println(indexPeak);
+
   }
 
 }
@@ -978,6 +997,25 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   #endif
 
   return Vbias;
+}
+
+void imprimirArrays(void) {
+  Serial.println("-------------------- DATOS OBTENIDOS --------------------");
+  Serial.println("------------------ -------------------");
+  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
+  for ( uint16_t i = 1; i < Elementos; i++ ) {
+    Serial.print(i);
+    Serial.print(",");
+    Serial.print(inverseVoltage[i], 7);
+    Serial.print(",");
+    Serial.print(inverseVCurrent[i], 7);
+    Serial.print(",");
+    Serial.print(temperatureArray[i]);
+    Serial.print(",");
+    Serial.print((inverseVoltage[i]*12)-3.8-(ResisA*(inverseVCurrent[i]-firstCurrent1)/ResisB), 7);
+    Serial.print(",");
+    Serial.println((inverseVCurrent[i]-firstCurrent1)/ResisB, 10);
+  }
 }
 
 

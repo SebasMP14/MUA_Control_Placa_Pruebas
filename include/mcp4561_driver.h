@@ -9,8 +9,10 @@
 
 #define MCP_ADDRESS 0b00101110 // 0x2E:startBit, A6, ..., A0, 
 
-bool writeMCP(uint8_t valor);
-uint16_t readMCP(void);
+bool writeMCP0(uint8_t valor);
+bool writeMCP1(uint8_t valor);
+uint16_t readMCP0(void);
+uint16_t readMCP1(void);
 
 #endif
 

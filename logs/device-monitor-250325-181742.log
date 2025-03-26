@@ -1,0 +1,113 @@
+18:17:45.653 > DEBUG (setup) -> Serial Iniciado
+18:17:45.654 > PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD...
+18:17:45.654 > DEBUG (setup) -> Serial1 Iniciado
+18:17:47.655 > Estado: 0x1
+18:17:47.657 > DEBUG (setup) -> COUNT_MODE iniciado
+18:17:47.669 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+18:17:47.670 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (escribirPot) -> VW0: 0
+18:17:47.671 > DEBUG (escribirPot) -> D2: 9C
+18:17:47.820 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 2
+18:17:47.821 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+18:17:47.831 > DEBUG (escribirPot) -> VW0: 0
+18:17:47.831 > DEBUG (escribirPot) -> D2: 9C
+18:17:47.832 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 2
+18:17:47.833 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+18:17:47.841 > DEBUG (escribirPot) -> VW0: 0
+18:17:47.843 > DEBUG (escribirPot) -> D2: 9C
+18:17:47.843 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 3
+18:17:47.843 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 2
+18:17:47.853 > DEBUG (escribirPot) -> VW0: 0
+18:17:47.853 > DEBUG (escribirPot) -> D2: 9C
+18:17:47.855 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+18:17:47.855 > MCP escrito en: 9C
+18:17:49.006 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+18:17:49.116 > DEBUG (setupCOUNT) -> MODE0: 100100
+18:17:49.165 > DEBUG (setupCOUNT) -> MODE0: 11111100
+18:17:49.166 > DEBUG (setupCOUNT) -> PGA: 0
+18:17:49.167 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+18:17:49.577 > DEBUG (loopCOUNT) -> readRef: 4.986738
+18:17:49.581 > DEBUG (write_max_reg) -> 0x1
+18:17:49.581 > Vbd teorico: 24.538687
+18:17:49.584 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 26.8390, 29.8390, 61B7, 41B7, paso: 20
+18:17:59.595 > First VCurrent: 1.6210310
+18:17:59.599 > Tiempo promedio de muestreo [ms]: 25.0005
+18:17:59.601 > DEBUG (obtain_Vbd) -> Ejecutandose
+18:17:59.603 > DEBUG (obtain_Vbd) -> logaritmo calculado
+18:17:59.606 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.412945
+18:17:59.608 > DEBUG (polarization_settling) -> iniciando
+18:18:15.983 > DEBUG (polarization_settling) -> pasos: 10911
+18:18:15.986 > DEBUG (polarization_settling) -> Vbias: 2.748702
+18:18:15.987 > setupCount finalizado...
+18:18:15.989 > DEBUG (setup) -> Setup finalizado...
+18:18:17.855 > COUNT1: 1
+18:18:20.436 > COUNT1: 2
+18:18:21.490 > millis: 41813, timestamp: 946684800, Temperatura: 26.6250
+18:18:24.301 > COUNT1: 3
+18:18:24.453 > COUNT1: 4
+18:18:25.662 > COUNT1: 5
+18:18:26.257 > COUNT1: 6
+18:18:26.995 > millis: 47313, timestamp: 946684839, Temperatura: 26.7500
+18:18:27.217 > COUNT1: 7
+18:18:28.067 > COUNT1: 8
+18:18:29.061 > COUNT1: 9
+18:18:29.764 > COUNT1: 10
+18:18:30.700 > COUNT1: 11
+18:18:30.793 > COUNT1: 12
+18:18:32.499 > millis: 52813, timestamp: 946684844, Temperatura: 26.8125
+18:18:32.503 > COUNT1: 13
+18:18:33.310 > COUNT1: 14
+18:18:33.786 > COUNT1: 15
+18:18:34.601 > COUNT1: 16
+18:18:38.002 > millis: 58313, timestamp: 946684850, Temperatura: 26.8750
+18:18:38.843 > COUNT1: 17
+18:18:40.436 > COUNT1: 18
+18:18:41.906 > COUNT1: 19
+18:18:43.507 > millis: 63813, timestamp: 946684855, Temperatura: 26.9375
+18:18:43.512 > COUNT1: 20
+18:18:44.649 > COUNT1: 21
+18:18:44.682 > COUNT1: 22
+18:18:46.744 > COUNT1: 23
+18:18:47.750 > COUNT1: 24
+18:18:48.080 > COUNT1: 25
+18:18:49.011 > millis: 69313, timestamp: 946684861, Temperatura: 27.0000
+18:18:49.013 > COUNT1: 26
+18:18:49.692 > COUNT1: 27
+18:18:51.720 > COUNT1: 28
+18:18:52.856 > COUNT1: 29
+18:18:53.446 > COUNT1: 30
+18:18:54.516 > millis: 74813, timestamp: 946684866, Temperatura: 27.0000
+18:18:54.831 > COUNT1: 31
+18:18:55.090 > COUNT1: 32
+18:18:56.424 > COUNT1: 33
+18:18:57.508 > COUNT1: 34
+18:18:57.625 > COUNT1: 35
+18:19:00.020 > millis: 80313, timestamp: 946684872, Temperatura: 27.0625
+18:19:00.025 > COUNT1: 36
+18:19:00.167 > COUNT1: 37
+18:19:00.483 > COUNT1: 38
+18:19:00.982 > COUNT1: 39
+18:19:02.156 > COUNT1: 40
+18:19:02.581 > COUNT1: 41
+18:19:02.772 > COUNT1: 42
+18:19:03.393 > COUNT1: 43
+18:19:03.645 > COUNT1: 44
+18:19:04.681 > COUNT1: 45
+18:19:05.525 > millis: 85813, timestamp: 946684877, Temperatura: 27.0625
+18:19:05.528 > COUNT1: 47
+18:19:05.662 > COUNT1: 48
+18:19:07.560 > COUNT1: 49
+18:19:09.321 > COUNT1: 50
+18:19:09.940 > COUNT1: 51
+18:19:10.372 > COUNT1: 52
+18:19:11.030 > millis: 91313, timestamp: 946684882, Temperatura: 27.1250
+18:19:12.035 > COUNT1: 53
+18:19:12.181 > COUNT1: 54
+18:19:13.580 > COUNT1: 55
+18:19:14.633 > COUNT1: 56
+18:19:15.101 > COUNT1: 57
+18:19:15.639 > COUNT1: 58
+18:19:16.033 > DEBUG (TC2_Handler) -> Interrupción TC2.
+18:19:16.034 > TRAMA -> timestamp: (946684887, 0x386D43D7), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.1250 ºC, 0x41C90000), Count1: (58, 0x3A), Count2: (0, 0x0), Vbd1: (2.41, 0x401A6DB2), Vbd2: (0.00, 0x0), Vcurr1: (1.84, 0x3FEAF8E2), Vcurr2: (0.00, 0x0)millis: 96829, timestamp: 946684888, Temperatura: 27.1250
+18:19:22.054 > millis: 102329, timestamp: 946684893, Temperatura: 27.1875
+18:19:27.558 > millis: 107829, timestamp: 946684899, Temperatura: 27.1875
+18:19:33.061 > millis: 113329, timestamp: 946684904, Temperatura: 27.2500

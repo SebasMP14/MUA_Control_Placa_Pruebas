@@ -1,0 +1,59 @@
+18:05:09.125 > DEBUG (setup) -> Serial Iniciado
+18:05:09.126 > PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD...
+18:05:09.126 > DEBUG (setup) -> Serial1 Iniciado
+18:05:11.128 > Estado: 0x1
+18:05:11.130 > DEBUG (setup) -> COUNT_MODE iniciado
+18:05:11.144 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+18:05:11.145 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (escribirPot) -> VW0: 0
+18:05:11.147 > DEBUG (escribirPot) -> D2: 9C
+18:05:11.294 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 2
+18:05:11.296 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+18:05:11.305 > DEBUG (escribirPot) -> VW0: 0
+18:05:11.305 > DEBUG (escribirPot) -> D2: 9C
+18:05:11.307 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 2
+18:05:11.307 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+18:05:11.316 > DEBUG (escribirPot) -> VW0: 0
+18:05:11.316 > DEBUG (escribirPot) -> D2: 9C
+18:05:11.316 > ERROR (writeMCP) -> Error en la transmisión I2C - Wiper0: 3
+18:05:11.317 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 2
+18:05:11.326 > DEBUG (escribirPot) -> VW0: 0
+18:05:11.327 > DEBUG (escribirPot) -> D2: 9C
+18:05:11.328 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+18:05:11.328 > MCP escrito en: 9C
+18:05:11.328 > DEBUG (escribirPot) -> VW1: 1
+18:05:11.329 > DEBUG (escribirPot) -> D2: 9C
+18:05:11.330 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+18:05:12.481 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+18:05:12.591 > DEBUG (setupCOUNT) -> MODE0: 100100
+18:05:12.641 > DEBUG (setupCOUNT) -> MODE0: 11111100
+18:05:12.643 > DEBUG (setupCOUNT) -> PGA: 0
+18:05:12.643 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+18:05:13.053 > DEBUG (loopCOUNT) -> readRef: 4.986035
+18:05:13.055 > DEBUG (write_max_reg) -> 0x1
+18:05:13.055 > Vbd teorico: 24.553469
+18:05:13.056 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 26.8536, 29.8537, 618F, 418F, paso: 20
+18:05:23.069 > First VCurrent: 1.3189468
+18:05:23.073 > Tiempo promedio de muestreo [ms]: 24.9989
+18:05:23.075 > DEBUG (obtain_Vbd) -> Ejecutandose
+18:05:23.077 > DEBUG (obtain_Vbd) -> logaritmo calculado
+18:05:23.078 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.427392
+18:05:23.081 > DEBUG (polarization_settling) -> iniciando
+18:05:39.478 > DEBUG (polarization_settling) -> pasos: 10921
+18:05:39.479 > DEBUG (polarization_settling) -> Vbias: 2.763617
+18:05:39.481 > setupCount finalizado...
+18:05:39.483 > DEBUG (setup) -> Setup finalizado...
+18:05:44.987 > millis: 41825, timestamp: 946685059, Temperatura: 26.6250
+18:05:50.494 > millis: 47325, timestamp: 946685098, Temperatura: 26.6250
+18:05:55.999 > millis: 52825, timestamp: 946685103, Temperatura: 26.6875
+18:06:01.504 > millis: 58325, timestamp: 946685109, Temperatura: 26.7500
+18:06:07.008 > millis: 63825, timestamp: 946685114, Temperatura: 26.7500
+18:06:12.513 > millis: 69325, timestamp: 946685120, Temperatura: 26.8125
+18:06:18.018 > millis: 74825, timestamp: 946685125, Temperatura: 26.8125
+18:06:23.522 > millis: 80325, timestamp: 946685131, Temperatura: 26.8125
+18:06:29.028 > millis: 85825, timestamp: 946685136, Temperatura: 26.8750
+18:06:34.534 > millis: 91325, timestamp: 946685141, Temperatura: 26.8750
+18:06:39.537 > DEBUG (TC2_Handler) -> Interrupción TC2.
+18:06:39.538 > TRAMA -> timestamp: (946685146, 0x386D44DA), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.8125 ºC, 0x41CE8000), Count1: (0, 0x0), Count2: (0, 0x0), Vbd1: (2.43, 0x401B5A66), Vbd2: (0.00, 0x0), Vcurr1: (2.09, 0x40058ACA), Vcurr2: (0.00, 0x0)millis: 96841, timestamp: 946685147, Temperatura: 26.8750
+18:06:45.560 > millis: 102341, timestamp: 946685152, Temperatura: 26.9375
+18:06:51.065 > millis: 107841, timestamp: 946685158, Temperatura: 26.9375
+18:06:56.570 > millis: 113341, timestamp: 946685163, Temperatura: 26.9375

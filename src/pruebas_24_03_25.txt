@@ -681,7 +681,7 @@ Prueba sin compensación de temperatura, OV = 2, Channel 1
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Prueba con fuente sin compensacion, OV=1.5, Channel 1
+Prueba con fuente sin compensacion, OV=1.5, Channel 1, CS-137 en todas las pruebas
 
 22:11:42.294 > DEBUG (setup) -> Serial1 Iniciado
 22:11:44.294 > Estado: 0x1

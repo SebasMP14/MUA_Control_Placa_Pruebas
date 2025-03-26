@@ -61,7 +61,7 @@ uint32_t ADS1260::readData(uint8_t p_pin, uint8_t n_pin) {
   digitalWrite(chipSelectPin, LOW);
   uint8_t response1 = spi->transfer(ADS1260_RDATA);  // Selección de registro 
   uint8_t response2 = spi->transfer(ADS1260_DUMMY);
-  uint8_t status = spi->transfer(ADS1260_DUMMY);
+  // uint8_t status = spi->transfer(ADS1260_DUMMY);
   uint8_t MSBdata = spi->transfer(ADS1260_DUMMY);
   uint8_t MIDdata = spi->transfer(ADS1260_DUMMY);
   uint8_t LSBdata = spi->transfer(ADS1260_DUMMY);
@@ -148,7 +148,7 @@ uint32_t ADS1260::readConversion(void) {
   digitalWrite(chipSelectPin, LOW);
   spi->transfer(ADS1260_RDATA);  // Selección de registro 
   spi->transfer(ADS1260_DUMMY);
-  spi->transfer(ADS1260_DUMMY);
+  // spi->transfer(ADS1260_DUMMY);
   uint8_t MSBdata = spi->transfer(ADS1260_DUMMY);
   uint8_t MIDdata = spi->transfer(ADS1260_DUMMY);
   uint8_t LSBdata = spi->transfer(ADS1260_DUMMY);

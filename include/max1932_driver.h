@@ -15,7 +15,7 @@
 #include <SPI.h>
 #include "hardware_pins.h"
 
-#define DEBUG_MAX
+// #define DEBUG_MAX
 #define SPI_CLK_Speed 1000000
 #define SPI_CS_delay 2 * SPI_CLK_Speed / 1000000
 
