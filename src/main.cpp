@@ -24,13 +24,15 @@
 #include "ads1260_driver.h"
 #include "calculos.h"
 #include "obc_comm.h"
+#include "power_manager.h"
+
 
 #define DEBUG_MAIN
 #define DEBUG_ // eliminar en todos lados para activar control de placa interfaz
 #define MAX_ITER            5             // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5             // Para Sliding Moving Average
-#define ov                  1.5
+#define ov                  2.5
 #define OverVoltage         0.2238233 * ov             // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX  4             // Microseconds
 #define TRAMA_DATA_SIZE     36            // Analizar
@@ -100,14 +102,14 @@ float polarization_settling(float Vbd, uint8_t CS_DAC);
 void imprimirArrays(void);
 
 void setup() {
-  delay(6000);
+  delay(3000);
 
   Serial.begin(115200);                 // Puerto USB
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial Iniciado");
   #endif
 
-  Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD, ambos canales");
+  // Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD, ambos canales");
 
   Serial1.begin(9600);                // OBC (On Board Computer)
   #ifdef DEBUG_MAIN
@@ -121,7 +123,6 @@ void setup() {
     Serial.println("DEBUG (setup) -> Flash con problemss");
     #endif
   }
-  delay(2000);
 
   // if ( erase_debug() ) {
   //   #ifdef DEBUG_MAIN
@@ -138,7 +139,7 @@ void setup() {
   // }
 
   // Restaurar último estado guardado en memoria
-  // get_OPstate(&state);
+  get_OPstate(&state);
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -146,7 +147,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(LED_SiPM1, OUTPUT);
   pinMode(LED_SiPM2, OUTPUT);
-  pinMode(INTERFACE_EN, OUTPUT);                    // 
+  pinMode(INTERFACE_EN, OUTPUT);                    
   digitalWrite(INTERFACE_EN, LOW);
 
   Serial.print("Estado: 0x");
@@ -160,6 +161,8 @@ void setup() {
       if ( currentMode == COUNT_MODE ) {
         setupCOUNT();
       } else if ( currentMode == TRANSFER_DATA_MODE ) {
+        setupTRANSFER();
+      } else if ( currentMode == TRANSFER_INFO_MODE ) {
         setupTRANSFER();
       }
       break;
@@ -175,6 +178,11 @@ void setup() {
     case 0x02:                                // TRANSFER_DATA_MODE
       currentMode = TRANSFER_DATA_MODE;
       setupTRANSFER();
+      break;
+    
+    case 0x08:
+      currentMode = FINISH;
+      enterOffMode();
       break;
 
     case 0x09:                                // TRANSFER_DATA_MODE
@@ -208,7 +216,7 @@ void loop() {
 
     case COUNT_MODE:
       loopCOUNT();
-      #ifdef DEBUG__
+      #ifdef DEBUG_
       if ( Serial1.available() ) {
         requestOperationMode();
         if (currentMode == TRANSFER_DATA_MODE) {
@@ -229,7 +237,8 @@ void loop() {
       break;
     
     case FINISH:
-      
+      write_OPstate(0x00);
+      enterOffMode();
       break;
 
     default:
@@ -238,9 +247,9 @@ void loop() {
       #endif
       delay(2000);
       requestOperationMode();
-      if ( !setup_state && currentMode != UNKNOWN_MODE) {
-        setupCOUNT();
-      }
+      // if ( !setup_state && currentMode != UNKNOWN_MODE) {
+      //   setupCOUNT();
+      // }
       /* Modo no seleccionado o incorrecto, manejar... */
       break;
   }
@@ -384,13 +393,14 @@ void setupCOUNT(void) {
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX1);
   temperature1 = read_tmp100();
+  firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
   obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
   sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
-  imprimirArrays();
+  // imprimirArrays();
   flag1 = false;
   #ifdef DEBUG_MAIN
   Serial.print("Over Voltage: ");
@@ -402,13 +412,14 @@ void setupCOUNT(void) {
   write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX2);
   temperature2 = read_tmp100();
+  firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
   obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
   sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
   sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
   Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
   activeInterrupt2();                                     // Una vez polarizado
-  imprimirArrays();
+  // imprimirArrays();
   flag1 = false;      
   #endif
 
@@ -599,6 +610,7 @@ void loopCOUNT(void) {
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
     temperature1 = read_tmp100();
+    firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Voltage Filtering 
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Current Filtering
@@ -612,6 +624,7 @@ void loopCOUNT(void) {
     write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Vout2 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX2);
     temperature2 = read_tmp100();
+    firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
     obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
     sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
@@ -777,9 +790,9 @@ void loopTRANSFER(void) {
   uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
   uint8_t trama[trama_size] = {MISSION_ID, ID_TRANSFER_MODE, TRAMA_DATA_SIZE};
   uint32_t last_sent_address = 0xFFFFFFFF;
-  // if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
-  //   last_sent_address = 0x00;
-  // }
+  if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
+    last_sent_address = 0x00;
+  }
 
   if ( last_address_written == last_sent_address ) { // Indica que se han enviado todos los datos faltantes
     currentMode = FINISH;
@@ -807,7 +820,7 @@ void loopTRANSFER(void) {
 
   /* Se recibe el ACK/NACK del OBC */
 
-  while ( Serial1.available() < TRAMA_COMM );           // esperando ACK de OBC
+  while ( Serial1.available() < TRAMA_COMM );           // esperando ACK del OBC
   // uint8_t len = Serial1.available();
   // uint8_t recibido[len];
   // Serial1.readBytes(recibido, len);
@@ -846,8 +859,12 @@ void loopTRANSFER(void) {
   }
 
   if ( recibido[1] == ACK_OBC_to_MUA ) {
-    write_SENT_DATAaddress(last_sent_address + TRAMA_DATA_SIZE);
-  } else {
+    write_SENT_DATAaddress(last_sent_address + TRAMA_DATA_SIZE);  // se actualiza la direccion del ultimo dato enviado
+  } else if (recibido[1] == ID_FINISH) {
+    currentMode = FINISH;
+    return ;
+  } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
+    currentMode = TRANSFER_INFO_MODE;
     return ;
   }
   #endif
@@ -933,13 +950,10 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
     // inverseVCurrent[i] = ads1260.computeVolts((uint32_t)(aux/10));
   }
   total_time = micros() - start_time;
-  write_dac8551_reg(0x7FFF, CS_DAC);
-  digitalWrite(led, LOW);
-  firstCurrent1 = inverseVCurrent[0];
+  write_dac8551_reg(0x7FFF, CS_DAC);  // Mínimo valor de tensión suministrado
+  digitalWrite(led, LOW);             // Se debe apagar el LED
   float Ts = (float)total_time / (Elementos * 1000);
   #ifdef DEBUG_MAIN
-  Serial.print("First VCurrent: ");
-  Serial.println(firstCurrent1, 7);
   Serial.print("Tiempo promedio de muestreo [ms]: ");
   Serial.println(Ts, 4);
   #endif

@@ -37,8 +37,12 @@ RTC_SAMD51 rtc;
  */
 void requestOperationMode(void) {
   uint8_t response[TRAMA_COMM];
-
-  while (Serial1.available() < TRAMA_COMM);               // Esperar respuesta, agregar TimeOut
+  unsigned long tiempo = millis();
+  while ( Serial1.available() < TRAMA_COMM ) {               // Esperar respuesta, agregar TimeOut
+    if ( tiempo >= timeOUT ) {
+      return ;
+    }
+  }
   delay(100);
 
   Serial1.readBytes(response, TRAMA_COMM);                //  Se recibe un byte indicando el modo de operación
@@ -130,6 +134,15 @@ void requestOperationMode(void) {
       write_OPstate(0x02);
       #endif
       break;
+    case 0x08:
+      currentMode = FINISH;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
+      Serial.println("Sleep mode in progress. order 66.");
+      #endif
+      write_OPstate(0x00);
+      enterOffMode();
+      break;
     case 0x09:
       currentMode = TRANSFER_INFO_MODE;
       #ifdef DEBUG_OBC
@@ -144,6 +157,7 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
       #endif
+      write_OPstate(0x00);
       break;
   }
 

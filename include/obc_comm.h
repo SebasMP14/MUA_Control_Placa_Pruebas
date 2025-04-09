@@ -17,6 +17,7 @@
 #include "Arduino.h"
 #include "RTC_SAMD51.h"
 #include "flash_driver.h"
+#include "power_manager.h"
 
 #define DEBUG_OBC
 #define TRAMA_SIZE                  45
@@ -29,6 +30,7 @@
 #define ID_SENT_DATA                0x03
 #define ID_TRANSFER_SYSINFO_MODE    0x09
 #define ACK_MUA_TO_OBC              0x07
+#define ID_FINISH                   0x08
 
 
 enum OperationMode {
