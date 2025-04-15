@@ -22,10 +22,11 @@
 #define DEBUG_OBC
 #define TRAMA_SIZE                  45
 #define TRAMA_COMM                  6
+
 #define MISSION_ID                  0x26
 /*** Modos de operación ***/
-#define ID_STANDBY                  0x00
-#define ID_COUNT_MODE               0x01
+#define ID_STANDBY                  0x00        // Este ID no lo envía el OBC
+#define ID_COUNT_MODE               0x01        
 #define ID_TRANSFER_MODE            0x02
 #define ID_SENT_DATA                0x03
 #define ID_TRANSFER_SYSINFO_MODE    0x09
@@ -48,15 +49,18 @@ extern RTC_SAMD51 rtc;
 extern unsigned long timeOUT;
 extern unsigned long timeOUT_invalid_frame;
 
+// ACK y NACK
 extern uint8_t ack_MUA_to_OBC[TRAMA_COMM];
 extern const uint8_t nack_MUA_to_OBC[TRAMA_COMM];
 extern const uint8_t nack_IF_MUA_to_OBC[TRAMA_COMM];
+
 extern const uint16_t crc_table[256];
 
 void requestOperationMode(void);
 void getTimestampFromGPS(void);
 unsigned long getTime(void);
 uint16_t crc_calculate(uint8_t *data);
+bool slidingWindowBuffer(uint8_t* buffer);
 void transferData(uint16_t Quantity);
 
 #endif

@@ -29,20 +29,22 @@
 
 #define DEBUG_MAIN
 #define DEBUG_ // eliminar en todos lados para activar control de placa interfaz
-#define MAX_ITER            5             // Protocol initialization attempts
+
+#define MAX_ITER            5               // Protocol initialization attempts
 // #define Elementos           400
-#define Ventana             5             // Para Sliding Moving Average
-#define ov                  2.5
-#define OverVoltage         0.2238233 * ov             // Sobrevoltaje aplicado para la polarización de los SiPMs
-#define Switching_Time_MAX  4             // Microseconds
-#define TRAMA_DATA_SIZE     36            // Analizar
-#define TRAMA_INFO_SIZE     36            // Analizar
+#define Ventana             5               // Para Sliding Moving Average
+#define ov                  2.5             // Establecido por el fabricante
+#define OverVoltage         0.2238233 * ov  // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define Switching_Time_MAX  4               // Microseconds
+#define TRAMA_DATA_SIZE     36              // 
+#define TRAMA_INFO_SIZE     36              // 39 Bytes maximum
+
+uint8_t ACK_OBC_to_MUA = 0x04;
 
 // uint8_t status = 0;
 uint8_t state = 0x01;                     // 
 // uint32_t timestamp = 0;
 uint8_t segundos = 60;                    // Calibración cada tantos segundos
-uint8_t ACK_OBC_to_MUA = 0x04;
 const float Voffset = 3.8;
 const float ResisA = 1050;
 const float ResisB = 2000;
@@ -82,14 +84,22 @@ ADS1260 ads1260;
 
 uint8_t sendTrama[TRAMA_DATA_SIZE] = {0x26};
 
-// Almacenan los datos de un Canal a la vez
-uint16_t indexPeak = 0;
+// Almacenan los datos
+uint16_t indexPeak1 = 0;
+uint16_t indexPeak2 = 0;
 uint16_t inverseVoltage_command[Elementos];   // Comandos a ser enviados a cada DAC
-float inverseVoltage[Elementos];              // Voltages en el SiPM
-float inverseVCurrent[Elementos];             // Corriente
-float Filtered_voltage[Elementos];
-float Filtered_current[Elementos];
-float temperatureArray [Elementos];
+// Channel 1
+float inverseVoltage1[Elementos];              // Voltaje en el SiPM
+float inverseVCurrent1[Elementos];             // Corriente
+float Filtered_voltage1[Elementos];
+float Filtered_current1[Elementos];
+float temperatureArray1[Elementos];
+// Channel 2
+float inverseVoltage2[Elementos];              // Voltaje en el SiPM
+float inverseVCurrent2[Elementos];             // Corriente
+float Filtered_voltage2[Elementos];
+float Filtered_current2[Elementos];
+float temperatureArray2[Elementos];
 
 void setupCOUNT(void);
 void loopCOUNT(void);
@@ -99,7 +109,12 @@ void loopTRANSFERinfo(void);
 
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE);
 float polarization_settling(float Vbd, uint8_t CS_DAC);
-void imprimirArrays(void);
+void printArrays_ch1(void);
+void printArrays_ch2(void);
+
+void buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address);
+bool verifyOBCResponse(uint8_t* recibido);
+bool sendDataFrame(void);
 
 void setup() {
   delay(3000);
@@ -395,12 +410,12 @@ void setupCOUNT(void) {
   temperature1 = read_tmp100();
   firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
   obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
-  sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-  sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
-  Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);
+  sliding_moving_average(inverseVoltage1, Elementos, Ventana, Filtered_voltage1);
+  sliding_moving_average(inverseVCurrent1, Elementos, Ventana, Filtered_current1);
+  Vbd1 = obtain_Vbd(Filtered_current1, Filtered_voltage1, Elementos, &Vcurr1, &indexPeak1);
   Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
   activeInterrupt1();                                           // Una vez polarizado
-  // imprimirArrays();
+  // printArrays_ch1();
   flag1 = false;
   #ifdef DEBUG_MAIN
   Serial.print("Over Voltage: ");
@@ -414,12 +429,12 @@ void setupCOUNT(void) {
   temperature2 = read_tmp100();
   firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
   obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
-  sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-  sliding_moving_average(inverseVCurrent, Elementos, Ventana, Filtered_current);
-  Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
+  sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
+  sliding_moving_average(inverseVCurrent2, Elementos, Ventana, Filtered_current2);
+  Vbd2 = obtain_Vbd(Filtered_current2, Filtered_voltage2, Elementos, &Vcurr2, &indexPeak2);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
   activeInterrupt2();                                     // Una vez polarizado
-  // imprimirArrays();
+  // printArrays_ch2();
   flag1 = false;      
   #endif
 
@@ -612,9 +627,9 @@ void loopCOUNT(void) {
     temperature1 = read_tmp100();
     firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Voltage Filtering 
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage); // Current Filtering
-    Vbd1 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr1, &indexPeak);    // 
+    sliding_moving_average(inverseVoltage1, Elementos, Ventana, Filtered_voltage1); // Voltage Filtering 
+    sliding_moving_average(inverseVoltage1, Elementos, Ventana, Filtered_voltage1); // Current Filtering
+    Vbd1 = obtain_Vbd(Filtered_current1, Filtered_voltage1, Elementos, &Vcurr1, &indexPeak1);    // 
     Vbias1 = polarization_settling(Vbd1, SPI_CS_DAC1);
     activeInterrupt1();
     // flag1 = false;
@@ -626,9 +641,9 @@ void loopCOUNT(void) {
     temperature2 = read_tmp100();
     firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
     obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-    sliding_moving_average(inverseVoltage, Elementos, Ventana, Filtered_voltage);
-    Vbd2 = obtain_Vbd(Filtered_current, Filtered_voltage, Elementos, &Vcurr2, &indexPeak);
+    sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
+    sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
+    Vbd2 = obtain_Vbd(Filtered_current2, Filtered_voltage2, Elementos, &Vcurr2, &indexPeak2);
     Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
     activeInterrupt2();
     flag1 = false;
@@ -638,33 +653,14 @@ void loopCOUNT(void) {
     enableTC2();  // activar
   }
 
-  ///////** Para imprimir los puntos de la curva*/
+  /* Para imprimir los puntos de la curva */
   if ( flag1 && !detect_TC ) {
     flag1 = false;
-
-    Serial.println("-------------------- DATOS OBTENIDOS --------------------");
-    Serial.println("------------------ -------------------");
-    Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
-    for ( uint16_t i = 1; i < Elementos; i++ ) {
-      Serial.print(i);
-      Serial.print(",");
-      Serial.print(inverseVoltage[i], 7);
-      Serial.print(",");
-      Serial.print(inverseVCurrent[i], 7);
-      Serial.print(",");
-      Serial.print(temperatureArray[i]);
-      Serial.print(",");
-      Serial.print((inverseVoltage[i]*12)-3.8-(ResisA*(inverseVCurrent[i]-firstCurrent1)/ResisB), 7);
-      Serial.print(",");
-      Serial.println((inverseVCurrent[i]-firstCurrent1)/ResisB, 10);
-    }
-    Serial.print("Vbd Calculado: ");
-    Serial.println(Vbd2, 6);
-    Serial.print("Vbias seteado: ");
-    Serial.println(Vbias2, 6);
-    Serial.print("IndexPeak: ");
-    Serial.println(indexPeak);
-
+    printArrays_ch1();
+  }
+  if ( flag2 && !detect_TC ) {
+    flag2 = false;
+    printArrays_ch2();
   }
 
 }
@@ -699,13 +695,324 @@ void setupTRANSFER(void) {
 }
 
 void loopTRANSFER(void) {
-  // transferir datos
-  // read_all();
-  delay(1000);
-  /*
-  * Esta sección prueba el envío de los datos al OBC, los únicos datos enviados son los que contiene "trama"
-  * y se envía X veces 
-  */
+  
+  if ( !sendDataFrame() ) {
+    #ifdef DEBUG_MAIN
+    Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");
+    #endif
+    return;
+  }
+
+}
+
+void loopTRANSFERinfo(void) {
+
+}
+
+/************************************************************************************************************
+ * @fn      obtain_Curve_inverseVI
+ * @brief   Se obtiene la curva I-V inversa del SiPM aplicando un filtro de butterworth a las lecturas del ADC.
+ * @param   Temperature: obtenido del sensor TMP100 para la estimación teórica
+ * @param   CS_DAC: Channel selection
+ * @return  NONE
+ */
+void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) {
+  uint8_t muxP0, muxP1, led;                    // Configuración de lectura: Canal 1 o 2
+  float* inverseVoltage;
+  float* inverseVCurrent;
+  float* temperatureArray;
+
+  muxP0 = ADS1260_MUXP_AIN0;                    // Initialization
+  muxP1 = ADS1260_MUXP_AIN2;
+  led = LED_SiPM1;
+  if ( CS_DAC == SPI_CS_DAC2 ) {
+    muxP0 = ADS1260_MUXP_AIN1;
+    muxP1 = ADS1260_MUXP_AIN3;
+    led = LED_SiPM2;
+    inverseVoltage    = inverseVoltage2;
+    inverseVCurrent   = inverseVCurrent2;
+    temperatureArray  = temperatureArray2;
+  }
+  inverseVoltage    = inverseVoltage1;
+  inverseVCurrent   = inverseVCurrent1;
+  temperatureArray  = temperatureArray1;
+
+  float Vbd_Teo = Vbd_teorical(Temperature);
+  #ifdef DEBUG_MAIN
+  Serial.print("Vbd teorico: ");
+  Serial.println(Vbd_Teo, 6);
+  #endif
+  float Vlimite_inferior = max(24.588, Vbd_Teo + Voffset - searchMargin);  // 24.588 es el minimo valor a la salida del MAX
+  float Vlimite_superior = min(36, Vbd_Teo + Voffset + searchMargin);      // 36 es el máximo valor a la salida del MAX
+  uint16_t Vlim_inf = VDAC_command(Vlimite_inferior); // Comando
+  uint16_t Vlim_sup = VDAC_command(Vlimite_superior); // Comando
+  uint16_t paso = (uint16_t)(Vlim_inf - Vlim_sup) / Elementos;
+  unsigned long start_time, total_time;
+
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): ");
+  Serial.print(out_voltage(Vlim_inf), 4);
+  Serial.print(", ");
+  Serial.print(out_voltage(Vlim_sup), 4);
+  Serial.print(", ");
+  Serial.print(Vlim_inf, HEX);
+  Serial.print(", ");
+  Serial.print(Vlim_sup, HEX);
+  Serial.print(", paso: ");
+  Serial.println(paso);
+  #endif
+  digitalWrite(led, HIGH);
+
+  start_time = micros();
+  for ( uint16_t i = 0; i < Elementos; i++ ) {
+    inverseVoltage_command[i] = Vlim_inf - i * paso;          // Comandos para el DAC
+    write_dac8551_reg(inverseVoltage_command[i], CS_DAC);
+    delayMicroseconds(Switching_Time_MAX); // 4 microseconds
+    delay(5); // Settling time of the MAX (Vout)
+    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden...
+
+    inverseVoltage[i] = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), REFERENCE);
+    inverseVCurrent[i] = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), REFERENCE);
+    temperatureArray[i] = read_tmp100();
+
+    /*  Si se decide implementar un submuestreo  */
+    // uint32_t aux = 0x00;
+    // ads1260.connectMUX(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM);
+    // for ( uint8_t j = 0; j < 10; j++ ) {
+    //   aux += ads1260.readConversion();
+    //   delayMicroseconds(100);
+    // }
+    // inverseVoltage[i] = ads1260.computeVolts((uint32_t)(aux/10));
+    // aux = 0x00;
+    // ads1260.connectMUX(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM);
+    // for ( uint8_t j = 0; j < 10; j++ ) {
+    //   aux += ads1260.readConversion();
+    //   delayMicroseconds(100);
+    // }
+    // inverseVCurrent[i] = ads1260.computeVolts((uint32_t)(aux/10));
+  }
+  total_time = micros() - start_time;
+  write_dac8551_reg(0x7FFF, CS_DAC);  // Mínimo valor de tensión suministrado
+  digitalWrite(led, LOW);             // Se debe apagar el LED
+  float Ts = (float)total_time / (Elementos * 1000);
+  #ifdef DEBUG_MAIN
+  Serial.print("Tiempo promedio de muestreo [ms]: ");
+  Serial.println(Ts, 4);
+  #endif
+}
+
+/************************************************************************************************************
+ * @fn      polarization_settling
+ * @brief   Establecimiento del voltaje de polarización de un canal
+ * @param   Vbd: Breakdown Voltage
+ * @param   CS_DAC: Channel to polarizate
+ * @return  Vbias (Polarization Voltage)
+ */
+float polarization_settling(float Vbd, uint8_t CS_DAC) {
+  uint8_t muxP0 = ADS1260_MUXP_AIN0;  // muxP1;                   // Configuración de lectura: Canal 1 o 2
+  float Vbias = 0.0;
+  uint16_t indexPeak;
+  
+  muxP0 = ADS1260_MUXP_AIN0;
+  indexPeak = indexPeak1;
+    // muxP1 = ADS1260_MUXP_AIN2;
+  if ( CS_DAC == SPI_CS_DAC2 ) {
+    muxP0 = ADS1260_MUXP_AIN1;
+    indexPeak = indexPeak1;
+    // muxP1 = ADS1260_MUXP_AIN3;
+  }
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (polarization_settling) -> iniciando");
+  #endif
+
+  uint16_t i = 0x01;
+  uint16_t command = inverseVoltage_command[indexPeak];
+  uint16_t newCommand;
+  while ( Vbias < Vbd + (OverVoltage) ) { 
+    newCommand = command - i;
+    write_dac8551_reg(newCommand, CS_DAC);       // Disminuir el comando -> aumento de Vout
+    i = i + 10; // paso de 10
+    
+    delayMicroseconds(Switching_Time_MAX); // 4 microseconds
+    delay(5); // Settling time of the MAX (Vout)
+    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden... // 354.96 useg
+
+    Vbias = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
+
+    if ( newCommand < 0x000F ) {                // evitamos underflow
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (polarization_settling) -> Limit reached");
+      #endif
+      break;
+    }
+  }
+
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (polarization_settling) -> pasos: ");
+  Serial.println(i);
+  Serial.print("DEBUG (polarization_settling) -> Vbias: ");
+  Serial.println(Vbias, 6);
+  #endif
+
+  return Vbias;
+}
+
+void printArrays_ch1(void) {
+  Serial.println("-------------------- DATOS OBTENIDOS --------------------");
+  Serial.println("------------------ -------------------");
+  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
+  for ( uint16_t i = 1; i < Elementos; i++ ) {
+    Serial.print(i);
+    Serial.print(",");
+    Serial.print(inverseVoltage1[i], 7);
+    Serial.print(",");
+    Serial.print(inverseVCurrent1[i], 7);
+    Serial.print(",");
+    Serial.print(temperatureArray1[i]);
+    Serial.print(",");
+    Serial.print((inverseVoltage1[i]*12)-3.8-(ResisA*(inverseVCurrent1[i]-firstCurrent1)/ResisB), 7);
+    Serial.print(",");
+    Serial.println((inverseVCurrent1[i]-firstCurrent1)/ResisB, 10);
+  }
+}
+
+void printArrays_ch2(void) {
+  Serial.println("-------------------- DATOS OBTENIDOS --------------------");
+  Serial.println("------------------ -------------------");
+  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
+  for ( uint16_t i = 1; i < Elementos; i++ ) {
+    Serial.print(i);
+    Serial.print(",");
+    Serial.print(inverseVoltage2[i], 7);
+    Serial.print(",");
+    Serial.print(inverseVCurrent2[i], 7);
+    Serial.print(",");
+    Serial.print(temperatureArray2[i]);
+    Serial.print(",");
+    Serial.print((inverseVoltage2[i]*12)-3.8-(ResisA*(inverseVCurrent2[i]-firstCurrent2)/ResisB), 7);
+    Serial.print(",");
+    Serial.println((inverseVCurrent2[i]-firstCurrent2)/ResisB, 10);
+  }
+}
+
+
+/************************************************************************************************************
+ * @fn      buildDataFrame
+ * @brief   Construcción de la trama de datos a enviar al OBC
+ * @param   trama: Almacenamiento de datos y comunicacion   
+ * @param   ID: Mission ID
+ * @param   trama_size: Cantidad de datos a obtener de la memoria flash
+ * @param   address: Dirección de inicio de los datos
+ * @return  NONE
+ */
+void buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address) {
+  trama[0] = MISSION_ID;
+  trama[1] = ID;
+  trama[2] = trama_size;
+
+  read(&trama[3], trama_size, address); // Cargar datos desde flash
+
+  uint16_t CRC = crc_calculate(trama);
+  trama[trama_size + 3] = (uint8_t)(CRC >> 8);
+  trama[trama_size + 4] = (uint8_t)(CRC & 0xFF);
+  trama[trama_size + 5] = 0x0A; // STOP byte
+}
+
+/************************************************************************************************************
+ * @fn      verifyOBCResponse
+ * @brief   Verifica el CRC y Mission ID de la trama recibida, en un caso fallido se devuelve un NACK
+ * @param   recibido: trama recibida del OBC
+ * @return  true: trama recibida verificada correctamente ... 
+ * @return  false: trama recibida con errores
+ */
+bool verifyOBCResponse(uint8_t* recibido) {
+  uint16_t crc_expected = crc_calculate(recibido);
+  uint16_t crc_received = (recibido[TRAMA_COMM - 3] << 8) | recibido[TRAMA_COMM - 2];
+
+  if ( crc_expected != crc_received ) {
+    Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
+  if ( recibido[0] != MISSION_ID ) {
+    delay(timeOUT_invalid_frame);
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
+  return true;
+}
+
+/************************************************************************************************************
+ * @fn      sendDataFrame
+ * @brief   Envía una trama de datos al OBC, recibe ACK o NACK y ejecuta en consecuencia
+ * @param   void
+ * @return  true: Transmisión exitosa, ACK recibido ... 
+ * @return  false: Transmisión fallida, CRC invalide, data frame invalid or timeout
+ */
+bool sendDataFrame(void) {
+  uint32_t last_address_written = 0xFFFFFFFF;
+  uint32_t last_sent_address = 0xFFFFFFFF;
+
+  if (!get_address(&last_address_written)) return false;
+  if (!get_SENT_DATAaddress(&last_sent_address)) return false;
+
+  if (last_sent_address == 0xFFFFFFFF) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
+  if (last_address_written == last_sent_address) {                // ya no quedan datos en memoria por enviar
+    currentMode = FINISH;
+    return true;
+  }
+
+  uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
+  uint8_t trama[trama_size];
+  buildDataFrame(trama, MISSION_ID, TRAMA_DATA_SIZE, last_sent_address);
+
+  Serial1.write(trama, trama_size);
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendDataFrame) -> Trama enviada:");
+  for ( uint8_t i = 0; i < trama_size; i++ ) {
+    Serial.print(" 0x"); Serial.print(trama[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  unsigned long tiempo = millis();
+  while ( Serial1.available() < TRAMA_COMM ) {
+    if ( (millis() - tiempo) >= timeOUT ) return false;
+  }
+
+  uint8_t recibido[TRAMA_COMM];
+  Serial1.readBytes(recibido, TRAMA_COMM);
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendDataFrame) -> Respuesta recibida:");
+  for ( uint8_t i = 0; i < TRAMA_COMM; i++ ) {
+    Serial.print(" 0x"); Serial.print(recibido[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  if ( !verifyOBCResponse(recibido) ) return false;
+
+  if ( recibido[1] == ACK_OBC_to_MUA ) {
+    write_SENT_DATAaddress(last_sent_address + TRAMA_DATA_SIZE);      // se actualiza la siguiente dirección a enviar
+  } else if (recibido[1] == ID_FINISH) {
+    currentMode = FINISH;
+  } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
+    currentMode = TRANSFER_INFO_MODE;
+  }
+
+  return true;
+}
+
+
+
+
+/*
+  Codigo de prueba
+
  #ifdef DEBUG__
   uint8_t counter = 0;
   uint8_t X = 3;
@@ -782,14 +1089,33 @@ void loopTRANSFER(void) {
     currentMode = FINISH;
   }
   #endif
+*/
+
+
+
+
+/*
+// transferir datos
+  // read_all();
+  delay(1000);
+  /*
+  * Esta sección prueba el envío de los datos al OBC, los únicos datos enviados son los que contiene "trama"
+  * y se envía X veces 
+  
+
 
   #ifdef DEBUG_
+  unsigned long tiempo = 0;
   uint32_t last_address_written = 0xFFFFFFFF;
   get_address(&last_address_written);
 
   uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
   uint8_t trama[trama_size] = {MISSION_ID, ID_TRANSFER_MODE, TRAMA_DATA_SIZE};
   uint32_t last_sent_address = 0xFFFFFFFF;
+
+  /**************************************************************************************************** 
+  *                                       Starting Sending Data
+  *************************************************************************************************** 
   if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
     last_sent_address = 0x00;
   }
@@ -811,6 +1137,8 @@ void loopTRANSFER(void) {
 
   Serial1.write(trama, trama_size);         // Envío de trama
   #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (loopTRANSFER) -> Trama enviada correctamente, esperando ACK...");
+  
   Serial.println("DEBUG (loopTRANSFER) -> Datos enviados: 0x");
   for ( uint8_t i = 0; i < TRAMA_COMM; i++ ) {
     Serial.print(trama[i], HEX);
@@ -818,9 +1146,18 @@ void loopTRANSFER(void) {
   }
   #endif
 
-  /* Se recibe el ACK/NACK del OBC */
-
-  while ( Serial1.available() < TRAMA_COMM );           // esperando ACK del OBC
+  
+  /**************************************************************************************************** 
+  *                                       Confirmation of data sent
+  *************************************************************************************************** */
+  /* Se recibe el ACK/NACK del OBC 
+  tiempo = millis();
+  while ( Serial1.available() < TRAMA_COMM ) {           // esperando ACK del OBC
+    if ( tiempo >= timeOUT ) {
+      // Serial1.write(nack_timeout_MUA_to_OBC, TRAMA_COMM);
+      return ;
+    }
+  }
   // uint8_t len = Serial1.available();
   // uint8_t recibido[len];
   // Serial1.readBytes(recibido, len);
@@ -835,7 +1172,7 @@ void loopTRANSFER(void) {
     Serial.print(", 0x");
   }
   #endif
-  /* Si se va a buscar la trama en una serie de datos recibidos... */
+  /* Si se va a buscar la trama en una serie de datos recibidos... 
   // uint8_t index_begin = 0;
   // for ( uint8_t i = 0; i < len; i++ ) { 
   //   if ( recibido[i] == MISSION_ID ) {
@@ -846,7 +1183,7 @@ void loopTRANSFER(void) {
   //   }
   // }
 
-  CRC = crc_calculate(&recibido[TRAMA_COMM]);       // TRAMA_COMM o index_begin
+  CRC = crc_calculate(recibido);       // TRAMA_COMM o index_begin
   uint16_t crc_received = (recibido[TRAMA_COMM-3]<<8) | recibido[TRAMA_COMM-2];
   
   if ( CRC != crc_received ) {
@@ -868,169 +1205,7 @@ void loopTRANSFER(void) {
     return ;
   }
   #endif
-
-  /* Al finalizar la transferencia, terminamos el proceso */
-}
-
-void loopTRANSFERinfo(void) {
-
-}
-
-/************************************************************************************************************
- * @fn      obtain_Curve_inverseVI
- * @brief   Se obtiene la curva I-V inversa del SiPM aplicando un filtro de butterworth a las lecturas del
- *          ADC.
- * @param   Temperature: obtenido del sensor TMP100 para la estimación teorica
- * @param   CS_DAC: Selección del Canal
- * @return  ---todo
- */
-void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) {
-  uint8_t muxP0, muxP1, led;                   // Configuración de lectura: Canal 1 o 2
-  muxP0 = ADS1260_MUXP_AIN0;
-  muxP1 = ADS1260_MUXP_AIN2;
-  led = LED_SiPM1;
-  if ( CS_DAC == SPI_CS_DAC2 ) {
-    muxP0 = ADS1260_MUXP_AIN1;
-    muxP1 = ADS1260_MUXP_AIN3;
-    led = LED_SiPM2;
-  }
-
-  float Vbd_Teo = Vbd_teorical(Temperature);
-  #ifdef DEBUG_MAIN
-  Serial.print("Vbd teorico: ");
-  Serial.println(Vbd_Teo, 6);
-  #endif
-  float Vlimite_inferior = max(24.588, Vbd_Teo + Voffset - searchMargin);  // 24.588 es el minimo valor a la salida del MAX
-  float Vlimite_superior = min(36, Vbd_Teo + Voffset + searchMargin);      // 36 es el máximo valor a la salida del MAX
-  uint16_t Vlim_inf = VDAC_command(Vlimite_inferior); // Comando
-  uint16_t Vlim_sup = VDAC_command(Vlimite_superior); // Comando
-  uint16_t paso = (uint16_t)(Vlim_inf - Vlim_sup) / Elementos;
-  unsigned long start_time, total_time;
-
-  #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): ");
-  Serial.print(out_voltage(Vlim_inf), 4);
-  Serial.print(", ");
-  Serial.print(out_voltage(Vlim_sup), 4);
-  Serial.print(", ");
-  Serial.print(Vlim_inf, HEX);
-  Serial.print(", ");
-  Serial.print(Vlim_sup, HEX);
-  Serial.print(", paso: ");
-  Serial.println(paso);
-  #endif
-  digitalWrite(led, HIGH);
-
-  start_time = micros();
-  for ( uint16_t i = 0; i < Elementos; i++ ) {
-    inverseVoltage_command[i] = Vlim_inf - i * paso;          // Comandos para el DAC
-    write_dac8551_reg(inverseVoltage_command[i], CS_DAC);
-    delayMicroseconds(Switching_Time_MAX); // 4 microseconds
-    delay(5); // Settling time of the MAX (Vout)
-    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden...
-
-    inverseVoltage[i] = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), REFERENCE);
-    inverseVCurrent[i] = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), REFERENCE);
-    temperatureArray[i] = read_tmp100();
-
-    /*  Si se decide implementar un submuestreo  */
-    // uint32_t aux = 0x00;
-    // ads1260.connectMUX(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM);
-    // for ( uint8_t j = 0; j < 10; j++ ) {
-    //   aux += ads1260.readConversion();
-    //   delayMicroseconds(100);
-    // }
-    // inverseVoltage[i] = ads1260.computeVolts((uint32_t)(aux/10));
-    // aux = 0x00;
-    // ads1260.connectMUX(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM);
-    // for ( uint8_t j = 0; j < 10; j++ ) {
-    //   aux += ads1260.readConversion();
-    //   delayMicroseconds(100);
-    // }
-    // inverseVCurrent[i] = ads1260.computeVolts((uint32_t)(aux/10));
-  }
-  total_time = micros() - start_time;
-  write_dac8551_reg(0x7FFF, CS_DAC);  // Mínimo valor de tensión suministrado
-  digitalWrite(led, LOW);             // Se debe apagar el LED
-  float Ts = (float)total_time / (Elementos * 1000);
-  #ifdef DEBUG_MAIN
-  Serial.print("Tiempo promedio de muestreo [ms]: ");
-  Serial.println(Ts, 4);
-  #endif
-}
-
-/************************************************************************************************************
- * @fn      polarization_settling
- * @brief   Establecimiento del voltaje de polarización de un canal
- * @param   Vbd:
- * @param   CS_DAC: 
- * @return  Vbias
- */
-float polarization_settling(float Vbd, uint8_t CS_DAC) {
-  uint8_t muxP0 = ADS1260_MUXP_AIN0;// muxP1;                   // Configuración de lectura: Canal 1 o 2
-  float Vbias = 0.0;
-  if ( CS_DAC == SPI_CS_DAC1 ) {
-    muxP0 = ADS1260_MUXP_AIN0;
-    // muxP1 = ADS1260_MUXP_AIN2;
-  } else if ( CS_DAC == SPI_CS_DAC2 ) {
-    muxP0 = ADS1260_MUXP_AIN1;
-    // muxP1 = ADS1260_MUXP_AIN3;
-  }
-
-  #ifdef DEBUG_MAIN
-  Serial.println("DEBUG (polarization_settling) -> iniciando");
-  #endif
-
-  uint16_t i = 0x01;
-  uint16_t command = inverseVoltage_command[indexPeak];
-  uint16_t newCommand;
-  while ( Vbias < Vbd + (OverVoltage) ) { 
-    newCommand = command - i;
-    write_dac8551_reg(newCommand, CS_DAC);       // Disminuir el comando -> aumento de Vout
-    i = i + 10; // paso de 10
-    
-    delayMicroseconds(Switching_Time_MAX); // 4 microseconds
-    delay(5); // Settling time of the MAX (Vout)
-    // Considerar el tiempo de asentamiento del filtro pasa bajos de 2ndo orden... // 354.96 useg
-
-    Vbias = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
-
-    if ( newCommand < 0x000F ) {                // evitamos underflow
-      #ifdef DEBUG_MAIN
-      Serial.println("DEBUG (polarization_settling) -> Limit reached");
-      #endif
-      break;
-    }
-  }
-
-  #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (polarization_settling) -> pasos: ");
-  Serial.println(i);
-  Serial.print("DEBUG (polarization_settling) -> Vbias: ");
-  Serial.println(Vbias, 6);
-  #endif
-
-  return Vbias;
-}
-
-void imprimirArrays(void) {
-  Serial.println("-------------------- DATOS OBTENIDOS --------------------");
-  Serial.println("------------------ -------------------");
-  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
-  for ( uint16_t i = 1; i < Elementos; i++ ) {
-    Serial.print(i);
-    Serial.print(",");
-    Serial.print(inverseVoltage[i], 7);
-    Serial.print(",");
-    Serial.print(inverseVCurrent[i], 7);
-    Serial.print(",");
-    Serial.print(temperatureArray[i]);
-    Serial.print(",");
-    Serial.print((inverseVoltage[i]*12)-3.8-(ResisA*(inverseVCurrent[i]-firstCurrent1)/ResisB), 7);
-    Serial.print(",");
-    Serial.println((inverseVCurrent[i]-firstCurrent1)/ResisB, 10);
-  }
-}
+*/
 
 
 

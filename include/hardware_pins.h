@@ -15,6 +15,7 @@
 
 // #define PLACA_PRUEBAS
 #define PLACA_FINAL
+// #define CORRECCION
 
 /////// Sebas_MUA_Control_Dev
 #ifdef PLACA_PRUEBAS
@@ -75,10 +76,19 @@
 #define QSPI_D3         PIN_QSPI_D3         // PA11
 #define QSPI_CS         PIN_QSPI_CS         // PB11
 #define QSPI_SCK        PIN_QSPI_SCK        // PB10
+
+#ifndef  CORRECCION
 #define UART_BOSS_Tx    PIN_SERIAL1_TX      // PB12 SERCOM4
 #define UART_BOSS_Rx    PIN_SERIAL1_RX      // PB13 SERCOM4
 #define UART_GPS_Tx     PIN_SERIAL2_TX      // PB16 SERCOM5
 #define UART_GPS_Rx     PIN_SERIAL2_RX      // PB17 SERCOM5
+#else
+#define UART_GPS_Tx     PIN_SERIAL1_TX      // PB12 SERCOM4
+#define UART_GPS_Rx     PIN_SERIAL1_RX      // PB13 SERCOM4
+#define UART_BOSS_Tx    PIN_SERIAL2_TX      // PB16 SERCOM5
+#define UART_BOSS_Rx    PIN_SERIAL2_RX      // PB17 SERCOM5
+#endif
+
 #define USB_MUA_N       PIN_USB_DM          // PA24
 #define USB_MUA_P       PIN_USB_PM          // PA25
 #define SPI_MOSI_ADC    PIN_SPI1_MOSI       // PA04 SERCOM0_0

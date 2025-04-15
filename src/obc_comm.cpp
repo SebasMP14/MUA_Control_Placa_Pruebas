@@ -19,7 +19,7 @@ bool setup_state = false;
 unsigned long timeOUT = 3000;
 unsigned long timeOUT_invalid_frame = 30;
 
-uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x07, 0x00, 0x00, 0x00, 0x0A};                        // MUA to OBC ACK
+uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x07, 0x00, 0x48, 0x04, 0x0A};                        // MUA to OBC ACK
 const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK
 const uint8_t nack_IF_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x00, 0x00, 0x00, 0x00, 0x0A};  // INVALID FRAME RECEIVED NACK
 
@@ -48,7 +48,7 @@ void requestOperationMode(void) {
   Serial1.readBytes(response, TRAMA_COMM);                //  Se recibe un byte indicando el modo de operación
   #ifdef DEBUG_OBC
   Serial.print("Recibido de Serial1: 0x");
-  for (uint8_t i = 0; i < TRAMA_COMM; i++) {
+  for (uint8_t i = 0; i < TRAMA_COMM; i++) {    // trama recibida del OBC
     Serial.print(response[i], HEX);
     Serial.print(", 0x");
   }
@@ -82,23 +82,26 @@ void requestOperationMode(void) {
   }
 
   //  IF INVALID FRAME
-  if ( response[1] != ID_COUNT_MODE && response[1] != ID_TRANSFER_MODE && response[1] != ID_TRANSFER_SYSINFO_MODE ) {   
+  if (  response[1] != ID_COUNT_MODE && 
+        response[1] != ID_TRANSFER_MODE && 
+        response[1] != ID_TRANSFER_SYSINFO_MODE &&
+        response[1] != ID_FINISH ) {
     #ifdef DEBUG_OBC
     Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
     #endif
-    delay(timeOUT_invalid_frame);
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
-    return ;                                      //  No se envía ACK
+    delay(timeOUT_invalid_frame);                     // If an invalid frame is received, a timeout error shall occur
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);    // and then a NACK (No-Acknowledgment) message shall be sent
+    return ;                                      
   }
   
-  // Send ACK
+  // Send ACK if every thing is ok
   CRC = crc_calculate(ack_MUA_to_OBC);
   #ifdef DEBUG_OBC
   Serial.print(" CRC calculado: 0x");
   Serial.println(CRC, HEX);
   #endif
-  ack_MUA_to_OBC[TRAMA_COMM-3] = (uint8_t)(CRC >> 8);
-  ack_MUA_to_OBC[TRAMA_COMM-2] = (uint8_t)(CRC & 0xFF);
+  ack_MUA_to_OBC[TRAMA_COMM-3] = (uint8_t)(CRC >> 8);     // ante penúltima posición
+  ack_MUA_to_OBC[TRAMA_COMM-2] = (uint8_t)(CRC & 0xFF);   // penúltima posición
   Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
 
   #ifdef DEBUG_OBC
@@ -138,7 +141,7 @@ void requestOperationMode(void) {
       currentMode = FINISH;
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
-      Serial.println("Sleep mode in progress. order 66.");
+      Serial.println("Sleep mode in progress: Executing order 66.");
       #endif
       write_OPstate(0x00);
       enterOffMode();
@@ -165,7 +168,7 @@ void requestOperationMode(void) {
 
 /************************************************************************************************************
  * @fn      getTimestampFromGPS
- * @brief   Obtiene el timestamp del GPS y actualiza el reloj del sistema
+ * @brief   Obtiene el timestamp del GPS y actualiza el reloj del sistema (SIMULACION, AUN FALTA PROGRAMAR)
  * @param   NONE
  * @return  NONE
  *  TODO: - Read GPS
@@ -212,6 +215,38 @@ void getTimestampFromGPS(void) {
 unsigned long getTime(void) {
   return rtc.now().unixtime();
 }
+
+
+bool slidingWindowBuffer(uint8_t* buffer) {
+  static uint8_t window[6] = {0};         // Sliding window buffer
+  static uint8_t index = 0;
+
+  while ( Serial1.available() ) {
+    uint8_t incoming = Serial1.read();
+
+    
+    for ( uint8_t i = 0; i < 5; i++ ) {   // Mover ventana y agregar el nuevo byte al final
+      window[i] = window[i + 1];
+    }
+    window[5] = incoming;
+
+   
+    if ( window[5] == 0x0A ) {            // Chequear si el byte final es 0x0A (STOP)
+      uint16_t crc_calc = crc_calculate(window);
+      uint16_t crc_recv = (window[3] << 8) | window[4];
+
+      if ( crc_calc == crc_recv && window[0] == MISSION_ID ) {
+        memcpy(buffer, window, 6);        // Trama válida → copiar a buffer 
+        return true; 
+      }
+      // Si el STOP llegó pero el CRC o ID no coincide, seguir deslizando
+    }
+  }
+
+  return false;
+}
+
+
 
 /**
 *******************************************************************************
@@ -282,6 +317,9 @@ uint16_t crc_calculate(uint8_t *data) {
   
   return (crc & 0xFFFF);
 }
+// *******************************************************************************
+// *******************************************************************************
+
 // /************************************************************************************************************
 //  * @fn      calcularCRC
 //  * @brief   calcula el Cyclic Redundancy Code - 16 bits, utilizando el polinomio 0x1021
