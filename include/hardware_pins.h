@@ -28,7 +28,7 @@
 #define SPI_MOSI_MAX    PIN_SPI_MOSI        // PA04 sercom0_0
 #define SPI_MISO_MAX    PIN_SPI_MISO        // PA06 sercom0_2
 #define SPI_SCK_MAX     PIN_SPI_SCK         // PA05 sercom0_1
-#define Interface_EN    D11                 // PB15
+#define INTERFACE_EN    G9                 // PB15
 
 #define QSPI_D0         PIN_QSPI_D0         // PA08     Revisar si se puede QSPI
 #define QSPI_D1         PIN_QSPI_D1         // PA09
@@ -43,6 +43,15 @@
 #define USB_MUA_N       PIN_USB_DM          // PA24
 #define USB_MUA_P       PIN_USB_PM          // PA25
 
+/////// NC ///////
+// #define LED_SiPM2       PB08
+// #define LED_SiPM1       PB09
+// #define SPI_CS_MAX1     PIN_SPI_SS          // 
+// #define SPI_CS_MAX2     G8                  // 
+// #define SPI_CS_DAC1     G11                 // 
+// #define SPI_CS_DAC2     G1                  // 
+// #define SPI_CS_ADC      G6
+
 /////// MICROMOD
 #define PA14        38
 #define PA15        39
@@ -53,6 +62,7 @@
 #define PB07        D3
 #define PB08        D4
 #define PB09        D5
+#define PA01        PIN_ATN
 #endif
 
 #ifdef PLACA_FINAL

@@ -84,11 +84,11 @@ bool get_SENT_DATAaddress(uint32_t *sent_address) {
 * @param   address: Dirección a ser almacenada
 * @return  True - False
 */
-bool write_SENT_DATAaddress(uint8_t address) {
+bool write_SENT_DATAaddress(uint32_t *address) {
   #ifdef DEBUG_FLASH
   Serial.println("DEBUG (write_SENDED_DATAaddress) -> ...");
   #endif
-  return write_DATAinfo(&address, ADDRESS_SIZE, SENT_INDEX);
+  return write_DATAinfo((uint8_t *)address, ADDRESS_SIZE, SENT_INDEX);
 }
 
 /************************************************************************************************************

@@ -39,8 +39,6 @@
 #define TRAMA_DATA_SIZE     36              // 
 #define TRAMA_INFO_SIZE     36              // 39 Bytes maximum
 
-uint8_t ACK_OBC_to_MUA = 0x04;
-
 // uint8_t status = 0;
 uint8_t state = 0x01;                     // 
 // uint32_t timestamp = 0;
@@ -109,12 +107,10 @@ void loopTRANSFERinfo(void);
 
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE);
 float polarization_settling(float Vbd, uint8_t CS_DAC);
+bool sendDataFrame(void);
 void printArrays_ch1(void);
 void printArrays_ch2(void);
 
-void buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address);
-bool verifyOBCResponse(uint8_t* recibido);
-bool sendDataFrame(void);
 
 void setup() {
   delay(3000);
@@ -665,28 +661,23 @@ void loopCOUNT(void) {
 
 }
 
-/******************************************************
+/**********************************************************************************
  * @fn      setupTRANSFER - loopTRANSFER
  * @brief   - Setup: Inicializaciones del modo de operación: Transferencia de Datos
- *          - Loop: Se transfieren los datos 
+ *          - Loop: Se transfieren datos y se revisa comandos entrantes 
  * @param   NONE
  * @return  NONE
- * TODO: - Se debe determinar cuantos Bytes se van a transferir al OBC
+ * @todo    test 
  */
 void setupTRANSFER(void) {
-  // unsigned long timeOUT = 1000;
-
-  // Serial1.begin(115200); // Establecer conexión
   #ifdef DEBUG_MAIN
-  Serial.println("DEBUG (setupTRANSFER) -> Serial1 Iniciado");
+  Serial.println("DEBUG (setupTRANSFER) -> Iniciado ");
   #endif
 
-  // write_OPstate(*state);
+  digitalWrite(INTERFACE_EN, LOW);
   disableTC2(); // Funka
   desactiveInterrupt1();
   desactiveInterrupt2();
-  digitalWrite(INTERFACE_EN, LOW);
-
   
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setupTRANSFER) -> setupTRANSFER finalizado...");
@@ -695,12 +686,64 @@ void setupTRANSFER(void) {
 }
 
 void loopTRANSFER(void) {
-  
-  if ( !sendDataFrame() ) {
+  uint8_t buffer[TRAMA_COMM] = {0};
+
+  if ( slidingWindowBuffer(buffer) ) {  // Se busca y revisa una trama válida proveniente del OBC
+    if ( verifyOBCResponse(buffer) ) {  // Se verifica el CRC, si es NACK se maneja en la función
+      switch (buffer[1]) {
+        case ID_STANDBY:
+          currentMode = STAND_BY;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
+          #endif
+          write_OPstate(ID_STANDBY);
+          break;
+        case ID_COUNT_MODE:
+          currentMode = COUNT_MODE;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
+          #endif
+          write_OPstate(ID_COUNT_MODE);
+          break;
+        case ID_TRANSFER_MODE:
+          currentMode = TRANSFER_DATA_MODE;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
+          #endif
+          write_OPstate(ID_TRANSFER_MODE);
+          break;
+        case ID_FINISH:
+          currentMode = FINISH;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
+          Serial.println("Sleep mode in progress: Executing order 66.");
+          #endif
+          write_OPstate(ID_FINISH);
+          enterOffMode();
+          break;
+        case ID_TRANSFER_SYSINFO_MODE:
+          currentMode = TRANSFER_INFO_MODE;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
+          #endif
+          write_OPstate(ID_TRANSFER_SYSINFO_MODE);
+          break;
+        default:
+          currentMode = STAND_BY;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
+          #endif
+          write_OPstate(0x00);
+          break;
+      }   // switch (buffer[1])
+    }     // verifyOBCResponse
+  }       // slidingWindowBuffer
+
+  if ( !sendDataFrame() ) {            // Durante sendDataFrame se puede recibir comandos del OBC
     #ifdef DEBUG_MAIN
     Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");
     #endif
-    return;
+    return ;
   }
 
 }
@@ -712,8 +755,8 @@ void loopTRANSFERinfo(void) {
 /************************************************************************************************************
  * @fn      obtain_Curve_inverseVI
  * @brief   Se obtiene la curva I-V inversa del SiPM aplicando un filtro de butterworth a las lecturas del ADC.
- * @param   Temperature: obtenido del sensor TMP100 para la estimación teórica
- * @param   CS_DAC: Channel selection
+ * @param   Temperature Obtenido del sensor TMP100 para la estimación teórica
+ * @param   CS_DAC Channel selection
  * @return  NONE
  */
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) {
@@ -806,7 +849,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
  * @brief   Establecimiento del voltaje de polarización de un canal
  * @param   Vbd: Breakdown Voltage
  * @param   CS_DAC: Channel to polarizate
- * @return  Vbias (Polarization Voltage)
+ * @return  float Vbias (Polarization Voltage)
  */
 float polarization_settling(float Vbd, uint8_t CS_DAC) {
   uint8_t muxP0 = ADS1260_MUXP_AIN0;  // muxP1;                   // Configuración de lectura: Canal 1 o 2
@@ -858,6 +901,77 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   return Vbias;
 }
 
+
+
+
+/************************************************************************************************************
+ * @fn      sendDataFrame
+ * @brief   Envía una trama de datos al OBC, recibe ACK o NACK y ejecuta en consecuencia
+ * @param   void
+ * @return  true: Transmisión exitosa, ACK recibido ... 
+ * @return  false: Transmisión fallida, CRC invalide, data frame invalid or timeout
+ */
+bool sendDataFrame(void) {
+  uint32_t last_address_written = 0xFFFFFFFF;
+  uint32_t last_sent_address = 0xFFFFFFFF;
+
+  if (!get_address(&last_address_written)) return false;
+  if (!get_SENT_DATAaddress(&last_sent_address)) return false;
+
+  if (last_sent_address == 0xFFFFFFFF) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
+  if (last_address_written == last_sent_address) {                // ya no quedan datos en memoria por enviar
+    currentMode = FINISH;
+    return true;
+  }
+
+  uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
+  uint8_t trama[trama_size];
+  if ( !buildDataFrame(trama, MISSION_ID, TRAMA_DATA_SIZE, last_sent_address) ) return false;
+
+  Serial1.write(trama, trama_size);
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendDataFrame) -> Trama enviada:");
+  for ( uint8_t i = 0; i < trama_size; i++ ) {
+    Serial.print(" 0x"); Serial.print(trama[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  unsigned long tiempo = millis();
+  while ( Serial1.available() < TRAMA_COMM ) { // usar la funcionn, esta ya tiene un timeout
+    if ( (millis() - tiempo) >= timeOUT ) return false;
+  }
+
+  uint8_t recibido[TRAMA_COMM];
+  Serial1.readBytes(recibido, TRAMA_COMM);
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendDataFrame) -> Respuesta recibida:");
+  for ( uint8_t i = 0; i < TRAMA_COMM; i++ ) {
+    Serial.print(" 0x"); Serial.print(recibido[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  if ( !verifyOBCResponse(recibido) ) return false;
+
+  if ( recibido[1] == ACK_OBC_to_MUA ) {
+    last_sent_address += TRAMA_DATA_SIZE;
+    write_SENT_DATAaddress(&last_sent_address);      // se actualiza la siguiente dirección a enviar
+  } else if (recibido[1] == ID_FINISH) {
+    currentMode = FINISH;
+  } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
+    currentMode = TRANSFER_INFO_MODE;
+  }
+
+  return true;
+}
+
+
+
+
+
 void printArrays_ch1(void) {
   Serial.println("-------------------- DATOS OBTENIDOS --------------------");
   Serial.println("------------------ -------------------");
@@ -894,117 +1008,6 @@ void printArrays_ch2(void) {
     Serial.print(",");
     Serial.println((inverseVCurrent2[i]-firstCurrent2)/ResisB, 10);
   }
-}
-
-
-/************************************************************************************************************
- * @fn      buildDataFrame
- * @brief   Construcción de la trama de datos a enviar al OBC
- * @param   trama: Almacenamiento de datos y comunicacion   
- * @param   ID: Mission ID
- * @param   trama_size: Cantidad de datos a obtener de la memoria flash
- * @param   address: Dirección de inicio de los datos
- * @return  NONE
- */
-void buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address) {
-  trama[0] = MISSION_ID;
-  trama[1] = ID;
-  trama[2] = trama_size;
-
-  read(&trama[3], trama_size, address); // Cargar datos desde flash
-
-  uint16_t CRC = crc_calculate(trama);
-  trama[trama_size + 3] = (uint8_t)(CRC >> 8);
-  trama[trama_size + 4] = (uint8_t)(CRC & 0xFF);
-  trama[trama_size + 5] = 0x0A; // STOP byte
-}
-
-/************************************************************************************************************
- * @fn      verifyOBCResponse
- * @brief   Verifica el CRC y Mission ID de la trama recibida, en un caso fallido se devuelve un NACK
- * @param   recibido: trama recibida del OBC
- * @return  true: trama recibida verificada correctamente ... 
- * @return  false: trama recibida con errores
- */
-bool verifyOBCResponse(uint8_t* recibido) {
-  uint16_t crc_expected = crc_calculate(recibido);
-  uint16_t crc_received = (recibido[TRAMA_COMM - 3] << 8) | recibido[TRAMA_COMM - 2];
-
-  if ( crc_expected != crc_received ) {
-    Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
-    return false;
-  }
-
-  if ( recibido[0] != MISSION_ID ) {
-    delay(timeOUT_invalid_frame);
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
-    return false;
-  }
-
-  return true;
-}
-
-/************************************************************************************************************
- * @fn      sendDataFrame
- * @brief   Envía una trama de datos al OBC, recibe ACK o NACK y ejecuta en consecuencia
- * @param   void
- * @return  true: Transmisión exitosa, ACK recibido ... 
- * @return  false: Transmisión fallida, CRC invalide, data frame invalid or timeout
- */
-bool sendDataFrame(void) {
-  uint32_t last_address_written = 0xFFFFFFFF;
-  uint32_t last_sent_address = 0xFFFFFFFF;
-
-  if (!get_address(&last_address_written)) return false;
-  if (!get_SENT_DATAaddress(&last_sent_address)) return false;
-
-  if (last_sent_address == 0xFFFFFFFF) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
-  if (last_address_written == last_sent_address) {                // ya no quedan datos en memoria por enviar
-    currentMode = FINISH;
-    return true;
-  }
-
-  uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
-  uint8_t trama[trama_size];
-  buildDataFrame(trama, MISSION_ID, TRAMA_DATA_SIZE, last_sent_address);
-
-  Serial1.write(trama, trama_size);
-
-  #ifdef DEBUG_MAIN
-  Serial.println("DEBUG (sendDataFrame) -> Trama enviada:");
-  for ( uint8_t i = 0; i < trama_size; i++ ) {
-    Serial.print(" 0x"); Serial.print(trama[i], HEX);
-  }
-  Serial.println();
-  #endif
-
-  unsigned long tiempo = millis();
-  while ( Serial1.available() < TRAMA_COMM ) {
-    if ( (millis() - tiempo) >= timeOUT ) return false;
-  }
-
-  uint8_t recibido[TRAMA_COMM];
-  Serial1.readBytes(recibido, TRAMA_COMM);
-
-  #ifdef DEBUG_MAIN
-  Serial.println("DEBUG (sendDataFrame) -> Respuesta recibida:");
-  for ( uint8_t i = 0; i < TRAMA_COMM; i++ ) {
-    Serial.print(" 0x"); Serial.print(recibido[i], HEX);
-  }
-  Serial.println();
-  #endif
-
-  if ( !verifyOBCResponse(recibido) ) return false;
-
-  if ( recibido[1] == ACK_OBC_to_MUA ) {
-    write_SENT_DATAaddress(last_sent_address + TRAMA_DATA_SIZE);      // se actualiza la siguiente dirección a enviar
-  } else if (recibido[1] == ID_FINISH) {
-    currentMode = FINISH;
-  } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
-    currentMode = TRANSFER_INFO_MODE;
-  }
-
-  return true;
 }
 
 
@@ -1098,7 +1101,7 @@ bool sendDataFrame(void) {
 // transferir datos
   // read_all();
   delay(1000);
-  /*
+  *
   * Esta sección prueba el envío de los datos al OBC, los únicos datos enviados son los que contiene "trama"
   * y se envía X veces 
   
@@ -1113,7 +1116,7 @@ bool sendDataFrame(void) {
   uint8_t trama[trama_size] = {MISSION_ID, ID_TRANSFER_MODE, TRAMA_DATA_SIZE};
   uint32_t last_sent_address = 0xFFFFFFFF;
 
-  /**************************************************************************************************** 
+  **************************************************************************************************** 
   *                                       Starting Sending Data
   *************************************************************************************************** 
   if ( get_SENT_DATAaddress(&last_sent_address) && last_sent_address == 0xFFFFFFFF ) { // Primera vez en enviar datos         
@@ -1147,7 +1150,7 @@ bool sendDataFrame(void) {
   #endif
 
   
-  /**************************************************************************************************** 
+  **************************************************************************************************** 
   *                                       Confirmation of data sent
   *************************************************************************************************** */
   /* Se recibe el ACK/NACK del OBC 
@@ -1172,7 +1175,7 @@ bool sendDataFrame(void) {
     Serial.print(", 0x");
   }
   #endif
-  /* Si se va a buscar la trama en una serie de datos recibidos... 
+  * Si se va a buscar la trama en una serie de datos recibidos... 
   // uint8_t index_begin = 0;
   // for ( uint8_t i = 0; i < len; i++ ) { 
   //   if ( recibido[i] == MISSION_ID ) {

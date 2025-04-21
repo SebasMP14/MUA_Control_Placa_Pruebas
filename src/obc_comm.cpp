@@ -18,10 +18,13 @@ OperationMode currentMode = INICIO;
 bool setup_state = false;
 unsigned long timeOUT = 3000;
 unsigned long timeOUT_invalid_frame = 30;
+unsigned long timeOUT_window = 1;
 
-uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x07, 0x00, 0x48, 0x04, 0x0A};                        // MUA to OBC ACK
+uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x07, 0x00, 0x48, 0x04, 0x0A};            // MUA to OBC ACK
 const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK
 const uint8_t nack_IF_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x00, 0x00, 0x00, 0x00, 0x0A};  // INVALID FRAME RECEIVED NACK
+
+const uint8_t ACK_OBC_to_MUA = 0x04;
 
 RTC_SAMD51 rtc;
 
@@ -38,7 +41,8 @@ RTC_SAMD51 rtc;
 void requestOperationMode(void) {
   uint8_t response[TRAMA_COMM];
   unsigned long tiempo = millis();
-  while ( Serial1.available() < TRAMA_COMM ) {               // Esperar respuesta, agregar TimeOut
+
+  while ( Serial1.available() < TRAMA_COMM ) {            // Esperar respuesta, agregar TimeOut
     if ( tiempo >= timeOUT ) {
       return ;
     }
@@ -47,16 +51,15 @@ void requestOperationMode(void) {
 
   Serial1.readBytes(response, TRAMA_COMM);                //  Se recibe un byte indicando el modo de operación
   #ifdef DEBUG_OBC
-  Serial.print("Recibido de Serial1: 0x");
-  for (uint8_t i = 0; i < TRAMA_COMM; i++) {    // trama recibida del OBC
+  Serial.print("(DEBUG) requestOperationMode -> Recibido de Serial1: 0x");
+  for (uint8_t i = 0; i < TRAMA_COMM; i++) {              // trama recibida del OBC
     Serial.print(response[i], HEX);
     Serial.print(", 0x");
   }
   Serial.println();
   #endif
 
-  // Comprobación de MISSION ID
-  if ( response[0] != MISSION_ID) {
+  if ( response[0] != MISSION_ID ) {                       // Comprobación de MISSION ID
     #ifdef DEBUG_OBC
     Serial.println("DEBUG (requestOperationMode) -> ID de Misión incorrecto");
     #endif
@@ -115,27 +118,21 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
       #endif
-      #ifdef DEBUG_OBC
-      write_OPstate(0x00);
-      #endif
+      write_OPstate(ID_STANDBY);
       break;
     case 0x01:
       currentMode = COUNT_MODE;
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_OBC
-      write_OPstate(0x01);
-      #endif
+      write_OPstate(ID_COUNT_MODE);
       break;
     case 0x02:
       currentMode = TRANSFER_DATA_MODE;
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_OBC
-      write_OPstate(0x02);
-      #endif
+      write_OPstate(ID_TRANSFER_MODE);
       break;
     case 0x08:
       currentMode = FINISH;
@@ -143,7 +140,7 @@ void requestOperationMode(void) {
       Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
       Serial.println("Sleep mode in progress: Executing order 66.");
       #endif
-      write_OPstate(0x00);
+      write_OPstate(ID_STANDBY);
       enterOffMode();
       break;
     case 0x09:
@@ -151,16 +148,14 @@ void requestOperationMode(void) {
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
       #endif
-      #ifdef DEBUG_OBC
-      write_OPstate(0x09);
-      #endif
+      write_OPstate(ID_TRANSFER_SYSINFO_MODE);
       break;
     default:
       currentMode = STAND_BY;
       #ifdef DEBUG_OBC
       Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
       #endif
-      write_OPstate(0x00);
+      write_OPstate(ID_STANDBY);
       break;
   }
 
@@ -184,7 +179,7 @@ void getTimestampFromGPS(void) {
   }
   Serial2.write(0xBB);                  // Comando para solicitar el timestamp
   unsigned long Time = millis();
-  while ( Serial2.available() < sizeof(uint32_t) && millis() - Time < timeOUT) ;
+  while ( Serial2.available() < 4 && millis() - Time < timeOUT) ; // sizeof(uint32_t)
 
   if ( millis() - Time > timeOUT ) {
     #ifdef DEBUG_OBC
@@ -216,35 +211,109 @@ unsigned long getTime(void) {
   return rtc.now().unixtime();
 }
 
-
+/************************************************************************************************************
+ * @fn      slidingWindowBuffer
+ * @brief   Obtiene bytes de Serial1 (OBC) hasta detectar una trama válida, se manejan los siguientes tipos de 
+ *          errores: timeout, invalid frame and data Noise.
+ * @param   buffer: Puntero a memoria donde almacenar trama recibida del OBC
+ * @return  true: trama válida recibida ... 
+ * @return  false: trama inválida recibida
+ */
 bool slidingWindowBuffer(uint8_t* buffer) {
   static uint8_t window[6] = {0};         // Sliding window buffer
-  static uint8_t index = 0;
+  // static uint8_t index = 0;
+  unsigned long tiempo = millis();
 
-  while ( Serial1.available() ) {
-    uint8_t incoming = Serial1.read();
-
-    
-    for ( uint8_t i = 0; i < 5; i++ ) {   // Mover ventana y agregar el nuevo byte al final
-      window[i] = window[i + 1];
-    }
-    window[5] = incoming;
-
-   
-    if ( window[5] == 0x0A ) {            // Chequear si el byte final es 0x0A (STOP)
-      uint16_t crc_calc = crc_calculate(window);
-      uint16_t crc_recv = (window[3] << 8) | window[4];
-
-      if ( crc_calc == crc_recv && window[0] == MISSION_ID ) {
-        memcpy(buffer, window, 6);        // Trama válida → copiar a buffer 
-        return true; 
+  while ( tiempo - millis() < timeOUT_window ) {
+    if ( Serial1.available() ) {
+      uint8_t incoming = Serial1.read();    // new byte
+      
+      for ( uint8_t i = 0; i < 5; i++ ) {   // slide window and add the new byte to the final position
+        window[i] = window[i + 1];
       }
-      // Si el STOP llegó pero el CRC o ID no coincide, seguir deslizando
+      window[5] = incoming;
+
+      // Condición para analizar CRC
+      if (window[0] == MISSION_ID &&     // Primer Byte debe ser el ID de MUA MISSION
+          // window[2] == 0x00 &&           // Tercer Byte debe ser 0x00 para trama de comunicación
+          window[5] == STOP_BYTE) {      // Byte final debe ser 0x0A (STOP)   
+        // uint16_t crc_calc = crc_calculate(window);
+        // uint16_t crc_recv = (window[3] << 8) | window[4];
+
+        // if ( crc_calc == crc_recv ) {    // Se verifica CRC
+          memcpy(buffer, window, 6);     // Trama válida → copiar a buffer
+          // return 1;                      // Trama válida encontrada
+          return true;
+        // } else {
+          // Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
+          // window[0] = 0x47;
+          // window[5] = 0x47;
+          // memcpy(buffer, window, 6);
+          // return 2;                      // Trama 
+        // }
+      }
     }
   }
-
+  
   return false;
 }
+
+
+/************************************************************************************************************
+ * @fn      buildDataFrame
+ * @brief   Construcción de la trama de datos a enviar al OBC
+ * @param   trama: Almacenamiento de datos y comunicacion   
+ * @param   ID: Mission ID
+ * @param   trama_size: Cantidad de datos a obtener de la memoria flash
+ * @param   address: Dirección de inicio de los datos
+ * @return  true: Datos cargados con éxito ... 
+ * @return  false: Error al cargar datos
+ */
+bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address) {
+  trama[0] = MISSION_ID;    // MISSION ID
+  trama[1] = ID;            // COMMAND ID
+  trama[2] = trama_size;    // BYTES QUANTITY TO TRANSFER
+
+  if ( !read(&trama[3], trama_size, address) ) return false; // Cargar datos de flash
+
+  uint16_t CRC = crc_calculate(trama);
+  trama[trama_size + 3] = (uint8_t)(CRC >> 8);
+  trama[trama_size + 4] = (uint8_t)(CRC & 0xFF);
+  trama[trama_size + 5] = 0x0A; // STOP byte
+
+  return true;
+}
+
+/************************************************************************************************************
+ * @fn      verifyOBCResponse
+ * @brief   Verifica el CRC y Mission ID de la trama recibida, en un caso fallido se devuelve un NACK
+ * @param   recibido: trama recibida del OBC
+ * @return  true: trama recibida verificada correctamente ... 
+ * @return  false: trama recibida con errores
+ */
+bool verifyOBCResponse(uint8_t* recibido) {
+  uint16_t crc_expected = crc_calculate(recibido);
+  uint16_t crc_received = (recibido[TRAMA_COMM - 3] << 8) | recibido[TRAMA_COMM - 2];
+
+  if ( crc_expected != crc_received ) {
+    Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
+  if ( recibido[0] != MISSION_ID ) {
+    delay(timeOUT_invalid_frame);
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
+  return true;
+}
+
+
+
+
+
+
 
 
 
@@ -298,7 +367,7 @@ const uint16_t crc_table[256] = {
 
 /**
  * @fn                crc_calculate
- * @brief             Calculate the crc16 value
+ * @brief             Calculate the crc16 value of data[1] to data[-4] (without CRC)
  * @param[in] data    Pointer to a buffer of up to 45 data_len bytes.
  * @return            The calculated crc value.
  */
@@ -310,7 +379,7 @@ uint16_t crc_calculate(uint8_t *data) {
   uint8_t data_len = data[2];
   
   // operate only over data[1:data_len] to calculate the checksum 
-  for ( uint8_t i = 1; i <= data_len + 2; i++ ) {
+  for ( uint8_t i = 1; i <= data_len + 2; i++ ) {   
     tbl_idx = (((crc >> 8) ^ (*(data + i))) & 0xFF);
     crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xFFFF;
   }

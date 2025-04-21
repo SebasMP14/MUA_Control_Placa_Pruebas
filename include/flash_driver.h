@@ -58,7 +58,7 @@ void read_until(uint8_t *data, uint32_t data_length);
 bool read(uint8_t *data, uint32_t data_length, uint32_t since); 
 bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index);
 bool write_OPstate(uint8_t state);
-bool write_SENT_DATAaddress(uint8_t address);
+bool write_SENT_DATAaddress(uint32_t *address);
 bool erase_all(void);
 bool erase_debug(void);
 
