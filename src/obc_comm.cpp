@@ -40,6 +40,103 @@ RTC_SAMD51 rtc;
  */
 void requestOperationMode(void) {
   uint8_t response[TRAMA_COMM];
+
+  if ( !slidingWindowBuffer(response, timeOUT) ) {  // Solo debe ir timeOUT_invalid_frame
+    delay(timeOUT_invalid_frame);                   // Se tiene que eliminar
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (requestOperationMode) → slidingWindowBuffer");
+    #endif
+    return ;
+  }
+
+  if ( !verifyOBCResponse(response) ) return ;
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (requestOperationMode) -> Recibido de Serial1: ");
+  for (uint8_t i = 0; i < TRAMA_COMM; i++) {              // trama recibida del OBC
+    Serial.print("0x ");  Serial.print(response[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  //  IF INVALID FRAME
+  if (  response[1] != ID_COUNT_MODE && 
+        response[1] != ID_TRANSFER_MODE && 
+        response[1] != ID_TRANSFER_SYSINFO_MODE &&
+        response[1] != ID_FINISH ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
+    #endif
+    delay(timeOUT_invalid_frame);                     // If an invalid frame is received, a timeout error shall occur
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);    // and then a NACK (No-Acknowledgment) message shall be sent
+    return ;
+  }
+
+  // uint16_t CRC = crc_calculate(ack_MUA_to_OBC);
+  // #ifdef DEBUG_OBC
+  // Serial.print(" CRC calculado: 0x");
+  // Serial.println(CRC, HEX);
+  // #endif
+  // ack_MUA_to_OBC[TRAMA_COMM-3] = (uint8_t)(CRC >> 8);     // ante penúltima posición
+  // ack_MUA_to_OBC[TRAMA_COMM-2] = (uint8_t)(CRC & 0xFF);   // penúltima posición
+  Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (requestOperationMode) -> COMAND ID: 0x");
+  Serial.println(response[1], HEX);
+  #endif
+  
+  switch (response[1]) {
+    case 0x00:
+      currentMode = STAND_BY;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
+      #endif
+      write_OPstate(ID_STANDBY);
+      break;
+    case 0x01:
+      currentMode = COUNT_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
+      #endif
+      write_OPstate(ID_COUNT_MODE);
+      break;
+    case 0x02:
+      currentMode = TRANSFER_DATA_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
+      #endif
+      write_OPstate(ID_TRANSFER_MODE);
+      break;
+    case 0x08:
+      currentMode = FINISH;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
+      Serial.println("Sleep mode in progress: Executing order 66.");
+      #endif
+      write_OPstate(ID_STANDBY);
+      enterOffMode();
+      break;
+    case 0x09:
+      currentMode = TRANSFER_INFO_MODE;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
+      #endif
+      write_OPstate(ID_TRANSFER_SYSINFO_MODE);
+      break;
+    default:
+      currentMode = STAND_BY;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
+      #endif
+      write_OPstate(ID_STANDBY);
+      break;
+  }
+
+}
+void requestOperationMode1(void) {
+  uint8_t response[TRAMA_COMM];
   unsigned long tiempo = millis();
 
   while ( Serial1.available() < TRAMA_COMM ) {            // Esperar respuesta, agregar TimeOut
@@ -219,19 +316,28 @@ unsigned long getTime(void) {
  * @return  true: trama válida recibida ... 
  * @return  false: trama inválida recibida
  */
-bool slidingWindowBuffer(uint8_t* buffer) {
+bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout) {
   static uint8_t window[6] = {0};         // Sliding window buffer
   // static uint8_t index = 0;
+  uint8_t incoming = 0x00;
   unsigned long tiempo = millis();
 
-  while ( tiempo - millis() < timeOUT_window ) {
+  while ( millis() - tiempo < timeout ) {
     if ( Serial1.available() ) {
-      uint8_t incoming = Serial1.read();    // new byte
+      #ifdef DEBUG_OBC
+      Serial.print("DEBUG (slidingWindowBuffer) → Serial1.available = ");
+      Serial.println(Serial1.available());
+      #endif
+      incoming = Serial1.read();    // new byte
       
       for ( uint8_t i = 0; i < 5; i++ ) {   // slide window and add the new byte to the final position
         window[i] = window[i + 1];
       }
       window[5] = incoming;
+      #ifdef DEBUG_OBC
+      Serial.print("DEBUG (slidingWindowBuffer) → incoming byte 0x");
+      Serial.println(incoming, HEX);
+      #endif
 
       // Condición para analizar CRC
       if (window[0] == MISSION_ID &&     // Primer Byte debe ser el ID de MUA MISSION

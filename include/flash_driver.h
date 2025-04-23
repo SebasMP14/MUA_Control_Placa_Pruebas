@@ -29,7 +29,7 @@
 extern Adafruit_FlashTransport_QSPI flashTransport;
 extern Adafruit_SPIFlash Flash_QSPI;
 
-// #define DEBUG_FLASH
+#define DEBUG_FLASH
 // #define DEBUG_FLASH_INFO
 #define MAX_ITERATIONS            5
 #define SAVED_SYSINFO_SECTOR      4095                            /* Numero de sector utilzado para almacenar 4 bytes que indican la ultima posicion de memoria donde se escribieron los datos */

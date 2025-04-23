@@ -240,11 +240,11 @@ void loop() {
       break;
 
     case TRANSFER_DATA_MODE:
-      loopTRANSFER();
+      loopTRANSFER();       // La verificación de un nuevo comando se hace en la función
       break;
 
     case TRANSFER_INFO_MODE:
-      loopTRANSFERinfo();
+      loopTRANSFERinfo();   // La verificación de un nuevo comando se hará en la función
       break;
     
     case FINISH:
@@ -688,8 +688,8 @@ void setupTRANSFER(void) {
 void loopTRANSFER(void) {
   uint8_t buffer[TRAMA_COMM] = {0};
 
-  if ( slidingWindowBuffer(buffer) ) {  // Se busca y revisa una trama válida proveniente del OBC
-    if ( verifyOBCResponse(buffer) ) {  // Se verifica el CRC, si es NACK se maneja en la función
+  if ( slidingWindowBuffer(buffer, timeOUT) ) {   // Se busca y revisa una trama válida proveniente del OBC
+    if ( verifyOBCResponse(buffer) ) {            // Se verifica el CRC, si es NACK se maneja en la función
       switch (buffer[1]) {
         case ID_STANDBY:
           currentMode = STAND_BY;
@@ -697,6 +697,7 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
           #endif
           write_OPstate(ID_STANDBY);
+          return ;
           break;
         case ID_COUNT_MODE:
           currentMode = COUNT_MODE;
@@ -704,6 +705,7 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
           #endif
           write_OPstate(ID_COUNT_MODE);
+          return ;
           break;
         case ID_TRANSFER_MODE:
           currentMode = TRANSFER_DATA_MODE;
@@ -711,6 +713,7 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
           #endif
           write_OPstate(ID_TRANSFER_MODE);
+          return ;
           break;
         case ID_FINISH:
           currentMode = FINISH;
@@ -718,8 +721,8 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
           Serial.println("Sleep mode in progress: Executing order 66.");
           #endif
-          write_OPstate(ID_FINISH);
-          enterOffMode();
+          write_OPstate(ID_STANDBY);
+          return ;
           break;
         case ID_TRANSFER_SYSINFO_MODE:
           currentMode = TRANSFER_INFO_MODE;
@@ -727,25 +730,26 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
           #endif
           write_OPstate(ID_TRANSFER_SYSINFO_MODE);
+          return ;
           break;
         default:
           currentMode = STAND_BY;
           #ifdef DEBUG_MAIN
           Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
           #endif
-          write_OPstate(0x00);
+          write_OPstate(ID_STANDBY);
+          return ;
           break;
       }   // switch (buffer[1])
     }     // verifyOBCResponse
   }       // slidingWindowBuffer
 
-  if ( !sendDataFrame() ) {            // Durante sendDataFrame se puede recibir comandos del OBC
+  if ( !sendDataFrame() ) {                       // Durante sendDataFrame se puede recibir comandos del OBC
     #ifdef DEBUG_MAIN
     Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");
     #endif
     return ;
   }
-
 }
 
 void loopTRANSFERinfo(void) {
@@ -910,6 +914,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
  * @param   void
  * @return  true: Transmisión exitosa, ACK recibido ... 
  * @return  false: Transmisión fallida, CRC invalide, data frame invalid or timeout
+ * @todo    - Al esperar ACK solo debe ir timeOUT_invalid_frame
  */
 bool sendDataFrame(void) {
   uint32_t last_address_written = 0xFFFFFFFF;
@@ -920,7 +925,10 @@ bool sendDataFrame(void) {
 
   if (last_sent_address == 0xFFFFFFFF) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
   if (last_address_written == last_sent_address) {                // ya no quedan datos en memoria por enviar
-    currentMode = FINISH;
+    #ifdef DEBUG_MAIN
+    Serial.println("DEBUG (sendDataFrame) → last_address_written == last_sent_address");
+    #endif
+    // currentMode = FINISH;
     return true;
   }
 
@@ -938,13 +946,21 @@ bool sendDataFrame(void) {
   Serial.println();
   #endif
 
-  unsigned long tiempo = millis();
-  while ( Serial1.available() < TRAMA_COMM ) { // usar la funcionn, esta ya tiene un timeout
-    if ( (millis() - tiempo) >= timeOUT ) return false;
+  // unsigned long tiempo = millis();
+  // while ( Serial1.available() < TRAMA_COMM ) { // usar la funcionn, esta ya tiene un timeout
+  //   if ( (millis() - tiempo) >= timeOUT ) return false;
+  // }
+  uint8_t recibido[TRAMA_COMM];
+  // Serial1.readBytes(recibido, TRAMA_COMM);
+  if ( !slidingWindowBuffer(recibido, timeOUT) ) {  // Solo debe ir timeOUT_invalid_frame
+    delay(timeOUT_invalid_frame);                   // Se tiene que eliminar
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    #ifdef DEBUG_MAIN
+    Serial.println("ERROR (sendDataFrame) → Fallo slidingWindowBuffer");
+    #endif
+    return false;
   }
 
-  uint8_t recibido[TRAMA_COMM];
-  Serial1.readBytes(recibido, TRAMA_COMM);
 
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (sendDataFrame) -> Respuesta recibida:");
@@ -954,11 +970,11 @@ bool sendDataFrame(void) {
   Serial.println();
   #endif
 
-  if ( !verifyOBCResponse(recibido) ) return false;
+  if ( !verifyOBCResponse(recibido) ) return false;   // REVISAR, se maneja el invalid frame también
 
   if ( recibido[1] == ACK_OBC_to_MUA ) {
     last_sent_address += TRAMA_DATA_SIZE;
-    write_SENT_DATAaddress(&last_sent_address);      // se actualiza la siguiente dirección a enviar
+    write_SENT_DATAaddress(&last_sent_address);       // se actualiza la siguiente dirección a enviar
   } else if (recibido[1] == ID_FINISH) {
     currentMode = FINISH;
   } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {

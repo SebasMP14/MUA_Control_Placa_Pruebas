@@ -62,10 +62,11 @@ extern const uint8_t ACK_OBC_to_MUA;
 extern const uint16_t crc_table[256];
 
 void requestOperationMode(void);
+void requestOperationMode1(void);
 void getTimestampFromGPS(void);
 unsigned long getTime(void);
 
-bool slidingWindowBuffer(uint8_t* buffer);
+bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout);
 bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address);
 bool verifyOBCResponse(uint8_t* recibido);
 
