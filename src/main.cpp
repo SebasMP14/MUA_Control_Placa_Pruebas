@@ -678,7 +678,13 @@ void setupTRANSFER(void) {
   disableTC2(); // Funka
   desactiveInterrupt1();
   desactiveInterrupt2();
-  
+
+  #ifdef DEBUG_MAIN
+  read_all();
+  uint32_t start_address = 0x00000000;
+  write_SENT_DATAaddress(&start_address);  // Para transferir desde el inicio
+  #endif
+
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setupTRANSFER) -> setupTRANSFER finalizado...");
   #endif
