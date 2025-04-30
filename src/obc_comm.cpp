@@ -16,9 +16,9 @@
 
 OperationMode currentMode = INICIO;
 bool setup_state = false;
-unsigned long timeOUT = 3000;
-unsigned long timeOUT_invalid_frame = 30;
-unsigned long timeOUT_window = 1;
+unsigned long timeOUT = 3000;               // ms
+unsigned long timeOUT_invalid_frame = 30;   // ms
+unsigned long timeOUT_window = 100;         // ms
 
 uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x07, 0x00, 0x48, 0x04, 0x0A};            // MUA to OBC ACK
 const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK
@@ -64,7 +64,7 @@ void requestOperationMode(void) {
   if (  response[1] != ID_COUNT_MODE && 
         response[1] != ID_TRANSFER_MODE && 
         response[1] != ID_TRANSFER_SYSINFO_MODE &&
-        response[1] != ID_FINISH ) {
+        response[1] != ID_FINISH  ) {
     #ifdef DEBUG_OBC
     Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
     #endif
@@ -398,17 +398,17 @@ bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t add
  * @return  false: trama recibida con errores
  */
 bool verifyOBCResponse(uint8_t* recibido) {
+  if ( recibido[0] != MISSION_ID ) {
+    delay(timeOUT_invalid_frame);
+    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
   uint16_t crc_expected = crc_calculate(recibido);
   uint16_t crc_received = (recibido[TRAMA_COMM - 3] << 8) | recibido[TRAMA_COMM - 2];
 
   if ( crc_expected != crc_received ) {
     Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
-    return false;
-  }
-
-  if ( recibido[0] != MISSION_ID ) {
-    delay(timeOUT_invalid_frame);
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
     return false;
   }
 

@@ -33,8 +33,8 @@
 #define MAX_ITER            5               // Protocol initialization attempts
 // #define Elementos           400
 #define Ventana             5               // Para Sliding Moving Average
-#define ov                  2.5             // Establecido por el fabricante
-#define OverVoltage         0.2238233 * ov  // Sobrevoltaje aplicado para la polarización de los SiPMs
+#define ov                  2.5f             // Establecido por el fabricante
+#define OverVoltage         0.2238233f * ov  // Sobrevoltaje aplicado para la polarización de los SiPMs
 #define Switching_Time_MAX  4               // Microseconds
 #define TRAMA_DATA_SIZE     36              // 
 #define TRAMA_INFO_SIZE     36              // 39 Bytes maximum
@@ -43,15 +43,15 @@
 uint8_t state = 0x01;                     // 
 // uint32_t timestamp = 0;
 uint8_t segundos = 60;                    // Calibración cada tantos segundos
-const float Voffset = 3.8;
+const float Voffset = 3.8f;
 const float ResisA = 1050;
 const float ResisB = 2000;
-float firstCurrent1 = 0.0;
-float firstCurrent2 = 0.0;
-float temperature1 = 0.0;
-float temperature2 = 0.0;
-float temperature = 0.0;
-float searchMargin = 1.5;                 // Search Vbd window
+float firstCurrent1 = 0.0f;
+float firstCurrent2 = 0.0f;
+float temperature1 = 0.0f;
+float temperature2 = 0.0f;
+float temperature = 0.0f;
+float searchMargin = 1.5f;                 // Search Vbd window
 const uint16_t Elementos = 400;
 union FloatToUint32 {                     // Para evitar aliasing y no violar las reglas del compilador
   float f;
@@ -66,14 +66,14 @@ FloatToUint32 vcurr1;
 FloatToUint32 vcurr2;
 unsigned long time_ini = 0x00;
 unsigned long timestamp = 0x00;
-float Lat = 0.0;
-float Long = 0.0;
-float Vbd1 = 0.0;                         // Breakdown Voltage Channel one
-float Vbias1 = 0.0;                       // Polarization Voltage Channel one
-float Vcurr1 = 0.0;                       // Breakdown Current Voltage Channel one
-float Vbd2 = 0.0;                         // Breakdown Voltage Channel two
-float Vbias2 = 0.0;                       // Polarization Voltage Channel two
-float Vcurr2 = 0.0;                       // Breakdown Current Voltage Channel two
+float Lat = 0.0f;
+float Long = 0.0f;
+float Vbd1 = 0.0f;                         // Breakdown Voltage Channel one
+float Vbias1 = 0.0f;                       // Polarization Voltage Channel one
+float Vcurr1 = 0.0f;                       // Breakdown Current Voltage Channel one
+float Vbd2 = 0.0f;                         // Breakdown Voltage Channel two
+float Vbias2 = 0.0f;                       // Polarization Voltage Channel two
+float Vcurr2 = 0.0f;                       // Breakdown Current Voltage Channel two
 
 bool flag1 = false;                       // Para imprimir las lecturas de ADC de cada canal
 bool flag2 = false;
@@ -420,6 +420,7 @@ void setupCOUNT(void) {
 
   #ifdef DEBUG_
   // Channel 2
+  external_ref = ads1260.readRef();                             // Se lee la referencia
   write_dac8551_reg(0x7FFF, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(0x01, SPI_CS_MAX2);
   temperature2 = read_tmp100();
@@ -694,7 +695,7 @@ void setupTRANSFER(void) {
 void loopTRANSFER(void) {
   uint8_t buffer[TRAMA_COMM] = {0};
 
-  if ( slidingWindowBuffer(buffer, timeOUT) ) {   // Se busca y revisa una trama válida proveniente del OBC
+  if ( slidingWindowBuffer(buffer, timeOUT_window) ) {   // Se busca y revisa una trama válida proveniente del OBC
     if ( verifyOBCResponse(buffer) ) {            // Se verifica el CRC, si es NACK se maneja en la función
       switch (buffer[1]) {
         case ID_STANDBY:

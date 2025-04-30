@@ -152,8 +152,9 @@ float* apply_butterworth(float *input, uint16_t Elementos) {
  * @fn      obtain_Vbias
  * @brief   Se obtiene la curva I-V inversa del SiPM, se aplica la inversa de la derivada del logaritmo neperiano de la curva. El pico de
  *          esta es el Voltaje de ruptura, sumandole el over voltage tenemos Vbias.
- * @param   
- * @return  ---todo
+ * @param   Elementos
+ * @return  Vbd, indexPeak and Vcurr
+ * @todo    Disminuir 1e-6f según el ruido...
  */
 float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elementos, float *Vcurr, uint16_t *indexPeak) {
   #ifdef DEBUG_CALCULOS
@@ -164,12 +165,11 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
   float logarithmicCurrent[Elementos];
   float inverseDerivative[Elementos];
 
-  // Logaritmo natural de la corriente
   for (uint16_t i = 0; i < Elementos; i++) {
     if (inverseCurrent[i] > 0.0f) { 
-      logarithmicCurrent[i] = logf(inverseCurrent[i]);            // Calculo del log de la corriente
+      logarithmicCurrent[i] = logf(inverseCurrent[i]);            // Calculo del log natural de la corriente
     } else {
-      logarithmicCurrent[i] = -__FLT_MAX__; // Valor mínimo para descartar
+      logarithmicCurrent[i] = -__FLT_MAX__;                       // Valor mínimo para descartar
     }
   }
   #ifdef DEBUG_CALCULOS
@@ -179,12 +179,12 @@ float obtain_Vbd(float *inverseCurrent, float *inverseVoltage, uint16_t Elemento
   // Calculo de la derivada y su inversa
   for (uint16_t i = 1; i < Elementos - 1; i++) {
     float dV = inverseVoltage[i+1] - inverseVoltage[i-1];
-    if (fabsf(dV) < 1e-6f) continue; // Evitar divisiones por valores muy pequeños
+    if (fabsf(dV) < 1e-6f) continue;                              // Evitar divisiones por valores muy pequeños
 
     float dLogI = logarithmicCurrent[i+1] - logarithmicCurrent[i-1];
     float derivative = dLogI / dV;
 
-    if (derivative > 0.0f) { // Filtrar derivadas negativas
+    if (derivative > 0.0f) {                                      // Filtrar derivadas negativas
       inverseDerivative[i] = 1.0f / derivative;
       if (inverseDerivative[i] < minInverseDerivative) {
         minInverseDerivative = inverseDerivative[i];
