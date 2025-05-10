@@ -29,6 +29,7 @@
 
 #define DEBUG_MAIN
 #define DEBUG_ // eliminar en todos lados para activar control de placa interfaz
+#define WITHOUT_DETECTION_BOARD
 
 #define MAX_ITER            5               // Protocol initialization attempts
 // #define Elementos           400
@@ -48,9 +49,9 @@ const float ResisA = 1050;
 const float ResisB = 2000;
 float firstCurrent1 = 0.0f;
 float firstCurrent2 = 0.0f;
-float temperature1 = 0.0f;
-float temperature2 = 0.0f;
-float temperature = 0.0f;
+float temperature1 = -273.0f;
+float temperature2 = -273.0f;
+float temperature = -273.0f;
 float searchMargin = 1.5f;                 // Search Vbd window
 const uint16_t Elementos = 400;
 union FloatToUint32 {                     // Para evitar aliasing y no violar las reglas del compilador
@@ -151,6 +152,7 @@ void setup() {
 
   // Restaurar último estado guardado en memoria
   get_OPstate(&state);
+  // state = 0x01;        // For COUNT test only
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -161,10 +163,12 @@ void setup() {
   pinMode(INTERFACE_EN, OUTPUT);                    
   digitalWrite(INTERFACE_EN, LOW);
 
+  #ifdef DEBUG_MAIN
   Serial.print("Estado: 0x");
   Serial.println(state, HEX);
+  #endif
 
-  switch ( state ) {
+  switch ( state ) {                          // STATE obtained from the flash memory
     case 0x00:                                // STAND_BY
     case 0xFF:
       currentMode = STAND_BY;
@@ -216,18 +220,17 @@ void loop() {
   switch ( currentMode ) {
     case STAND_BY:
       requestOperationMode();
-      if (currentMode == COUNT_MODE) {
+      if ( currentMode == COUNT_MODE ) {
         setupCOUNT();
-      } else if (currentMode == TRANSFER_DATA_MODE) {
+      } else if ( currentMode == TRANSFER_DATA_MODE ) {
         setupTRANSFER();
-      } else if (currentMode == TRANSFER_INFO_MODE){
+      } else if ( currentMode == TRANSFER_INFO_MODE ) {
         setupTRANSFER();
       }
       break;
 
     case COUNT_MODE:
       loopCOUNT();
-      #ifdef DEBUG_
       if ( Serial1.available() ) {
         requestOperationMode();
         if (currentMode == TRANSFER_DATA_MODE) {
@@ -236,7 +239,6 @@ void loop() {
           setupTRANSFER();
         }
       }
-      #endif
       break;
 
     case TRANSFER_DATA_MODE:
@@ -244,7 +246,7 @@ void loop() {
       break;
 
     case TRANSFER_INFO_MODE:
-      loopTRANSFERinfo();   // La verificación de un nuevo comando se hará en la función
+      loopTRANSFERinfo();   // La verificación de un nuevo comando se hace en la función
       break;
     
     case FINISH:
@@ -302,6 +304,7 @@ void setupCOUNT(void) {
   digitalWrite(LED_SiPM2, LOW);
   digitalWrite(INTERFACE_EN, HIGH);                 // Activación de Placa Interfaz(5V-3V3) y ADC1260(5V)
 
+  #ifndef WITHOUT_DETECTION_BOARD
   #ifdef DEBUG_MAIN
   Serial.print("DEBUG (setupCOUNT) -> writing in MCP ");
   #endif
@@ -323,27 +326,11 @@ void setupCOUNT(void) {
   Serial.print("MCP escrito en: ");
   Serial.println(readMCP0(), HEX);
   #endif
-  // for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
-  //   if ( writeMCP1(0x9C) ) {                         // Configuración del MCP4561
-  //     #ifdef DEBUG_MAIN
-  //     Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
-  //     #endif
-  //     break;
-  //   } else {
-  //     #ifdef DEBUG_MAIN
-  //     Serial.print("DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: ");
-  //     Serial.println(iter_counter);
-  //     #endif
-  //     delay(10);
-  //   }
-  // }
-  // #ifdef DEBUG_MAIN
-  // Serial.print("MCP escrito en: 0x");
-  // Serial.println(readMCP1(), HEX);
-  // #endif
+  #endif
 
   delay(START_UP_TIME_ADS);                         // Habilitación del ADC (REVISAR TIEMPO)
   
+  #ifndef WITHOUT_DETECTION_BOARD
   start_dac8551(SPI_CS_DAC1);                       // SiPM 1
   start_max1932(SPI_CS_MAX1);
 
@@ -366,8 +353,8 @@ void setupCOUNT(void) {
     }
   }
   #endif
+  #endif
 
-  #ifdef DEBUG_
   // ADC Configuration
   ads1260.begin();
   #ifdef DEBUG_MAIN
@@ -399,6 +386,8 @@ void setupCOUNT(void) {
   Serial.print("DEBUG (loopCOUNT) -> readRef: ");
   Serial.println(external_ref, 6);
   #endif
+
+  #ifndef WITHOUT_DETECTION_BOARD
   // Primera polarización de los SiPMs
   // Channel 1
   write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
@@ -434,8 +423,8 @@ void setupCOUNT(void) {
   // printArrays_ch2();
   flag1 = false;      
   #endif
-
   #endif
+
   setupTC2(segundos);
 
   setup_state = true;
@@ -449,16 +438,14 @@ void loopCOUNT(void) {
   if ( detect1 ) {                            // Se puede obtener el ancho del pulso?, es necesario?: (si, no)
     detect1 = false;
     #ifdef DEBUG_MAIN
-    Serial.print("COUNT1: ");
-    Serial.println(pulse_count1);
+    Serial.print("COUNT1: ");    Serial.println(pulse_count1);
     #endif
   }
 
   if ( detect2 ) {
     detect2 = false;
     #ifdef DEBUG_MAIN
-    Serial.print("COUNT2: ");
-    Serial.println(pulse_count2);
+    Serial.print("COUNT2: ");    Serial.println(pulse_count2);
     #endif
   }
 
@@ -472,34 +459,32 @@ void loopCOUNT(void) {
     Serial.print(time_ini);
     Serial.print(", timestamp: ");
     Serial.print(rtc.now().unixtime());
+    #ifndef WITHOUT_DETECTION_BOARD
     Serial.print(", Temperatura: ");
-    #ifdef DEBUG_
     Serial.println(read_tmp100(), 4);
     #endif
   }
 
   /**   Interrupción del TC2 cada 60 seg: Primeramente se deben desactivar las interrupciones de los pulsos,
    * luego se debe guardar en memoria -> 
-   * timestamp(4B) - LatyLong(2x4B) - temperature(4B) - Count1y2(2x2B) - Vbias1y2(2x4B) - Vcurr1y2(2x4B),
+   * timestamp(4B) - LatyLong(2x4B) - temperature(4B) - Count1y2(2x2B) - Vbias1y2(2x4B) - Vcurr1y2(2x4B) → 36 Bytes,
    * realizar el algoritmo de polarización y obtener Vbias1y2, inicializar las variables globales y activar 
    * las interrupciones de los pulsos.
-   *    El proceso se espera que tarde 5 segundos por SiPM y la calibración se hará individualmente. */
+   *    El proceso de calibración sucede un canal a la vez. */
   if ( detect_TC ) {
     detect_TC = false;
     disableTC2();
-    desactiveInterrupt1();
-    desactiveInterrupt2();
 
-    temperature = (temperature1 + temperature2) / 2;
+    temperature = (temperature1 + temperature2) / 2;    // Average between curve measurements
     
     timestamp = getTime();
-    lati.f = Lat;
-    longi.f = Long;
-    temp.f = temperature;
-    vbd1.f = Vbd1;
-    vbd2.f = Vbd2;
-    vcurr1.f = Vcurr1;
-    vcurr2.f = Vcurr2;
+    lati.f    = Lat;
+    longi.f   = Long;
+    temp.f    = temperature;
+    vbd1.f    = Vbd1;
+    vbd2.f    = Vbd2;
+    vcurr1.f  = Vcurr1;
+    vcurr2.f  = Vcurr2;
 
     if (isnan(temperature)) {
       #ifdef DEBUG_MAIN
@@ -538,7 +523,7 @@ void loopCOUNT(void) {
     Serial.print("), Vbd1: (");
     Serial.print(vbd1.f);
     Serial.print(", 0x");
-    Serial.print(vbd1.u, HEX); // hacer FloatTOUINT
+    Serial.print(vbd1.u, HEX);
     Serial.print("), Vbd2: (");
     Serial.print(vbd2.f);
     Serial.print(", 0x");
@@ -579,11 +564,13 @@ void loopCOUNT(void) {
       Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura temperatura.");
       #endif
     }
+    desactiveInterrupt1();
     if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
       #ifdef DEBUG_MAIN
       Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count1.");
       #endif
     }
+    desactiveInterrupt2();
     if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
       #ifdef DEBUG_MAIN
       Serial.println("DEBUG (loopCOUNT) -> Fallo en la escritura pulse_count2.");
@@ -610,14 +597,13 @@ void loopCOUNT(void) {
       #endif
     }
 
-    #ifdef DEBUG_
     external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
-
     #ifdef DEBUG_MAIN
     Serial.print("DEBUG (loopCOUNT) -> readRef: ");
     Serial.println(external_ref, 6);
     #endif
 
+    #ifndef WITHOUT_DETECTION_BOARD
     // Channel 1 Polarization
     write_dac8551_reg(0x7FFF, SPI_CS_DAC1);                       // Vout1 al mínimo valor
     write_max_reg(0x01, SPI_CS_MAX1);
@@ -645,8 +631,8 @@ void loopCOUNT(void) {
     activeInterrupt2();
     flag1 = false;
     #endif
-
     #endif
+
     enableTC2();  // activar
   }
 
@@ -668,22 +654,22 @@ void loopCOUNT(void) {
  *          - Loop: Se transfieren datos y se revisa comandos entrantes 
  * @param   NONE
  * @return  NONE
- * @todo    test 
+ * @todo    - test 
  */
 void setupTRANSFER(void) {
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setupTRANSFER) -> Iniciado ");
   #endif
 
-  digitalWrite(INTERFACE_EN, LOW);
-  disableTC2(); // Funka
-  desactiveInterrupt1();
+  digitalWrite(INTERFACE_EN, LOW);          // Desactive detection board
+  disableTC2();                             // Disable time interrupt
+  desactiveInterrupt1();                    // Disable external interrupts
   desactiveInterrupt2();
 
   #ifdef DEBUG_MAIN
-  read_all();
+  read_all();                               // To compare the data
   uint32_t start_address = 0x00000000;
-  write_SENT_DATAaddress(&start_address);  // Para transferir desde el inicio
+  write_SENT_DATAaddress(&start_address);   // To transfer from the begining of the flash
   #endif
 
   #ifdef DEBUG_MAIN
@@ -695,21 +681,21 @@ void setupTRANSFER(void) {
 void loopTRANSFER(void) {
   uint8_t buffer[TRAMA_COMM] = {0};
 
-  if ( slidingWindowBuffer(buffer, timeOUT_window) ) {   // Se busca y revisa una trama válida proveniente del OBC
-    if ( verifyOBCResponse(buffer) ) {            // Se verifica el CRC, si es NACK se maneja en la función
+  if ( slidingWindowBuffer(buffer, timeOUT_window) ) {  // Se busca y revisa una trama válida proveniente del OBC
+    if ( verifyOBCResponse(buffer) ) {                  // NACK se maneja en la función
       switch (buffer[1]) {
-        case ID_STANDBY:
-          currentMode = STAND_BY;
-          #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
-          #endif
-          write_OPstate(ID_STANDBY);
-          return ;
-          break;
+        // case ID_STANDBY:
+        //   currentMode = STAND_BY;
+        //   #ifdef DEBUG_MAIN
+        //   Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
+        //   #endif
+        //   write_OPstate(ID_STANDBY);
+        //   return ;
+        //   break;
         case ID_COUNT_MODE:
           currentMode = COUNT_MODE;
           #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED");
+          Serial.println("DEBUG (loopTRANSFER) -> COUNT MODE ACTIVATED");
           #endif
           write_OPstate(ID_COUNT_MODE);
           return ;
@@ -717,7 +703,7 @@ void loopTRANSFER(void) {
         case ID_TRANSFER_MODE:
           currentMode = TRANSFER_DATA_MODE;
           #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED");
+          Serial.println("DEBUG (loopTRANSFER) -> TRANSFER MODE ACTIVATED");
           #endif
           write_OPstate(ID_TRANSFER_MODE);
           return ;
@@ -725,7 +711,7 @@ void loopTRANSFER(void) {
         case ID_FINISH:
           currentMode = FINISH;
           #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED");
+          Serial.println("DEBUG (loopTRANSFER) -> FINISH MODE ACTIVATED");
           Serial.println("Sleep mode in progress: Executing order 66.");
           #endif
           write_OPstate(ID_STANDBY);
@@ -734,24 +720,25 @@ void loopTRANSFER(void) {
         case ID_TRANSFER_SYSINFO_MODE:
           currentMode = TRANSFER_INFO_MODE;
           #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> TRANSFER SYSINFO MODE ACTIVATED");
+          Serial.println("DEBUG (loopTRANSFER) -> TRANSFER SYSINFO MODE ACTIVATED");
           #endif
           write_OPstate(ID_TRANSFER_SYSINFO_MODE);
           return ;
           break;
         default:
-          currentMode = STAND_BY;
-          #ifdef DEBUG_MAIN
-          Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
-          #endif
-          write_OPstate(ID_STANDBY);
-          return ;
+          /* ADD INVALID FRAME */
+          // currentMode = STAND_BY;
+          // #ifdef DEBUG_MAIN
+          // Serial.println("DEBUG (requestOperationMode) -> UNKNOWN MODE");
+          // #endif
+          // write_OPstate(ID_STANDBY);
+          // return ;
           break;
       }   // switch (buffer[1])
     }     // verifyOBCResponse
   }       // slidingWindowBuffer
 
-  if ( !sendDataFrame() ) {                       // Durante sendDataFrame se puede recibir comandos del OBC
+  if ( !sendDataFrame() ) {     // Durante sendDataFrame se pueden recibir comandos del OBC, manejar
     #ifdef DEBUG_MAIN
     Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");
     #endif
@@ -927,21 +914,21 @@ bool sendDataFrame(void) {
   uint32_t last_address_written = 0xFFFFFFFF;
   uint32_t last_sent_address = 0xFFFFFFFF;
 
-  if (!get_address(&last_address_written)) return false;
-  if (!get_SENT_DATAaddress(&last_sent_address)) return false;
+  if ( !get_address(&last_address_written) ) return false;
+  if ( !get_SENT_DATAaddress(&last_sent_address) ) return false;
 
-  if (last_sent_address == 0xFFFFFFFF) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
-  if (last_address_written == last_sent_address) {                // ya no quedan datos en memoria por enviar
+  if ( last_sent_address == 0xFFFFFFFF ) last_sent_address = 0x00;  // primer envío de día uno (*festeja*)
+  if ( last_address_written == last_sent_address ) {                // ya no quedan datos en memoria por enviar
     #ifdef DEBUG_MAIN
     Serial.println("DEBUG (sendDataFrame) → last_address_written == last_sent_address");
     #endif
     // currentMode = FINISH;
-    return true;
+    return true;            // All data available in flash memory sent
   }
 
   uint8_t trama_size = TRAMA_DATA_SIZE + TRAMA_COMM;
-  uint8_t trama[trama_size];
-  if ( !buildDataFrame(trama, MISSION_ID, TRAMA_DATA_SIZE, last_sent_address) ) return false;
+  uint8_t trama[trama_size] = {0};
+  if ( !buildDataFrame(trama, ID_SENT_DATA, TRAMA_DATA_SIZE, last_sent_address) ) return false;
 
   Serial1.write(trama, trama_size);
 
@@ -959,8 +946,8 @@ bool sendDataFrame(void) {
   // }
   uint8_t recibido[TRAMA_COMM];
   // Serial1.readBytes(recibido, TRAMA_COMM);
-  if ( !slidingWindowBuffer(recibido, timeOUT) ) {  // Solo debe ir timeOUT_invalid_frame
-    delay(timeOUT_invalid_frame);                   // Se tiene que eliminar
+  if ( !slidingWindowBuffer(recibido, timeOUT_invalid_frame) ) {  // Solo debe ir timeOUT_invalid_frame
+    // delay(timeOUT_invalid_frame);                   // Se tiene que eliminar
     Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
     #ifdef DEBUG_MAIN
     Serial.println("ERROR (sendDataFrame) → Fallo slidingWindowBuffer");
@@ -979,7 +966,7 @@ bool sendDataFrame(void) {
 
   if ( !verifyOBCResponse(recibido) ) return false;   // REVISAR, se maneja el invalid frame también
 
-  if ( recibido[1] == ACK_OBC_to_MUA ) {
+  if ( recibido[1] == trama[1] ) {                    // ACK CMD_ID is the same as data sent
     last_sent_address += TRAMA_DATA_SIZE;
     write_SENT_DATAaddress(&last_sent_address);       // se actualiza la siguiente dirección a enviar
   } else if (recibido[1] == ID_FINISH) {

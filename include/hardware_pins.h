@@ -15,7 +15,7 @@
 
 // #define PLACA_PRUEBAS
 #define PLACA_FINAL
-// #define CORRECCION
+#define CORRECCION
 
 /////// Sebas_MUA_Control_Dev
 #ifdef PLACA_PRUEBAS

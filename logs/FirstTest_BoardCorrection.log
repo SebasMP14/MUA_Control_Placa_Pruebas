@@ -1,0 +1,12 @@
+DEBUG (setup) -> Serial Iniciado
+DEBUG (setup) -> Serial1 Iniciado
+DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+Estado: 0x1
+DEBUG (setup) -> COUNT_MODE iniciado
+DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+DEBUG (setupCOUNT) -> MODE0: 100100
+DEBUG (setupCOUNT) -> MODE0: 11111100
+DEBUG (setupCOUNT) -> PGA: 0
+DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+DEBUG (loopCOUNT) -> readRef: 5.165110
