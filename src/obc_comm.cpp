@@ -16,7 +16,7 @@
 
 OperationMode currentMode = INICIO;
 bool setup_state = false;
-unsigned long timeOUT = 3000;               // ms
+unsigned long timeOUT = 10000;               // ms
 unsigned long timeOUT_invalid_frame = 30;   // ms
 unsigned long timeOUT_window = 100;         // ms
 
@@ -34,7 +34,7 @@ RTC_SAMD51 rtc;
  * @param   NONE
  * @return  NONE
  * TODO:
- * - Cambiar los baudios en los protocolos UART a 9600
+ * - Cambiar los baudios en los protocolos UART a 2400?, 9600
  * - Agregar Timeout
  * - Agregar estado TRANSFER_INFO_MODE
  */
@@ -68,9 +68,9 @@ void requestOperationMode(void) {
     #ifdef DEBUG_OBC
     Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
     #endif
-    delay(timeOUT_invalid_frame);                     // If an invalid frame is received, a timeout error shall occur
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);    // and then a NACK (No-Acknowledgment) message shall be sent
-    return ;
+    // delay(timeOUT_invalid_frame);                     // If an invalid frame is received, a timeout error shall occur
+    // Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);    // and then a NACK (No-Acknowledgment) message shall be sent
+    return ;  // NACK IF eliminado 10/05/2025
   }
 
   // SEND ACKNOWLEDGE FRAME
@@ -212,7 +212,7 @@ bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout) {
       #endif
 
       // Condición para analizar CRC
-      if (window[0] == MISSION_ID &&     // Primer Byte debe ser el ID de MUA MISSION
+      if (window[0] == ACCESS_BOARD_ID &&     // Primer Byte debe ser el ID de MUA MISSION
           // window[2] == 0x00 &&           // Tercer Byte debe ser 0x00 para trama de comunicación
           window[5] == STOP_BYTE) {      // Byte final debe ser 0x0A (STOP)   
         // uint16_t crc_calc = crc_calculate(window);
@@ -270,9 +270,9 @@ bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t add
  * @return  false: trama recibida con errores
  */
 bool verifyOBCResponse(uint8_t* recibido) {
-  if ( recibido[0] != MISSION_ID ) {
-    delay(timeOUT_invalid_frame);
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+  if ( recibido[0] != ACCESS_BOARD_ID ) {   // Se elimina el timeout y el invalid frame
+    // delay(timeOUT_invalid_frame);
+    // Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
     return false;
   }
 

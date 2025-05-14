@@ -123,7 +123,7 @@ void setup() {
 
   // Serial.println("PRUEBA DE FLUJO DE PARTICULAS COMPENSANDO EL VBD, ambos canales");
 
-  Serial1.begin(9600);                // OBC (On Board Computer)
+  Serial1.begin(2400);                 // OBC (On Board Computer)
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
   #endif
@@ -461,8 +461,9 @@ void loopCOUNT(void) {
     Serial.print(rtc.now().unixtime());
     #ifndef WITHOUT_DETECTION_BOARD
     Serial.print(", Temperatura: ");
-    Serial.println(read_tmp100(), 4);
+    Serial.print(read_tmp100(), 4);
     #endif
+    Serial.println();
   }
 
   /**   Interrupción del TC2 cada 60 seg: Primeramente se deben desactivar las interrupciones de los pulsos,
@@ -680,10 +681,11 @@ void setupTRANSFER(void) {
 
 void loopTRANSFER(void) {
   uint8_t buffer[TRAMA_COMM] = {0};
-
+/* AGREGAR ACK */ // Hacer tambien lo de enviar los paquetes de datos disponibles antes de enviar los datos cuando 
+// entra en modo transferencia...
   if ( slidingWindowBuffer(buffer, timeOUT_window) ) {  // Se busca y revisa una trama válida proveniente del OBC
     if ( verifyOBCResponse(buffer) ) {                  // NACK se maneja en la función
-      switch (buffer[1]) {
+      switch ( buffer[1] ) {
         // case ID_STANDBY:
         //   currentMode = STAND_BY;
         //   #ifdef DEBUG_MAIN
@@ -946,15 +948,14 @@ bool sendDataFrame(void) {
   // }
   uint8_t recibido[TRAMA_COMM];
   // Serial1.readBytes(recibido, TRAMA_COMM);
-  if ( !slidingWindowBuffer(recibido, timeOUT_invalid_frame) ) {  // Solo debe ir timeOUT_invalid_frame
+  if ( !slidingWindowBuffer(recibido, timeOUT) ) {  // Solo debe ir timeOUT_invalid_frame
     // delay(timeOUT_invalid_frame);                   // Se tiene que eliminar
-    Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
+    // Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);   // Se pidio deshabilitar, reu 10/05/2025
     #ifdef DEBUG_MAIN
     Serial.println("ERROR (sendDataFrame) → Fallo slidingWindowBuffer");
     #endif
     return false;
   }
-
 
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (sendDataFrame) -> Respuesta recibida:");
@@ -964,6 +965,7 @@ bool sendDataFrame(void) {
   Serial.println();
   #endif
 
+  // sacar la verificacion del CRC por que este es constante (0xAAAA)
   if ( !verifyOBCResponse(recibido) ) return false;   // REVISAR, se maneja el invalid frame también
 
   if ( recibido[1] == trama[1] ) {                    // ACK CMD_ID is the same as data sent
@@ -974,6 +976,12 @@ bool sendDataFrame(void) {
   } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
     currentMode = TRANSFER_INFO_MODE;
   }
+
+  #ifdef DEBUG_MAIN
+  digitalWrite(LED_BUILTIN, HIGH);                      // Blink
+  delay(500);
+  digitalWrite(LED_BUILTIN, LOW);
+  #endif
 
   return true;
 }

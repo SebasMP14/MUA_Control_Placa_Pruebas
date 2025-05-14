@@ -36,6 +36,8 @@
 #define ID_FINISH                   0x08
 #define STOP_BYTE                   0x0A
 
+#define ACCESS_BOARD_ID             0xAB
+
 
 enum OperationMode {
     INICIO,
