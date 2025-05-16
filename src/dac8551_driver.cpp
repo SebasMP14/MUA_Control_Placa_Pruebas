@@ -43,10 +43,10 @@ void end_dac8551(uint8_t chip_select) {
  * @param   valor: Es el voltaje objetivo en la salida del MAX
  * @return  comando en binario
  */
-uint16_t VDAC_command(float voltage) {
-  return static_cast<uint16_t>((36 - voltage) * 32767 / 12);
+uint16_t VDAC_command(float max_vout, float voltage) {
+  return static_cast<uint16_t>((max_vout - voltage) * 32767 / 12); // 36 para la Placa de deteccion anterior
 }
 
-float out_voltage(uint16_t Vcommand) {
-  return static_cast<float>(36 - (Vcommand * 12 / 32767.0));
+float out_voltage(float max_vout, uint16_t Vcommand) {
+  return static_cast<float>(max_vout - (Vcommand * 12 / 32767.0)); // 36 para la Placa de deteccion anterior
 }

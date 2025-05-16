@@ -1,7 +1,7 @@
 #ifndef MCP4561_DRIVER_H
 #define MCP4561_DRIVER_H
 
-#define DEBUG_MCP
+// #define DEBUG_MCP
 
 #include <Arduino.h>
 #include <Wire.h>
