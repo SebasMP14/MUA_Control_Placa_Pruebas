@@ -66,3 +66,4 @@ uint8_t VMax_command(float valor) {
 float HexMax_command(uint8_t valor) {
   return 21.2 + (12 * (255 - valor)) / 254;
 }
+

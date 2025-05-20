@@ -167,8 +167,8 @@ void setup() {
   // }
 
   // Restaurar último estado guardado en memoria
-  // get_OPstate(&state);
-  state = 0x01;                                     // For COUNT test only
+  get_OPstate(&state);
+  // state = 0x01;                                     // For COUNT test only
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -426,7 +426,6 @@ void setupCOUNT(void) {
   // Channel 1
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
   write_max_reg(MAX_INIT, SPI_CS_MAX1);
-  delay(5);
   temperature1 = read_tmp100();
   #ifdef DEBUG_MAIN
   Serial.print("Temperatura: ");
@@ -466,7 +465,6 @@ void setupCOUNT(void) {
   #endif
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(MAX_INIT, SPI_CS_MAX2);
-  delay(1);
   temperature2 = read_tmp100();
   #ifdef DEBUG_MAIN
   Serial.print("Temperatura2: ");
@@ -764,17 +762,19 @@ void loopTRANSFER(void) {
   uint8_t buffer[TRAMA_COMM] = {0};
 /* AGREGAR ACK */ // Hacer tambien lo de enviar los paquetes de datos disponibles antes de enviar los datos cuando 
 // entra en modo transferencia...
-  if ( slidingWindowBuffer(buffer, timeOUT_window) ) {  // Se busca y revisa una trama válida proveniente del OBC
-    if ( verifyOBCResponse(buffer) ) {                  // NACK se maneja en la función
+    if ( slidingWindowBuffer(buffer, timeOUT_window) ) {  // Se busca y revisa una trama válida proveniente del OBC
+    if ( verifyOBCResponse(buffer) ) {                    // NACK se maneja en la función
+      ack_MUA_to_OBC[1] = buffer[1];  
+      Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);          // SEND ACKNOWLEDGE FRAME
       switch ( buffer[1] ) {
-        // case ID_STANDBY:
-        //   currentMode = STAND_BY;
-        //   #ifdef DEBUG_MAIN
-        //   Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
-        //   #endif
-        //   write_OPstate(ID_STANDBY);
-        //   return ;
-        //   break;
+        case ID_STANDBY:
+          currentMode = STAND_BY;
+          #ifdef DEBUG_MAIN
+          Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
+          #endif
+          write_OPstate(ID_STANDBY);
+          return ;
+          break;
         case ID_COUNT_MODE:
           currentMode = COUNT_MODE;
           #ifdef DEBUG_MAIN
@@ -823,7 +823,7 @@ void loopTRANSFER(void) {
 
   if ( !sendDataFrame() ) {     // Durante sendDataFrame se pueden recibir comandos del OBC, manejar
     #ifdef DEBUG_MAIN
-    Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");
+    Serial.println("DEBUG (loopTRANSFER) -> Falló el envío de trama.");   // Then, we try again the same frame
     #endif
     return ;
   }
@@ -1040,15 +1040,20 @@ bool sendDataFrame(void) {
   #endif
 
   // sacar la verificacion del CRC por que este es constante (0xAAAA)
-  if ( !verifyOBCResponse(recibido) ) return false;   // REVISAR, se maneja el invalid frame también
+  // if ( !verifyOBCResponse(recibido) ) return false;   // REVISAR, se maneja el invalid frame también
+  if ( !verifyCRCACK(recibido) ) return false;        // El CRC es siempre 0xAAAA para el ACK
 
   if ( recibido[1] == trama[1] ) {                    // ACK CMD_ID is the same as data sent
     last_sent_address += TRAMA_DATA_SIZE;
     write_SENT_DATAaddress(&last_sent_address);       // se actualiza la siguiente dirección a enviar
-  } else if (recibido[1] == ID_FINISH) {
+  } else if ( recibido[1] == ID_FINISH ) {
     currentMode = FINISH;
-  } else if (recibido[1] == ID_TRANSFER_SYSINFO_MODE) {
+  } else if ( recibido[1] == ID_TRANSFER_SYSINFO_MODE ) {
     currentMode = TRANSFER_INFO_MODE;
+  } else if ( recibido[1] == ID_COUNT_MODE ) {
+    currentMode = COUNT_MODE;
+  } else if ( recibido[1] == ID_STANDBY ) {
+    currentMode = STAND_BY;
   }
 
   #ifdef DEBUG_MAIN

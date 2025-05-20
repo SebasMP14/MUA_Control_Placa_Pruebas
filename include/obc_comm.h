@@ -27,7 +27,7 @@
 
 #define MISSION_ID                  0x26
 /*** Modos de operación ***/
-#define ID_STANDBY                  0x00        // Este ID no lo envía el OBC
+#define ID_STANDBY                  0x14        // Este ID no lo envía el OBC, ahora si lo envía y es 0x14
 #define ID_COUNT_MODE               0x01        
 #define ID_TRANSFER_MODE            0x02
 #define ID_SENT_DATA                0x03
@@ -71,6 +71,7 @@ unsigned long getTime(void);
 bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout);
 bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t address);
 bool verifyOBCResponse(uint8_t* recibido);
+bool verifyCRCACK(uint8_t* recibido);
 
 uint16_t crc_calculate(uint8_t *data);
 

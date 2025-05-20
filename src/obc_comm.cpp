@@ -64,13 +64,14 @@ void requestOperationMode(void) {
   if (  response[1] != ID_COUNT_MODE && 
         response[1] != ID_TRANSFER_MODE && 
         response[1] != ID_TRANSFER_SYSINFO_MODE &&
-        response[1] != ID_FINISH  ) {
+        response[1] != ID_FINISH &&
+        response[1] != ID_STANDBY  ) {
     #ifdef DEBUG_OBC
     Serial.println("DEBUG (requestOperationMode) -> Estado inválido.");
     #endif
     // delay(timeOUT_invalid_frame);                     // If an invalid frame is received, a timeout error shall occur
     // Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);    // and then a NACK (No-Acknowledgment) message shall be sent
-    return ;  // NACK IF eliminado 10/05/2025
+    return ;  // NACK IF eliminado 10/05/2025, no se elimina ra'e...
   }
 
   // SEND ACKNOWLEDGE FRAME
@@ -285,6 +286,21 @@ bool verifyOBCResponse(uint8_t* recibido) {
   }
 
   return true;
+}
+
+/************************************************************************************************************
+ * @fn      verifyOBCACK
+ * @brief   Verifica el CRC de la trama recibida correspondiente a un ACKnowledge
+ * @param   recibido: trama recibida del OBC
+ * @return  true: Valid CRC ... 
+ * @return  false: NACK
+ */
+bool verifyCRCACK(uint8_t* recibido) {
+  if ( recibido[TRAMA_COMM - 3] == 0xAA && recibido[TRAMA_COMM - 2] == 0xAA ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 

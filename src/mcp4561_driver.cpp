@@ -23,21 +23,8 @@ bool writeMCP0(uint8_t valor) {
     return false;  // Detener si hay error en la transmisión
   }
 
-  // Wire.beginTransmission(MCP_ADDRESS); //Dirección del MCP4561
-  
-  // Wire.write(VW1);
-  // Wire.write(D2);
-
-  // status = Wire.endTransmission();
-  // if (status != 0) {
-  //   #ifdef DEBUG_MCP
-  //   Serial.print("ERROR (writeMCP) -> Error en la transmisión I2C - Wiper1: ");
-  //   Serial.println(status);
-  //   #endif
-  //   return false;  // Detener si hay error en la transmisión
-  // }
-
-  return true;  // Configuración exitosa
+  // if ( valor == readMCP0() )  return true;  // Configuración y verificación exitosa
+  return true;
 }
 bool writeMCP1(uint8_t valor) {
   uint8_t VW1 = 0b00000001 ;
