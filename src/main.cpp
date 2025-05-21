@@ -38,16 +38,17 @@
 #define Ventana             5               // Para Sliding Moving Average
 #define Switching_Time_MAX  4               // Microseconds
 #define TRAMA_DATA_SIZE     36              // 
-#define TRAMA_INFO_SIZE     36              // 39 Bytes maximum
+#define TRAMA_INFO_SIZE     8               // 39 Bytes maximum
+#define TRAMA_CURVE_SIZE    39              // VER LA FORMA DE DISMINUIR LA CANT DE PUNTOS (400)
 
 // uint8_t status = 0;
-uint8_t state = 0x01;                     // 
+uint8_t state = 0x01;                       // 
 // uint32_t timestamp = 0;
-uint8_t segundos = 120;                    // Calibración cada tantos segundos
+uint8_t segundos = 120;                     // Calibración cada tantos segundos
 const float Voffset = 3.8f;
 const float voffset = 3.8f / 12;
 const float ResisA = 1050;
-const float ov = 5.5f;                    // Establecido por el fabricante: 2.5 V
+const float ov = 5.5f;                      // Establecido por el fabricante: 2.5 V
 #ifdef SECOND_DETECTION_BOARD
 const float ResisB = 1000;
 float OverVoltage = ov / 12;
@@ -121,6 +122,7 @@ void loopTRANSFERinfo(void);
 void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE);
 float polarization_settling(float Vbd, uint8_t CS_DAC);
 bool sendDataFrame(void);
+bool sendInfoFrame(void);
 void printArrays_ch1(void);
 void printArrays_ch2(void);
 
@@ -167,7 +169,7 @@ void setup() {
   // }
 
   // Restaurar último estado guardado en memoria
-  get_OPstate(&state);
+  // get_OPstate(&state);
   // state = 0x01;                                     // For COUNT test only
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
@@ -830,7 +832,12 @@ void loopTRANSFER(void) {
 }
 
 void loopTRANSFERinfo(void) {
-
+  if ( !sendInfoFrame() ) {
+    #ifdef DEBUG_MAIN
+    Serial.println("DEBUG (loopTRANSFERinfo) -> Falló el envío de trama.");   // Then, we try again the same frame
+    #endif
+    return ;
+  }
 }
 
 /************************************************************************************************************
@@ -1061,6 +1068,45 @@ bool sendDataFrame(void) {
   delay(500);
   digitalWrite(LED_BUILTIN, LOW);
   #endif
+
+  return true;
+}
+
+bool sendInfoFrame(void) {
+  uint8_t trama_size = TRAMA_COMM + TRAMA_INFO_SIZE;
+  uint8_t trama[trama_size];
+
+  if ( !buildDataFrame(trama, ID_TRANSFER_SYSINFO_MODE, TRAMA_INFO_SIZE, SAVED_ADDRESS_SECTOR_DIR) ) return false;
+
+  Serial1.write(trama, trama_size);
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendInfoFrame) -> Trama enviada:");
+  for ( uint8_t i = 0; i < trama_size; i++ ) {
+    Serial.print(" 0x"); Serial.print(trama[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  uint8_t recibido[TRAMA_COMM];
+  if ( !slidingWindowBuffer(recibido, timeOUT) ) {
+    #ifdef DEBUG_MAIN
+    Serial.println("ERROR (sendInfoFrame) → Fallo slidingWindowBuffer");
+    #endif
+    return false;
+  }
+
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (sendInfoFrame) -> Respuesta recibida:");
+  for ( uint8_t i = 0; i < TRAMA_COMM; i++ ) {
+    Serial.print(" 0x"); Serial.print(recibido[i], HEX);
+  }
+  Serial.println();
+  #endif
+
+  if ( !verifyCRCACK(recibido) && recibido[1] != trama[1] ) return false;
+
+  currentMode = TRANSFER_DATA_MODE; // or STAND_BY 
 
   return true;
 }
