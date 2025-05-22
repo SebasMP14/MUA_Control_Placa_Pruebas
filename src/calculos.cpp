@@ -222,6 +222,23 @@ float SiPMCurrent(float VCurrent, float firstCurrent) {
 }
 
 /************************************************************************************************************
+ * @fn      VMAX_OUT
+ * @brief   Voltage expected int the output of the MAX1932 considerating the MAX and DAC commands 
+ * @param   CMD_MAX: Comando del MAX
+ * @param   CMD_DAC: Comando del DAC
+ * @return  salida del MAX esperada → > 20 V
+ */
+float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC) {
+  float MAXv = 1.25 * CMD_MAX / 0xFE;     // 
+  float DACv = 1.25 * CMD_DAC / 0xFFFE;   //
+  
+  return ( (( (1.25/10000) + 
+              ((1.25 - MAXv) / 24900) +
+              ((1.25 - DACv) / 24900) - 
+              ((2.5 - 1.25) / 24900) ) * 240000 ) + 1.25 );
+}
+
+/************************************************************************************************************
  * @fn      Vtia
  * @brief   Vtia no debe ser inferior a 2.1V, este valor se toma en cuenta para setear el MCP4561
  * @param   VCurrent: Corriente del SiPM acondicionada a tensión y leída por el ADS1260
@@ -231,22 +248,42 @@ float Vtia(float VCurrent, float firstCurrent) {
   return (Voffset - 470 * SiPMCurrent(VCurrent, firstCurrent));
 }
 
-/************************************************************************************************************
- * @fn      VMAX_OUT
- * @brief   Voltage expected int the output of the MAX1932 considerating the MAX and DAC commands 
- * @param   CMD_MAX: Comando del MAX
- * @param   CMD_DAC: Comando del DAC
- * @return  salida del MAX esperada → > 20 V
- */
-float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC) {
-  float MAXv = 1.25 * CMD_MAX / 0xFE;     // 
-  float DACv = 1.25 * CMD_DAC / 0xFFFE;  //
-  
-  return ( (( (1.25/10000) + 
+uint16_t CMD_DAC(uint8_t CMD_MAX, float Vout) {
+  float MAXv = 1.25 * CMD_MAX / 0xFE;
+  float DACv = -1*( (( (-1.25/10000) - 
               ((1.25 - MAXv) / 24900) +
-              ((1.25 - DACv) / 24900) - 
-              ((2.5 - 1.25) / 24900) ) * 240000 ) + 1.25 );
+              ((Vout - 1.25) / 240000) + 
+              ((2.5 - 1.25) / 24900) ) * 24900 ) - 1.25 );
+
+  return (uint16_t)(DACv * 0x7FFF / 1.25);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* anteriormente en obtain_Vbd

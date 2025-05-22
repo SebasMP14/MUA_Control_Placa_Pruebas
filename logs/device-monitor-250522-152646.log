@@ -1,0 +1,188 @@
+15:26:50.845 > DEBUG (setup) -> Serial Iniciado
+15:26:50.846 > PRUEBA DE FLUJO DE PARTICULAS 22/05/2025, SOLO CHANNEL 1, Without Radiactive Coin
+15:26:50.848 > DEBUG (setup) -> Serial1 Iniciado
+15:26:50.848 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+15:26:50.848 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+15:26:50.848 > Estado: 0x1
+15:26:50.848 > DEBUG (setup) -> COUNT_MODE iniciado
+15:26:50.862 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+15:26:50.863 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+15:26:51.025 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+15:26:51.035 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+15:26:51.036 > MCP escrito en: 9C
+15:26:52.187 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+15:26:52.296 > DEBUG (setupCOUNT) -> MODE0: 100100
+15:26:52.346 > DEBUG (setupCOUNT) -> MODE0: 11111100
+15:26:52.347 > DEBUG (setupCOUNT) -> PGA: 0
+15:26:52.348 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+15:26:52.758 > DEBUG (loopCOUNT) -> readRef: 5.129425
+15:26:52.762 > Temperatura: 21.1250
+15:26:52.772 > firstCurrent1: 0.605802
+15:26:52.775 > Vbd teorico: 24.452688
+15:26:52.777 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.7822, 7FFE, 6C22, paso: 12
+15:27:02.786 > Tiempo promedio de muestreo [ms]: 24.9980
+15:27:02.788 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:27:02.791 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:27:02.792 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.403933
+15:27:02.796 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 779A
+15:27:02.796 > DEBUG (polarization_settling) -> iniciando
+15:27:02.797 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.3489, 0x5204, 2.321199
+15:27:02.981 > DEBUG (polarization_settling) → writing in MCP: C2
+15:27:02.982 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:27:02.982 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:27:02.983 > DEBUG (polarization_settling) → Vbias_: 32.348927
+15:27:02.985 > Over Voltage: 4.00
+15:27:02.986 > setupCount finalizado...
+15:27:02.986 > DEBUG (setup) -> Setup finalizado...
+15:27:08.488 > millis: 22635, timestamp: 946684804, Temperatura: 22.6250
+15:27:08.493 > ref, Vbias: 5.125952, 2.699600
+15:27:13.990 > millis: 28135, timestamp: 946684827, Temperatura: 22.8750
+15:27:13.993 > ref, Vbias: 5.126393, 2.699301
+15:27:19.493 > millis: 33635, timestamp: 946684832, Temperatura: 23.0625
+15:27:19.495 > ref, Vbias: 5.126906, 2.699215
+15:27:24.996 > millis: 39135, timestamp: 946684838, Temperatura: 23.1875
+15:27:24.998 > ref, Vbias: 5.125760, 2.698813
+15:27:30.497 > millis: 44635, timestamp: 946684843, Temperatura: 23.3125
+15:27:30.500 > ref, Vbias: 5.126250, 2.698940
+15:27:36.000 > millis: 50135, timestamp: 946684849, Temperatura: 23.4375
+15:27:36.001 > ref, Vbias: 5.126512, 2.699429
+15:27:41.501 > millis: 55635, timestamp: 946684854, Temperatura: 23.5625
+15:27:41.504 > ref, Vbias: 5.126013, 2.698879
+15:27:47.001 > millis: 61135, timestamp: 946684859, Temperatura: 23.6250
+15:27:47.003 > ref, Vbias: 5.126756, 2.699583
+15:27:52.502 > millis: 66635, timestamp: 946684865, Temperatura: 23.7500
+15:27:52.506 > ref, Vbias: 5.125658, 2.699145
+15:27:58.003 > millis: 72135, timestamp: 946684870, Temperatura: 23.8125
+15:27:58.007 > ref, Vbias: 5.126555, 2.699849
+15:28:03.504 > millis: 77635, timestamp: 946684876, Temperatura: 23.8750
+15:28:03.507 > ref, Vbias: 5.125700, 2.699489
+15:28:09.004 > millis: 83135, timestamp: 946684881, Temperatura: 23.9375
+15:28:09.008 > ref, Vbias: 5.126683, 2.699332
+15:28:14.505 > millis: 88635, timestamp: 946684887, Temperatura: 24.0000
+15:28:14.508 > ref, Vbias: 5.126629, 2.699749
+15:28:20.006 > millis: 94135, timestamp: 946684892, Temperatura: 24.0625
+15:28:20.010 > ref, Vbias: 5.125756, 2.699190
+15:28:25.506 > millis: 99635, timestamp: 946684898, Temperatura: 24.1250
+15:28:25.510 > ref, Vbias: 5.125551, 2.699128
+15:28:31.007 > millis: 105135, timestamp: 946684903, Temperatura: 24.1875
+15:28:31.009 > ref, Vbias: 5.125570, 2.699627
+15:28:36.508 > millis: 110635, timestamp: 946684909, Temperatura: 24.2500
+15:28:36.512 > ref, Vbias: 5.126335, 2.699303
+15:28:42.008 > millis: 116135, timestamp: 946684914, Temperatura: 24.3125
+15:28:42.012 > ref, Vbias: 5.126666, 2.699208
+15:28:47.509 > millis: 121635, timestamp: 946684920, Temperatura: 24.3750
+15:28:47.512 > ref, Vbias: 5.126193, 2.698878
+15:28:53.009 > millis: 127135, timestamp: 946684925, Temperatura: 24.4375
+15:28:53.012 > ref, Vbias: 5.125840, 2.700020
+15:28:58.509 > millis: 132635, timestamp: 946684931, Temperatura: 24.4375
+15:28:58.513 > ref, Vbias: 5.126366, 2.699825
+15:29:03.008 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:29:03.009 > TRAMA -> timestamp: (946684935, 0x386D4407), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (21.1250 ºC, 0x41A90000), Count1: (0, 0x0), Count2: (0, 0x0), Vbd1: (2.40, 0x4019DA08), Vbd2: (0.00, 0x0), Vcurr1: (0.93, 0x3F6D40A6), Vcurr2: (0.00, 0x0)
+15:29:03.133 > DEBUG (loopCOUNT) -> readRef: 5.125695
+15:29:03.136 > Temperatura: 24.5000
+15:29:03.157 > VVoltage, VCorriente
+15:29:03.158 > 2.296958, 0.607955
+15:29:03.162 > Vbd teorico: 24.525249
+15:29:03.166 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8547, 7FFE, 6B5C, paso: 13
+15:29:13.170 > Tiempo promedio de muestreo [ms]: 24.9990
+15:29:13.172 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:29:13.175 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:29:13.176 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.411322
+15:29:13.179 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 767F
+15:29:13.180 > DEBUG (polarization_settling) -> iniciando
+15:29:13.180 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.4361, 0x5117, 2.309674
+15:29:13.366 > DEBUG (polarization_settling) → writing in MCP: C2
+15:29:13.367 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:29:13.368 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:29:13.368 > DEBUG (polarization_settling) → Vbias_: 32.436069
+15:29:13.870 > millis: 147995, timestamp: 946684946, Temperatura: 24.6250
+15:29:13.872 > ref, Vbias: 5.126097, 2.706329
+15:29:19.371 > millis: 153495, timestamp: 946684952, Temperatura: 24.6250
+15:29:19.373 > ref, Vbias: 5.124935, 2.706561
+15:29:24.871 > millis: 158995, timestamp: 946684957, Temperatura: 24.6875
+15:29:24.874 > ref, Vbias: 5.126704, 2.706602
+15:29:30.372 > millis: 164495, timestamp: 946684963, Temperatura: 24.7500
+15:29:30.375 > ref, Vbias: 5.125936, 2.706132
+15:29:35.871 > millis: 169995, timestamp: 946684968, Temperatura: 24.7500
+15:29:35.876 > ref, Vbias: 5.126654, 2.706215
+15:29:41.372 > millis: 175495, timestamp: 946684974, Temperatura: 24.8125
+15:29:41.375 > ref, Vbias: 5.126163, 2.706405
+15:29:46.871 > millis: 180995, timestamp: 946684979, Temperatura: 24.8750
+15:29:46.873 > ref, Vbias: 5.125644, 2.706915
+15:29:52.371 > millis: 186495, timestamp: 946684985, Temperatura: 24.8750
+15:29:52.374 > ref, Vbias: 5.125327, 2.706474
+15:29:57.870 > millis: 191995, timestamp: 946684990, Temperatura: 24.9375
+15:29:57.871 > ref, Vbias: 5.126093, 2.706286
+15:30:03.369 > millis: 197495, timestamp: 946684996, Temperatura: 24.9375
+15:30:03.373 > ref, Vbias: 5.125824, 2.706533
+15:30:08.868 > millis: 202995, timestamp: 946685001, Temperatura: 25.0000
+15:30:08.871 > ref, Vbias: 5.125613, 2.706550
+15:30:14.367 > millis: 208495, timestamp: 946685007, Temperatura: 25.0625
+15:30:14.370 > ref, Vbias: 5.125205, 2.706507
+15:30:19.867 > millis: 213995, timestamp: 946685012, Temperatura: 25.0625
+15:30:19.870 > ref, Vbias: 5.126528, 2.706264
+15:30:25.367 > millis: 219495, timestamp: 946685018, Temperatura: 25.1250
+15:30:25.371 > ref, Vbias: 5.126049, 2.706764
+15:30:30.867 > millis: 224995, timestamp: 946685023, Temperatura: 25.1250
+15:30:30.870 > ref, Vbias: 5.125667, 2.706520
+15:30:36.366 > millis: 230495, timestamp: 946685029, Temperatura: 25.1875
+15:30:36.369 > ref, Vbias: 5.125817, 2.706705
+15:30:41.866 > millis: 235995, timestamp: 946685034, Temperatura: 25.2500
+15:30:41.868 > ref, Vbias: 5.125240, 2.706589
+15:30:47.366 > millis: 241495, timestamp: 946685040, Temperatura: 25.2500
+15:30:47.370 > ref, Vbias: 5.125710, 2.706187
+15:30:52.866 > millis: 246995, timestamp: 946685045, Temperatura: 25.3125
+15:30:52.869 > ref, Vbias: 5.125235, 2.706544
+15:30:58.365 > millis: 252495, timestamp: 946685051, Temperatura: 25.3125
+15:30:58.369 > ref, Vbias: 5.125791, 2.706458
+15:31:03.865 > millis: 257995, timestamp: 946685056, Temperatura: 25.3750
+15:31:03.869 > ref, Vbias: 5.126360, 2.707038
+15:31:09.365 > millis: 263495, timestamp: 946685062, Temperatura: 25.3750
+15:31:09.367 > ref, Vbias: 5.124675, 2.707240
+15:31:13.365 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:31:13.366 > TRAMA -> timestamp: (946685066, 0x386D448A), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (24.5000 ºC, 0x41C40000), Count1: (0, 0x0), Count2: (0, 0x0), Vbd1: (2.41, 0x401A531A), Vbd2: (0.00, 0x0), Vcurr1: (0.95, 0x3F7452EB), Vcurr2: (0.00, 0x0)
+15:31:13.490 > DEBUG (loopCOUNT) -> readRef: 5.126215
+15:31:13.493 > Temperatura: 25.4375
+15:31:13.514 > VVoltage, VCorriente
+15:31:13.514 > 2.304013, 0.608166
+15:31:13.518 > Vbd teorico: 24.545406
+15:31:13.520 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8749, 7FFE, 6B25, paso: 13
+15:31:23.523 > Tiempo promedio de muestreo [ms]: 24.9987
+15:31:23.524 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:31:23.528 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:31:23.528 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.497686
+15:31:23.530 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 6BC8
+15:31:23.531 > DEBUG (polarization_settling) -> iniciando
+15:31:23.531 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 33.4545, 0x4645, 2.330971
+15:31:23.715 > DEBUG (polarization_settling) → writing in MCP: C2
+15:31:23.715 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:31:23.716 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:31:23.717 > DEBUG (polarization_settling) → Vbias_: 33.454533
+15:31:24.218 > millis: 278346, timestamp: 946685076, Temperatura: 25.5000
+15:31:24.221 > ref, Vbias: 5.124585, 2.792515
+15:31:29.718 > millis: 283846, timestamp: 946685082, Temperatura: 25.5000
+15:31:29.720 > ref, Vbias: 5.125575, 2.791906
+15:31:35.218 > millis: 289346, timestamp: 946685087, Temperatura: 25.5625
+15:31:35.221 > ref, Vbias: 5.124703, 2.792018
+15:31:40.719 > millis: 294846, timestamp: 946685093, Temperatura: 25.5625
+15:31:40.721 > ref, Vbias: 5.124983, 2.791615
+15:31:46.219 > millis: 300346, timestamp: 946685098, Temperatura: 25.6250
+15:31:46.222 > ref, Vbias: 5.124414, 2.792450
+15:31:51.720 > millis: 305846, timestamp: 946685104, Temperatura: 25.6875
+15:31:51.723 > ref, Vbias: 5.124634, 2.792976
+15:31:57.220 > millis: 311346, timestamp: 946685109, Temperatura: 25.6875
+15:31:57.222 > ref, Vbias: 5.124393, 2.791979
+15:32:02.720 > millis: 316846, timestamp: 946685115, Temperatura: 25.7500
+15:32:02.721 > ref, Vbias: 5.124955, 2.792393
+15:32:08.219 > millis: 322346, timestamp: 946685120, Temperatura: 25.7500
+15:32:08.221 > ref, Vbias: 5.124856, 2.792609
+15:32:13.719 > millis: 327846, timestamp: 946685126, Temperatura: 25.7500
+15:32:13.722 > ref, Vbias: 5.124786, 2.792391
+15:32:19.219 > millis: 333346, timestamp: 946685131, Temperatura: 25.8125
+15:32:19.221 > ref, Vbias: 5.125896, 2.792552
+15:32:24.718 > millis: 338846, timestamp: 946685137, Temperatura: 25.8125
+15:32:24.727 > ref, Vbias: 5.124568, 2.792973
+15:32:30.217 > millis: 344346, timestamp: 946685142, Temperatura: 25.8750
+15:32:30.219 > ref, Vbias: 5.123777, 2.792452
+15:32:35.719 > millis: 349846, timestamp: 946685148, Temperatura: 25.8750
+15:32:35.722 > ref, Vbias: 5.124130, 2.792825

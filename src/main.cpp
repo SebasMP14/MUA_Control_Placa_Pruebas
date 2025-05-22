@@ -32,6 +32,7 @@
 // #define WITHOUT_DETECTION_BOARD
 #define DESACTIVE_CHANNEL_2
 #define SECOND_DETECTION_BOARD              // Placa con rango ampliado de polarización
+#define DEBUG_NEW_POL_SETTLING
 
 #define MAX_ITER            5               // Protocol initialization attempts
 // #define Elementos           400
@@ -40,26 +41,27 @@
 #define TRAMA_DATA_SIZE     36              // 
 #define TRAMA_INFO_SIZE     8               // 39 Bytes maximum
 #define TRAMA_CURVE_SIZE    39              // VER LA FORMA DE DISMINUIR LA CANT DE PUNTOS (400)
+#define RESISTIVE_DIVISOR   11.79272944f    // Average value
 
 // uint8_t status = 0;
 uint8_t state = 0x01;                       // 
 // uint32_t timestamp = 0;
 uint8_t segundos = 120;                     // Calibración cada tantos segundos
-const float Voffset = 3.8f;
-const float voffset = 3.8f / 12;
+const float Voffset = 3.829428571f;
+const float voffset = Voffset / RESISTIVE_DIVISOR;
 const float ResisA = 1050;
-const float ov = 5.5f;                      // Establecido por el fabricante: 2.5 V
+const float ov = 4.0f;                      // Establecido por el fabricante: 2.5 V
 #ifdef SECOND_DETECTION_BOARD
 const float ResisB = 1000;
-float OverVoltage = ov / 12;
+float OverVoltage = ov / RESISTIVE_DIVISOR;
 #else
 const float ResisB = 2000;
 // const float OverVoltage = 0.2238233f * ov // CALCULAR
-const float OverVoltage = ov / 12;
+const float OverVoltage = ov / RESISTIVE_DIVISOR;
 #endif
 uint16_t DAC_INIT = 0x7FFF;
-uint8_t MAX_INIT = 0x60;
-float MIN_VOUT_SIPM = 26.714f;  // Teórico
+uint8_t MAX_INIT = 0x44; // 0x60;
+float MIN_VOUT_SIPM = 27.92f;// 26.714f;  // Teórico
 float firstCurrent1 = 0.0f;
 float firstCurrent2 = 0.0f;
 float temperature1 = -273.0f;
@@ -138,7 +140,7 @@ void setup() {
   #endif
 
   #ifdef DEBUG_MAIN
-  Serial.println("PRUEBA DE FLUJO DE PARTICULAS 14/05/2025, SOLO CHANNEL 1");
+  Serial.println("PRUEBA DE FLUJO DE PARTICULAS 22/05/2025, SOLO CHANNEL 1, Without Radiactive Coin");
   #endif
 
   Serial1.begin(2400);                 // OBC (On Board Computer)
@@ -170,7 +172,7 @@ void setup() {
 
   // Restaurar último estado guardado en memoria
   // get_OPstate(&state);
-  // state = 0x01;                                     // For COUNT test only
+  state = 0x01;                                     // For COUNT test only
 
   pinMode(PULSE_1, INPUT_PULLDOWN);
   pinMode(PULSE_2, INPUT_PULLDOWN);
@@ -510,7 +512,10 @@ void loopCOUNT(void) {
   if ( (millis() - time_ini) >= 5000 ) {      /////////// Rutina de prueba
     // read_all();
     digitalWrite(LED_BUILTIN, HIGH);                      // Blink
+    // digitalWrite(LED_SiPM1, HIGH);
+    // delayMicroseconds(1);
     delay(500);
+    // digitalWrite(LED_SiPM1, LOW);
     digitalWrite(LED_BUILTIN, LOW);
     Serial.print("millis: ");
     time_ini = millis();
@@ -799,7 +804,7 @@ void loopTRANSFER(void) {
           Serial.println("DEBUG (loopTRANSFER) -> FINISH MODE ACTIVATED");
           Serial.println("Sleep mode in progress: Executing order 66.");
           #endif
-          write_OPstate(ID_STANDBY);
+          write_OPstate(ID_STANDBY); 
           return ;
           break;
         case ID_TRANSFER_SYSINFO_MODE:
@@ -929,23 +934,24 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
  * @return  float Vbias (Polarization Voltage)
  */
 float polarization_settling(float Vbd, uint8_t CS_DAC) {
-  uint8_t muxP0 = ADS1260_MUXP_AIN0;  // muxP1;                   // Configuración de lectura: Canal 1 o 2
+  uint8_t muxP0 = ADS1260_MUXP_AIN0;                      // Configuración de lectura: Canal 1 o 2
+  uint8_t muxP1 = ADS1260_MUXP_AIN2;
   float Vbias = 0.0f;
-  uint16_t indexPeak;
-  
-  muxP0 = ADS1260_MUXP_AIN0;
-  indexPeak = indexPeak1;
-  // muxP1 = ADS1260_MUXP_AIN2;
+  float firstCurrent = firstCurrent1;
+  // uint16_t indexPeak = indexPeak1;
+
   if ( CS_DAC == SPI_CS_DAC2 ) {
     muxP0 = ADS1260_MUXP_AIN1;
-    indexPeak = indexPeak2;
-    // muxP1 = ADS1260_MUXP_AIN3;
+    // indexPeak = indexPeak2;
+    muxP1 = ADS1260_MUXP_AIN3;
+    firstCurrent = firstCurrent2;
   }
 
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (polarization_settling) -> iniciando");
   #endif
 
+  #ifndef DEBUG_NEW_POL_SETTLING
   uint16_t i = 0x01;
   uint16_t command = inverseVoltage_command[indexPeak];
   uint16_t newCommand;
@@ -978,8 +984,102 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   Serial.print("DEBUG (polarization_settling) -> VIbias: ");
   Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref), 6);
   #endif
+  
+  return Vbias;
+  #else
+  Vbias = (Vbd * RESISTIVE_DIVISOR) + ov;
+  uint16_t Vbias_DAC_CMD = CMD_DAC(MAX_INIT, Vbias) - 0x000A;
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: ");
+  Serial.print(Vbias, 4);
+  Serial.print(", 0x");
+  Serial.print(Vbias_DAC_CMD, HEX);
+  Serial.print(", ");
+  Serial.println(ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref), 6);
+  #endif
+  write_dac8551_reg(Vbias_DAC_CMD, CS_DAC);
+  delay(3);
+  uint8_t i = 0x14;
+  float Vi1, Vi2, Vi3, Vtia1, Vtia2, Vtia3, Vv;
+  uint16_t aux, aux_;
+
+  external_ref = ads1260.readRef();
+  
+  Vv = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
+  Vi1 = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), external_ref);
+  Vtia1 = Vtia(Vi1, firstCurrent);
+  Vbias_DAC_CMD -= i;
+  write_dac8551_reg(Vbias_DAC_CMD, CS_DAC);
+  delay(3);
+  Vi2 = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), external_ref);
+  Vtia2 = Vtia(Vi2, firstCurrent);
+  Vbias_DAC_CMD -= i;
+  write_dac8551_reg(Vbias_DAC_CMD, CS_DAC);
+  delay(3);
+  Vi3 = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), external_ref);
+  Vtia3 = Vtia(Vi3, firstCurrent);
+
+  while ( Vtia1 - Vtia2 < Vtia2 - Vtia3 && Vbias <= Vv * RESISTIVE_DIVISOR) { // Vbias calculado == al Vbias leido
+    aux = Vi2;
+    aux_ = Vtia2;
+    Vi1 = aux;
+    Vtia1 = aux_;
+    Vi2 = Vi3;
+    Vtia2 = Vtia3;
+    Vbias_DAC_CMD -= i;
+    write_dac8551_reg(Vbias_DAC_CMD, CS_DAC);
+    delay(3);
+    Vi3 = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), external_ref);
+    Vtia3 = Vtia(Vi3, firstCurrent);
+    #ifdef DEBUG_MAIN
+    Serial.print("DEBUG (polarization_settling) → Vtia2: ");
+    Serial.print(Vtia2, 4); Serial.print(", 0x"); Serial.println(Vbias_DAC_CMD, HEX);
+    #endif
+    Vv = ads1260.computeVolts(ads1260.readData(muxP0, ADS1260_MUXN_AINCOM), external_ref);
+    if ( Vbias <= Vv * RESISTIVE_DIVISOR ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (polarization_settling) → Vbias_calculated equal readed");
+      #endif
+      break;
+    }
+  }
+
+  Vbias_DAC_CMD += i;
+  write_dac8551_reg(Vbias_DAC_CMD, CS_DAC);
+  delay(3);
+  Vi2 = ads1260.computeVolts(ads1260.readData(muxP1, ADS1260_MUXN_AINCOM), external_ref);
+  Vtia2 = Vtia(Vi2, firstCurrent);
+
+  uint8_t CMD_POT = VMCP_to_DEC(Vtia2);
+
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (polarization_settling) → writing in MCP: ");
+  Serial.println(CMD_POT, HEX);
+  #endif
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( writeMCP0(CMD_POT) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.");
+      #endif
+      break;
+    } else {
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (polarization_settling) → Inicialización de MCP4561 fallida: ");
+      Serial.println(iter_counter);
+      #endif
+      delay(10);
+    }
+  }
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (polarization_settling) → MCP escrito en: ");
+  Serial.println(readMCP0(), HEX);
+  Serial.print("DEBUG (polarization_settling) → Vbias_: ");
+  Serial.println(Vbias, 6);
+  #endif
 
   return Vbias;
+  #endif
+
 }
 
 
@@ -1192,7 +1292,7 @@ bool enable_Interface(void) {
 void printArrays_ch1(void) {
   Serial.println("-------------------- DATOS OBTENIDOS --------------------");
   Serial.println("------------------ -------------------");
-  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/2000");
+  Serial.println("i, Voltage, VCorriente, T, (V*12)-3.8-k(VCorr-firstCurr1), (VCorr-firstCurr1)/1000");
   for ( uint16_t i = 1; i < Elementos; i++ ) {
     Serial.print(i);
     Serial.print(",");
@@ -1202,7 +1302,7 @@ void printArrays_ch1(void) {
     Serial.print(",");
     Serial.print(temperatureArray1[i]);
     Serial.print(",");
-    Serial.print((inverseVoltage1[i]*12)-3.8-(ResisA*(inverseVCurrent1[i]-firstCurrent1)/ResisB), 7);
+    Serial.print((inverseVoltage1[i]*RESISTIVE_DIVISOR)-Voffset-(ResisA*(inverseVCurrent1[i]-firstCurrent1)/ResisB), 7);
     Serial.print(",");
     Serial.println((inverseVCurrent1[i]-firstCurrent1)/ResisB, 10);
   }
@@ -1221,7 +1321,7 @@ void printArrays_ch2(void) {
     Serial.print(",");
     Serial.print(temperatureArray2[i]);
     Serial.print(",");
-    Serial.print((inverseVoltage2[i]*12)-3.8-(ResisA*(inverseVCurrent2[i]-firstCurrent2)/ResisB), 7);
+    Serial.print((inverseVoltage2[i]*RESISTIVE_DIVISOR)-Voffset-(ResisA*(inverseVCurrent2[i]-firstCurrent2)/ResisB), 7);
     Serial.print(",");
     Serial.println((inverseVCurrent2[i]-firstCurrent2)/ResisB, 10);
   }

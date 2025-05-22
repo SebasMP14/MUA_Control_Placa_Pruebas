@@ -38,8 +38,9 @@ float* apply_butterworth(float *input, uint16_t Elementos);
 float obtain_Vbd(float *inverseCurrent_I, float *inverseVoltage, uint16_t Elemento, float* Vcurr, uint16_t* indexPeak); // se usa
 float Vbd_teorical(float Temperature); // se usa
 
-float SiPMCurrent(float VCurrent, float firstCurrent);
-float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC);
-float Vtia(float VCurrent, float firstCurrent);
+float SiPMCurrent(float VCurrent, float firstCurrent);  // Cálculo teórico
+float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC);      // Cálculo teórico
+float Vtia(float VCurrent, float firstCurrent);         // Cálculo teórico
+uint16_t CMD_DAC(uint8_t CMD_MAX, float Vout);
 
 #endif

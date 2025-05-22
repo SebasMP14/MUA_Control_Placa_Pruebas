@@ -23,7 +23,7 @@
 #define TRAMA_SIZE                  45
 #define TRAMA_COMM                  6
 #define TRAMA_DATA_SIZE             36          // 
-#define TRAMA_INFO_SIZE             36          // 39 Bytes maximum
+// #define TRAMA_INFO_SIZE             36          // 39 Bytes maximum
 
 #define MISSION_ID                  0x26
 /*** Modos de operación ***/

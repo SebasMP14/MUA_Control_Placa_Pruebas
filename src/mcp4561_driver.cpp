@@ -1,5 +1,7 @@
 #include "mcp4561_driver.h"
 
+const float V_to_umbral = 0.7;
+
 bool writeMCP0(uint8_t valor) {
   // uint8_t DH = valor/256;
   uint8_t VW0 = 0b00000000 ;//|| DH;
@@ -81,4 +83,8 @@ uint16_t readMCP1(void) {
   uint8_t HSB = Wire.read();
   uint8_t LSB = Wire.read();
   return (uint16_t)( HSB << 8 | LSB ) & 0x01FF;
+}
+
+uint8_t VMCP_to_DEC(float voltage) {
+  return (uint8_t)((voltage - V_to_umbral) * 256 / 4.096);
 }
