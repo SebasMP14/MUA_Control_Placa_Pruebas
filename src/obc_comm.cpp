@@ -16,7 +16,7 @@
 
 OperationMode currentMode = INICIO;
 bool setup_state = false;
-unsigned long timeOUT = 10000;               // ms
+unsigned long timeOUT = 6000;               // ms
 unsigned long timeOUT_invalid_frame = 30;   // ms
 unsigned long timeOUT_window = 100;         // ms
 
@@ -55,7 +55,7 @@ void requestOperationMode(void) {
   #ifdef DEBUG_OBC
   Serial.print("DEBUG (requestOperationMode) -> Recibido de Serial1: ");
   for (uint8_t i = 0; i < TRAMA_COMM; i++) {              // trama recibida del OBC
-    Serial.print("0x ");  Serial.print(response[i], HEX);
+    Serial.print(" 0x");  Serial.print(response[i], HEX);
   }
   Serial.println();
   #endif
@@ -84,13 +84,13 @@ void requestOperationMode(void) {
   #endif
   
   switch (response[1]) {
-    // case 0x00:
-    //   currentMode = STAND_BY;
-    //   #ifdef DEBUG_OBC
-    //   Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
-    //   #endif
-    //   write_OPstate(ID_STANDBY);
-    //   break;
+    case 0x14:
+      currentMode = STAND_BY;
+      #ifdef DEBUG_OBC
+      Serial.println("DEBUG (requestOperationMode) -> STAND_BY ACTIVATED");
+      #endif
+      write_OPstate(ID_STANDBY);
+      break;
     case 0x01:
       currentMode = COUNT_MODE;
       #ifdef DEBUG_OBC
@@ -197,10 +197,6 @@ bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout) {
 
   while ( millis() - tiempo < timeout ) {
     if ( Serial1.available() ) {
-      #ifdef DEBUG_OBC
-      Serial.print("DEBUG (slidingWindowBuffer) → Serial1.available = ");
-      Serial.println(Serial1.available());
-      #endif
       incoming = Serial1.read();    // new byte
       
       for ( uint8_t i = 0; i < 5; i++ ) {   // slide window and add the new byte to the final position

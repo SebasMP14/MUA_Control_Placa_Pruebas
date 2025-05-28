@@ -1,0 +1,20 @@
+14:23:11.201 > DEBUG (setup) -> Serial Iniciado
+14:23:11.202 > DEBUG (setup) -> Serial1 Iniciado
+14:23:11.202 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+14:23:11.203 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+14:23:11.203 > DEBUG (get_OPstate) -> Dirección: 0xFFF00B Estado leído: 0x0
+14:23:11.203 > Estado: 0x0
+14:23:17.209 > DEBUG (requestOperationMode) → slidingWindowBuffer
+14:23:17.210 > DEBUG (setup) -> Setup finalizado...
+14:23:21.099 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+14:23:21.124 > DEBUG (slidingWindowBuffer) → incoming byte 0x8
+14:23:21.148 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+14:23:21.172 > DEBUG (slidingWindowBuffer) → incoming byte 0xD
+14:23:21.197 > DEBUG (slidingWindowBuffer) → incoming byte 0x69
+14:23:21.221 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+14:23:21.222 > DEBUG (requestOperationMode) -> Recibido de Serial1: 0x AB0x 80x 00x D0x 690x A
+14:23:21.224 > DEBUG (requestOperationMode) -> COMAND ID: 0x8
+14:23:21.225 > DEBUG (requestOperationMode) -> FINISH MODE ACTIVATED
+14:23:21.225 > Sleep mode in progress: Executing order 66.
+14:23:21.225 > DEBUG (write_OPstate) -> 
+14:23:21.252 > DEBUG (write_OPstate) -> 

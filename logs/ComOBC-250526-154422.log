@@ -1,0 +1,835 @@
+15:44:22.616 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x90
+15:44:22.617 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:22.617 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:22.817 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.852 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:22.852 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.852 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:22.866 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.883 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:22.890 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.891 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:22.915 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.918 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:22.939 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:22.940 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:22.941 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:22.941 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:22.943 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:23.561 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xB4
+15:44:23.562 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:23.562 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:23.762 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.763 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:23.787 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.788 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:23.811 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.812 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:23.836 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.837 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:23.860 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.861 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:23.885 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:23.886 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:23.886 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:23.886 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:23.888 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:24.505 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xD8
+15:44:24.508 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:24.508 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:24.706 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.707 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:24.731 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.732 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:24.755 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.757 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:24.780 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.781 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:24.804 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.805 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:24.829 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:24.832 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:24.832 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:24.832 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:24.834 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:25.450 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xFC
+15:44:25.451 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:25.452 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:25.652 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.653 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:25.677 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.678 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:25.701 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.702 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:25.726 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.727 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:25.750 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.751 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:25.775 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:25.775 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:25.776 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:25.776 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:25.778 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:26.399 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x120
+15:44:26.401 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:26.402 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:26.602 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.603 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:26.626 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.627 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:26.651 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.652 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:26.675 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.676 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:26.700 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.701 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:26.724 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:26.725 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:26.725 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:26.726 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:26.728 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:27.345 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x144
+15:44:27.347 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:27.348 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:27.548 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.549 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:27.572 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.573 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:27.597 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.598 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:27.621 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.622 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:27.646 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.647 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:27.670 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:27.671 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:27.671 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:27.672 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:27.674 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:28.290 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x168
+15:44:28.291 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:28.291 >  0x26 0x3 0x24 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x3E 0x9D 0xA
+15:44:28.493 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.493 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:28.517 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.518 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:28.541 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.542 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:28.566 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.567 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:28.591 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.592 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:28.615 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:28.617 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:28.617 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:28.617 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:28.618 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:29.236 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x18C
+15:44:29.238 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:29.239 >  0x26 0x3 0x24 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x6A 0x93 0xA
+15:44:29.438 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.439 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:29.462 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.465 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:29.487 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.488 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:29.511 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.512 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:29.535 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.536 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:29.560 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:29.561 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:29.561 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:29.562 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:29.564 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:30.181 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1B0
+15:44:30.183 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:30.184 >  0x26 0x3 0x24 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB3 0x2B 0xA
+15:44:30.383 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.384 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:30.407 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.408 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:30.432 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.433 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:30.457 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.457 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:30.480 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.482 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:30.505 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:30.506 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:30.507 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:30.507 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:30.508 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:31.125 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1D4
+15:44:31.127 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:31.127 >  0x26 0x3 0x24 0x73 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x64 0xA
+15:44:31.328 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.329 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:31.353 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.354 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:31.378 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.379 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:31.402 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.403 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:31.426 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.427 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:31.451 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:31.452 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:31.452 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:31.453 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:31.454 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:32.072 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1F8
+15:44:32.073 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:32.074 >  0x26 0x3 0x24 0xAF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x86 0x24 0xA
+15:44:32.274 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.275 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:32.299 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.300 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:32.323 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.325 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:32.347 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.349 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:32.372 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.373 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:32.396 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:32.398 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:32.398 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:32.398 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:32.400 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:33.018 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x21C
+15:44:33.020 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:33.021 >  0x26 0x3 0x24 0xEB 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xD2 0x2A 0xA
+15:44:33.220 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.222 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:33.244 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.245 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:33.269 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.269 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:33.293 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.306 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:33.317 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.341 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:33.342 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:33.353 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:33.353 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:33.353 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:33.353 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:33.962 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x240
+15:44:33.965 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:33.965 >  0x26 0x3 0x24 0x27 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x49 0xD 0xA
+15:44:34.165 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.166 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:34.189 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.190 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:34.214 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.215 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:34.238 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.239 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:34.263 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.263 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:34.287 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:34.288 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:34.288 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:34.289 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:34.291 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:34.909 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x264
+15:44:34.911 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:34.913 >  0x26 0x3 0x24 0x64 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC3 0xC4 0xA
+15:44:35.111 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.112 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:35.135 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.136 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:35.160 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.161 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:35.184 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.185 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:35.209 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.210 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:35.233 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:35.234 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:35.235 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:35.235 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:35.237 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:35.854 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x288
+15:44:35.856 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:35.857 >  0x26 0x3 0x24 0xA0 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x65 0xFF 0xA
+15:44:36.056 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.057 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:36.081 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.082 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:36.106 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.107 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:36.130 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.131 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:36.155 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.156 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:36.179 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:36.180 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:36.181 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:36.181 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:36.183 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:36.801 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2AC
+15:44:36.802 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:36.804 >  0x26 0x3 0x24 0xDC 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA7 0xF 0xA
+15:44:37.002 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.003 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:37.027 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.028 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:37.051 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.052 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:37.076 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.077 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:37.100 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.101 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:37.125 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.125 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:37.126 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:37.126 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:37.128 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:37.746 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2D0
+15:44:37.748 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:37.749 >  0x26 0x3 0x24 0x19 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x81 0x2A 0xA
+15:44:37.947 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.948 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:37.972 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.973 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:37.996 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:37.997 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:38.020 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.021 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:38.045 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.046 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:38.069 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.071 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:38.071 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:38.071 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:38.073 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:38.691 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2F4
+15:44:38.692 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:38.692 >  0x26 0x3 0x24 0x55 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x8F 0xD 0xA
+15:44:38.893 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.894 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:38.917 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.918 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:38.942 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.943 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:38.966 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.967 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:38.991 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:38.992 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:39.015 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.017 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:39.017 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:39.017 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:39.019 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:39.637 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x318
+15:44:39.639 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:39.639 >  0x26 0x3 0x24 0x91 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x36 0xA
+15:44:39.839 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.840 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:39.863 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.865 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:39.888 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.888 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:39.912 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.913 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:39.936 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.937 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:39.961 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:39.962 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:39.962 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:39.962 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:39.964 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:40.581 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x33C
+15:44:40.583 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:40.584 >  0x26 0x3 0x24 0xCE 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE8 0x80 0xA
+15:44:40.784 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.785 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:40.809 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.810 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:40.833 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.834 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:40.858 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.859 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:40.882 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.883 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:40.907 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:40.908 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:40.908 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:40.908 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:40.911 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:41.531 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x360
+15:44:41.533 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:41.533 >  0x26 0x3 0x24 0xA 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x8E 0xA
+15:44:41.733 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.734 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:41.758 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.759 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:41.782 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.783 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:41.807 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.807 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:41.831 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.832 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:41.856 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:41.857 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:41.857 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:41.857 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:41.859 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:42.477 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x384
+15:44:42.478 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:42.479 >  0x26 0x3 0x24 0x47 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE 0xE8 0xA
+15:44:42.679 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.681 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:42.704 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.705 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:42.728 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.729 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:42.753 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.754 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:42.777 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.778 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:42.802 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:42.802 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:42.802 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:42.803 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:42.805 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:43.422 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3A8
+15:44:43.424 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:43.426 >  0x26 0x3 0x24 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x3E 0x9D 0xA
+15:44:43.625 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.626 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:43.650 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.650 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:43.674 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.675 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:43.698 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.699 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:43.723 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.723 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:43.747 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:43.748 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:43.748 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:43.749 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:43.751 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:44.368 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3CC
+15:44:44.370 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:44.371 >  0x26 0x3 0x24 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x6A 0x93 0xA
+15:44:44.571 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.573 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:44.596 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.597 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:44.620 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.621 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:44.644 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.645 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:44.669 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.670 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:44.693 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:44.694 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:44.695 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:44.695 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:44.698 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:45.315 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3F0
+15:44:45.316 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:45.316 >  0x26 0x3 0x24 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB3 0x2B 0xA
+15:44:45.516 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.518 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:45.541 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.542 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:45.565 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.566 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:45.590 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.591 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:45.614 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.615 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:45.639 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:45.640 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:45.640 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:45.640 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:45.643 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:46.260 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x414
+15:44:46.261 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:46.262 >  0x26 0x3 0x24 0xA3 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x79 0x9 0xA
+15:44:46.461 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.462 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:46.486 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.487 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:46.510 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.511 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:46.535 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.536 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:46.559 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.560 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:46.583 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:46.584 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:46.585 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:46.585 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:46.587 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:47.204 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x438
+15:44:47.205 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:47.206 >  0x26 0x3 0x24 0xDF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xBB 0xF9 0xA
+15:44:47.406 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.408 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:47.431 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.433 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:47.455 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.456 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:47.480 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.482 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:47.504 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.507 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:47.529 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:47.530 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:47.530 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:47.532 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:47.533 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:48.150 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x45C
+15:44:48.151 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:48.151 >  0x26 0x3 0x24 0x1B 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x7A 0xF7 0xA
+15:44:48.351 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.353 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:48.376 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.377 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:48.400 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.401 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:48.424 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.426 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:48.449 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.450 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:48.474 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:48.475 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:48.475 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:48.475 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:48.478 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:49.095 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x480
+15:44:49.105 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:49.105 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:49.297 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.298 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:49.321 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.322 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:49.346 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.347 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:49.371 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.372 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:49.394 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.395 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:49.420 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:49.421 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:49.421 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:49.422 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:49.424 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:50.041 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4A4
+15:44:50.042 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:50.043 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:50.243 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.244 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:50.267 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.268 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:50.292 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.293 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:50.316 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.317 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:50.341 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.341 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:50.365 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:50.366 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:50.366 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:50.367 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:50.369 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:50.987 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4C8
+15:44:50.988 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:50.990 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:51.188 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.189 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:51.213 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.214 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:51.238 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.238 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:51.262 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.263 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:51.287 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.287 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:51.311 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:51.312 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:51.312 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:51.312 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:51.314 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:51.932 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4EC
+15:44:51.933 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:51.933 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:52.134 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.135 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:52.158 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.159 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:52.183 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.184 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:52.207 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.208 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:52.232 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.232 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:52.256 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:52.257 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:52.258 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:52.258 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:52.260 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:52.877 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x510
+15:44:52.879 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:52.879 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:53.080 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.081 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:53.104 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.106 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:53.128 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.130 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:53.153 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.154 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:53.177 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.178 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:53.202 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:53.203 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:53.203 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:53.204 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:53.205 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:53.823 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x534
+15:44:53.825 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:53.826 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:54.025 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.026 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:54.049 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.050 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:54.074 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.075 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:54.098 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.099 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:54.123 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.123 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:54.147 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.148 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:54.149 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:54.149 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:54.151 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:54.768 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x558
+15:44:54.769 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:54.770 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:54.971 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.972 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:54.995 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:54.996 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:55.019 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.020 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:55.044 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.044 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:55.068 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.069 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:55.092 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.093 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:55.094 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:55.094 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:55.096 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:55.713 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x57C
+15:44:55.714 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:55.714 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:55.916 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.917 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:55.941 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.941 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:55.965 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.966 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:55.989 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:55.990 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:56.014 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.015 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:56.038 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.039 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:56.040 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:56.040 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:56.042 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:56.663 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5A0
+15:44:56.665 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:56.665 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:44:56.865 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.866 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:56.890 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.890 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:56.914 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.915 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:56.938 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.939 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:56.963 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.964 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:56.987 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:56.988 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:56.989 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:56.989 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:56.991 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:57.608 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5C4
+15:44:57.609 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:57.609 >  0x26 0x3 0x24 0xE 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xB8 0x41 0x6 0x0 0x0 0x0 0x84 0x7 0x1A 0x40 0x0 0x0 0x0 0x0 0xDA 0xF5 0xF3 0x3F 0x0 0x0 0x0 0x0 0x74 0xE2 0xA
+15:44:57.811 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.812 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:57.834 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.836 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:57.860 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.861 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:57.884 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.885 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:57.908 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.909 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:57.933 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:57.934 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:57.934 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:57.934 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:57.936 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:58.554 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5E8
+15:44:58.556 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:58.557 >  0x26 0x3 0x24 0x9D 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC8 0x41 0x16 0x0 0x0 0x0 0x98 0x22 0x1B 0x40 0x0 0x0 0x0 0x0 0xB2 0x9 0x9 0x40 0x0 0x0 0x0 0x0 0x53 0x3 0xA
+15:44:58.755 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.756 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:58.780 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.781 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:58.804 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.805 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:58.828 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.829 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:58.853 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.854 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:58.878 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:58.879 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:58.879 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:58.880 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:58.882 > DEBUG (write_SENT_DATAaddress) -> ...
+15:44:59.499 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x60C
+15:44:59.500 > DEBUG (sendDataFrame) -> Trama enviada:
+15:44:59.501 >  0x26 0x3 0x24 0x10 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB9 0x41 0xA 0x0 0x0 0x0 0x87 0x6 0x1B 0x40 0x0 0x0 0x0 0x0 0xD 0x27 0xC 0x40 0x0 0x0 0x0 0x0 0x39 0x43 0xA
+15:44:59.701 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.702 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:44:59.725 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.726 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:44:59.750 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.750 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:44:59.774 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.775 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:59.799 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.800 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:44:59.823 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:44:59.825 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:44:59.825 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:44:59.825 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:44:59.827 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:00.445 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x630
+15:45:00.447 > DEBUG (sendDataFrame) -> Trama enviada:
+15:45:00.447 >  0x26 0x3 0x24 0xA0 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x40 0xC8 0x41 0x15 0x0 0x0 0x0 0x48 0xE8 0x1A 0x40 0x0 0x0 0x0 0x0 0x5F 0xA2 0x4 0x40 0x0 0x0 0x0 0x0 0xF8 0x3E 0xA
+15:45:00.646 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.647 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:45:00.671 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.672 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:45:00.695 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.696 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:45:00.720 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.721 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:00.744 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.745 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:00.769 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:00.769 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:45:00.770 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:45:00.770 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:45:00.772 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:01.389 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x654
+15:45:01.390 > DEBUG (sendDataFrame) -> Trama enviada:
+15:45:01.391 >  0x26 0x3 0x24 0x2D 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCB 0x41 0x1A 0x0 0x0 0x0 0x16 0xD8 0x1A 0x40 0x0 0x0 0x0 0x0 0xDD 0xC7 0x2 0x40 0x0 0x0 0x0 0x0 0x61 0xBB 0xA
+15:45:01.592 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.593 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:45:01.616 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.617 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:45:01.641 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.641 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:45:01.665 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.666 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:01.690 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.691 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:01.714 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:01.715 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:45:01.716 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:45:01.716 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:45:01.718 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:02.335 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x678
+15:45:02.336 > DEBUG (sendDataFrame) -> Trama enviada:
+15:45:02.336 >  0x26 0x3 0x24 0xBA 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC0 0xCC 0x41 0x20 0x0 0x0 0x0 0xC7 0x16 0x1B 0x40 0x0 0x0 0x0 0x0 0x38 0x19 0x7 0x40 0x0 0x0 0x0 0x0 0x22 0x12 0xA
+15:45:02.538 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.539 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:45:02.562 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.563 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:45:02.586 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.587 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:45:02.610 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.611 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:02.635 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.635 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:02.659 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:02.660 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:45:02.660 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:45:02.661 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:45:02.663 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:03.281 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x69C
+15:45:03.282 > DEBUG (sendDataFrame) -> Trama enviada:
+15:45:03.283 >  0x26 0x3 0x24 0x49 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x41 0x2F 0x0 0x0 0x0 0x2A 0x49 0x1A 0x40 0x0 0x0 0x0 0x0 0x65 0x62 0xF0 0x3F 0x0 0x0 0x0 0x0 0x4B 0xFD 0xA
+15:45:03.483 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.484 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:45:03.508 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.509 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:45:03.532 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.533 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:45:03.557 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.558 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:03.581 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.582 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:03.606 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:03.607 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:45:03.607 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:45:03.607 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:45:03.609 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:04.226 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x6C0
+15:45:04.227 > DEBUG (sendDataFrame) -> Trama enviada:
+15:45:04.228 >  0x26 0x3 0x24 0xD6 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xCE 0x41 0x33 0x0 0x0 0x0 0x2 0xD 0x1A 0x40 0x0 0x0 0x0 0x0 0x43 0xA2 0xE8 0x3F 0x0 0x0 0x0 0x0 0x66 0x99 0xA
+15:45:04.427 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.428 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:45:04.452 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.453 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:45:04.476 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.478 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:45:04.501 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.502 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:04.525 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.526 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:45:04.550 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:45:04.551 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:45:04.552 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:45:04.552 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:45:04.554 > DEBUG (write_SENT_DATAaddress) -> ...
+15:45:05.171 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:45:11.176 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:17.180 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:23.186 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:29.191 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:35.195 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:41.201 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:47.205 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:53.210 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:45:59.214 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:05.218 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:11.223 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:17.228 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:23.232 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:29.238 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:35.243 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:41.248 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:47.253 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:53.258 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:46:59.262 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:47:05.267 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:47:11.272 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:47:17.275 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:47:23.279 > DEBUG (requestOperationMode) → slidingWindowBuffer
+15:47:29.284 > DEBUG (requestOperationMode) → slidingWindowBuffer

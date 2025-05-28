@@ -1,0 +1,1216 @@
+15:42:04.843 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x264
+15:42:04.845 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:04.845 >  0x26 0x3 0x24 0x64 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC3 0xC4 0xA
+15:42:05.044 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.045 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:05.068 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.069 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:05.093 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.093 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:05.117 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.118 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:05.141 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.143 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:05.166 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.167 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:05.168 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:05.168 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:05.170 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:05.787 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x288
+15:42:05.788 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:05.789 >  0x26 0x3 0x24 0xA0 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x65 0xFF 0xA
+15:42:05.990 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:05.991 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:06.014 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.015 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:06.039 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.041 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:06.063 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.066 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:06.088 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.088 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:06.112 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.145 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:06.145 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:06.145 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:06.145 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:06.733 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2AC
+15:42:06.734 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:06.734 >  0x26 0x3 0x24 0xDC 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA7 0xF 0xA
+15:42:06.936 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.937 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:06.960 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.961 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:06.984 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:06.986 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:07.009 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.010 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:07.033 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.034 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:07.058 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.059 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:07.060 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:07.060 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:07.062 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:07.679 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2D0
+15:42:07.681 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:07.682 >  0x26 0x3 0x24 0x19 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x81 0x2A 0xA
+15:42:07.881 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.883 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:07.906 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.907 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:07.930 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.931 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:07.954 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.955 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:07.979 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:07.980 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:08.003 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.004 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:08.005 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:08.005 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:08.007 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:08.624 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2F4
+15:42:08.626 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:08.627 >  0x26 0x3 0x24 0x55 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x8F 0xD 0xA
+15:42:08.828 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.829 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:08.852 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.853 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:08.875 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.876 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:08.900 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.901 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:08.924 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.926 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:08.949 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:08.950 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:08.950 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:08.950 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:08.952 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:09.570 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x318
+15:42:09.572 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:09.573 >  0x26 0x3 0x24 0x91 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x36 0xA
+15:42:09.773 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.774 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:09.797 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.798 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:09.822 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.823 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:09.846 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.847 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:09.871 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.872 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:09.895 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:09.896 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:09.897 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:09.897 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:09.899 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:10.516 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x33C
+15:42:10.517 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:10.517 >  0x26 0x3 0x24 0xCE 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE8 0x80 0xA
+15:42:10.718 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.719 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:10.743 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.744 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:10.767 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.768 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:10.791 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.792 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:10.816 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.817 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:10.840 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:10.841 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:10.842 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:10.843 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:10.845 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:11.461 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x360
+15:42:11.463 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:11.463 >  0x26 0x3 0x24 0xA 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x8E 0xA
+15:42:11.664 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.665 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:11.688 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.689 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:11.713 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.714 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:11.737 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.738 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:11.762 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.762 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:11.786 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:11.787 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:11.787 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:11.788 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:11.790 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:12.405 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x384
+15:42:12.407 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:12.408 >  0x26 0x3 0x24 0x47 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE 0xE8 0xA
+15:42:12.607 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.608 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:12.632 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.634 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:12.656 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.657 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:12.681 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.682 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:12.705 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.706 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:12.730 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:12.731 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:12.731 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:12.731 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:12.733 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:13.354 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3A8
+15:42:13.355 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:13.356 >  0x26 0x3 0x24 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x3E 0x9D 0xA
+15:42:13.557 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.557 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:13.581 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.582 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:13.606 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.606 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:13.630 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.631 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:13.655 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.656 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:13.679 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:13.680 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:13.681 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:13.681 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:13.683 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:14.300 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3CC
+15:42:14.301 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:14.302 >  0x26 0x3 0x24 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x6A 0x93 0xA
+15:42:14.501 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.502 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:14.527 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.528 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:14.551 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.552 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:14.576 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.577 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:14.600 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.601 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:14.625 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:14.626 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:14.626 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:14.626 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:14.628 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:15.245 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3F0
+15:42:15.247 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:15.248 >  0x26 0x3 0x24 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB3 0x2B 0xA
+15:42:15.448 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.449 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:15.472 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.473 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:15.497 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.498 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:15.521 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.522 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:15.545 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.546 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:15.570 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:15.571 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:15.572 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:15.572 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:15.574 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:16.191 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x414
+15:42:16.193 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:16.194 >  0x26 0x3 0x24 0xA3 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x79 0x9 0xA
+15:42:16.393 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.396 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:16.418 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.419 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:16.442 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.443 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:16.467 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.467 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:16.491 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.492 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:16.515 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:16.516 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:16.517 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:16.518 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:16.519 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:17.136 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x438
+15:42:17.138 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:17.139 >  0x26 0x3 0x24 0xDF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xBB 0xF9 0xA
+15:42:17.339 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.341 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:17.363 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.364 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:17.388 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.388 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:17.412 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.413 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:17.437 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.438 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:17.461 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:17.474 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:17.474 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:17.474 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:17.474 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:18.082 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x45C
+15:42:18.085 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:18.086 >  0x26 0x3 0x24 0x1B 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x7A 0xF7 0xA
+15:42:18.285 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.285 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:18.309 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.310 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:18.333 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.335 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:18.358 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.359 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:18.382 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.383 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:18.407 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:18.408 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:18.408 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:18.409 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:18.410 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:19.028 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x480
+15:42:19.030 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:19.030 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:19.230 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.231 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:19.255 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.256 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:19.279 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.281 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:19.304 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.304 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:19.328 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.329 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:19.353 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:19.354 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:19.354 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:19.355 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:19.357 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:19.974 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4A4
+15:42:19.976 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:19.977 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:20.175 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.177 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:20.200 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.201 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:20.224 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.225 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:20.249 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.250 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:20.273 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.274 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:20.298 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:20.299 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:20.299 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:20.299 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:20.302 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:20.920 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4C8
+15:42:20.922 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:20.923 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:21.122 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.123 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:21.146 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.147 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:21.171 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.172 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:21.195 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.196 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:21.219 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.220 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:21.244 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:21.245 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:21.245 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:21.245 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:21.248 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:21.864 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4EC
+15:42:21.865 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:21.866 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:22.068 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.069 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:22.092 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.092 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:22.116 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.117 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:22.141 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.142 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:22.165 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.166 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:22.190 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:22.191 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:22.191 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:22.192 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:22.193 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:22.810 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x510
+15:42:22.812 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:22.813 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:23.013 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.014 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:23.037 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.038 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:23.062 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.062 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:23.086 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.087 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:23.110 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.111 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:23.135 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.136 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:23.136 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:23.136 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:23.138 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:23.756 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x534
+15:42:23.757 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:23.757 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:23.958 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.959 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:23.983 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:23.984 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:24.007 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.008 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:24.032 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.033 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:24.056 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.057 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:24.081 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.081 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:24.082 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:24.082 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:24.085 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:24.703 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x558
+15:42:24.705 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:24.705 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:24.904 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.905 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:24.929 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.930 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:24.953 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.955 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:24.977 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:24.978 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:25.002 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.002 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:25.026 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.028 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:25.028 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:25.028 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:25.030 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:25.647 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x57C
+15:42:25.649 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:25.650 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:25.850 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.850 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:25.874 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.875 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:25.899 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.899 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:25.923 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.924 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:25.947 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:25.948 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:25.972 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.007 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:26.007 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:26.007 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:26.007 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:26.593 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5A0
+15:42:26.595 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:26.596 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:42:26.796 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.797 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:26.820 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.822 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:26.844 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.845 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:26.869 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.870 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:26.893 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.895 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:26.918 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:26.919 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:26.919 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:26.920 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:26.921 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:27.538 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5C4
+15:42:27.540 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:27.541 >  0x26 0x3 0x24 0xE 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xB8 0x41 0x6 0x0 0x0 0x0 0x84 0x7 0x1A 0x40 0x0 0x0 0x0 0x0 0xDA 0xF5 0xF3 0x3F 0x0 0x0 0x0 0x0 0x74 0xE2 0xA
+15:42:27.741 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.742 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:27.766 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.767 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:27.790 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.792 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:27.814 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.815 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:27.839 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.839 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:27.863 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:27.864 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:27.865 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:27.865 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:27.867 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:28.488 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5E8
+15:42:28.489 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:28.490 >  0x26 0x3 0x24 0x9D 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC8 0x41 0x16 0x0 0x0 0x0 0x98 0x22 0x1B 0x40 0x0 0x0 0x0 0x0 0xB2 0x9 0x9 0x40 0x0 0x0 0x0 0x0 0x53 0x3 0xA
+15:42:28.691 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.692 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:28.715 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.717 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:28.740 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.740 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:28.764 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.765 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:28.789 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.789 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:28.813 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:28.814 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:28.814 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:28.815 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:28.817 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:29.434 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x60C
+15:42:29.435 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:29.437 >  0x26 0x3 0x24 0x10 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB9 0x41 0xA 0x0 0x0 0x0 0x87 0x6 0x1B 0x40 0x0 0x0 0x0 0x0 0xD 0x27 0xC 0x40 0x0 0x0 0x0 0x0 0x39 0x43 0xA
+15:42:29.636 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.638 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:29.661 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.662 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:29.685 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.686 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:29.710 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.711 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:29.734 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.735 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:29.758 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:29.778 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:29.778 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:29.778 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:29.778 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:30.379 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x630
+15:42:30.380 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:30.381 >  0x26 0x3 0x24 0xA0 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x40 0xC8 0x41 0x15 0x0 0x0 0x0 0x48 0xE8 0x1A 0x40 0x0 0x0 0x0 0x0 0x5F 0xA2 0x4 0x40 0x0 0x0 0x0 0x0 0xF8 0x3E 0xA
+15:42:30.582 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.583 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:30.606 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.607 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:30.631 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.632 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:30.655 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.656 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:30.680 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.681 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:30.704 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:30.705 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:30.706 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:30.706 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:30.708 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:31.325 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x654
+15:42:31.327 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:31.328 >  0x26 0x3 0x24 0x2D 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCB 0x41 0x1A 0x0 0x0 0x0 0x16 0xD8 0x1A 0x40 0x0 0x0 0x0 0x0 0xDD 0xC7 0x2 0x40 0x0 0x0 0x0 0x0 0x61 0xBB 0xA
+15:42:31.527 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.528 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:31.551 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.552 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:31.576 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.577 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:31.600 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.601 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:31.624 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.626 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:31.649 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:31.650 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:31.651 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:31.651 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:31.653 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:32.271 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x678
+15:42:32.273 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:32.273 >  0x26 0x3 0x24 0xBA 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC0 0xCC 0x41 0x20 0x0 0x0 0x0 0xC7 0x16 0x1B 0x40 0x0 0x0 0x0 0x0 0x38 0x19 0x7 0x40 0x0 0x0 0x0 0x0 0x22 0x12 0xA
+15:42:32.473 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.474 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:32.497 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.498 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:32.521 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.522 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:32.546 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.546 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:32.570 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.571 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:32.595 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:32.596 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:32.596 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:32.597 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:32.598 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:33.215 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x69C
+15:42:33.217 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:33.218 >  0x26 0x3 0x24 0x49 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x41 0x2F 0x0 0x0 0x0 0x2A 0x49 0x1A 0x40 0x0 0x0 0x0 0x0 0x65 0x62 0xF0 0x3F 0x0 0x0 0x0 0x0 0x4B 0xFD 0xA
+15:42:33.417 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.418 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:33.442 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.442 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:33.466 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.467 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:33.490 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.492 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:33.515 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.516 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:33.539 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:33.540 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:33.540 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:33.541 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:33.543 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:34.160 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x6C0
+15:42:34.161 > DEBUG (sendDataFrame) -> Trama enviada:
+15:42:34.161 >  0x26 0x3 0x24 0xD6 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xCE 0x41 0x33 0x0 0x0 0x0 0x2 0xD 0x1A 0x40 0x0 0x0 0x0 0x0 0x43 0xA2 0xE8 0x3F 0x0 0x0 0x0 0x0 0x66 0x99 0xA
+15:42:34.362 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.363 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:42:34.387 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.389 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:42:34.411 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.412 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:42:34.435 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.436 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:34.460 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.461 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:42:34.484 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:42:34.485 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:42:34.485 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:42:34.485 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:42:34.487 > DEBUG (write_SENT_DATAaddress) -> ...
+15:42:35.106 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.205 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.305 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.405 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.506 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.606 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.706 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.806 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:35.906 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.006 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.106 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.206 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.306 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.406 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.507 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.607 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.707 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.807 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:36.907 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.007 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.107 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.207 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.307 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.407 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.507 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.607 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.707 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.808 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:37.907 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.008 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.108 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.208 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.308 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.408 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.508 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.607 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.708 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.808 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:38.908 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.008 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.108 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.209 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.308 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.409 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.509 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.609 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.709 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.809 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:39.909 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.009 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.109 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.209 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.309 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.409 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.509 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.609 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.709 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.809 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:40.909 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.010 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.110 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.210 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.310 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.410 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.510 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.610 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.710 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.811 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:41.911 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.010 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.110 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.211 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.310 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.411 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.511 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.611 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.711 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.811 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:42.911 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.011 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.111 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.212 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.312 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.412 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.512 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.612 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.712 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.812 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:43.912 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.012 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.112 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.213 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.313 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.412 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.513 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.613 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.713 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.813 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:44.913 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.013 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.113 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.213 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.313 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.413 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.514 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.613 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.714 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.814 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:45.914 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.014 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.114 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.214 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.314 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.414 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.514 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.614 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.715 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.815 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:46.914 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.015 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.115 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.215 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.315 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.415 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.515 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.615 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.714 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.815 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:47.915 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.016 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.116 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.216 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.316 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.416 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.516 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.616 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.716 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.816 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:48.916 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.016 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.116 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.215 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.316 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.416 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.516 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.616 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.716 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.816 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:49.917 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.016 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.116 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.217 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.317 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.417 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.517 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.617 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.718 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.818 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:50.918 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.018 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.118 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.217 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.318 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.418 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.518 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.618 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.718 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.818 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:51.919 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.019 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.119 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.219 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.319 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.419 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.518 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.619 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.719 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.819 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:52.919 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.019 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.119 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.219 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.320 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.420 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.520 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.619 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.720 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.819 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:53.920 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.020 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.120 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.220 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.319 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.420 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.520 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.620 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.720 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.821 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:54.921 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.021 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.121 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.221 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.320 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.421 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.521 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.621 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.721 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.821 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:55.921 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.021 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.121 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.222 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.322 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.422 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.522 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.622 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.721 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.822 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:56.922 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.021 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.122 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.222 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.322 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.422 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.522 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.622 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.722 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.822 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:57.923 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.022 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.123 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.223 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.322 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.423 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.523 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.623 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.723 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.823 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:58.924 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.024 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.123 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.224 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.324 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.423 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.524 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.624 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.724 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.824 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:42:59.924 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.023 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.124 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.224 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.324 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.424 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.524 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.624 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.725 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.825 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:00.925 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.025 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.125 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.224 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.324 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.424 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.525 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.625 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.725 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.826 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:01.926 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.025 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.126 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.226 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.326 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.426 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.525 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.625 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.725 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.826 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:02.926 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.026 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.126 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.226 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.326 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.426 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.526 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.626 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.726 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.826 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:03.927 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.026 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.127 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.227 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.327 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.427 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.527 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.627 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.727 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.827 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:04.928 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.028 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.128 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.228 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.328 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.428 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.528 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.628 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.728 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.828 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:05.928 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.028 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.128 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.228 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.328 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.428 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.528 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.629 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.729 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.829 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:06.929 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.029 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.129 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.229 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.329 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.429 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.529 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.629 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.729 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.829 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:07.930 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.029 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.129 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.229 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.329 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.429 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.529 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.629 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.730 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.830 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:08.930 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.030 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.130 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.231 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.330 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.430 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.530 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.630 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.730 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.831 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:09.931 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.031 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.131 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.231 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.331 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.431 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.531 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.631 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.731 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.831 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:10.931 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.031 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.131 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.231 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.331 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.432 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.532 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.632 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.731 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.832 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:11.932 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.032 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.132 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.232 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.332 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.432 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.532 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.632 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.732 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.833 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:12.932 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.033 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.133 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.233 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.333 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.433 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.533 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.633 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.733 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.833 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:13.933 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.033 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.133 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.234 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.334 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.434 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.533 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.634 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.734 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.834 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:14.934 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.034 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.134 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.234 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.334 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.434 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.534 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.635 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.735 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.835 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:15.935 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.034 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.135 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.235 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.335 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.435 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.535 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.635 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.735 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.835 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:16.936 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.036 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.135 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.235 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.335 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.436 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.536 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.635 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.736 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.836 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:17.936 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.036 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.136 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.236 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.337 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.437 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.537 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.636 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.736 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.836 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:18.937 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.036 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.137 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.236 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.337 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.437 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.537 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.637 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.737 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.837 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:19.937 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.038 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.138 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.237 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.337 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.438 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.538 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.638 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.737 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.838 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:20.938 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.038 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.138 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.238 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.339 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.439 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.538 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.639 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.739 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.838 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:21.938 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.039 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.139 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.239 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.339 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.439 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.539 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.639 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.740 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.840 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:22.939 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.040 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.140 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.240 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.340 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.440 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.540 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.639 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.740 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.840 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:23.940 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.040 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.140 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.240 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.340 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.440 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.541 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.641 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.741 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.841 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:24.941 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.041 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.142 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.241 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.341 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.441 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.541 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.641 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.741 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.842 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:25.942 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.042 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.142 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.242 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.342 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.442 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.543 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.643 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.743 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.843 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:26.942 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.042 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.142 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.242 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.343 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.443 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.543 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.643 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.743 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.843 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:27.944 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.044 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.144 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.244 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.344 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.444 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.543 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.643 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.743 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.844 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:28.944 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.044 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.144 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.244 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.345 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.444 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.544 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.645 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.744 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.845 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:29.945 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.045 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.145 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.245 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.345 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.445 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.546 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.646 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.746 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.846 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:30.945 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.045 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.146 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.246 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.346 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.446 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.546 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.646 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.746 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.847 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:31.947 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.047 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.147 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.247 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.347 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.446 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.546 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.647 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.747 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.847 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:32.947 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.047 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.147 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.248 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.348 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.448 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.548 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.648 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.748 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.848 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:33.949 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.048 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.148 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.248 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.348 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.448 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.548 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.649 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.749 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.849 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:34.949 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.049 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.149 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.250 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.350 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.450 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.550 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.649 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.749 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.849 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:35.949 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.050 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.150 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.250 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.350 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.451 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.550 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.651 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.751 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.851 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:36.951 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.051 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.151 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.251 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.351 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.451 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.552 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.652 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.752 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.852 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:37.952 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.052 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.152 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.252 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.352 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.452 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.553 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.652 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.752 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.852 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:38.952 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:43:39.052 > DEBUG (sendDataFrame) → last_address_written == last_sent_address

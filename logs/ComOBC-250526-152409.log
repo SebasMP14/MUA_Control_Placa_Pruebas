@@ -1,0 +1,2161 @@
+15:24:09.204 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+15:24:09.314 > DEBUG (setupCOUNT) -> MODE0: 100100
+15:24:09.364 > DEBUG (setupCOUNT) -> MODE0: 11111100
+15:24:09.365 > DEBUG (setupCOUNT) -> PGA: 0
+15:24:09.366 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+15:24:09.776 > DEBUG (loopCOUNT) -> readRef: 5.085414
+15:24:09.777 > Temperatura: 22.6250
+15:24:09.787 > firstCurrent1: 1.212311
+15:24:09.789 > Vbd teorico: 24.484938
+15:24:09.791 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.0644, 29.5646, 6595, 4AEA, paso: 17
+15:24:19.803 > Tiempo promedio de muestreo [ms]: 24.9991
+15:24:19.806 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:24:19.809 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:24:19.810 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.422273
+15:24:19.813 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 5165
+15:24:19.813 > DEBUG (polarization_settling) -> iniciando
+15:24:19.814 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.0652, 0x3309, 1.989606
+15:24:19.998 > DEBUG (polarization_settling) → Vtia2: 3.823993, 0x32CD
+15:24:20.023 > DEBUG (polarization_settling) → Vtia2: 3.823828, 0x32B9
+15:24:20.047 > DEBUG (polarization_settling) → Vtia2: 3.823940, 0x32A5
+15:24:20.072 > DEBUG (polarization_settling) → Vtia2: 3.823894, 0x3291
+15:24:20.096 > DEBUG (polarization_settling) → Vtia2: 3.823784, 0x327D
+15:24:20.120 > DEBUG (polarization_settling) → Vtia2: 3.823878, 0x3269
+15:24:20.144 > DEBUG (polarization_settling) → Vtia2: 3.823678, 0x3255
+15:24:20.169 > DEBUG (polarization_settling) → Vtia2: 3.823884, 0x3241
+15:24:20.193 > DEBUG (polarization_settling) → Vtia2: 3.823828, 0x322D
+15:24:20.218 > DEBUG (polarization_settling) → Vtia2: 3.823847, 0x3219
+15:24:20.242 > DEBUG (polarization_settling) → Vtia2: 3.823721, 0x3205
+15:24:20.266 > DEBUG (polarization_settling) → Vtia2: 3.823722, 0x31F1
+15:24:20.290 > DEBUG (polarization_settling) → Vtia2: 3.823606, 0x31DD
+15:24:20.314 > DEBUG (polarization_settling) → Vtia2: 3.823711, 0x31C9
+15:24:20.338 > DEBUG (polarization_settling) → Vtia2: 3.823778, 0x31B5
+15:24:20.362 > DEBUG (polarization_settling) → Vtia2: 3.823725, 0x31A1
+15:24:20.387 > DEBUG (polarization_settling) → Vtia2: 3.823706, 0x318D
+15:24:20.411 > DEBUG (polarization_settling) → Vtia2: 3.823571, 0x3179
+15:24:20.435 > DEBUG (polarization_settling) → Vtia2: 3.823478, 0x3165
+15:24:20.461 > DEBUG (polarization_settling) → Vtia2: 3.823587, 0x3151
+15:24:20.486 > DEBUG (polarization_settling) → Vtia2: 3.823568, 0x313D
+15:24:20.510 > DEBUG (polarization_settling) → Vtia2: 3.823678, 0x3129
+15:24:20.534 > DEBUG (polarization_settling) → Vtia2: 3.823558, 0x3115
+15:24:20.558 > DEBUG (polarization_settling) → Vtia2: 3.823612, 0x3101
+15:24:20.582 > DEBUG (polarization_settling) → Vtia2: 3.823555, 0x30ED
+15:24:20.606 > DEBUG (polarization_settling) → Vtia2: 3.823492, 0x30D9
+15:24:20.630 > DEBUG (polarization_settling) → Vtia2: 3.823477, 0x30C5
+15:24:20.654 > DEBUG (polarization_settling) → Vtia2: 3.823400, 0x30B1
+15:24:20.679 > DEBUG (polarization_settling) → Vtia2: 3.823488, 0x309D
+15:24:20.703 > DEBUG (polarization_settling) → Vtia2: 3.823227, 0x3089
+15:24:20.727 > DEBUG (polarization_settling) → Vtia2: 3.823417, 0x3075
+15:24:20.751 > DEBUG (polarization_settling) → Vtia2: 3.823268, 0x3061
+15:24:20.776 > DEBUG (polarization_settling) → Vtia2: 3.823389, 0x304D
+15:24:20.800 > DEBUG (polarization_settling) → Vtia2: 3.823244, 0x3039
+15:24:20.824 > DEBUG (polarization_settling) → Vtia2: 3.823262, 0x3025
+15:24:20.848 > DEBUG (polarization_settling) → Vtia2: 3.823232, 0x3011
+15:24:20.872 > DEBUG (polarization_settling) → Vtia2: 3.823441, 0x2FFD
+15:24:20.896 > DEBUG (polarization_settling) → Vtia2: 3.823360, 0x2FE9
+15:24:20.920 > DEBUG (polarization_settling) → Vtia2: 3.823240, 0x2FD5
+15:24:20.944 > DEBUG (polarization_settling) → Vtia2: 3.823356, 0x2FC1
+15:24:20.968 > DEBUG (polarization_settling) → Vtia2: 3.823289, 0x2FAD
+15:24:20.991 > DEBUG (polarization_settling) → Vtia2: 3.823158, 0x2F99
+15:24:21.015 > DEBUG (polarization_settling) → Vtia2: 3.823383, 0x2F85
+15:24:21.039 > DEBUG (polarization_settling) → Vtia2: 3.822860, 0x2F71
+15:24:21.063 > DEBUG (polarization_settling) → Vtia2: 3.823263, 0x2F5D
+15:24:21.087 > DEBUG (polarization_settling) → Vtia2: 3.823027, 0x2F49
+15:24:21.112 > DEBUG (polarization_settling) → Vtia2: 3.823194, 0x2F35
+15:24:21.136 > DEBUG (polarization_settling) → Vtia2: 3.823210, 0x2F21
+15:24:21.160 > DEBUG (polarization_settling) → Vtia2: 3.823081, 0x2F0D
+15:24:21.184 > DEBUG (polarization_settling) → Vtia2: 3.822960, 0x2EF9
+15:24:21.208 > DEBUG (polarization_settling) → Vtia2: 3.823036, 0x2EE5
+15:24:21.232 > DEBUG (polarization_settling) → Vtia2: 3.822873, 0x2ED1
+15:24:21.257 > DEBUG (polarization_settling) → Vtia2: 3.822896, 0x2EBD
+15:24:21.281 > DEBUG (polarization_settling) → Vtia2: 3.822845, 0x2EA9
+15:24:21.306 > DEBUG (polarization_settling) → Vtia2: 3.822953, 0x2E95
+15:24:21.330 > DEBUG (polarization_settling) → Vtia2: 3.822855, 0x2E81
+15:24:21.355 > DEBUG (polarization_settling) → Vtia2: 3.823024, 0x2E6D
+15:24:21.379 > DEBUG (polarization_settling) → Vtia2: 3.823006, 0x2E59
+15:24:21.403 > DEBUG (polarization_settling) → Vtia2: 3.822873, 0x2E45
+15:24:21.427 > DEBUG (polarization_settling) → Vtia2: 3.822945, 0x2E31
+15:24:21.451 > DEBUG (polarization_settling) → Vtia2: 3.822898, 0x2E1D
+15:24:21.475 > DEBUG (polarization_settling) → Vtia2: 3.823197, 0x2E09
+15:24:21.500 > DEBUG (polarization_settling) → Vtia2: 3.823421, 0x2DF5
+15:24:21.524 > DEBUG (polarization_settling) → Vtia2: 3.823361, 0x2DE1
+15:24:21.549 > DEBUG (polarization_settling) → Vtia2: 3.823402, 0x2DCD
+15:24:21.573 > DEBUG (polarization_settling) → Vtia2: 3.823242, 0x2DB9
+15:24:21.597 > DEBUG (polarization_settling) → Vtia2: 3.823156, 0x2DA5
+15:24:21.621 > DEBUG (polarization_settling) → Vtia2: 3.823111, 0x2D91
+15:24:21.645 > DEBUG (polarization_settling) → Vtia2: 3.823310, 0x2D7D
+15:24:21.669 > DEBUG (polarization_settling) → Vtia2: 3.823457, 0x2D69
+15:24:21.693 > DEBUG (polarization_settling) → Vtia2: 3.823284, 0x2D55
+15:24:21.717 > DEBUG (polarization_settling) → Vtia2: 3.823372, 0x2D41
+15:24:21.742 > DEBUG (polarization_settling) → Vtia2: 3.823208, 0x2D2D
+15:24:21.766 > DEBUG (polarization_settling) → Vtia2: 3.823188, 0x2D19
+15:24:21.792 > DEBUG (polarization_settling) → Vtia2: 3.823019, 0x2D05
+15:24:21.815 > DEBUG (polarization_settling) → Vtia2: 3.823077, 0x2CF1
+15:24:21.840 > DEBUG (polarization_settling) → Vtia2: 3.822894, 0x2CDD
+15:24:21.865 > DEBUG (polarization_settling) → Vtia2: 3.822921, 0x2CC9
+15:24:21.889 > DEBUG (polarization_settling) → Vtia2: 3.822697, 0x2CB5
+15:24:21.913 > DEBUG (polarization_settling) → Vtia2: 3.822787, 0x2CA1
+15:24:21.937 > DEBUG (polarization_settling) → Vtia2: 3.822689, 0x2C8D
+15:24:21.961 > DEBUG (polarization_settling) → Vtia2: 3.822695, 0x2C79
+15:24:21.985 > DEBUG (polarization_settling) → Vtia2: 3.822782, 0x2C65
+15:24:22.009 > DEBUG (polarization_settling) → Vtia2: 3.822582, 0x2C51
+15:24:22.033 > DEBUG (polarization_settling) → Vtia2: 3.822425, 0x2C3D
+15:24:22.057 > DEBUG (polarization_settling) → Vtia2: 3.822542, 0x2C29
+15:24:22.081 > DEBUG (polarization_settling) → Vtia2: 3.822388, 0x2C15
+15:24:22.105 > DEBUG (polarization_settling) → Vtia2: 3.822516, 0x2C01
+15:24:22.129 > DEBUG (polarization_settling) → Vtia2: 3.822403, 0x2BED
+15:24:22.153 > DEBUG (polarization_settling) → Vtia2: 3.822743, 0x2BD9
+15:24:22.177 > DEBUG (polarization_settling) → Vtia2: 3.822444, 0x2BC5
+15:24:22.201 > DEBUG (polarization_settling) → Vtia2: 3.822615, 0x2BB1
+15:24:22.225 > DEBUG (polarization_settling) → Vtia2: 3.822564, 0x2B9D
+15:24:22.236 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:24:22.259 > DEBUG (polarization_settling) → writing in MCP: C3
+15:24:22.260 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:24:22.260 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:24:22.262 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 32.065216, 2.718863, 32.062817
+15:24:22.266 > Over Voltage: 3.50
+15:24:22.377 > DEBUG (loopCOUNT) -> readRef: 5.085144
+15:24:22.379 > Temperatura2: 23.6250
+15:24:22.390 > Vbd teorico: 24.506437
+15:24:22.392 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.0860, 29.5862, 655A, 4AAF, paso: 17
+15:24:32.402 > Tiempo promedio de muestreo [ms]: 24.9987
+15:24:32.405 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:24:32.405 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:24:32.407 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:24:32.407 > DEBUG (polarization_settling) -> iniciando
+15:24:32.409 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.027237
+15:24:32.594 > DEBUG (polarization_settling) → Vtia2: 3.829503, 0x6244
+15:24:32.605 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:24:32.628 > DEBUG (polarization_settling) → writing in MCP: C3
+15:24:32.629 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:24:32.629 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:24:32.630 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299501, 27.117397
+15:24:32.634 > setupCount finalizado...
+15:24:32.635 > DEBUG (setup) -> Setup finalizado...
+15:24:38.139 > millis: 32247, timestamp: 946684800, Temperatura: 24.1875
+15:24:38.145 > ref, Vbias: 5.084233, 2.718503
+15:24:43.643 > millis: 37747, timestamp: 946684835, Temperatura: 24.2500
+15:24:43.647 > ref, Vbias: 5.084246, 2.718377
+15:24:47.614 > COUNT1: 1
+15:24:49.148 > millis: 43247, timestamp: 946684841, Temperatura: 24.3750
+15:24:49.151 > ref, Vbias: 5.084204, 2.718714
+15:24:50.722 > COUNT1: 2
+15:24:54.652 > millis: 48747, timestamp: 946684846, Temperatura: 24.4375
+15:24:54.655 > ref, Vbias: 5.084284, 2.718478
+15:25:00.156 > millis: 54247, timestamp: 946684852, Temperatura: 24.5000
+15:25:00.159 > ref, Vbias: 5.084357, 2.718319
+15:25:05.661 > millis: 59747, timestamp: 946684857, Temperatura: 24.5625
+15:25:05.664 > ref, Vbias: 5.084298, 2.718342
+15:25:11.165 > millis: 65247, timestamp: 946684863, Temperatura: 24.6250
+15:25:11.167 > ref, Vbias: 5.084632, 2.718482
+15:25:16.669 > millis: 70747, timestamp: 946684868, Temperatura: 24.6875
+15:25:16.672 > ref, Vbias: 5.084388, 2.718500
+15:25:17.807 > COUNT1: 3
+15:25:18.539 > COUNT1: 4
+15:25:22.173 > millis: 76247, timestamp: 946684874, Temperatura: 24.6875
+15:25:22.175 > ref, Vbias: 5.084340, 2.718723
+15:25:27.677 > millis: 81747, timestamp: 946684879, Temperatura: 24.7500
+15:25:27.680 > ref, Vbias: 5.084441, 2.718647
+15:25:33.182 > millis: 87247, timestamp: 946684885, Temperatura: 24.7500
+15:25:33.184 > ref, Vbias: 5.084486, 2.718386
+15:25:36.856 > COUNT1: 5
+15:25:38.686 > millis: 92747, timestamp: 946684890, Temperatura: 24.7500
+15:25:38.688 > ref, Vbias: 5.084029, 2.718601
+15:25:44.189 > millis: 98247, timestamp: 946684896, Temperatura: 24.8125
+15:25:44.191 > ref, Vbias: 5.084362, 2.718849
+15:25:46.297 > COUNT1: 6
+15:25:49.694 > millis: 103747, timestamp: 946684901, Temperatura: 24.8125
+15:25:49.696 > ref, Vbias: 5.084413, 2.718610
+15:25:51.156 > COUNT1: 7
+15:25:55.198 > millis: 109247, timestamp: 946684907, Temperatura: 24.8750
+15:25:55.200 > ref, Vbias: 5.084029, 2.718730
+15:26:00.702 > millis: 114747, timestamp: 946684912, Temperatura: 24.8750
+15:26:00.704 > ref, Vbias: 5.083930, 2.718352
+15:26:06.207 > millis: 120247, timestamp: 946684918, Temperatura: 24.8750
+15:26:06.209 > ref, Vbias: 5.084229, 2.718614
+15:26:11.710 > millis: 125747, timestamp: 946684923, Temperatura: 24.9375
+15:26:11.714 > ref, Vbias: 5.084292, 2.718757
+15:26:17.215 > millis: 131247, timestamp: 946684929, Temperatura: 24.9375
+15:26:17.217 > ref, Vbias: 5.084177, 2.718504
+15:26:17.940 > COUNT1: 8
+15:26:22.719 > millis: 136747, timestamp: 946684934, Temperatura: 24.9375
+15:26:22.722 > ref, Vbias: 5.084370, 2.718630
+15:26:23.875 > COUNT1: 9
+15:26:28.224 > millis: 142247, timestamp: 946684940, Temperatura: 25.0000
+15:26:28.228 > ref, Vbias: 5.084697, 2.718708
+15:26:32.657 > COUNT1: 10
+15:26:32.726 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:26:32.726 > TRAMA -> timestamp: (946684944, 0x386D4410), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (23.1250 ºC, 0x41B90000), Count1: (10, 0xA), Count2: (0, 0x0), Vbd1: (2.42, 0x401B0687), Vbd2: (0.00, 0x0), Vcurr1: (2.19, 0x400C270D), Vcurr2: (0.00, 0x0)
+15:26:32.736 > DEBUG (update_address) -> ...
+15:26:32.753 > DEBUG (update_address) -> ...
+15:26:32.770 > DEBUG (update_address) -> ...
+15:26:32.787 > DEBUG (update_address) -> ...
+15:26:32.805 > DEBUG (update_address) -> ...
+15:26:32.822 > DEBUG (update_address) -> ...
+15:26:32.840 > DEBUG (update_address) -> ...
+15:26:32.857 > DEBUG (update_address) -> ...
+15:26:32.874 > DEBUG (update_address) -> ...
+15:26:32.892 > DEBUG (update_address) -> ...
+15:26:33.019 > DEBUG (loopCOUNT) -> readRef: 5.084448
+15:26:33.021 > Temperatura: 25.0000
+15:26:33.041 > VVoltage, VCorriente
+15:26:33.041 > 2.252388, 1.195509
+15:26:33.044 > Vbd teorico: 24.535999
+15:26:33.045 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1157, 29.6155, 6509, 4A5F, paso: 17
+15:26:43.055 > Tiempo promedio de muestreo [ms]: 24.9991
+15:26:43.056 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:26:43.060 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:26:43.061 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.420427
+15:26:43.063 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 51A5
+15:26:43.063 > DEBUG (polarization_settling) -> iniciando
+15:26:43.063 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.0434, 0x3344, 1.996277
+15:26:43.247 > DEBUG (polarization_settling) → Vtia2: 3.819363, 0x3308
+15:26:43.271 > DEBUG (polarization_settling) → Vtia2: 3.819533, 0x32F4
+15:26:43.295 > DEBUG (polarization_settling) → Vtia2: 3.819251, 0x32E0
+15:26:43.319 > DEBUG (polarization_settling) → Vtia2: 3.819340, 0x32CC
+15:26:43.343 > DEBUG (polarization_settling) → Vtia2: 3.819207, 0x32B8
+15:26:43.369 > DEBUG (polarization_settling) → Vtia2: 3.819054, 0x32A4
+15:26:43.393 > DEBUG (polarization_settling) → Vtia2: 3.819190, 0x3290
+15:26:43.417 > DEBUG (polarization_settling) → Vtia2: 3.819268, 0x327C
+15:26:43.440 > DEBUG (polarization_settling) → Vtia2: 3.819263, 0x3268
+15:26:43.464 > DEBUG (polarization_settling) → Vtia2: 3.819199, 0x3254
+15:26:43.488 > DEBUG (polarization_settling) → Vtia2: 3.819212, 0x3240
+15:26:43.512 > DEBUG (polarization_settling) → Vtia2: 3.819293, 0x322C
+15:26:43.536 > DEBUG (polarization_settling) → Vtia2: 3.819221, 0x3218
+15:26:43.560 > DEBUG (polarization_settling) → Vtia2: 3.819158, 0x3204
+15:26:43.584 > DEBUG (polarization_settling) → Vtia2: 3.819175, 0x31F0
+15:26:43.608 > DEBUG (polarization_settling) → Vtia2: 3.819236, 0x31DC
+15:26:43.632 > DEBUG (polarization_settling) → Vtia2: 3.819007, 0x31C8
+15:26:43.657 > DEBUG (polarization_settling) → Vtia2: 3.819145, 0x31B4
+15:26:43.681 > DEBUG (polarization_settling) → Vtia2: 3.819062, 0x31A0
+15:26:43.705 > DEBUG (polarization_settling) → Vtia2: 3.819012, 0x318C
+15:26:43.729 > DEBUG (polarization_settling) → Vtia2: 3.818954, 0x3178
+15:26:43.754 > DEBUG (polarization_settling) → Vtia2: 3.819098, 0x3164
+15:26:43.778 > DEBUG (polarization_settling) → Vtia2: 3.819007, 0x3150
+15:26:43.803 > DEBUG (polarization_settling) → Vtia2: 3.819026, 0x313C
+15:26:43.828 > DEBUG (polarization_settling) → Vtia2: 3.819067, 0x3128
+15:26:43.852 > DEBUG (polarization_settling) → Vtia2: 3.819063, 0x3114
+15:26:43.875 > DEBUG (polarization_settling) → Vtia2: 3.818747, 0x3100
+15:26:43.899 > DEBUG (polarization_settling) → Vtia2: 3.818920, 0x30EC
+15:26:43.923 > DEBUG (polarization_settling) → Vtia2: 3.818868, 0x30D8
+15:26:43.947 > DEBUG (polarization_settling) → Vtia2: 3.818842, 0x30C4
+15:26:43.971 > DEBUG (polarization_settling) → Vtia2: 3.818857, 0x30B0
+15:26:43.995 > DEBUG (polarization_settling) → Vtia2: 3.818915, 0x309C
+15:26:44.019 > DEBUG (polarization_settling) → Vtia2: 3.818950, 0x3088
+15:26:44.043 > DEBUG (polarization_settling) → Vtia2: 3.818831, 0x3074
+15:26:44.067 > DEBUG (polarization_settling) → Vtia2: 3.818534, 0x3060
+15:26:44.091 > DEBUG (polarization_settling) → Vtia2: 3.818692, 0x304C
+15:26:44.117 > DEBUG (polarization_settling) → Vtia2: 3.818631, 0x3038
+15:26:44.142 > DEBUG (polarization_settling) → Vtia2: 3.818660, 0x3024
+15:26:44.166 > DEBUG (polarization_settling) → Vtia2: 3.818805, 0x3010
+15:26:44.190 > DEBUG (polarization_settling) → Vtia2: 3.818712, 0x2FFC
+15:26:44.214 > DEBUG (polarization_settling) → Vtia2: 3.818330, 0x2FE8
+15:26:44.238 > DEBUG (polarization_settling) → Vtia2: 3.818576, 0x2FD4
+15:26:44.262 > DEBUG (polarization_settling) → Vtia2: 3.818608, 0x2FC0
+15:26:44.286 > DEBUG (polarization_settling) → Vtia2: 3.818453, 0x2FAC
+15:26:44.310 > DEBUG (polarization_settling) → Vtia2: 3.818305, 0x2F98
+15:26:44.334 > DEBUG (polarization_settling) → Vtia2: 3.818571, 0x2F84
+15:26:44.358 > DEBUG (polarization_settling) → Vtia2: 3.818458, 0x2F70
+15:26:44.382 > DEBUG (polarization_settling) → Vtia2: 3.818327, 0x2F5C
+15:26:44.406 > DEBUG (polarization_settling) → Vtia2: 3.818413, 0x2F48
+15:26:44.430 > DEBUG (polarization_settling) → Vtia2: 3.818463, 0x2F34
+15:26:44.455 > DEBUG (polarization_settling) → Vtia2: 3.818325, 0x2F20
+15:26:44.479 > DEBUG (polarization_settling) → Vtia2: 3.818367, 0x2F0C
+15:26:44.503 > DEBUG (polarization_settling) → Vtia2: 3.818191, 0x2EF8
+15:26:44.527 > DEBUG (polarization_settling) → Vtia2: 3.818089, 0x2EE4
+15:26:44.551 > DEBUG (polarization_settling) → Vtia2: 3.818179, 0x2ED0
+15:26:44.575 > DEBUG (polarization_settling) → Vtia2: 3.818286, 0x2EBC
+15:26:44.600 > DEBUG (polarization_settling) → Vtia2: 3.818160, 0x2EA8
+15:26:44.625 > DEBUG (polarization_settling) → Vtia2: 3.818141, 0x2E94
+15:26:44.648 > DEBUG (polarization_settling) → Vtia2: 3.818118, 0x2E80
+15:26:44.672 > DEBUG (polarization_settling) → Vtia2: 3.818012, 0x2E6C
+15:26:44.696 > DEBUG (polarization_settling) → Vtia2: 3.818188, 0x2E58
+15:26:44.721 > DEBUG (polarization_settling) → Vtia2: 3.818316, 0x2E44
+15:26:44.745 > DEBUG (polarization_settling) → Vtia2: 3.818097, 0x2E30
+15:26:44.770 > DEBUG (polarization_settling) → Vtia2: 3.818179, 0x2E1C
+15:26:44.795 > DEBUG (polarization_settling) → Vtia2: 3.817708, 0x2E08
+15:26:44.818 > DEBUG (polarization_settling) → Vtia2: 3.818156, 0x2DF4
+15:26:44.842 > DEBUG (polarization_settling) → Vtia2: 3.817942, 0x2DE0
+15:26:44.867 > DEBUG (polarization_settling) → Vtia2: 3.818007, 0x2DCC
+15:26:44.892 > DEBUG (polarization_settling) → Vtia2: 3.817891, 0x2DB8
+15:26:44.916 > DEBUG (polarization_settling) → Vtia2: 3.817957, 0x2DA4
+15:26:44.941 > DEBUG (polarization_settling) → Vtia2: 3.817757, 0x2D90
+15:26:44.965 > DEBUG (polarization_settling) → Vtia2: 3.817905, 0x2D7C
+15:26:44.990 > DEBUG (polarization_settling) → Vtia2: 3.817729, 0x2D68
+15:26:45.014 > DEBUG (polarization_settling) → Vtia2: 3.817786, 0x2D54
+15:26:45.037 > DEBUG (polarization_settling) → Vtia2: 3.817969, 0x2D40
+15:26:45.061 > DEBUG (polarization_settling) → Vtia2: 3.817765, 0x2D2C
+15:26:45.085 > DEBUG (polarization_settling) → Vtia2: 3.817615, 0x2D18
+15:26:45.109 > DEBUG (polarization_settling) → Vtia2: 3.817647, 0x2D04
+15:26:45.134 > DEBUG (polarization_settling) → Vtia2: 3.817591, 0x2CF0
+15:26:45.159 > DEBUG (polarization_settling) → Vtia2: 3.817491, 0x2CDC
+15:26:45.183 > DEBUG (polarization_settling) → Vtia2: 3.817631, 0x2CC8
+15:26:45.208 > DEBUG (polarization_settling) → Vtia2: 3.817569, 0x2CB4
+15:26:45.232 > DEBUG (polarization_settling) → Vtia2: 3.817720, 0x2CA0
+15:26:45.257 > DEBUG (polarization_settling) → Vtia2: 3.817527, 0x2C8C
+15:26:45.281 > DEBUG (polarization_settling) → Vtia2: 3.817442, 0x2C78
+15:26:45.305 > DEBUG (polarization_settling) → Vtia2: 3.817573, 0x2C64
+15:26:45.329 > DEBUG (polarization_settling) → Vtia2: 3.817531, 0x2C50
+15:26:45.352 > DEBUG (polarization_settling) → Vtia2: 3.817523, 0x2C3C
+15:26:45.376 > DEBUG (polarization_settling) → Vtia2: 3.817456, 0x2C28
+15:26:45.401 > DEBUG (polarization_settling) → Vtia2: 3.817250, 0x2C14
+15:26:45.425 > DEBUG (polarization_settling) → Vtia2: 3.817204, 0x2C00
+15:26:45.449 > DEBUG (polarization_settling) → Vtia2: 3.817238, 0x2BEC
+15:26:45.473 > DEBUG (polarization_settling) → Vtia2: 3.817207, 0x2BD8
+15:26:45.484 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:26:45.507 > DEBUG (polarization_settling) → writing in MCP: C2
+15:26:45.508 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:26:45.509 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:26:45.510 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 32.043446, 2.716457, 32.034439
+15:26:45.523 > Vbd teorico: 24.537344
+15:26:45.525 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1171, 29.6170, 6505, 4A5B, paso: 17
+15:26:55.536 > Tiempo promedio de muestreo [ms]: 24.9993
+15:26:55.538 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:26:55.538 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:26:55.539 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:26:55.540 > DEBUG (polarization_settling) -> iniciando
+15:26:55.540 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.076778
+15:26:55.725 > DEBUG (polarization_settling) → Vtia2: 3.827394, 0x6244
+15:26:55.736 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:26:55.759 > DEBUG (polarization_settling) → writing in MCP: C3
+15:26:55.759 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:26:55.760 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:26:55.761 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299791, 27.120808
+15:26:56.264 > millis: 170266, timestamp: 946684968, Temperatura: 25.0625
+15:26:56.266 > ref, Vbias: 5.084242, 2.717129
+15:27:01.770 > millis: 175766, timestamp: 946684973, Temperatura: 25.0625
+15:27:01.773 > ref, Vbias: 5.083679, 2.716444
+15:27:07.276 > millis: 181266, timestamp: 946684979, Temperatura: 25.0625
+15:27:07.279 > ref, Vbias: 5.084533, 2.716570
+15:27:07.512 > COUNT1: 11
+15:27:12.781 > millis: 186766, timestamp: 946684984, Temperatura: 25.1250
+15:27:12.782 > ref, Vbias: 5.084028, 2.716635
+15:27:14.805 > COUNT1: 12
+15:27:18.284 > millis: 192266, timestamp: 946684990, Temperatura: 25.1250
+15:27:18.287 > ref, Vbias: 5.084317, 2.716790
+15:27:23.789 > millis: 197766, timestamp: 946684995, Temperatura: 25.1250
+15:27:23.793 > ref, Vbias: 5.084221, 2.717253
+15:27:28.738 > COUNT1: 13
+15:27:29.294 > millis: 203266, timestamp: 946685001, Temperatura: 25.1250
+15:27:29.296 > ref, Vbias: 5.084122, 2.717269
+15:27:29.447 > COUNT1: 14
+15:27:34.798 > millis: 208766, timestamp: 946685006, Temperatura: 25.1875
+15:27:34.800 > ref, Vbias: 5.083966, 2.717109
+15:27:40.303 > millis: 214266, timestamp: 946685012, Temperatura: 25.1875
+15:27:40.306 > ref, Vbias: 5.084599, 2.716946
+15:27:45.806 > millis: 219766, timestamp: 946685017, Temperatura: 25.1875
+15:27:45.809 > ref, Vbias: 5.084476, 2.717152
+15:27:48.324 > COUNT1: 15
+15:27:51.311 > millis: 225266, timestamp: 946685023, Temperatura: 25.1875
+15:27:51.313 > ref, Vbias: 5.084217, 2.716438
+15:27:53.255 > COUNT1: 16
+15:27:54.345 > COUNT1: 17
+15:27:56.814 > millis: 230766, timestamp: 946685028, Temperatura: 25.1875
+15:27:56.816 > ref, Vbias: 5.084542, 2.717048
+15:28:02.318 > millis: 236266, timestamp: 946685034, Temperatura: 25.1875
+15:28:02.321 > ref, Vbias: 5.084388, 2.716925
+15:28:07.823 > millis: 241766, timestamp: 946685040, Temperatura: 25.1875
+15:28:07.826 > ref, Vbias: 5.084159, 2.716966
+15:28:13.326 > millis: 247266, timestamp: 946685045, Temperatura: 25.2500
+15:28:13.328 > ref, Vbias: 5.084364, 2.716855
+15:28:13.450 > COUNT1: 18
+15:28:18.832 > millis: 252766, timestamp: 946685051, Temperatura: 25.2500
+15:28:18.834 > ref, Vbias: 5.083862, 2.716630
+15:28:23.751 > COUNT1: 19
+15:28:24.336 > millis: 258266, timestamp: 946685056, Temperatura: 25.2500
+15:28:24.339 > ref, Vbias: 5.083718, 2.717020
+15:28:29.840 > millis: 263766, timestamp: 946685062, Temperatura: 25.2500
+15:28:29.844 > ref, Vbias: 5.084215, 2.716864
+15:28:30.429 > COUNT1: 20
+15:28:35.345 > millis: 269266, timestamp: 946685067, Temperatura: 25.3125
+15:28:35.346 > ref, Vbias: 5.084447, 2.716419
+15:28:40.848 > millis: 274766, timestamp: 946685073, Temperatura: 25.3125
+15:28:40.850 > ref, Vbias: 5.084288, 2.716858
+15:28:41.876 > COUNT1: 21
+15:28:46.350 > millis: 280266, timestamp: 946685078, Temperatura: 25.3125
+15:28:46.353 > ref, Vbias: 5.084060, 2.716964
+15:28:51.853 > millis: 285766, timestamp: 946685084, Temperatura: 25.3750
+15:28:51.855 > ref, Vbias: 5.084060, 2.716750
+15:28:55.856 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:28:55.857 > TRAMA -> timestamp: (946685088, 0x386D44A0), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.0313 ºC, 0x41C84000), Count1: (21, 0x15), Count2: (0, 0x0), Vbd1: (2.42, 0x401AE848), Vbd2: (0.00, 0x0), Vcurr1: (2.07, 0x4004A25F), Vcurr2: (0.00, 0x0)
+15:28:55.866 > DEBUG (update_address) -> ...
+15:28:55.887 > DEBUG (update_address) -> ...
+15:28:55.904 > DEBUG (update_address) -> ...
+15:28:55.922 > DEBUG (update_address) -> ...
+15:28:55.939 > DEBUG (update_address) -> ...
+15:28:55.957 > DEBUG (update_address) -> ...
+15:28:55.974 > DEBUG (update_address) -> ...
+15:28:55.991 > DEBUG (update_address) -> ...
+15:28:56.009 > DEBUG (update_address) -> ...
+15:28:56.026 > DEBUG (update_address) -> ...
+15:28:56.153 > DEBUG (loopCOUNT) -> readRef: 5.084200
+15:28:56.156 > Temperatura: 25.3750
+15:28:56.175 > VVoltage, VCorriente
+15:28:56.176 > 2.242309, 1.195690
+15:28:56.179 > Vbd teorico: 24.544062
+15:28:56.180 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1237, 29.6236, 64F3, 4A49, paso: 17
+15:29:06.188 > Tiempo promedio de muestreo [ms]: 24.9995
+15:29:06.190 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:29:06.193 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:29:06.194 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.419439
+15:29:06.196 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 51C2
+15:29:06.196 > DEBUG (polarization_settling) -> iniciando
+15:29:06.197 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.0318, 0x3363, 1.995467
+15:29:06.391 > DEBUG (polarization_settling) → writing in MCP: C2
+15:29:06.392 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:29:06.392 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:29:06.393 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 32.031788, 2.658651, 31.352757
+15:29:06.407 > Vbd teorico: 24.544062
+15:29:06.409 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1237, 29.6236, 64F3, 4A49, paso: 17
+15:29:16.418 > Tiempo promedio de muestreo [ms]: 24.9986
+15:29:16.420 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:29:16.420 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:29:16.421 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:29:16.422 > DEBUG (polarization_settling) -> iniciando
+15:29:16.423 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.054228
+15:29:16.608 > DEBUG (polarization_settling) → Vtia2: 3.827566, 0x6244
+15:29:16.620 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:29:16.643 > DEBUG (polarization_settling) → writing in MCP: C3
+15:29:16.644 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:29:16.644 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:29:16.645 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299887, 27.121946
+15:29:17.149 > millis: 311045, timestamp: 946685109, Temperatura: 25.3750
+15:29:17.151 > ref, Vbias: 5.084097, 2.658512
+15:29:22.652 > millis: 316545, timestamp: 946685114, Temperatura: 25.4375
+15:29:22.654 > ref, Vbias: 5.084219, 2.659094
+15:29:28.157 > millis: 322045, timestamp: 946685120, Temperatura: 25.4375
+15:29:28.160 > ref, Vbias: 5.084751, 2.658948
+15:29:33.660 > millis: 327545, timestamp: 946685125, Temperatura: 25.4375
+15:29:33.664 > ref, Vbias: 5.084114, 2.659194
+15:29:38.050 > COUNT1: 22
+15:29:39.163 > millis: 333045, timestamp: 946685131, Temperatura: 25.4375
+15:29:39.165 > ref, Vbias: 5.084195, 2.658798
+15:29:44.668 > millis: 338545, timestamp: 946685136, Temperatura: 25.4375
+15:29:44.670 > ref, Vbias: 5.084490, 2.658788
+15:29:50.171 > millis: 344045, timestamp: 946685142, Temperatura: 25.4375
+15:29:50.173 > ref, Vbias: 5.084371, 2.658986
+15:29:55.674 > millis: 349545, timestamp: 946685147, Temperatura: 25.4375
+15:29:55.676 > ref, Vbias: 5.084446, 2.658606
+15:30:01.178 > millis: 355045, timestamp: 946685153, Temperatura: 25.4375
+15:30:01.182 > ref, Vbias: 5.084025, 2.658733
+15:30:04.051 > COUNT1: 23
+15:30:06.681 > millis: 360545, timestamp: 946685158, Temperatura: 25.5000
+15:30:06.684 > ref, Vbias: 5.084496, 2.658806
+15:30:12.185 > millis: 366045, timestamp: 946685164, Temperatura: 25.5000
+15:30:12.188 > ref, Vbias: 5.084564, 2.658877
+15:30:15.934 > COUNT1: 24
+15:30:17.688 > millis: 371545, timestamp: 946685169, Temperatura: 25.5000
+15:30:17.689 > ref, Vbias: 5.084290, 2.658700
+15:30:23.191 > millis: 377045, timestamp: 946685175, Temperatura: 25.5000
+15:30:23.195 > ref, Vbias: 5.084260, 2.658795
+15:30:28.694 > millis: 382545, timestamp: 946685180, Temperatura: 25.5000
+15:30:28.697 > ref, Vbias: 5.083804, 2.658838
+15:30:34.198 > millis: 388045, timestamp: 946685186, Temperatura: 25.5000
+15:30:34.202 > ref, Vbias: 5.084372, 2.659035
+15:30:39.701 > millis: 393545, timestamp: 946685192, Temperatura: 25.5000
+15:30:39.703 > ref, Vbias: 5.084092, 2.658669
+15:30:45.204 > millis: 399045, timestamp: 946685197, Temperatura: 25.5000
+15:30:45.206 > ref, Vbias: 5.083809, 2.658848
+15:30:45.328 > COUNT1: 25
+15:30:50.707 > millis: 404545, timestamp: 946685203, Temperatura: 25.5000
+15:30:50.709 > ref, Vbias: 5.084547, 2.658718
+15:30:56.210 > millis: 410045, timestamp: 946685208, Temperatura: 25.5625
+15:30:56.212 > ref, Vbias: 5.083993, 2.658961
+15:31:00.818 > COUNT1: 26
+15:31:01.713 > millis: 415545, timestamp: 946685214, Temperatura: 25.5625
+15:31:01.715 > ref, Vbias: 5.084179, 2.658880
+15:31:07.217 > millis: 421045, timestamp: 946685219, Temperatura: 25.5625
+15:31:07.220 > ref, Vbias: 5.084332, 2.659053
+15:31:12.719 > millis: 426545, timestamp: 946685225, Temperatura: 25.5625
+15:31:12.722 > ref, Vbias: 5.084283, 2.658979
+15:31:16.722 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:31:16.724 > TRAMA -> timestamp: (946685229, 0x386D452D), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.3750 ºC, 0x41CB0000), Count1: (26, 0x1A), Count2: (0, 0x0), Vbd1: (2.42, 0x401AD816), Vbd2: (0.00, 0x0), Vcurr1: (2.04, 0x4002C7DD), Vcurr2: (0.00, 0x0)
+15:31:16.739 > DEBUG (update_address) -> ...
+15:31:16.756 > DEBUG (update_address) -> ...
+15:31:16.774 > DEBUG (update_address) -> ...
+15:31:16.791 > DEBUG (update_address) -> ...
+15:31:16.807 > DEBUG (update_address) -> ...
+15:31:16.824 > DEBUG (update_address) -> ...
+15:31:16.842 > DEBUG (update_address) -> ...
+15:31:16.863 > DEBUG (update_address) -> ...
+15:31:16.880 > DEBUG (update_address) -> ...
+15:31:16.898 > DEBUG (update_address) -> ...
+15:31:17.024 > DEBUG (loopCOUNT) -> readRef: 5.083922
+15:31:17.026 > Temperatura: 25.5625
+15:31:17.046 > VVoltage, VCorriente
+15:31:17.047 > 2.201096, 1.195857
+15:31:17.050 > Vbd teorico: 24.548094
+15:31:17.051 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1277, 29.6276, 64E8, 4A3E, paso: 17
+15:31:27.060 > Tiempo promedio de muestreo [ms]: 24.9994
+15:31:27.062 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:31:27.065 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:31:27.066 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.423265
+15:31:27.067 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 5140
+15:31:27.067 > DEBUG (polarization_settling) -> iniciando
+15:31:27.068 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.0769, 0x32E9, 1.994905
+15:31:27.263 > DEBUG (polarization_settling) → writing in MCP: C3
+15:31:27.264 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:31:27.264 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:31:27.265 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 32.076912, 2.662371, 31.396618
+15:31:27.280 > Vbd teorico: 24.549437
+15:31:27.283 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1292, 29.6290, 64E4, 4A3A, paso: 17
+15:31:37.290 > Tiempo promedio de muestreo [ms]: 24.9984
+15:31:37.292 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:31:37.293 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:31:37.294 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:31:37.296 > DEBUG (polarization_settling) -> iniciando
+15:31:37.296 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.021701
+15:31:37.481 > DEBUG (polarization_settling) → Vtia2: 3.827477, 0x6244
+15:31:37.493 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:31:37.517 > DEBUG (polarization_settling) → writing in MCP: C3
+15:31:37.518 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:31:37.519 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:31:37.519 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299664, 27.119310
+15:31:38.024 > millis: 451834, timestamp: 946685250, Temperatura: 25.6250
+15:31:38.028 > ref, Vbias: 5.084228, 2.662506
+15:31:43.528 > millis: 457334, timestamp: 946685255, Temperatura: 25.6250
+15:31:43.532 > ref, Vbias: 5.084157, 2.662486
+15:31:44.256 > COUNT1: 27
+15:31:49.030 > millis: 462834, timestamp: 946685261, Temperatura: 25.6250
+15:31:49.035 > ref, Vbias: 5.084227, 2.662610
+15:31:49.613 > COUNT1: 28
+15:31:54.534 > millis: 468334, timestamp: 946685266, Temperatura: 25.6250
+15:31:54.538 > ref, Vbias: 5.084359, 2.662760
+15:32:00.038 > millis: 473834, timestamp: 946685272, Temperatura: 25.6875
+15:32:00.042 > ref, Vbias: 5.084179, 2.662545
+15:32:05.542 > millis: 479334, timestamp: 946685277, Temperatura: 25.6875
+15:32:05.546 > ref, Vbias: 5.084568, 2.662743
+15:32:11.045 > millis: 484834, timestamp: 946685283, Temperatura: 25.6875
+15:32:11.048 > ref, Vbias: 5.084346, 2.662586
+15:32:16.547 > millis: 490334, timestamp: 946685288, Temperatura: 25.6875
+15:32:16.550 > ref, Vbias: 5.084348, 2.662618
+15:32:22.050 > millis: 495834, timestamp: 946685294, Temperatura: 25.6875
+15:32:22.054 > ref, Vbias: 5.084269, 2.662808
+15:32:27.554 > millis: 501334, timestamp: 946685299, Temperatura: 25.6875
+15:32:27.556 > ref, Vbias: 5.083863, 2.662601
+15:32:27.678 > COUNT1: 29
+15:32:33.058 > millis: 506834, timestamp: 946685305, Temperatura: 25.6875
+15:32:33.061 > ref, Vbias: 5.084447, 2.662828
+15:32:38.561 > millis: 512334, timestamp: 946685310, Temperatura: 25.6875
+15:32:38.564 > ref, Vbias: 5.084005, 2.662623
+15:32:39.468 > COUNT1: 30
+15:32:44.065 > millis: 517834, timestamp: 946685316, Temperatura: 25.6875
+15:32:44.069 > ref, Vbias: 5.084242, 2.662313
+15:32:49.568 > millis: 523334, timestamp: 946685321, Temperatura: 25.6875
+15:32:49.572 > ref, Vbias: 5.084315, 2.662590
+15:32:55.070 > millis: 528834, timestamp: 946685327, Temperatura: 25.6875
+15:32:55.074 > ref, Vbias: 5.084293, 2.662331
+15:33:00.574 > millis: 534334, timestamp: 946685333, Temperatura: 25.7500
+15:33:00.578 > ref, Vbias: 5.084099, 2.662369
+15:33:06.077 > millis: 539834, timestamp: 946685338, Temperatura: 25.7500
+15:33:06.080 > ref, Vbias: 5.084603, 2.662305
+15:33:11.580 > millis: 545334, timestamp: 946685344, Temperatura: 25.7500
+15:33:11.583 > ref, Vbias: 5.084346, 2.662519
+15:33:17.083 > millis: 550834, timestamp: 946685349, Temperatura: 25.7500
+15:33:17.087 > ref, Vbias: 5.084620, 2.662117
+15:33:22.586 > millis: 556334, timestamp: 946685355, Temperatura: 25.7500
+15:33:22.591 > ref, Vbias: 5.084215, 2.662235
+15:33:28.089 > millis: 561834, timestamp: 946685360, Temperatura: 25.7500
+15:33:28.092 > ref, Vbias: 5.084415, 2.662688
+15:33:28.325 > COUNT1: 31
+15:33:32.788 > COUNT1: 32
+15:33:33.592 > millis: 567334, timestamp: 946685366, Temperatura: 25.7500
+15:33:33.596 > ref, Vbias: 5.084288, 2.662256
+15:33:37.594 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:33:37.595 > TRAMA -> timestamp: (946685370, 0x386D45BA), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.5938 ºC, 0x41CCC000), Count1: (32, 0x20), Count2: (0, 0x0), Vbd1: (2.42, 0x401B16C7), Vbd2: (0.00, 0x0), Vcurr1: (2.11, 0x40071938), Vcurr2: (0.00, 0x0)
+15:33:37.610 > DEBUG (update_address) -> ...
+15:33:37.628 > DEBUG (update_address) -> ...
+15:33:37.645 > DEBUG (update_address) -> ...
+15:33:37.662 > DEBUG (update_address) -> ...
+15:33:37.680 > DEBUG (update_address) -> ...
+15:33:37.696 > DEBUG (update_address) -> ...
+15:33:37.713 > DEBUG (update_address) -> ...
+15:33:37.730 > DEBUG (update_address) -> ...
+15:33:37.748 > DEBUG (update_address) -> ...
+15:33:37.765 > DEBUG (update_address) -> ...
+15:33:37.892 > DEBUG (loopCOUNT) -> readRef: 5.084501
+15:33:37.894 > Temperatura: 25.7500
+15:33:37.914 > VVoltage, VCorriente
+15:33:37.915 > 2.208257, 1.195829
+15:33:37.918 > Vbd teorico: 24.552126
+15:33:37.919 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1318, 29.6316, 64DD, 4A33, paso: 17
+15:33:47.928 > Tiempo promedio de muestreo [ms]: 24.9996
+15:33:47.931 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:33:47.933 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:33:47.934 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.410716
+15:33:47.937 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 52DE
+15:33:47.937 > DEBUG (polarization_settling) -> iniciando
+15:33:47.939 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 31.9289, 0x347B, 1.988017
+15:33:48.122 > DEBUG (polarization_settling) → Vtia2: 3.820576, 0x343F
+15:33:48.147 > DEBUG (polarization_settling) → Vtia2: 3.820637, 0x342B
+15:33:48.171 > DEBUG (polarization_settling) → Vtia2: 3.820639, 0x3417
+15:33:48.196 > DEBUG (polarization_settling) → Vtia2: 3.820632, 0x3403
+15:33:48.220 > DEBUG (polarization_settling) → Vtia2: 3.820607, 0x33EF
+15:33:48.245 > DEBUG (polarization_settling) → Vtia2: 3.820626, 0x33DB
+15:33:48.270 > DEBUG (polarization_settling) → Vtia2: 3.820632, 0x33C7
+15:33:48.295 > DEBUG (polarization_settling) → Vtia2: 3.820399, 0x33B3
+15:33:48.320 > DEBUG (polarization_settling) → Vtia2: 3.820536, 0x339F
+15:33:48.345 > DEBUG (polarization_settling) → Vtia2: 3.820560, 0x338B
+15:33:48.369 > DEBUG (polarization_settling) → Vtia2: 3.820578, 0x3377
+15:33:48.393 > DEBUG (polarization_settling) → Vtia2: 3.820511, 0x3363
+15:33:48.418 > DEBUG (polarization_settling) → Vtia2: 3.820424, 0x334F
+15:33:48.442 > DEBUG (polarization_settling) → Vtia2: 3.820456, 0x333B
+15:33:48.467 > DEBUG (polarization_settling) → Vtia2: 3.820531, 0x3327
+15:33:48.491 > DEBUG (polarization_settling) → Vtia2: 3.820546, 0x3313
+15:33:48.515 > DEBUG (polarization_settling) → Vtia2: 3.820504, 0x32FF
+15:33:48.540 > DEBUG (polarization_settling) → Vtia2: 3.820546, 0x32EB
+15:33:48.564 > DEBUG (polarization_settling) → Vtia2: 3.820327, 0x32D7
+15:33:48.589 > DEBUG (polarization_settling) → Vtia2: 3.820482, 0x32C3
+15:33:48.613 > DEBUG (polarization_settling) → Vtia2: 3.820398, 0x32AF
+15:33:48.637 > DEBUG (polarization_settling) → Vtia2: 3.820359, 0x329B
+15:33:48.662 > DEBUG (polarization_settling) → Vtia2: 3.820334, 0x3287
+15:33:48.687 > DEBUG (polarization_settling) → Vtia2: 3.820301, 0x3273
+15:33:48.711 > DEBUG (polarization_settling) → Vtia2: 3.820302, 0x325F
+15:33:48.736 > DEBUG (polarization_settling) → Vtia2: 3.820276, 0x324B
+15:33:48.761 > DEBUG (polarization_settling) → Vtia2: 3.820241, 0x3237
+15:33:48.786 > DEBUG (polarization_settling) → Vtia2: 3.820282, 0x3223
+15:33:48.811 > DEBUG (polarization_settling) → Vtia2: 3.820367, 0x320F
+15:33:48.835 > DEBUG (polarization_settling) → Vtia2: 3.820207, 0x31FB
+15:33:48.859 > DEBUG (polarization_settling) → Vtia2: 3.820229, 0x31E7
+15:33:48.883 > DEBUG (polarization_settling) → Vtia2: 3.820172, 0x31D3
+15:33:48.907 > DEBUG (polarization_settling) → Vtia2: 3.820280, 0x31BF
+15:33:48.931 > DEBUG (polarization_settling) → Vtia2: 3.820109, 0x31AB
+15:33:48.955 > DEBUG (polarization_settling) → Vtia2: 3.820098, 0x3197
+15:33:48.980 > DEBUG (polarization_settling) → Vtia2: 3.820139, 0x3183
+15:33:49.005 > DEBUG (polarization_settling) → Vtia2: 3.820198, 0x316F
+15:33:49.030 > DEBUG (polarization_settling) → Vtia2: 3.820179, 0x315B
+15:33:49.055 > DEBUG (polarization_settling) → Vtia2: 3.820016, 0x3147
+15:33:49.080 > DEBUG (polarization_settling) → Vtia2: 3.820057, 0x3133
+15:33:49.105 > DEBUG (polarization_settling) → Vtia2: 3.819991, 0x311F
+15:33:49.129 > DEBUG (polarization_settling) → Vtia2: 3.819890, 0x310B
+15:33:49.154 > DEBUG (polarization_settling) → Vtia2: 3.819882, 0x30F7
+15:33:49.178 > DEBUG (polarization_settling) → Vtia2: 3.819937, 0x30E3
+15:33:49.202 > DEBUG (polarization_settling) → Vtia2: 3.819914, 0x30CF
+15:33:49.226 > DEBUG (polarization_settling) → Vtia2: 3.819930, 0x30BB
+15:33:49.250 > DEBUG (polarization_settling) → Vtia2: 3.819941, 0x30A7
+15:33:49.274 > DEBUG (polarization_settling) → Vtia2: 3.819734, 0x3093
+15:33:49.298 > DEBUG (polarization_settling) → Vtia2: 3.819984, 0x307F
+15:33:49.323 > DEBUG (polarization_settling) → Vtia2: 3.819911, 0x306B
+15:33:49.347 > DEBUG (polarization_settling) → Vtia2: 3.820009, 0x3057
+15:33:49.372 > DEBUG (polarization_settling) → Vtia2: 3.819822, 0x3043
+15:33:49.396 > DEBUG (polarization_settling) → Vtia2: 3.819753, 0x302F
+15:33:49.421 > DEBUG (polarization_settling) → Vtia2: 3.819928, 0x301B
+15:33:49.444 > DEBUG (polarization_settling) → Vtia2: 3.819685, 0x3007
+15:33:49.469 > DEBUG (polarization_settling) → Vtia2: 3.819847, 0x2FF3
+15:33:49.494 > DEBUG (polarization_settling) → Vtia2: 3.819752, 0x2FDF
+15:33:49.518 > DEBUG (polarization_settling) → Vtia2: 3.819665, 0x2FCB
+15:33:49.543 > DEBUG (polarization_settling) → Vtia2: 3.819832, 0x2FB7
+15:33:49.567 > DEBUG (polarization_settling) → Vtia2: 3.819604, 0x2FA3
+15:33:49.591 > DEBUG (polarization_settling) → Vtia2: 3.819451, 0x2F8F
+15:33:49.616 > DEBUG (polarization_settling) → Vtia2: 3.819580, 0x2F7B
+15:33:49.639 > DEBUG (polarization_settling) → Vtia2: 3.819798, 0x2F67
+15:33:49.663 > DEBUG (polarization_settling) → Vtia2: 3.819565, 0x2F53
+15:33:49.688 > DEBUG (polarization_settling) → Vtia2: 3.819729, 0x2F3F
+15:33:49.711 > DEBUG (polarization_settling) → Vtia2: 3.819765, 0x2F2B
+15:33:49.736 > DEBUG (polarization_settling) → Vtia2: 3.819425, 0x2F17
+15:33:49.761 > DEBUG (polarization_settling) → Vtia2: 3.819528, 0x2F03
+15:33:49.785 > DEBUG (polarization_settling) → Vtia2: 3.819605, 0x2EEF
+15:33:49.810 > DEBUG (polarization_settling) → Vtia2: 3.819580, 0x2EDB
+15:33:49.834 > DEBUG (polarization_settling) → Vtia2: 3.819469, 0x2EC7
+15:33:49.858 > DEBUG (polarization_settling) → Vtia2: 3.819448, 0x2EB3
+15:33:49.882 > DEBUG (polarization_settling) → Vtia2: 3.819437, 0x2E9F
+15:33:49.907 > DEBUG (polarization_settling) → Vtia2: 3.819396, 0x2E8B
+15:33:49.932 > DEBUG (polarization_settling) → Vtia2: 3.819237, 0x2E77
+15:33:49.957 > DEBUG (polarization_settling) → Vtia2: 3.819549, 0x2E63
+15:33:49.982 > DEBUG (polarization_settling) → Vtia2: 3.819603, 0x2E4F
+15:33:50.005 > DEBUG (polarization_settling) → Vtia2: 3.819543, 0x2E3B
+15:33:50.030 > DEBUG (polarization_settling) → Vtia2: 3.819439, 0x2E27
+15:33:50.054 > DEBUG (polarization_settling) → Vtia2: 3.819374, 0x2E13
+15:33:50.078 > DEBUG (polarization_settling) → Vtia2: 3.819388, 0x2DFF
+15:33:50.104 > DEBUG (polarization_settling) → Vtia2: 3.819378, 0x2DEB
+15:33:50.128 > DEBUG (polarization_settling) → Vtia2: 3.819317, 0x2DD7
+15:33:50.153 > DEBUG (polarization_settling) → Vtia2: 3.819270, 0x2DC3
+15:33:50.178 > DEBUG (polarization_settling) → Vtia2: 3.819113, 0x2DAF
+15:33:50.202 > DEBUG (polarization_settling) → Vtia2: 3.819300, 0x2D9B
+15:33:50.227 > DEBUG (polarization_settling) → Vtia2: 3.819076, 0x2D87
+15:33:50.252 > DEBUG (polarization_settling) → Vtia2: 3.818920, 0x2D73
+15:33:50.277 > DEBUG (polarization_settling) → Vtia2: 3.819271, 0x2D5F
+15:33:50.302 > DEBUG (polarization_settling) → Vtia2: 3.819068, 0x2D4B
+15:33:50.327 > DEBUG (polarization_settling) → Vtia2: 3.818985, 0x2D37
+15:33:50.352 > DEBUG (polarization_settling) → Vtia2: 3.819178, 0x2D23
+15:33:50.364 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:33:50.387 > DEBUG (polarization_settling) → writing in MCP: C2
+15:33:50.388 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:33:50.388 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:33:50.390 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 31.928917, 2.706477, 31.916750
+15:33:50.404 > Vbd teorico: 24.552126
+15:33:50.405 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1318, 29.6316, 64DD, 4A33, paso: 17
+15:34:00.415 > Tiempo promedio de muestreo [ms]: 24.9980
+15:34:00.417 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:34:00.418 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:34:00.418 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:34:00.422 > DEBUG (polarization_settling) -> iniciando
+15:34:00.422 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.009026
+15:34:00.608 > DEBUG (polarization_settling) → Vtia2: 3.827471, 0x6244
+15:34:00.620 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:34:00.643 > DEBUG (polarization_settling) → writing in MCP: C3
+15:34:00.644 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:34:00.645 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:34:00.647 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299902, 27.122118
+15:34:00.652 > COUNT1: 34
+15:34:01.152 > millis: 594878, timestamp: 946685393, Temperatura: 25.7500
+15:34:01.155 > ref, Vbias: 5.084432, 2.706593
+15:34:05.925 > COUNT1: 35
+15:34:06.655 > millis: 600378, timestamp: 946685399, Temperatura: 25.7500
+15:34:06.658 > ref, Vbias: 5.084181, 2.706596
+15:34:12.158 > millis: 605878, timestamp: 946685404, Temperatura: 25.7500
+15:34:12.161 > ref, Vbias: 5.084048, 2.706543
+15:34:17.660 > millis: 611378, timestamp: 946685410, Temperatura: 25.7500
+15:34:17.665 > ref, Vbias: 5.084279, 2.706728
+15:34:20.673 > COUNT1: 36
+15:34:23.163 > millis: 616878, timestamp: 946685415, Temperatura: 25.7500
+15:34:23.167 > ref, Vbias: 5.084340, 2.706370
+15:34:28.667 > millis: 622378, timestamp: 946685421, Temperatura: 25.8125
+15:34:28.669 > ref, Vbias: 5.084104, 2.706459
+15:34:34.170 > millis: 627878, timestamp: 946685426, Temperatura: 25.8125
+15:34:34.173 > ref, Vbias: 5.084497, 2.706559
+15:34:39.674 > millis: 633378, timestamp: 946685432, Temperatura: 25.8125
+15:34:39.678 > ref, Vbias: 5.084333, 2.706485
+15:34:45.177 > millis: 638878, timestamp: 946685437, Temperatura: 25.8125
+15:34:45.181 > ref, Vbias: 5.084250, 2.706375
+15:34:50.680 > millis: 644378, timestamp: 946685443, Temperatura: 25.8125
+15:34:50.684 > ref, Vbias: 5.084302, 2.706892
+15:34:51.631 > COUNT1: 37
+15:34:55.191 > COUNT1: 38
+15:34:56.183 > millis: 649878, timestamp: 946685448, Temperatura: 25.8125
+15:34:56.186 > ref, Vbias: 5.084475, 2.706285
+15:34:58.292 > COUNT1: 39
+15:35:01.687 > millis: 655378, timestamp: 946685454, Temperatura: 25.8125
+15:35:01.691 > ref, Vbias: 5.084329, 2.706468
+15:35:07.191 > millis: 660878, timestamp: 946685459, Temperatura: 25.8125
+15:35:07.194 > ref, Vbias: 5.083962, 2.706825
+15:35:11.939 > COUNT1: 40
+15:35:12.694 > millis: 666378, timestamp: 946685465, Temperatura: 25.8125
+15:35:12.698 > ref, Vbias: 5.084261, 2.706841
+15:35:18.198 > millis: 671878, timestamp: 946685470, Temperatura: 25.8125
+15:35:18.202 > ref, Vbias: 5.084215, 2.706324
+15:35:23.701 > millis: 677378, timestamp: 946685476, Temperatura: 25.8125
+15:35:23.703 > ref, Vbias: 5.083993, 2.707030
+15:35:26.627 > COUNT1: 41
+15:35:29.206 > millis: 682878, timestamp: 946685481, Temperatura: 25.8125
+15:35:29.208 > ref, Vbias: 5.084253, 2.706593
+15:35:29.798 > COUNT1: 42
+15:35:34.710 > millis: 688378, timestamp: 946685487, Temperatura: 25.8125
+15:35:34.712 > ref, Vbias: 5.084497, 2.706619
+15:35:35.892 > COUNT1: 43
+15:35:40.213 > millis: 693878, timestamp: 946685492, Temperatura: 25.8125
+15:35:40.215 > ref, Vbias: 5.084540, 2.706399
+15:35:40.587 > COUNT1: 44
+15:35:42.165 > COUNT1: 45
+15:35:43.164 > COUNT1: 46
+15:35:45.716 > millis: 699378, timestamp: 946685498, Temperatura: 25.8125
+15:35:45.718 > ref, Vbias: 5.084040, 2.706547
+15:35:51.218 > millis: 704878, timestamp: 946685503, Temperatura: 25.8125
+15:35:51.220 > ref, Vbias: 5.084188, 2.706275
+15:35:54.658 > COUNT1: 47
+15:35:56.722 > millis: 710378, timestamp: 946685509, Temperatura: 25.8125
+15:35:56.724 > ref, Vbias: 5.084590, 2.706564
+15:36:00.724 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:36:00.725 > TRAMA -> timestamp: (946685513, 0x386D4649), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.7500 ºC, 0x41CE0000), Count1: (47, 0x2F), Count2: (0, 0x0), Vbd1: (2.41, 0x401A492A), Vbd2: (0.00, 0x0), Vcurr1: (1.88, 0x3FF06265), Vcurr2: (0.00, 0x0)
+15:36:00.734 > DEBUG (update_address) -> ...
+15:36:00.751 > DEBUG (update_address) -> ...
+15:36:00.769 > DEBUG (update_address) -> ...
+15:36:00.790 > DEBUG (update_address) -> ...
+15:36:00.806 > DEBUG (update_address) -> ...
+15:36:00.823 > DEBUG (update_address) -> ...
+15:36:00.841 > DEBUG (update_address) -> ...
+15:36:00.858 > DEBUG (update_address) -> ...
+15:36:00.876 > DEBUG (update_address) -> ...
+15:36:00.893 > DEBUG (update_address) -> ...
+15:36:01.020 > DEBUG (loopCOUNT) -> readRef: 5.084123
+15:36:01.023 > Temperatura: 25.8125
+15:36:01.043 > VVoltage, VCorriente
+15:36:01.044 > 2.209305, 1.195523
+15:36:01.046 > Vbd teorico: 24.553469
+15:36:01.048 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1332, 29.6331, 64D9, 4A2F, paso: 17
+15:36:11.058 > Tiempo promedio de muestreo [ms]: 24.9992
+15:36:11.060 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:36:11.063 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:36:11.063 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.407044
+15:36:11.064 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 5351
+15:36:11.065 > DEBUG (polarization_settling) -> iniciando
+15:36:11.065 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 31.8856, 0x34F1, 2.001643
+15:36:11.259 > DEBUG (polarization_settling) → writing in MCP: C3
+15:36:11.260 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:36:11.260 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:36:11.262 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 31.885618, 2.646726, 31.212126
+15:36:11.275 > Vbd teorico: 24.553469
+15:36:11.277 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1332, 29.6331, 64D9, 4A2F, paso: 17
+15:36:21.288 > Tiempo promedio de muestreo [ms]: 24.9999
+15:36:21.290 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:36:21.290 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:36:21.290 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:36:21.292 > DEBUG (polarization_settling) -> iniciando
+15:36:21.293 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.073297
+15:36:21.475 > DEBUG (polarization_settling) → Vtia2: 3.827408, 0x6244
+15:36:21.486 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:36:21.510 > DEBUG (polarization_settling) → writing in MCP: C3
+15:36:21.511 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:36:21.511 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:36:21.513 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299508, 27.117479
+15:36:22.017 > millis: 735654, timestamp: 946685534, Temperatura: 25.8750
+15:36:22.019 > ref, Vbias: 5.084123, 2.646717
+15:36:25.937 > COUNT1: 48
+15:36:27.521 > millis: 741154, timestamp: 946685540, Temperatura: 25.8750
+15:36:27.523 > ref, Vbias: 5.084677, 2.646540
+15:36:33.025 > millis: 746654, timestamp: 946685545, Temperatura: 25.8750
+15:36:33.027 > ref, Vbias: 5.084133, 2.646744
+15:36:38.530 > millis: 752154, timestamp: 946685551, Temperatura: 25.8750
+15:36:38.532 > ref, Vbias: 5.084410, 2.646430
+15:36:44.033 > millis: 757654, timestamp: 946685556, Temperatura: 25.8750
+15:36:44.036 > ref, Vbias: 5.084331, 2.646462
+15:36:49.538 > millis: 763154, timestamp: 946685562, Temperatura: 25.8750
+15:36:49.541 > ref, Vbias: 5.084585, 2.646795
+15:36:53.789 > COUNT1: 49
+15:36:55.041 > millis: 768654, timestamp: 946685567, Temperatura: 25.8750
+15:36:55.044 > ref, Vbias: 5.084376, 2.646527
+15:37:00.545 > millis: 774154, timestamp: 946685573, Temperatura: 25.8750
+15:37:00.547 > ref, Vbias: 5.084347, 2.646683
+15:37:06.049 > millis: 779654, timestamp: 946685578, Temperatura: 25.8750
+15:37:06.053 > ref, Vbias: 5.084215, 2.646657
+15:37:11.552 > millis: 785154, timestamp: 946685584, Temperatura: 25.8750
+15:37:11.556 > ref, Vbias: 5.084192, 2.646808
+15:37:17.056 > millis: 790654, timestamp: 946685589, Temperatura: 25.8125
+15:37:17.059 > ref, Vbias: 5.084060, 2.647094
+15:37:22.560 > millis: 796154, timestamp: 946685595, Temperatura: 25.8750
+15:37:22.562 > ref, Vbias: 5.083916, 2.646698
+15:37:23.641 > COUNT1: 50
+15:37:28.065 > millis: 801654, timestamp: 946685600, Temperatura: 25.8750
+15:37:28.067 > ref, Vbias: 5.084506, 2.646689
+15:37:33.569 > millis: 807154, timestamp: 946685606, Temperatura: 25.8750
+15:37:33.573 > ref, Vbias: 5.084570, 2.646843
+15:37:38.350 > COUNT1: 51
+15:37:39.072 > millis: 812654, timestamp: 946685611, Temperatura: 25.8750
+15:37:39.076 > ref, Vbias: 5.084596, 2.646744
+15:37:44.576 > millis: 818154, timestamp: 946685617, Temperatura: 25.8750
+15:37:44.580 > ref, Vbias: 5.084696, 2.646863
+15:37:50.080 > millis: 823654, timestamp: 946685622, Temperatura: 25.8750
+15:37:50.084 > ref, Vbias: 5.084240, 2.646771
+15:37:55.582 > millis: 829154, timestamp: 946685628, Temperatura: 25.8750
+15:37:55.586 > ref, Vbias: 5.084141, 2.646677
+15:38:01.086 > millis: 834654, timestamp: 946685633, Temperatura: 25.8750
+15:38:01.090 > ref, Vbias: 5.084216, 2.646613
+15:38:06.589 > millis: 840154, timestamp: 946685639, Temperatura: 25.8750
+15:38:06.593 > ref, Vbias: 5.084174, 2.646733
+15:38:12.092 > millis: 845654, timestamp: 946685644, Temperatura: 25.8750
+15:38:12.096 > ref, Vbias: 5.084281, 2.646580
+15:38:17.596 > millis: 851154, timestamp: 946685650, Temperatura: 25.8750
+15:38:17.600 > ref, Vbias: 5.084461, 2.646721
+15:38:21.598 > DEBUG (TC2_Handler) -> Interrupción TC2.
+15:38:21.599 > TRAMA -> timestamp: (946685654, 0x386D46D6), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (25.8125 ºC, 0x41CE8000), Count1: (51, 0x33), Count2: (0, 0x0), Vbd1: (2.41, 0x401A0D02), Vbd2: (0.00, 0x0), Vcurr1: (1.82, 0x3FE8A243), Vcurr2: (0.00, 0x0)
+15:38:21.608 > DEBUG (update_address) -> ...
+15:38:21.625 > DEBUG (update_address) -> ...
+15:38:21.643 > DEBUG (update_address) -> ...
+15:38:21.660 > DEBUG (update_address) -> ...
+15:38:21.678 > DEBUG (update_address) -> ...
+15:38:21.695 > DEBUG (update_address) -> ...
+15:38:21.712 > DEBUG (update_address) -> ...
+15:38:21.730 > DEBUG (update_address) -> ...
+15:38:21.747 > DEBUG (update_address) -> ...
+15:38:21.768 > DEBUG (update_address) -> ...
+15:38:21.895 > DEBUG (loopCOUNT) -> readRef: 5.084141
+15:38:21.897 > Temperatura: 25.8750
+15:38:21.917 > VVoltage, VCorriente
+15:38:21.917 > 2.198491, 1.195513
+15:38:21.920 > Vbd teorico: 24.554813
+15:38:21.922 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1343, 29.6345, 64D6, 4A2B, paso: 17
+15:38:31.930 > Tiempo promedio de muestreo [ms]: 24.9984
+15:38:31.932 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:38:31.936 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:38:31.937 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.431152
+15:38:31.939 > DEBUG (obtain_Vbd) -> command del Vbd obtenido: 5040
+15:38:31.940 > DEBUG (polarization_settling) -> iniciando
+15:38:31.942 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 32.1699, 0x31EC, 1.986844
+15:38:32.135 > DEBUG (polarization_settling) → writing in MCP: C2
+15:38:32.136 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:38:32.136 > DEBUG (polarization_settling) → MCP escrito en: C2
+15:38:32.137 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 32.169922, 2.670014, 31.486748
+15:38:32.152 > Vbd teorico: 24.554813
+15:38:32.155 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.1343, 29.6345, 64D6, 4A2B, paso: 17
+15:38:42.165 > Tiempo promedio de muestreo [ms]: 24.9979
+15:38:42.167 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:38:42.168 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:38:42.168 > DEBUG (obtain_Vbd) -> Vbd obtenido: 0.000000
+15:38:42.172 > DEBUG (polarization_settling) -> iniciando
+15:38:42.172 > DEBUG (polarization_settling) → Iniciando en Vbias_calculado, CMD_Vbias, Vbias_leido: 3.5000, 0x6280, 2.020589
+15:38:42.356 > DEBUG (polarization_settling) → Vtia2: 3.827540, 0x6244
+15:38:42.368 > DEBUG (polarization_settling) → Vbias_calculated equal readed
+15:38:42.391 > DEBUG (polarization_settling) → writing in MCP: C3
+15:38:42.392 > DEBUG (polarization_settling) → Inicialización de MCP4561 exitosa.
+15:38:42.395 > DEBUG (polarization_settling) → MCP escrito en: C3
+15:38:42.395 > DEBUG (polarization_settling) → Vbias_Objective, vbias, Vbias_setted: 3.500000, 2.299762, 27.120468
+15:38:42.401 > COUNT1: 54
+15:38:42.900 > millis: 876442, timestamp: 946685675, Temperatura: 25.9375
+15:38:42.904 > ref, Vbias: 5.084371, 2.670168
+15:38:48.404 > millis: 881942, timestamp: 946685681, Temperatura: 25.9375
+15:38:48.407 > ref, Vbias: 5.084008, 2.670933
+15:38:53.907 > millis: 887442, timestamp: 946685686, Temperatura: 25.9375
+15:38:53.911 > ref, Vbias: 5.084269, 2.670602
+15:38:59.410 > millis: 892942, timestamp: 946685692, Temperatura: 25.9375
+15:38:59.413 > ref, Vbias: 5.084427, 2.670450
+15:39:04.914 > millis: 898442, timestamp: 946685697, Temperatura: 25.9375
+15:39:04.917 > ref, Vbias: 5.084079, 2.670075
+15:39:10.417 > millis: 903942, timestamp: 946685703, Temperatura: 25.9375
+15:39:10.421 > ref, Vbias: 5.084526, 2.670608
+15:39:12.794 > COUNT1: 55
+15:39:15.921 > millis: 909442, timestamp: 946685708, Temperatura: 25.9375
+15:39:15.922 > ref, Vbias: 5.084365, 2.670219
+15:39:16.338 > COUNT1: 56
+15:39:21.424 > millis: 914942, timestamp: 946685714, Temperatura: 25.9375
+15:39:21.426 > ref, Vbias: 5.084270, 2.670097
+15:39:26.927 > millis: 920442, timestamp: 946685719, Temperatura: 25.9375
+15:39:26.930 > ref, Vbias: 5.084371, 2.670203
+15:39:32.430 > millis: 925942, timestamp: 946685725, Temperatura: 25.9375
+15:39:32.434 > ref, Vbias: 5.084197, 2.670288
+15:39:37.935 > millis: 931442, timestamp: 946685730, Temperatura: 25.9375
+15:39:37.938 > ref, Vbias: 5.084270, 2.670294
+15:39:43.438 > millis: 936942, timestamp: 946685736, Temperatura: 25.8750
+15:39:43.442 > ref, Vbias: 5.083982, 2.670357
+15:39:48.941 > millis: 942442, timestamp: 946685741, Temperatura: 25.9375
+15:39:48.944 > ref, Vbias: 5.084317, 2.670396
+15:39:52.741 > COUNT1: 57
+15:39:54.444 > millis: 947942, timestamp: 946685747, Temperatura: 25.9375
+15:39:54.447 > ref, Vbias: 5.084319, 2.670336
+15:39:57.163 > COUNT1: 58
+15:39:59.948 > millis: 953442, timestamp: 946685752, Temperatura: 25.9375
+15:39:59.951 > ref, Vbias: 5.084310, 2.670238
+15:40:03.432 > COUNT1: 59
+15:40:05.451 > millis: 958942, timestamp: 946685758, Temperatura: 25.9375
+15:40:05.454 > ref, Vbias: 5.084723, 2.670527
+15:40:05.576 > DEBUG (slidingWindowBuffer) → Serial1.available = 6
+15:40:05.577 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:05.578 > DEBUG (slidingWindowBuffer) → Serial1.available = 5
+15:40:05.578 > DEBUG (slidingWindowBuffer) → incoming byte 0x1
+15:40:05.578 > DEBUG (slidingWindowBuffer) → Serial1.available = 4
+15:40:05.579 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:05.579 > DEBUG (slidingWindowBuffer) → Serial1.available = 3
+15:40:05.580 > DEBUG (slidingWindowBuffer) → incoming byte 0xB7
+15:40:05.581 > DEBUG (slidingWindowBuffer) → Serial1.available = 2
+15:40:05.581 > DEBUG (slidingWindowBuffer) → incoming byte 0xF1
+15:40:05.581 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:05.582 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:05.583 > DEBUG (requestOperationMode) -> Recibido de Serial1: 0x AB0x 10x 00x B70x F10x A
+15:40:05.585 > DEBUG (requestOperationMode) -> COMAND ID: 0x1
+15:40:05.585 > DEBUG (requestOperationMode) -> COUNT MODE ACTIVATED
+15:40:05.586 > DEBUG (write_OPstate) -> 
+15:40:06.480 > COUNT1: 60
+15:40:10.953 > millis: 964442, timestamp: 946685763, Temperatura: 25.9375
+15:40:10.957 > ref, Vbias: 5.084180, 2.670413
+15:40:16.457 > millis: 969942, timestamp: 946685769, Temperatura: 25.9375
+15:40:16.460 > ref, Vbias: 5.084314, 2.670293
+15:40:21.960 > millis: 975442, timestamp: 946685774, Temperatura: 25.8750
+15:40:21.964 > ref, Vbias: 5.083944, 2.670530
+15:40:22.415 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.416 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:22.439 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.440 > DEBUG (slidingWindowBuffer) → incoming byte 0x2
+15:40:22.464 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.466 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:22.488 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.508 > DEBUG (slidingWindowBuffer) → incoming byte 0xE2
+15:40:22.513 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.518 > DEBUG (slidingWindowBuffer) → incoming byte 0xA2
+15:40:22.537 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:22.539 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:22.544 > DEBUG (requestOperationMode) -> Recibido de Serial1: 0x AB0x 20x 00x E20x A20x A
+15:40:22.544 > DEBUG (requestOperationMode) -> COMAND ID: 0x2
+15:40:22.544 > DEBUG (requestOperationMode) -> TRANSFER MODE ACTIVATED
+15:40:22.544 > DEBUG (write_OPstate) -> 
+15:40:22.558 > DEBUG (setupTRANSFER) -> Iniciado 
+15:40:22.560 > DEBUG (read_all) -> 
+15:40:22.560 > 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x73 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xAF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xEB 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x27 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x64 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA0 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xDC 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x19 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x55 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x91 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x47 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA3 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xDF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x1B 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xB8 0x41 0x6 0x0 0x0 0x0 0x84 0x7 0x1A 0x40 0x0 0x0 0x0 0x0 0xDA 0xF5 0xF3 0x3F 0x0 0x0 0x0 0x0 0x9D 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC8 0x41 0x16 0x0 0x0 0x0 0x98 0x22 0x1B 0x40 0x0 0x0 0x0 0x0 0xB2 0x9 0x9 0x40 0x0 0x0 0x0 0x0 0x10 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB9 0x41 0xA 0x0 0x0 0x0 0x87 0x6 0x1B 0x40 0x0 0x0 0x0 0x0 0xD 0x27 0xC 0x40 0x0 0x0 0x0 0x0 0xA0 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x40 0xC8 0x41 0x15 0x0 0x0 0x0 0x48 0xE8 0x1A 0x40 0x0 0x0 0x0 0x0 0x5F 0xA2 0x4 0x40 0x0 0x0 0x0 0x0 0x2D 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCB 0x41 0x1A 0x0 0x0 0x0 0x16 0xD8 0x1A 0x40 0x0 0x0 0x0 0x0 0xDD 0xC7 0x2 0x40 0x0 0x0 0x0 0x0 0xBA 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC0 0xCC 0x41 0x20 0x0 0x0 0x0 0xC7 0x16 0x1B 0x40 0x0 0x0 0x0 0x0 0x38 0x19 0x7 0x40 0x0 0x0 0x0 0x0 0x49 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x41 0x2F 0x0 0x0 0x0 0x2A 0x49 0x1A 0x40 0x0 0x0 0x0 0x0 0x65 0x62 0xF0 0x3F 0x0 0x0 0x0 0x0 0xD6 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xCE 0x41 0x33 0x0 0x0 0x0 0x2 0xD 0x1A 0x40 0x0 0x0 0x0 0x0 0x43 0xA2 0xE8 0x3F 0x0 0x0 0x0 0x0 
+15:40:23.319 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:23.336 > DEBUG (setupTRANSFER) -> setupTRANSFER finalizado...
+15:40:23.437 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x0
+15:40:23.438 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:23.438 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:23.638 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.639 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:23.662 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.663 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:23.687 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.688 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:23.711 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.712 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:23.735 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.736 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:23.760 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:23.760 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:23.761 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:23.762 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:23.764 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:24.381 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x24
+15:40:24.382 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:24.383 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:24.584 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.585 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:24.607 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.609 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:24.632 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.633 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:24.656 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.657 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:24.681 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.681 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:24.705 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:24.706 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:24.707 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:24.707 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:24.709 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:25.327 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x48
+15:40:25.329 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:25.330 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:25.528 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.529 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:25.553 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.554 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:25.577 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.578 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:25.602 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.603 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:25.626 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.627 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:25.651 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:25.653 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:25.653 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:25.654 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:25.654 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:26.272 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x6C
+15:40:26.273 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:26.273 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:26.474 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.475 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:26.498 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.499 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:26.523 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.524 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:26.547 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.548 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:26.572 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.573 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:26.596 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:26.597 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:26.597 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:26.598 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:26.600 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:27.217 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x90
+15:40:27.219 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:27.220 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:27.419 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.420 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:27.444 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.446 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:27.468 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.469 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:27.493 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.494 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:27.517 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.518 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:27.541 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:27.543 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:27.543 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:27.543 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:27.546 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:28.163 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xB4
+15:40:28.165 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:28.165 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:28.365 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.366 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:28.389 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.390 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:28.413 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.414 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:28.438 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.439 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:28.462 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.463 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:28.487 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:28.488 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:28.488 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:28.488 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:28.491 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:29.109 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xD8
+15:40:29.111 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:29.112 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:29.310 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.311 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:29.335 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.336 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:29.359 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.360 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:29.384 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.385 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:29.408 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.409 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:29.433 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:29.434 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:29.434 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:29.435 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:29.436 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:30.053 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0xFC
+15:40:30.054 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:30.055 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:30.256 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.256 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:30.280 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.281 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:30.304 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.305 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:30.329 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.330 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:30.353 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.354 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:30.377 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:30.378 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:30.379 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:30.379 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:30.381 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:30.999 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x120
+15:40:31.001 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:31.002 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:31.200 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.201 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:31.225 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.227 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:31.250 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.251 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:31.273 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.274 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:31.298 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.299 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:31.322 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:31.323 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:31.324 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:31.324 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:31.326 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:31.943 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x144
+15:40:31.946 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:31.946 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:32.147 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.149 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:32.171 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.173 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:32.195 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.196 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:32.220 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.221 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:32.244 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.245 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:32.269 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:32.270 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:32.270 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:32.271 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:32.273 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:32.890 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x168
+15:40:32.892 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:32.892 >  0x26 0x3 0x24 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x3E 0x9D 0xA
+15:40:33.092 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.092 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:33.116 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.116 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:33.140 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.143 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:33.164 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.165 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:33.189 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.190 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:33.213 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:33.214 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:33.215 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:33.216 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:33.217 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:33.835 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x18C
+15:40:33.837 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:33.838 >  0x26 0x3 0x24 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x6A 0x93 0xA
+15:40:34.037 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.037 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:34.061 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.062 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:34.086 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.087 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:34.110 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.111 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:34.135 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.136 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:34.159 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.160 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:34.160 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:34.160 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:34.162 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:34.784 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1B0
+15:40:34.786 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:34.787 >  0x26 0x3 0x24 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB3 0x2B 0xA
+15:40:34.986 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:34.988 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:35.011 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.012 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:35.035 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.036 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:35.059 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.061 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:35.084 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.084 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:35.108 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.111 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:35.111 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:35.111 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:35.112 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:35.730 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1D4
+15:40:35.732 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:35.733 >  0x26 0x3 0x24 0x73 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x64 0xA
+15:40:35.932 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.933 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:35.956 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.957 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:35.981 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:35.982 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:36.005 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.006 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:36.029 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.030 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:36.054 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.054 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:36.055 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:36.056 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:36.058 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:36.674 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x1F8
+15:40:36.675 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:36.676 >  0x26 0x3 0x24 0xAF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x86 0x24 0xA
+15:40:36.877 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.877 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:36.901 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.902 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:36.926 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.927 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:36.950 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.951 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:36.975 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:36.975 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:36.999 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.000 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:37.001 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:37.001 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:37.003 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:37.620 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x21C
+15:40:37.621 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:37.622 >  0x26 0x3 0x24 0xEB 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xD2 0x2A 0xA
+15:40:37.823 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.824 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:37.847 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.849 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:37.871 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.873 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:37.896 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.896 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:37.920 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.921 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:37.945 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:37.945 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:37.946 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:37.946 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:37.948 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:38.566 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x240
+15:40:38.568 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:38.569 >  0x26 0x3 0x24 0x27 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x49 0xD 0xA
+15:40:38.767 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.768 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:38.792 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.793 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:38.817 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.818 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:38.841 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.842 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:38.866 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.867 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:38.890 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:38.891 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:38.891 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:38.891 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:38.893 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:39.511 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x264
+15:40:39.513 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:39.514 >  0x26 0x3 0x24 0x64 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC3 0xC4 0xA
+15:40:39.713 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.714 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:39.738 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.739 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:39.762 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.762 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:39.786 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.787 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:39.811 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.812 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:39.835 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:39.836 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:39.836 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:39.837 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:39.838 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:40.456 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x288
+15:40:40.457 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:40.457 >  0x26 0x3 0x24 0xA0 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x65 0xFF 0xA
+15:40:40.659 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.659 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:40.683 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.684 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:40.707 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.709 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:40.732 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.733 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:40.756 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.757 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:40.780 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:40.781 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:40.781 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:40.782 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:40.784 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:41.402 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2AC
+15:40:41.403 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:41.404 >  0x26 0x3 0x24 0xDC 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xA7 0xF 0xA
+15:40:41.604 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.605 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:41.628 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.629 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:41.653 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.653 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:41.677 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.678 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:41.701 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.703 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:41.726 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:41.727 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:41.727 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:41.728 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:41.729 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:42.347 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2D0
+15:40:42.350 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:42.350 >  0x26 0x3 0x24 0x19 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x81 0x2A 0xA
+15:40:42.550 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.551 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:42.575 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.576 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:42.599 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.600 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:42.623 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.624 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:42.647 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.648 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:42.672 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:42.684 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:42.684 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:42.684 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:42.684 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:43.292 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x2F4
+15:40:43.294 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:43.294 >  0x26 0x3 0x24 0x55 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x8F 0xD 0xA
+15:40:43.495 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.496 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:43.520 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.521 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:43.544 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.545 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:43.569 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.569 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:43.593 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.594 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:43.618 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:43.618 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:43.619 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:43.619 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:43.621 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:44.238 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x318
+15:40:44.240 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:44.241 >  0x26 0x3 0x24 0x91 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x36 0xA
+15:40:44.441 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.442 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:44.466 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.468 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:44.490 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.492 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:44.514 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.515 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:44.539 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.540 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:44.563 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:44.564 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:44.565 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:44.565 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:44.567 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:45.185 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x33C
+15:40:45.187 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:45.188 >  0x26 0x3 0x24 0xCE 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE8 0x80 0xA
+15:40:45.386 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.387 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:45.411 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.412 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:45.435 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.436 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:45.459 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.460 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:45.484 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.485 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:45.509 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:45.509 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:45.510 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:45.510 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:45.512 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:46.129 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x360
+15:40:46.131 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:46.132 >  0x26 0x3 0x24 0xA 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x29 0x8E 0xA
+15:40:46.332 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.332 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:46.355 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.356 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:46.380 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.381 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:46.404 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.405 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:46.429 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.434 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:46.453 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:46.455 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:46.455 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:46.455 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:46.457 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:47.074 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x384
+15:40:47.075 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:47.075 >  0x26 0x3 0x24 0x47 0x47 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xE 0xE8 0xA
+15:40:47.277 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.278 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:47.301 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.302 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:47.326 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.327 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:47.350 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.351 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:47.374 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.375 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:47.399 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:47.400 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:47.400 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:47.401 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:47.402 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:48.019 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3A8
+15:40:48.021 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:48.021 >  0x26 0x3 0x24 0xBE 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x3E 0x9D 0xA
+15:40:48.222 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.223 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:48.247 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.249 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:48.271 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.272 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:48.296 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.297 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:48.320 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.321 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:48.345 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:48.346 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:48.346 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:48.346 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:48.348 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:48.965 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3CC
+15:40:48.967 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:48.969 >  0x26 0x3 0x24 0xFA 0x43 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x6A 0x93 0xA
+15:40:49.167 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.171 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:49.192 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.192 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:49.216 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.218 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:49.240 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.241 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:49.265 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.266 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:49.289 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:49.290 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:49.291 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:49.291 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:49.293 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:49.914 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x3F0
+15:40:49.917 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:49.917 >  0x26 0x3 0x24 0x36 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB3 0x2B 0xA
+15:40:50.116 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.117 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:50.141 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.142 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:50.165 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.167 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:50.190 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.190 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:50.214 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.216 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:50.239 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:50.240 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:50.240 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:50.240 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:50.242 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:50.859 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x414
+15:40:50.861 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:50.862 >  0x26 0x3 0x24 0xA3 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x79 0x9 0xA
+15:40:51.063 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.064 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:51.087 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.088 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:51.111 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.112 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:51.136 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.137 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:51.160 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.161 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:51.184 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:51.185 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:51.186 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:51.186 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:51.188 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:51.806 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x438
+15:40:51.808 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:51.808 >  0x26 0x3 0x24 0xDF 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xBB 0xF9 0xA
+15:40:52.008 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.009 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:52.032 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.033 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:52.057 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.058 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:52.081 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.082 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:52.105 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.106 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:52.130 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.131 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:52.131 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:52.132 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:52.133 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:52.750 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x45C
+15:40:52.752 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:52.753 >  0x26 0x3 0x24 0x1B 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0x88 0xC3 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x7A 0xF7 0xA
+15:40:52.953 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.954 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:52.977 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:52.978 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:53.002 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.003 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:53.026 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.027 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:53.051 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.052 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:53.075 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.076 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:53.076 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:53.077 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:53.079 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:53.697 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x480
+15:40:53.698 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:53.698 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:53.898 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.899 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:53.923 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.924 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:53.947 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.948 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:53.972 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.973 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:53.996 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:53.997 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:54.021 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.022 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:54.022 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:54.023 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:54.024 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:54.641 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4A4
+15:40:54.643 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:54.643 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:54.844 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.845 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:54.868 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.869 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:54.893 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.894 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:54.917 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.918 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:54.941 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.942 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:54.966 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:54.967 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:54.968 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:54.968 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:54.970 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:55.587 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4C8
+15:40:55.588 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:55.589 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:55.789 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.790 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:55.813 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.814 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:55.838 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.838 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:55.862 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.863 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:55.887 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.888 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:55.911 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:55.912 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:55.913 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:55.913 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:55.916 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:56.533 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x4EC
+15:40:56.535 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:56.535 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:56.736 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.737 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:56.761 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.763 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:56.785 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.786 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:56.809 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.811 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:56.834 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.834 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:56.858 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:56.860 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:56.860 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:56.861 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:56.862 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:57.480 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x510
+15:40:57.481 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:57.481 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:57.681 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.682 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:57.706 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.706 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:57.730 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.731 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:57.755 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.756 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:57.779 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.780 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:57.804 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:57.804 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:57.805 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:57.805 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:57.806 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:58.424 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x534
+15:40:58.426 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:58.427 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:58.627 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.628 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:58.651 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.652 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:58.676 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.677 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:58.700 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.701 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:58.725 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.726 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:58.749 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:58.750 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:58.750 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:58.751 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:58.753 > DEBUG (write_SENT_DATAaddress) -> ...
+15:40:59.369 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x558
+15:40:59.371 > DEBUG (sendDataFrame) -> Trama enviada:
+15:40:59.371 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:40:59.572 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.573 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:40:59.597 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.597 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:40:59.621 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.623 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:40:59.645 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.646 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:59.670 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.670 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:40:59.694 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:40:59.695 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:40:59.695 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:40:59.695 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:40:59.698 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:00.315 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x57C
+15:41:00.316 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:00.317 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:41:00.517 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.518 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:00.542 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.543 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:00.566 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.567 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:00.591 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.591 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:00.615 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.616 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:00.639 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:00.640 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:00.641 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:00.641 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:00.643 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:01.261 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5A0
+15:41:01.262 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:01.262 >  0x26 0x3 0x24 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xA3 0xF5 0x12 0x14 0x1 0xE2 0x12 0xA
+15:41:01.463 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.464 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:01.488 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.489 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:01.512 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.514 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:01.537 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.538 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:01.561 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.562 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:01.585 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:01.586 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:01.588 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:01.588 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:01.589 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:02.207 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5C4
+15:41:02.208 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:02.208 >  0x26 0x3 0x24 0xE 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xB8 0x41 0x6 0x0 0x0 0x0 0x84 0x7 0x1A 0x40 0x0 0x0 0x0 0x0 0xDA 0xF5 0xF3 0x3F 0x0 0x0 0x0 0x0 0x74 0xE2 0xA
+15:41:02.409 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.410 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:02.433 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.434 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:02.458 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.459 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:02.482 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.483 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:02.507 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.508 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:02.531 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:02.532 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:02.533 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:02.533 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:02.535 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:03.152 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x5E8
+15:41:03.154 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:03.155 >  0x26 0x3 0x24 0x9D 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC8 0x41 0x16 0x0 0x0 0x0 0x98 0x22 0x1B 0x40 0x0 0x0 0x0 0x0 0xB2 0x9 0x9 0x40 0x0 0x0 0x0 0x0 0x53 0x3 0xA
+15:41:03.355 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.356 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:03.379 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.380 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:03.404 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.405 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:03.428 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.428 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:03.452 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.453 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:03.477 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:03.477 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:03.478 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:03.478 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:03.480 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:04.097 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x60C
+15:41:04.099 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:04.100 >  0x26 0x3 0x24 0x10 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xB9 0x41 0xA 0x0 0x0 0x0 0x87 0x6 0x1B 0x40 0x0 0x0 0x0 0x0 0xD 0x27 0xC 0x40 0x0 0x0 0x0 0x0 0x39 0x43 0xA
+15:41:04.300 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.301 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:04.325 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.325 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:04.349 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.350 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:04.374 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.375 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:04.398 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.399 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:04.423 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:04.424 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:04.424 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:04.425 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:04.427 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:05.047 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x630
+15:41:05.049 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:05.050 >  0x26 0x3 0x24 0xA0 0x44 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x40 0xC8 0x41 0x15 0x0 0x0 0x0 0x48 0xE8 0x1A 0x40 0x0 0x0 0x0 0x0 0x5F 0xA2 0x4 0x40 0x0 0x0 0x0 0x0 0xF8 0x3E 0xA
+15:41:05.250 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.250 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:05.274 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.275 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:05.299 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.300 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:05.323 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.324 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:05.348 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.348 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:05.372 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:05.373 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:05.374 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:05.374 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:05.376 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:05.992 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x654
+15:41:05.994 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:05.995 >  0x26 0x3 0x24 0x2D 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCB 0x41 0x1A 0x0 0x0 0x0 0x16 0xD8 0x1A 0x40 0x0 0x0 0x0 0x0 0xDD 0xC7 0x2 0x40 0x0 0x0 0x0 0x0 0x61 0xBB 0xA
+15:41:06.195 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.196 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:06.219 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.220 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:06.244 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.245 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:06.269 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.269 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:06.293 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.294 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:06.317 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:06.318 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:06.318 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:06.318 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:06.321 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:06.938 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x678
+15:41:06.940 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:06.941 >  0x26 0x3 0x24 0xBA 0x45 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xC0 0xCC 0x41 0x20 0x0 0x0 0x0 0xC7 0x16 0x1B 0x40 0x0 0x0 0x0 0x0 0x38 0x19 0x7 0x40 0x0 0x0 0x0 0x0 0x22 0x12 0xA
+15:41:07.141 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.142 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:07.164 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.165 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:07.190 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.190 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:07.213 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.214 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:07.237 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.238 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:07.262 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:07.263 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:07.264 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:07.264 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:07.265 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:07.883 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x69C
+15:41:07.884 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:07.884 >  0x26 0x3 0x24 0x49 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0xCE 0x41 0x2F 0x0 0x0 0x0 0x2A 0x49 0x1A 0x40 0x0 0x0 0x0 0x0 0x65 0x62 0xF0 0x3F 0x0 0x0 0x0 0x0 0x4B 0xFD 0xA
+15:41:08.085 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.086 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:08.110 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.112 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:08.134 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.136 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:08.158 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.159 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:08.183 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.184 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:08.208 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:08.209 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:08.209 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:08.210 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:08.212 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:08.829 > DEBUG (read) -> Dirección en memoria: 0xFFF004 Ultima dirección enviada: 0x6C0
+15:41:08.831 > DEBUG (sendDataFrame) -> Trama enviada:
+15:41:08.831 >  0x26 0x3 0x24 0xD6 0x46 0x6D 0x38 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x80 0xCE 0x41 0x33 0x0 0x0 0x0 0x2 0xD 0x1A 0x40 0x0 0x0 0x0 0x0 0x43 0xA2 0xE8 0x3F 0x0 0x0 0x0 0x0 0x66 0x99 0xA
+15:41:09.031 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.032 > DEBUG (slidingWindowBuffer) → incoming byte 0xAB
+15:41:09.055 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.056 > DEBUG (slidingWindowBuffer) → incoming byte 0x3
+15:41:09.079 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.080 > DEBUG (slidingWindowBuffer) → incoming byte 0x0
+15:41:09.104 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.105 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:09.128 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.129 > DEBUG (slidingWindowBuffer) → incoming byte 0xAA
+15:41:09.153 > DEBUG (slidingWindowBuffer) → Serial1.available = 1
+15:41:09.153 > DEBUG (slidingWindowBuffer) → incoming byte 0xA
+15:41:09.154 > DEBUG (sendDataFrame) -> Respuesta recibida:
+15:41:09.154 >  0xAB 0x3 0x0 0xAA 0xAA 0xA
+15:41:09.156 > DEBUG (write_SENT_DATAaddress) -> ...
+15:41:09.774 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:09.874 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:09.974 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.075 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.175 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.275 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.375 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.475 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.575 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.675 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.775 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.875 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:10.975 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.075 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.175 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.274 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.374 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.474 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.575 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.675 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.775 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.876 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:11.975 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.075 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.176 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.275 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.376 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.476 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.576 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.676 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.776 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.876 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:12.976 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.076 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.176 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.276 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.376 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.476 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.577 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.677 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.777 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.877 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:13.977 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.076 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.177 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.277 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.377 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.477 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.577 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.676 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.777 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.877 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:14.977 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.077 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.177 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.278 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.378 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.478 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.578 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.678 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.777 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.878 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:15.978 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.078 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.178 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.278 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.378 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.478 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.578 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.678 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.779 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.879 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:16.979 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.079 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.179 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.279 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.379 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.479 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.579 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.679 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.779 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.879 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:17.979 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.079 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.179 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.279 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.379 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.479 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.580 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.679 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.780 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.880 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:18.980 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.080 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.180 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.280 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.380 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.480 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.580 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.680 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.780 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.880 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:19.980 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.080 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.180 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.280 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.380 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.480 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.581 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.681 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.781 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.881 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:20.981 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.081 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.181 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.281 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.381 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.481 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.581 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.681 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.782 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.881 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:21.981 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.081 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.182 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.281 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.382 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.482 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.582 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.682 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.781 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.882 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:22.982 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.082 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.182 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.282 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.383 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.482 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.583 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.683 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.783 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.883 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:23.983 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.083 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.183 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.283 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.383 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.483 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.584 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.683 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.783 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.883 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:24.983 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.083 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.183 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.284 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.384 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.484 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.584 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.684 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.784 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.883 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:25.984 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.084 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.184 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.284 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.385 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.485 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.585 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.685 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.785 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.885 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:26.985 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.085 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.185 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.285 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.385 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.485 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.585 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.685 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.785 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.885 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:27.986 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.086 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.186 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.286 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.385 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.486 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.586 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.685 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.786 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.886 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:28.986 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.086 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.186 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.286 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.387 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.486 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.586 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.686 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.787 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.887 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:29.986 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.087 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.186 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.287 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.387 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.487 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.588 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.688 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.787 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.887 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:30.987 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.088 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.187 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.287 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.388 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.488 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.588 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.688 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.788 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.888 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:31.988 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.088 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.188 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.288 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.389 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.489 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.588 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.688 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.789 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.889 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:32.989 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.089 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.189 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.289 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.389 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.489 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.589 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.689 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.789 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.890 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:33.990 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.090 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.190 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.290 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.389 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.490 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.590 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.690 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.790 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.890 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:34.990 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.090 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.190 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.290 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.391 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.491 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.591 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.691 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.791 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.891 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:35.991 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.091 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.191 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.291 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.391 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.491 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.591 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.691 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.792 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.892 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:36.992 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.092 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.192 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.292 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.392 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.491 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.592 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.692 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.792 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.892 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:37.992 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.092 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.192 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.293 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.393 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.493 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.593 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.693 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.793 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.893 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:38.994 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.094 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.193 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.293 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.394 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.494 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.594 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.694 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.794 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.894 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:39.994 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:40.094 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:40.194 > DEBUG (sendDataFrame) → last_address_written == last_sent_address
+15:41:40.295 > DEBUG (sendDataFrame) → last_address_written == last_sent_address

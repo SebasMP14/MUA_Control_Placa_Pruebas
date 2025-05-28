@@ -1,0 +1,80 @@
+16:19:36.167 > DEBUG (setup) -> Serial Iniciado
+16:19:36.169 > DEBUG (setup) -> Serial1 Iniciado
+16:19:36.169 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+16:19:36.169 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+16:19:36.169 > DEBUG (get_OPstate) -> Dirección: 0xFFF00B Estado leído: 0x0
+16:19:36.173 > Estado: 0x0
+16:19:42.172 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:19:42.173 > DEBUG (setup) -> Setup finalizado...
+16:19:48.175 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:19:54.177 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:00.179 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:06.182 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:12.184 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:18.187 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:24.189 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:30.191 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:36.194 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:42.196 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:48.198 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:20:54.200 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:00.202 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:06.204 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:12.207 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:18.209 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:24.212 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:30.214 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:36.216 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:42.219 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:48.221 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:21:54.223 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:00.224 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:06.227 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:12.228 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:18.231 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:24.233 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:30.235 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:36.237 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:42.240 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:48.240 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:22:54.243 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:00.245 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:06.247 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:12.249 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:18.253 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:24.255 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:30.258 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:36.260 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:42.263 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:48.265 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:23:54.267 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:00.269 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:06.270 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:12.272 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:18.274 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:24.277 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:30.279 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:36.282 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:42.284 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:48.286 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:24:54.288 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:00.290 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:06.291 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:12.293 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:18.296 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:24.299 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:30.302 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:36.304 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:42.306 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:48.309 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:25:54.311 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:00.313 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:06.315 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:12.316 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:18.317 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:24.320 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:30.322 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:36.323 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:42.326 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:48.327 > DEBUG (requestOperationMode) → slidingWindowBuffer
+16:26:54.328 > DEBUG (requestOperationMode) → slidingWindowBuffer

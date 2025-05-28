@@ -29,6 +29,7 @@ extern const float Voffset;
 extern float firstCurrent1;
 extern float firstCurrent2;
 extern const float ResisB; 
+extern const float ResisC;
 
 float* moving_average(float *input, uint16_t Elementos, uint8_t window_size);
 void sliding_moving_average(float *input, uint16_t N, uint8_t M, float* output); // se usa
@@ -41,6 +42,6 @@ float Vbd_teorical(float Temperature); // se usa
 float SiPMCurrent(float VCurrent, float firstCurrent);  // Cálculo teórico
 float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC);      // Cálculo teórico
 float Vtia(float VCurrent, float firstCurrent);         // Cálculo teórico
-uint16_t CMD_DAC(uint8_t CMD_MAX, float Vout);
+uint16_t CMD_DAC(uint8_t CMD_MAX, float Vout);          // Conversión
 
 #endif
