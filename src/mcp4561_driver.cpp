@@ -86,5 +86,5 @@ uint16_t readMCP1(void) {
 }
 
 uint8_t VMCP_to_DEC(float voltage) {
-  return (uint8_t)((voltage - V_to_umbral) * 256 / 4.096);
+  return (uint8_t)((voltage - V_to_umbral) * 0xFF / 4.096);
 }

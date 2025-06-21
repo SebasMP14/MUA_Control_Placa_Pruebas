@@ -218,7 +218,8 @@ float Vbd_teorical(float Temperature) {   // Celcius
  * @return  
  */
 float SiPMCurrent(float VCurrent, float firstCurrent) {
-  return (float)( (VCurrent - firstCurrent) / ResisB );
+  float I = (VCurrent - firstCurrent) / ResisB;
+  return I;
 }
 
 /************************************************************************************************************
@@ -229,13 +230,14 @@ float SiPMCurrent(float VCurrent, float firstCurrent) {
  * @return  salida del MAX esperada → > 20 V
  */
 float VMAX_OUT(uint8_t CMD_MAX, uint16_t CMD_DAC) {
-  float MAXv = 1.25 * CMD_MAX / 0xFE;     // 
-  float DACv = 1.25 * CMD_DAC / 0xFFFE;   //
+  float MAXv = 1.25 * CMD_MAX / 0xFF;     // 
+  float DACv = 1.25 * CMD_DAC / 0x7FFF;   //
   
-  return (float)( (( (1.25/ResisC) + 
+  float out = (( (1.25/ResisC) + 
               ((1.25 - MAXv) / 24900) +
               ((1.25 - DACv) / 24900) - 
-              ((2.5 - 1.25) / 24900) ) * 240000 ) + 1.25 );
+              ((2.5 - 1.25) / 24900) ) * 240000 ) + 1.25;
+  return out;
 }
 
 /************************************************************************************************************
@@ -249,13 +251,14 @@ float Vtia(float VCurrent, float firstCurrent) {
 }
 
 uint16_t CMD_DAC(uint8_t CMD_MAX, float Vout) {
-  float MAXv = 1.25 * CMD_MAX / 0xFE;
+  float MAXv = 1.25 * CMD_MAX / 0xFF;
   float DACv = -1*( (( (-1.25/ResisC) - 
               ((1.25 - MAXv) / 24900) +
               ((Vout - 1.25) / 240000) + 
               ((2.5 - 1.25) / 24900) ) * 24900 ) - 1.25 );
 
-  return (uint16_t)(DACv * 0x7FFF / 1.25);
+  uint16_t cmd = (uint16_t)(DACv * 0x7FFF / 1.25);
+  return cmd;
 }
 
 

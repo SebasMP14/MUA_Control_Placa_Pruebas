@@ -11,8 +11,8 @@ MUA FRONT main and k01  Ch5
 
 
 
-
-
+///////////////////////////////////////////
+base line 14/06/2025 con pot = 0xDD
 
 
 

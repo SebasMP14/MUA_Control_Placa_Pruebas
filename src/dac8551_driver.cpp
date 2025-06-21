@@ -26,6 +26,7 @@ void write_dac8551_reg(uint16_t command, uint8_t chip_select) {
   SPI.transfer16(command);
   digitalWrite(chip_select, HIGH);
   SPI.endTransaction();
+  delay(10);
 }
 
 void end_dac8551(uint8_t chip_select) {

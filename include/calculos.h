@@ -28,6 +28,7 @@ extern float y[3];                         // Últimos 3 valores de salida (corr
 extern const float Voffset;
 extern float firstCurrent1;
 extern float firstCurrent2;
+extern const float ResisA;
 extern const float ResisB; 
 extern const float ResisC;
 
