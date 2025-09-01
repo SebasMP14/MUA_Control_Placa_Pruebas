@@ -190,14 +190,13 @@ unsigned long getTime(void) {
  * @return  false: trama inválida recibida
  */
 bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout) {
-  static uint8_t window[6] = {0};         // Sliding window buffer
-  // static uint8_t index = 0;
+  static uint8_t window[6] = {0};           // Sliding window buffer
   uint8_t incoming = 0x00;
   unsigned long tiempo = millis();
 
   while ( millis() - tiempo < timeout ) {
     if ( Serial1.available() ) {
-      incoming = Serial1.read();    // new byte
+      incoming = Serial1.read();            // new byte
       
       for ( uint8_t i = 0; i < 5; i++ ) {   // slide window and add the new byte to the final position
         window[i] = window[i + 1];
@@ -207,25 +206,10 @@ bool slidingWindowBuffer(uint8_t* buffer, unsigned long timeout) {
       Serial.print("DEBUG (slidingWindowBuffer) → incoming byte 0x");
       Serial.println(incoming, HEX);
       #endif
-
-      // Condición para analizar CRC
-      if (window[0] == ACCESS_BOARD_ID &&     // Primer Byte debe ser el ID de MUA MISSION
-          // window[2] == 0x00 &&           // Tercer Byte debe ser 0x00 para trama de comunicación
-          window[5] == STOP_BYTE) {      // Byte final debe ser 0x0A (STOP)   
-        // uint16_t crc_calc = crc_calculate(window);
-        // uint16_t crc_recv = (window[3] << 8) | window[4];
-
-        // if ( crc_calc == crc_recv ) {    // Se verifica CRC
-          memcpy(buffer, window, 6);     // Trama válida → copiar a buffer
-          // return 1;                      // Trama válida encontrada
-          return true;
-        // } else {
-          // Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
-          // window[0] = 0x47;
-          // window[5] = 0x47;
-          // memcpy(buffer, window, 6);
-          // return 2;                      // Trama 
-        // }
+      
+      if ( window[0] == ACCESS_BOARD_ID && window[5] == STOP_BYTE ) {   // Condición para analizar CRC
+        memcpy(buffer, window, 6);     // Trama válida → copiar a buffer
+        return true;
       }
     }
   }

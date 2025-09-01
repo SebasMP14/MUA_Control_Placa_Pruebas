@@ -14,7 +14,7 @@
  * - Ing. Lucas Cho 
  * 
  * TODO:
- * - 
+ * - cambiar a 128 MB
  */
 
 #ifndef FLASH_DRIVER_H

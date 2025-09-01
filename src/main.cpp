@@ -237,10 +237,10 @@ void setup() {
       setupTRANSFER();
       break;
     
-    case 0x08:
-      currentMode = FINISH;
-      enterOffMode();
-      break;
+    // case 0x08:                               // Eliminar por que podría entrar en un bucle...
+    //   currentMode = FINISH;
+    //   enterOffMode();
+    //   break;
 
     case 0x09:                                // TRANSFER_DATA_MODE
       currentMode = TRANSFER_INFO_MODE;
@@ -554,7 +554,7 @@ void setupCOUNT(void) {
   #endif
   time_ini = millis();
   time_flag = millis();
-  // setupTC2(segundos);
+  setupTC2(segundos);
 }
 
 void loopCOUNT(void) {
@@ -712,58 +712,59 @@ void loopCOUNT(void) {
     #endif  // descomentar
     
     /* GUARDADO Little-Endian */
-    // if ( !write_mem((uint8_t *)&timestamp, sizeof(timestamp)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura timestamp.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&lati.u, sizeof(lati.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Lat.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&longi.u, sizeof(longi.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Long.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura temperatura.");
-    //   #endif
-    // }
-    // desactiveInterrupt1();
-    // if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura pulse_count1.");
-    //   #endif
-    // }
-    // desactiveInterrupt2();
-    // if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura pulse_count2.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&vbd1.u, sizeof(vbd1.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vbd1.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&vbd2.u, sizeof(vbd2.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vbd2.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&vcurr1.u, sizeof(vcurr1.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vcurr1.");
-    //   #endif
-    // }
-    // if ( !write_mem((uint8_t *)&vcurr2.u, sizeof(vcurr2.u)) ) {
-    //   #ifdef DEBUG_MAIN
-    //   Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vcurr2.");
-    //   #endif
-    // }
+    if ( !write_mem((uint8_t *)&timestamp, sizeof(timestamp)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura timestamp.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&lati.u, sizeof(lati.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Lat.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&longi.u, sizeof(longi.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Long.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&temp.u, sizeof(temperature)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura temperatura.");
+      #endif
+    }
+    desactiveInterrupt1();
+    if ( !write_mem((uint8_t *)&pulse_count1, sizeof(pulse_count1)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura pulse_count1.");
+      #endif
+    }
+    // pulse_count1 = 0;
+    desactiveInterrupt2();
+    if ( !write_mem((uint8_t *)&pulse_count2, sizeof(pulse_count2)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura pulse_count2.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vbd1.u, sizeof(vbd1.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vbd1.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vbd2.u, sizeof(vbd2.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vbd2.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vcurr1.u, sizeof(vcurr1.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vcurr1.");
+      #endif
+    }
+    if ( !write_mem((uint8_t *)&vcurr2.u, sizeof(vcurr2.u)) ) {
+      #ifdef DEBUG_MAIN
+      Serial.println("ERROR (loopCOUNT) -> Fallo en la escritura Vcurr2.");
+      #endif
+    }
 
     // enable_Interface();                                           // LINEA DE PRUEBA
     
@@ -792,7 +793,7 @@ void loopCOUNT(void) {
     // #endif
     obtain_Curve_inverseVI(temperature1, SPI_CS_DAC1, external_ref);
     sliding_moving_average(inverseVoltage1, Elementos, Ventana, Filtered_voltage1); // Voltage Filtering 
-    sliding_moving_average(inverseVoltage1, Elementos, Ventana, Filtered_voltage1); // Current Filtering
+    sliding_moving_average(inverseVCurrent1, Elementos, Ventana, Filtered_current1); // Current Filtering
     Vbd1 = obtain_Vbd(Filtered_current1, Filtered_voltage1, Elementos, &Vcurr1, &indexPeak1);    // 
     // #ifdef DEBUG_MAIN
     // Serial.print("DEBUG (obtain_Vbd) -> command del Vbd1 obtenido: ");
@@ -844,7 +845,7 @@ void loopCOUNT(void) {
     #endif
     obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
     sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
-    sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
+    sliding_moving_average(inverseVCurrent2, Elementos, Ventana, Filtered_current2);
     Vbd2 = obtain_Vbd(Filtered_current2, Filtered_voltage2, Elementos, &Vcurr2, &indexPeak2);
     #ifdef DEBUG_MAIN
     Serial.print("DEBUG (obtain_Vbd) -> command del Vbd2 obtenido: ");

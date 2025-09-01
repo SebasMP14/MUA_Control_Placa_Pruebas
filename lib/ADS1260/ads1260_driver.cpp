@@ -138,7 +138,7 @@ float ADS1260::computeVolts(uint32_t value, float REFERENCE) {
 
 void ADS1260::connectMUX(uint8_t p_pin, uint8_t n_pin) {
   uint8_t inpmuxValue = (p_pin << 4) | n_pin;
-  writeRegister(ADS1260_INPMUX, inpmuxValue); // Configuración de multiplexor
+  writeRegister(ADS1260_INPMUX, inpmuxValue);             // Configuración de multiplexor
   delay(10);
 }
 
