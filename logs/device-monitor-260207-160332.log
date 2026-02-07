@@ -1,0 +1,135 @@
+16:03:35.838 > DEBUG (setup) -> Serial Iniciado
+16:03:35.838 > DEBUG (setup) -> Serial1 Iniciado
+16:03:35.838 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+16:03:35.838 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+16:03:35.838 > Estado: 0x1
+16:03:35.838 > DEBUG (setup) -> COUNT_MODE iniciado
+16:03:35.856 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+16:03:35.856 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+16:03:36.020 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+16:03:36.026 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 2
+16:03:36.040 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+16:03:36.040 > MCP escrito en: 9C
+16:03:37.187 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+16:03:37.302 > DEBUG (setupCOUNT) -> MODE0: 100100
+16:03:37.338 > DEBUG (setupCOUNT) -> MODE0: 11111100
+16:03:37.338 > DEBUG (setupCOUNT) -> PGA: 0
+16:03:37.394 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+16:03:37.712 > Temperatura1: 22.6250
+16:03:37.722 > firstCurrent1: 0.605784
+16:03:37.722 > Vbd teorico: 24.484938
+16:03:37.722 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8145, 0x7FFE, 0x6BCA, paso: 12
+16:03:51.740 > Tiempo promedio de muestreo [ms]: 34.9998
+16:03:51.740 > DEBUG (obtain_Vbd) -> Ejecutandose
+16:03:51.744 > DEBUG (obtain_Vbd) -> logaritmo calculado
+16:03:51.744 > DEBUG (obtain_Vbd) -> Vbd obtenido: 1.965296
+16:03:51.744 > DEBUG (obtain_Vbd) -> Command DAC del Vbd1 obtenido: 0x7062
+16:03:51.745 > DEBUG (obtain_Vbd) → Vi_Vbd = 0.614681
+16:03:51.745 > DEBUG (obtain_Vbd) → Isipm = 0.00000890
+16:03:51.746 > Over Voltage: 2.50
+16:03:51.746 > DEBUG (polarization_settling) → Channel 1
+16:03:56.088 > DEBUG (polarization_settling) -> Vbias_command: 5542
+16:03:56.088 > DEBUG (polarization_settling) -> Vbias: 2.178138
+16:03:56.088 > DEBUG (polarization_settling) -> VIbias: 0.620736
+16:03:56.098 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+16:03:56.098 > MCP escrito en: E8
+16:03:56.209 > Temperatura2: 23.5625
+16:03:56.219 > firstCurrent2: 0.605342
+16:03:56.223 > Vbd teorico: 24.505095
+16:03:56.223 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8346, 0x7FFE, 0x6B93, paso: 13
+16:04:10.237 > Tiempo promedio de muestreo [ms]: 35.0001
+16:04:10.238 > DEBUG (obtain_Vbd) -> Ejecutandose
+16:04:10.238 > DEBUG (obtain_Vbd) -> logaritmo calculado
+16:04:10.238 > DEBUG (obtain_Vbd) -> Vbd obtenido: 1.910408
+16:04:10.238 > DEBUG (polarization_settling) → Channel 2
+16:04:10.238 > DEBUG (polarization_settling) → Channel 1
+16:04:14.565 > DEBUG (polarization_settling) -> Vbias_command: 5BF4
+16:04:14.566 > DEBUG (polarization_settling) -> Vbias: 2.122610
+16:04:14.566 > DEBUG (polarization_settling) -> VIbias: 0.626220
+16:04:14.575 > setupCount finalizado...
+16:04:14.576 > DEBUG (setup) -> Setup finalizado...
+16:04:34.586 > millis: 62718, timestamp: 946684827, Temperatura: 24.0625
+16:04:54.596 > millis: 82718, timestamp: 946684905, Temperatura: 24.1875
+16:05:14.605 > millis: 102718, timestamp: 946684925, Temperatura: 24.2500
+16:05:34.614 > millis: 122718, timestamp: 946684945, Temperatura: 24.3750
+16:05:54.623 > millis: 142718, timestamp: 946684965, Temperatura: 24.4375
+16:06:14.632 > millis: 162718DEBUG (TC2_Handler) -> Interrupción TC2.
+16:06:14.632 > , timestamp: 946684985, Temperatura: 24.5000
+16:06:14.633 > TRAMA -> timestamp: (946684985, 0x386D4439), Lat: (0.00, 0x0), Long: (0.00, 0x0), TMP: (23.0938 ºC, 0x41B8C000), Count1: (0, 0x0), Count2: (0, 0x0), Vbd1: (1.97, 0x3FFB8ED0), Vbd2: (1.91, 0x3FF48842), Vcurr1: (0.61, 0x3F1D5BC1), Vcurr2: (0.62, 0x3F1E8CA4)
+16:06:14.634 > readBuffer: address = FFF000 count = 4
+16:06:14.634 > writeBuffer: address = 6C count = 4
+16:06:14.634 > DEBUG (update_address) -> ...
+16:06:14.634 > readBuffer: address = FFF000 count = 12
+16:06:14.639 > eraseSector: address = FFF000
+16:06:14.639 > writeBuffer: address = FFF000 count = 12
+16:06:14.656 > readBuffer: address = FFF000 count = 4
+16:06:14.656 > writeBuffer: address = 70 count = 4
+16:06:14.656 > DEBUG (update_address) -> ...
+16:06:14.657 > readBuffer: address = FFF000 count = 12
+16:06:14.657 > eraseSector: address = FFF000
+16:06:14.657 > writeBuffer: address = FFF000 count = 12
+16:06:14.670 > readBuffer: address = FFF000 count = 4
+16:06:14.670 > writeBuffer: address = 74 count = 4
+16:06:14.670 > DEBUG (update_address) -> ...
+16:06:14.670 > readBuffer: address = FFF000 count = 12
+16:06:14.670 > eraseSector: address = FFF000
+16:06:14.670 > writeBuffer: address = FFF000 count = 12
+16:06:14.690 > readBuffer: address = FFF000 count = 4
+16:06:14.690 > writeBuffer: address = 78 count = 4
+16:06:14.690 > DEBUG (update_address) -> ...
+16:06:14.690 > readBuffer: address = FFF000 count = 12
+16:06:14.690 > eraseSector: address = FFF000
+16:06:14.690 > writeBuffer: address = FFF000 count = 12
+16:06:14.706 > readBuffer: address = FFF000 count = 4
+16:06:14.706 > writeBuffer: address = 7C count = 2
+16:06:14.706 > DEBUG (update_address) -> ...
+16:06:14.706 > readBuffer: address = FFF000 count = 12
+16:06:14.706 > eraseSector: address = FFF000
+16:06:14.706 > writeBuffer: address = FFF000 count = 12
+16:06:14.723 > readBuffer: address = FFF000 count = 4
+16:06:14.723 > writeBuffer: address = 7E count = 2
+16:06:14.723 > DEBUG (update_address) -> ...
+16:06:14.723 > readBuffer: address = FFF000 count = 12
+16:06:14.723 > eraseSector: address = FFF000
+16:06:14.723 > writeBuffer: address = FFF000 count = 12
+16:06:14.740 > readBuffer: address = FFF000 count = 4
+16:06:14.740 > writeBuffer: address = 80 count = 4
+16:06:14.740 > DEBUG (update_address) -> ...
+16:06:14.740 > readBuffer: address = FFF000 count = 12
+16:06:14.740 > eraseSector: address = FFF000
+16:06:14.740 > writeBuffer: address = FFF000 count = 12
+16:06:14.753 > readBuffer: address = FFF000 count = 4
+16:06:14.753 > writeBuffer: address = 84 count = 4
+16:06:14.753 > DEBUG (update_address) -> ...
+16:06:14.753 > readBuffer: address = FFF000 count = 12
+16:06:14.753 > eraseSector: address = FFF000
+16:06:14.768 > writeBuffer: address = FFF000 count = 12
+16:06:14.784 > readBuffer: address = FFF000 count = 4
+16:06:14.785 > writeBuffer: address = 88 count = 4
+16:06:14.785 > DEBUG (update_address) -> ...
+16:06:14.785 > readBuffer: address = FFF000 count = 12
+16:06:14.786 > eraseSector: address = FFF000
+16:06:14.786 > writeBuffer: address = FFF000 count = 12
+16:06:14.802 > readBuffer: address = FFF000 count = 4
+16:06:14.802 > writeBuffer: address = 8C count = 4
+16:06:14.802 > DEBUG (update_address) -> ...
+16:06:14.803 > readBuffer: address = FFF000 count = 12
+16:06:14.803 > eraseSector: address = FFF000
+16:06:14.803 > writeBuffer: address = FFF000 count = 12
+16:06:14.837 > Vbd teorico: 24.525249
+16:06:14.837 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8547, 0x7FFE, 0x6B5C, paso: 13
+16:06:28.857 > Tiempo promedio de muestreo [ms]: 34.9979
+16:06:28.859 > DEBUG (obtain_Vbd) -> Ejecutandose
+16:06:28.862 > DEBUG (obtain_Vbd) -> logaritmo calculado
+16:06:28.862 > DEBUG (obtain_Vbd) -> Vbd obtenido: 1.989426
+16:06:28.863 > DEBUG (polarization_settling) → Channel 1
+16:06:33.205 > DEBUG (polarization_settling) -> Vbias_command: 522E
+16:06:33.205 > DEBUG (polarization_settling) -> Vbias: 2.202444
+16:06:33.205 > DEBUG (polarization_settling) -> VIbias: 0.622293
+16:06:33.215 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+16:06:33.216 > MCP escrito en: E8
+16:06:33.317 > Temperatura2: 24.5625
+16:06:33.335 > firstCurrent2: 
+16:06:33.335 > 0.608100
+16:06:33.335 > Vbd teorico: 24.526594
+16:06:33.335 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 27.9204, 29.8562, 0x7FFE, 0x6B58, paso: 13

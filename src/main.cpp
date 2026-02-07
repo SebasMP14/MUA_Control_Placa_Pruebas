@@ -31,8 +31,9 @@
 // #define DEBUG_
 // #define WITHOUT_DETECTION_BOARD
 #define DESACTIVE_CHANNEL_2
-#define SECOND_DETECTION_BOARD              // Placa con rangos modificados
+// #define SECOND_DETECTION_BOARD              // Placa con rangos modificados
 // #define DEBUG_NEW_POL_SETTLING
+// #define PLACA_CONTROL_V3
 
 #define MAX_ITER            5               // Protocol initialization attempts
 #define Ventana             5               // Para Sliding Moving Average
@@ -138,7 +139,7 @@ bool enable_Interface(void);
 
 
 void setup() {
-  delay(2000);
+  delay(4000);
 
   Serial.begin(115200);                 // Puerto USB
   #ifdef DEBUG_MAIN
@@ -412,6 +413,9 @@ void setupCOUNT(void) {
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
   #endif
   ads1260.writeRegisterData(ADS1260_PGA, 0b10000000);             // BYPASS MODE
+  ads1260.writeRegisterData(ADS1260_REF, 0b00001001);
+  delay(50);
+  // ads1260.readRegister
   #ifdef DEBUG_MAIN
   Serial.print("DEBUG (setupCOUNT) -> PGA BYPASS MODE: ");
   Serial.println(ads1260.readRegisterData(ADS1260_PGA), BIN);
@@ -420,11 +424,19 @@ void setupCOUNT(void) {
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
 
-  external_ref = ads1260.readRef();                             // Se lee la referencia
-  #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-  Serial.println(external_ref, 6);
-  #endif
+  // external_ref = ads1260.readRef();                             // Se lee la referencia
+  external_ref = 3.923650f;
+  // ads1260.writeRegisterData(ADS1260_REF, 0b00001001);
+
+  // #ifdef DEBUG_MAIN
+  // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  // Serial.println(external_ref, 6);
+  // #endif
+  // Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM), external_ref), 6);
+
+  // while(true){
+  //   delay(1000);
+  // }
 
   #ifdef DEBUG_
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC1);             // 0x7FFF
@@ -432,11 +444,11 @@ void setupCOUNT(void) {
   uint16_t aux = DAC_INIT;
   while (true) {
     // aux -= 0x0100;
-    external_ref = ads1260.readRef();                             // Se lee la referencia
-    #ifdef DEBUG_MAIN
-    Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-    Serial.println(external_ref, 6);
-    #endif
+    // external_ref = ads1260.readRef();                             // Se lee la referencia
+    // #ifdef DEBUG_MAIN
+    // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+    // Serial.println(external_ref, 6);
+    // #endif
     write_dac8551_reg(0x4235, SPI_CS_DAC1);     /* Medi 28.67 V con el multimetro (channel 1)*/
     delay(5);                                   /* Debieron ser 34V */
     Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM), external_ref), 6);
@@ -459,7 +471,11 @@ void setupCOUNT(void) {
   Serial.print("Temperatura1: ");
   Serial.println(temperature1, 4);
   #endif
+  #ifdef PLACA_CONTROL_V3
+  firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+  #else
   firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
+  #endif
   #ifdef DEBUG_MAIN
   Serial.print("firstCurrent1: ");
   Serial.println(firstCurrent1, 6);
@@ -477,13 +493,14 @@ void setupCOUNT(void) {
   // write_dac8551_reg(inverseVoltage_command[indexPeak1], SPI_CS_DAC1);
   // Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref), 6);
   // while (true) {}
-  external_ref = ads1260.readRef();                             // Se lee la referencia
+  // external_ref = ads1260.readRef();                             // Se lee la referencia
   #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-  Serial.println(external_ref, 6);
+  // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  // Serial.println(external_ref, 6);
   Serial.print("Over Voltage: ");
   Serial.println(ov, 2);
   #endif
+  
   // write_dac8551_reg(DAC_INIT, SPI_CS_DAC1);                       // Activación de Vout1 al mínimo valor
   // write_max_reg(MAX_INIT, SPI_CS_MAX1);
   // delayMicroseconds(300);
@@ -513,16 +530,16 @@ void setupCOUNT(void) {
   #endif
   delay(100);
   activeInterrupt1();                                           // Una vez polarizado
-  flag1 = false;
+  flag1 = true;
   
 
 
   #ifndef DESACTIVE_CHANNEL_2
   // Channel 2
-  external_ref = ads1260.readRef();                             // Se lee la referencia
+  // external_ref = ads1260.readRef();                             // Se lee la referencia
   #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-  Serial.println(external_ref, 6);
+  // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  // Serial.println(external_ref, 6);
   #endif
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(MAX_INIT, SPI_CS_MAX2);
@@ -532,7 +549,11 @@ void setupCOUNT(void) {
   Serial.print("Temperatura2: ");
   Serial.println(temperature2, 4);
   #endif
+  #ifdef PLACA_CONTROL_V3
+  firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN4, ADS1260_MUXN_AINCOM), external_ref);
+  #else
   firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+  #endif
   #ifdef DEBUG_MAIN
   Serial.print("firstCurrent2: ");
   Serial.println(firstCurrent2, 6);
@@ -542,8 +563,29 @@ void setupCOUNT(void) {
   sliding_moving_average(inverseVCurrent2, Elementos, Ventana, Filtered_current2);
   Vbd2 = obtain_Vbd(Filtered_current2, Filtered_voltage2, Elementos, &Vcurr2, &indexPeak2);
   Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
+  #ifdef DEBUG_MAIN
+  Serial.print("DEBUG (setupCOUNT) -> writing in MCP ");
+  #endif
+  for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+    if ( writeMCP1(pot) ) {                         // Configuración del MCP4561
+      #ifdef DEBUG_MAIN
+      Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
+      #endif
+      break;
+    } else {
+      #ifdef DEBUG_MAIN
+      Serial.print("DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: ");
+      Serial.println(iter_counter);
+      #endif
+      delay(10);
+    }
+  }
+  #ifdef DEBUG_MAIN
+  Serial.print("MCP escrito en: ");
+  Serial.println(readMCP1(), HEX);
+  #endif
   activeInterrupt2();                                     // Una vez polarizado
-  flag2 = false;      
+  flag2 = true;      
   #endif
   #endif
 
@@ -768,11 +810,11 @@ void loopCOUNT(void) {
 
     // enable_Interface();                                           // LINEA DE PRUEBA
     
-    external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
-    #ifdef DEBUG_MAIN
-    Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-    Serial.println(external_ref, 6);
-    #endif
+    // external_ref = ads1260.readRef();                             // Se lee nuevamente la ref del ADC
+    // #ifdef DEBUG_MAIN
+    // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+    // Serial.println(external_ref, 6);
+    // #endif
     desactiveInterrupt1();
     #ifndef WITHOUT_DETECTION_BOARD
     // Channel 1 Polarization
@@ -784,7 +826,11 @@ void loopCOUNT(void) {
     // Serial.print("Temperatura1: ");
     // Serial.println(temperature1, 4);
     // #endif
+    #ifdef PLACA_CONTROL_V3
+    firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+    #else
     firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
+    #endif
     // #ifdef DEBUG_MAIN
     // Serial.println("VVoltage, VCorriente");
     // Serial.print(firstVoltage1, 6);
@@ -823,7 +869,7 @@ void loopCOUNT(void) {
     #endif
     delay(100);
     activeInterrupt1();
-    flag1 = false;
+    flag1 = true;
 
 
     
@@ -838,7 +884,11 @@ void loopCOUNT(void) {
     Serial.print("Temperatura2: ");
     Serial.println(temperature2, 4);
     #endif
+    #ifdef PLACA_CONTROL_V3
+    firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN4, ADS1260_MUXN_AINCOM), external_ref);
+    #else
     firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+    #endif
     #ifdef DEBUG_MAIN
     Serial.println("firstCurrent2: ");
     Serial.println(firstCurrent2, 6);
@@ -852,8 +902,29 @@ void loopCOUNT(void) {
     Serial.println(inverseVoltage_command[indexPeak2], HEX);
     #endif
     Vbias2 = polarization_settling(Vbd2, SPI_CS_DAC2);
+    #ifdef DEBUG_MAIN
+    Serial.print("DEBUG (setupCOUNT) -> writing in MCP ");
+    #endif
+    for ( uint8_t iter_counter = 0; iter_counter <= MAX_ITER ; iter_counter ++) {
+      if ( writeMCP1(pot) ) {                         // Configuración del MCP4561
+        #ifdef DEBUG_MAIN
+        Serial.println("DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.");
+        #endif
+        break;
+      } else {
+        #ifdef DEBUG_MAIN
+        Serial.print("DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: ");
+        Serial.println(iter_counter);
+        #endif
+        delay(10);
+      }
+    }
+    #ifdef DEBUG_MAIN
+    Serial.print("MCP escrito en: ");
+    Serial.println(readMCP1(), HEX);
+    #endif
     activeInterrupt2();
-    flag1 = false;
+    flag1 = true;
     #endif
     #endif
 
@@ -996,6 +1067,22 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
   float* inverseVCurrent;
   // float* temperatureArray;
 
+  #ifdef PLACA_CONTROL_V3
+  muxP0             = ADS1260_MUXP_AIN1;                    // Initialization
+  muxP1             = ADS1260_MUXP_AIN3;
+  led               = LED_SiPM1;
+  inverseVoltage    = inverseVoltage1;
+  inverseVCurrent   = inverseVCurrent1;
+  // temperatureArray  = temperatureArray1;
+  if ( CS_DAC == SPI_CS_DAC2 ) {
+    muxP0             = ADS1260_MUXP_AIN2;
+    muxP1             = ADS1260_MUXP_AIN4;
+    led               = LED_SiPM2;
+    inverseVoltage    = inverseVoltage2;
+    inverseVCurrent   = inverseVCurrent2;
+    // temperatureArray  = temperatureArray2;
+  }
+  #else
   muxP0             = ADS1260_MUXP_AIN0;                    // Initialization
   muxP1             = ADS1260_MUXP_AIN2;
   led               = LED_SiPM1;
@@ -1010,6 +1097,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
     inverseVCurrent   = inverseVCurrent2;
     // temperatureArray  = temperatureArray2;
   }
+  #endif
 
   float Vbd_Teo = Vbd_teorical(Temperature);
   #ifdef DEBUG_MAIN
@@ -1077,6 +1165,22 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   float firstCurrent;
   uint16_t indexPeak;
 
+  #ifdef PLACA_CONTROL_V3
+  muxP0         = ADS1260_MUXP_AIN1;                      // Configuración de lectura: Canal 1 o 2
+  muxP1         = ADS1260_MUXP_AIN3;
+  led           = LED_SiPM1;
+  firstCurrent  = firstCurrent1;
+  indexPeak     = indexPeak1;
+  
+  if ( CS_DAC == SPI_CS_DAC2 ) {
+    muxP0         = ADS1260_MUXP_AIN2;
+    muxP1         = ADS1260_MUXP_AIN4;
+    led           = LED_SiPM2;
+    firstCurrent  = firstCurrent2;
+    indexPeak     = indexPeak2;
+    Serial.println("DEBUG (polarization_settling) → Channel 2");
+  }
+  #else
   muxP0         = ADS1260_MUXP_AIN0;                      // Configuración de lectura: Canal 1 o 2
   muxP1         = ADS1260_MUXP_AIN2;
   led           = LED_SiPM1;
@@ -1091,6 +1195,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
     indexPeak     = indexPeak2;
     Serial.println("DEBUG (polarization_settling) → Channel 2");
   }
+  #endif
 
   #ifdef DEBUG_MAIN
   Serial.println("DEBUG (polarization_settling) → Channel 1");
@@ -1142,7 +1247,7 @@ float polarization_settling(float Vbd, uint8_t CS_DAC) {
   #else
   Vbias = (Vbd * RESISTIVE_DIVISOR) + ov;     // en el Vbd ya se encuentran los 3.8V de offset
   uint16_t Vbias_DAC_CMD = CMD_DAC(MAX_INIT, Vbias) - 0x000A;
-  external_ref = ads1260.readRef();
+  // external_ref = ads1260.readRef();
   #ifdef DEBUG_MAIN
   Serial.print("DEBUG (polarization_settling) → external_ref = "); Serial.println(external_ref, 6);
   #endif
@@ -1450,10 +1555,10 @@ bool enable_Interface(void) {
   // ads1260.writeRegisterData(ADS1260_REF, 0b00010000);             // REF 2.498V ENABLE
   delay(300);
 
-  external_ref = ads1260.readRef();                             // Se lee la referencia
+  // external_ref = ads1260.readRef();                             // Se lee la referencia
   #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-  Serial.println(external_ref, 6);
+  // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  // Serial.println(external_ref, 6);
   #endif
 
   #ifdef DEBUG_
@@ -1462,10 +1567,10 @@ bool enable_Interface(void) {
   uint16_t aux = DAC_INIT;
   while (true) {
     // aux -= 0x0100;
-    external_ref = ads1260.readRef();                             // Se lee la referencia
+    // external_ref = ads1260.readRef();                             // Se lee la referencia
     #ifdef DEBUG_MAIN
-    Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-    Serial.println(external_ref, 6);
+    // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+    // Serial.println(external_ref, 6);
     #endif
     write_dac8551_reg(0x4235, SPI_CS_DAC1);     /* Medi 28.67 V con el multimetro (channel 1)*/
     delay(5);                                   /* Debieron ser 34V */
@@ -1488,7 +1593,11 @@ bool enable_Interface(void) {
   Serial.print("Temperatura: ");
   Serial.println(temperature1, 4);
   #endif
+  #ifdef PLACA_CONTROL_V3
+  firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+  #else
   firstCurrent1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
+  #endif
   #ifdef DEBUG_MAIN
   Serial.print("firstCurrent1: ");
   Serial.println(firstCurrent1, 6);
@@ -1515,10 +1624,10 @@ bool enable_Interface(void) {
 
   #ifndef DESACTIVE_CHANNEL_2
   // Channel 2
-  external_ref = ads1260.readRef();                             // Se lee la referencia
+  // external_ref = ads1260.readRef();                             // Se lee la referencia
   #ifdef DEBUG_MAIN
-  Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-  Serial.println(external_ref, 6);
+  // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
+  // Serial.println(external_ref, 6);
   #endif
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC2);                       // Activación de Vout2 al mínimo valor
   write_max_reg(MAX_INIT, SPI_CS_MAX2);
@@ -1527,7 +1636,11 @@ bool enable_Interface(void) {
   Serial.print("Temperatura2: ");
   Serial.println(temperature2, 4);
   #endif
+  #ifdef PLACA_CONTROL_V3
+  firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN4, ADS1260_MUXN_AINCOM), external_ref);
+  #else
   firstCurrent2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+  #endif
   obtain_Curve_inverseVI(temperature2, SPI_CS_DAC2, external_ref);
   sliding_moving_average(inverseVoltage2, Elementos, Ventana, Filtered_voltage2);
   sliding_moving_average(inverseVCurrent2, Elementos, Ventana, Filtered_current2);

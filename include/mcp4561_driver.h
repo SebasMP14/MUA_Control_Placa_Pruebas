@@ -8,6 +8,7 @@
 #include <math.h>
 
 #define MCP_ADDRESS 0b00101110 // 0x2E:startBit, A6, ..., A0, 
+// #define MCP_ADDRESS 0b00101000
 
 extern const float V_to_umbral;
 

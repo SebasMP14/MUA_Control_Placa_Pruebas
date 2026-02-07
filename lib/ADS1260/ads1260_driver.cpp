@@ -162,7 +162,8 @@ float ADS1260::readRef(void) {
   this->writeRegisterData(ADS1260_REF, 0b00010000);                     // Internal reference (2.498V) ENABLE
   delay(50);
   this->connectMUX(ADS1260_MUXP_ANALOG, ADS1260_MUXN_ANALOG);           // MUX configuration
-
+  // this->connectMUX(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM);
+  // delay(200);
   float conversion = this->computeVolts(this->readConversion(), INTERNAL_REF);
   this->writeRegisterData(ADS1260_REF, 0b00000101);                     // Activate External reference
   // this->connectMUX(ADS1260_MUXP_ANALOG, ADS1260_MUXN_ANALOG);

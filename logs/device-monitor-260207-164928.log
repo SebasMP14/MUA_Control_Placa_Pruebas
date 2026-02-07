@@ -1,0 +1,23 @@
+16:49:31.993 > DEBUG (setup) -> Serial Iniciado
+16:49:31.994 > DEBUG (setup) -> Serial1 Iniciado
+16:49:31.994 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+16:49:31.994 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+16:49:31.994 > Estado: 0x1
+16:49:31.994 > DEBUG (setup) -> COUNT_MODE iniciado
+16:49:32.006 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+16:49:32.006 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+16:49:32.170 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+16:49:32.180 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 2
+16:49:32.191 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 3
+16:49:32.193 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 4
+16:49:32.207 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 5
+16:49:32.212 > MCP escrito en: FFFF
+16:49:33.372 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+16:49:33.482 > DEBUG (setupCOUNT) -> MODE0: 100100
+16:49:33.526 > DEBUG (setupCOUNT) -> MODE0: 11111100
+16:49:33.526 > DEBUG (setupCOUNT) -> PGA: 0
+16:49:33.575 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000
+16:49:33.891 > Temperatura1: 25.3750
+16:49:33.891 > firstCurrent1: 1.213546
+16:49:33.891 > Vbd teorico: 24.544062
+16:49:33.904 > DEBUG (obtain_Curve_inverseVI) -> Limites (dec, hex): 26.8736, 29.8737, 0x679E, 0x479E, paso: 20
