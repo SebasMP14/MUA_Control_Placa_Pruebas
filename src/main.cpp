@@ -31,9 +31,11 @@
 // #define DEBUG_
 // #define WITHOUT_DETECTION_BOARD
 #define DESACTIVE_CHANNEL_2
+#define FIRST_DETECTION_BOARD
 // #define SECOND_DETECTION_BOARD              // Placa con rangos modificados
+// #define THIRD_DETECTION_BOARD
 // #define DEBUG_NEW_POL_SETTLING
-// #define PLACA_CONTROL_V3
+#define PLACA_CONTROL_V3
 
 #define MAX_ITER            5               // Protocol initialization attempts
 #define Ventana             5               // Para Sliding Moving Average
@@ -43,7 +45,7 @@
 #define TRAMA_CURVE_SIZE    39              // VER LA FORMA DE DISMINUIR LA CANT DE PUNTOS (400)
 #define RESISTIVE_DIVISOR   11.79272944f    // Average value
 
-uint8_t pot = 0xE8; // 0xDD Prueba final con tutores 14/06
+uint8_t pot = 0xE8;// 0xE8; Placa de deteccion V2// 0xDD Prueba final con tutores 14/06
 // uint8_t status = 0;
 uint8_t state = 0x01;                       // 
 // uint32_t timestamp = 0;
@@ -51,20 +53,28 @@ uint8_t segundos = 120;                     // Calibración cada tantos segundos
 const float Voffset = 3.829428571f;
 const float voffset = Voffset / RESISTIVE_DIVISOR;
 const float ResisA = 1050;
-const float ov = 2.5f;                      // Establecido por el fabricante: 2.5 V
+const float ov = 5.5f;                      // Establecido por el fabricante: 2.5 V
+#ifdef FIRST_DETECTION_BOARD
+const float ResisB = 2000;
+const float ResisC = 12700;
+// const float OverVoltage = 0.2238233f * ov // CALCULAR
+const float OverVoltage = ov / RESISTIVE_DIVISOR;
+uint8_t MAX_INIT = 0x01;      // 0x44     // 0x60;
+float MIN_VOUT_SIPM = 24.595; // 27.92f;  // 26.714f;  // Teórico
+#endif
 #ifdef SECOND_DETECTION_BOARD
 const float ResisB = 1000;
 const float ResisC = 10000;
 float OverVoltage = ov / RESISTIVE_DIVISOR;
 uint8_t MAX_INIT = 0x44;     // 0x60;
 float MIN_VOUT_SIPM = 27.92f;  // 26.714f;  // Teórico
-#else
-const float ResisB = 2000;
-const float ResisC = 12700;
-// const float OverVoltage = 0.2238233f * ov // CALCULAR
-const float OverVoltage = ov / RESISTIVE_DIVISOR;
-uint8_t MAX_INIT = 0x01;      // 0x44     // 0x60;
-float MIN_VOUT_SIPM = 24.588; // 27.92f;  // 26.714f;  // Teórico
+#endif
+#ifdef THIRD_DETECTION_BOARD
+const float ResisB = 1000;
+const float ResisC = 12400;
+float OverVoltage = ov / RESISTIVE_DIVISOR;
+uint8_t MAX_INIT = 0x01;//0x44;                                        // 0x01;     
+float MIN_VOUT_SIPM = 24.588f;//22.0366f+3.8f; //21.96486                                // 25.1717f; //25.094
 #endif
 uint16_t DAC_INIT = 0x7FFF;
 
@@ -441,22 +451,28 @@ void setupCOUNT(void) {
   #ifdef DEBUG_
   write_dac8551_reg(DAC_INIT, SPI_CS_DAC1);             // 0x7FFF
   write_max_reg(MAX_INIT, SPI_CS_MAX1);                 // 0x40
-  uint16_t aux = DAC_INIT;
+  write_dac8551_reg(DAC_INIT, SPI_CS_DAC2);             // 0x7FFF
+  write_max_reg(MAX_INIT, SPI_CS_MAX2);                 // 0x40
+  delay(100);
+  float val1, val2, val3, val4;
   while (true) {
-    // aux -= 0x0100;
-    // external_ref = ads1260.readRef();                             // Se lee la referencia
-    // #ifdef DEBUG_MAIN
-    // Serial.print("DEBUG (loopCOUNT) -> readRef: ");
-    // Serial.println(external_ref, 6);
-    // #endif
-    write_dac8551_reg(0x4235, SPI_CS_DAC1);     /* Medi 28.67 V con el multimetro (channel 1)*/
-    delay(5);                                   /* Debieron ser 34V */
-    Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM), external_ref), 6);
-    Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref), 6);
+    val1 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN1, ADS1260_MUXN_AINCOM), external_ref);
+    delay(100);
+    val2 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN3, ADS1260_MUXN_AINCOM), external_ref);
+    delay(100);
+    val3 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref);
+    delay(100);
+    val4 = ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN4, ADS1260_MUXN_AINCOM), external_ref);
+    Serial.println(val1, 6);
+    Serial.println(val2, 6);
     delay(500);
-    Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN0, ADS1260_MUXN_AINCOM), external_ref), 6);
-    Serial.println(ads1260.computeVolts(ads1260.readData(ADS1260_MUXP_AIN2, ADS1260_MUXN_AINCOM), external_ref), 6);
+    Serial.println(val3, 6);
+    Serial.println(val4, 6);
     delay(10000);
+    Serial.println("val1, val3");
+    Serial.print((val1*RESISTIVE_DIVISOR)-Voffset, 7);
+    Serial.print(", ");
+    Serial.print((val3*RESISTIVE_DIVISOR)-Voffset, 7);
   }
   #endif
 
@@ -1101,7 +1117,7 @@ void obtain_Curve_inverseVI(float Temperature, uint8_t CS_DAC, float REFERENCE) 
 
   float Vbd_Teo = Vbd_teorical(Temperature);
   #ifdef DEBUG_MAIN
-  Serial.print("Vbd teorico: ");
+  Serial.print("DEBUG (obtain_Curve_inverseVI) -> Vbd teorico: ");
   Serial.println(Vbd_Teo, 6);
   #endif
   float MAX_VOUT_SIPM = MIN_VOUT_SIPM + 12;
