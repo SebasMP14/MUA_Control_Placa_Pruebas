@@ -251,6 +251,8 @@ void setup()
   // }
 
   // Restaurar último estado guardado en memoria
+  write_OPstate(0x00);
+  delay(1000);
   get_OPstate(&state);
   // state = 0x14; // For COUNT test only
 
