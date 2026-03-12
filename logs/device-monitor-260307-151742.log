@@ -1,0 +1,10 @@
+15:17:46.040 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+15:17:46.040 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+15:18:01.924 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:18:01.924 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:18:01.924 > DEBUG (obtain_Vbd) -> Vbd obtenido: 1.976933
+15:18:01.924 > DEBUG (polarization_settling) → Channel 1
+15:18:20.690 > DEBUG (obtain_Vbd) -> Ejecutandose
+15:18:20.693 > DEBUG (obtain_Vbd) -> logaritmo calculado
+15:18:20.694 > DEBUG (obtain_Vbd) -> Vbd obtenido: 2.438588
+15:18:20.697 > DEBUG (polarization_settling) → Channel 2

@@ -21,7 +21,7 @@ unsigned long timeOUT_invalid_frame = 30;   // ms
 unsigned long timeOUT_window = 100;         // ms
 
 uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x00, 0x00, 0xAA, 0xAA, 0x0A};            // MUA to OBC ACK
-const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK
+const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK CRC
 const uint8_t nack_IF_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x00, 0x00, 0x00, 0x00, 0x0A};  // INVALID FRAME RECEIVED NACK
 
 const uint8_t ACK_OBC_to_MUA = 0x04;
@@ -347,19 +347,20 @@ const uint16_t crc_table[256] = {
  */
 uint16_t crc_calculate(uint8_t *data) {
   uint16_t crc = 0x1d0f;     //initial crc value
-  uint16_t tbl_idx;
+  uint8_t tbl_idx;
   
   // get the amount of appended data according to Data size
   uint8_t data_len = data[2];
   
   // operate only over data[1:data_len] to calculate the checksum 
-  for ( uint8_t i = 1; i <= data_len + 2; i++ ) {   
-    tbl_idx = ((crc >> 8) ^ (*(data + i)) & 0xFF);
-    crc = (crc_table[tbl_idx] ^ (crc << 8)) & 0xFFFF;
+  for ( uint8_t i = 0; i <= data_len + 2; i++ ) {
+    tbl_idx = (((uint8_t)(crc >> 8) ^ (*(data + i))) & 0xFF);
+    crc = (crc_table[tbl_idx] ^ (crc << 8));
   }
   
-  return (crc & 0xFFFF);
+  return crc;
 }
+
 // *******************************************************************************
 // *******************************************************************************
 

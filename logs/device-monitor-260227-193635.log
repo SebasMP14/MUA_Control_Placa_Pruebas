@@ -1,0 +1,19 @@
+19:36:39.201 > DEBUG (setup) -> Serial Iniciado
+19:36:39.201 > DEBUG (setup) -> Serial1 Iniciado
+19:36:39.201 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+19:36:39.202 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+19:36:39.202 > Estado: 0x1
+19:36:39.202 > DEBUG (setup) -> COUNT_MODE iniciado
+19:36:39.217 > DEBUG (setupCOUNT) -> Inicialización de RTC exitosa.
+19:36:39.217 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 0
+19:36:39.380 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 1
+19:36:39.390 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 fallida: 2
+19:36:39.400 > DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+19:36:39.401 > MCP escrito en: 9C
+19:36:39.401 > DEBUG (setupCOUNT) -> writing in MCP DEBUG (setupCOUNT) -> Inicialización de MCP4561 exitosa.
+19:36:39.401 > MCP escrito en: 19C
+19:36:40.553 > DEBUG (setupCOUNT) -> Inicialización de TMP100 exitosa.
+19:36:40.663 > DEBUG (setupCOUNT) -> MODE0: 100100
+19:36:40.713 > DEBUG (setupCOUNT) -> MODE0: 11111100
+19:36:40.713 > DEBUG (setupCOUNT) -> PGA: 0
+19:36:40.763 > DEBUG (setupCOUNT) -> PGA BYPASS MODE: 10000000

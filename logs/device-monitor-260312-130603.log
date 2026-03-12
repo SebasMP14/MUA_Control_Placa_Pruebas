@@ -1,0 +1,22 @@
+13:06:07.075 > DEBUG (setup) -> Serial Iniciado
+13:06:07.075 > DEBUG (setup) -> Serial1 Iniciado
+13:06:07.075 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+13:06:07.076 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+13:06:07.076 > Estado: 0x14
+13:06:07.076 > DEBUG (setup) -> Setup finalizado...
+13:06:13.080 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:19.083 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:25.084 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:31.082 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:37.083 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:43.100 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:49.104 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:06:55.103 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:01.104 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:07.115 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:13.119 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:19.123 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:25.127 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:31.130 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:37.131 > DEBUG (requestOperationMode) → slidingWindowBuffer
+13:07:43.137 > DEBUG (requestOperationMode) → slidingWindowBuffer

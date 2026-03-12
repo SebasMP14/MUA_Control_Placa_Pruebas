@@ -29,7 +29,7 @@ bool writeMCP0(uint8_t valor) {
   return true;
 }
 bool writeMCP1(uint8_t valor) {
-  uint8_t VW1 = 0b00000001 ;
+  uint8_t VW1 = 0b00010000 ;
   uint8_t D2 = valor;
   #ifdef DEBUG_MCP
   Serial.print("DEBUG (escribirPot) -> VW1: "); Serial.println(VW1, BIN);
@@ -71,7 +71,7 @@ uint16_t readMCP0(void) {
 
 uint16_t readMCP1(void) {
   Wire.beginTransmission(MCP_ADDRESS);
-  Wire.write(0b00001101);  // Dirección del registro Wiper 1
+  Wire.write(0b00011100);  // Dirección del registro Wiper 1
   Wire.endTransmission(false);
 
   Wire.requestFrom(MCP_ADDRESS, 2); // Solicita 2 bytes
