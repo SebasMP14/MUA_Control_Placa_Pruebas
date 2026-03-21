@@ -288,6 +288,9 @@ void setup()
     {
       setupTRANSFER();
     }
+    else if (currentMode == DYNAMIC_MEM_READ_MODE) {
+      setupTRANSFER();
+    }
     break;
 
   case 0x01: // COUNT_MODE
@@ -311,6 +314,10 @@ void setup()
   case 0x09: // TRANSFER_DATA_MODE
     currentMode = TRANSFER_INFO_MODE;
     setupTRANSFER();
+    break;
+  case 0x0B: // DYNAMIC_MEM_READ_MODE no persiste entre reinicios:
+             // las direcciones se pierden, se requiere nuevo comando del OBC
+    currentMode = STAND_BY;
     break;
 
   default:
@@ -342,6 +349,9 @@ void loop()
     {
       setupTRANSFER();
     }
+    else if (currentMode == DYNAMIC_MEM_READ_MODE) {
+      setupTRANSFER();
+    }
     break;
 
   case COUNT_MODE:
@@ -354,6 +364,10 @@ void loop()
         setupTRANSFER();
       }
       else if (currentMode == TRANSFER_INFO_MODE)
+      {
+        setupTRANSFER();
+      }
+      else if (currentMode == DYNAMIC_MEM_READ_MODE)
       {
         setupTRANSFER();
       }
@@ -372,6 +386,12 @@ void loop()
     write_OPstate(0x00);
     enterOffMode();
     break;
+  case DYNAMIC_MEM_READ_MODE:
+  #ifdef DEBUG_MAIN
+  Serial.println("DEBUG (main) -> DYNAMIC_MEM_READ_MODE");
+  #endif
+  loopTRANSFERdynamic();
+  break;
 
   default:
 #ifdef DEBUG_MAIN
@@ -1263,6 +1283,14 @@ void loopTRANSFER(void)
         Serial.println("DEBUG (loopTRANSFER) -> TRANSFER SYSINFO MODE ACTIVATED");
 #endif
         write_OPstate(ID_TRANSFER_SYSINFO_MODE);
+        return;
+        break;
+      case ID_DYNAMIC_MEM_READ:
+        currentMode = DYNAMIC_MEM_READ_MODE;
+#ifdef DEBUG_MAIN
+        Serial.println("DEBUG (loopTRANSFER) -> DYNAMIC MEMORY READ MODE ACTIVATED");
+#endif
+        write_OPstate(ID_DYNAMIC_MEM_READ);
         return;
         break;
       default:

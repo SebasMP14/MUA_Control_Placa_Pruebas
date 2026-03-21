@@ -35,6 +35,7 @@
 #define ACK_MUA_TO_OBC              0x07
 #define ID_FINISH                   0x08
 #define STOP_BYTE                   0x0A
+#define ID_DYNAMIC_MEM_READ         0x0B        //PRUEBA de lectura dinámica de la memoria
 
 #define ACCESS_BOARD_ID             0xAB
 
@@ -44,6 +45,7 @@ enum OperationMode {
     STAND_BY,
     COUNT_MODE,
     TRANSFER_DATA_MODE,
+    DYNAMIC_MEM_READ_MODE, //Modo para probar la lectura dinamica de la memoria
     TRANSFER_INFO_MODE,
     FINISH,
     UNKNOWN_MODE
@@ -55,11 +57,20 @@ extern unsigned long timeOUT;
 extern unsigned long timeOUT_invalid_frame;
 extern unsigned long timeOUT_window;
 
+
 // ACK y NACK
 extern uint8_t ack_MUA_to_OBC[TRAMA_COMM];
 extern const uint8_t nack_MUA_to_OBC[TRAMA_COMM];
 extern const uint8_t nack_IF_MUA_to_OBC[TRAMA_COMM];
 extern const uint8_t ACK_OBC_to_MUA;
+// ACCESO DINAMICO A MEMORIA
+extern uint32_t dynamic_start_addr;
+extern uint32_t dynamic_end_addr;
+extern uint32_t dynamic_current_addr;
+bool receiveFrame(uint8_t* buffer, uint8_t* total_len, unsigned long timeout);
+bool sendDynamicMemoryFrame(void);
+void loopTRANSFERdynamic(void);
+bool parseDynamicMemCmd(const uint8_t* response);
 
 extern const uint16_t crc_table[256];
 

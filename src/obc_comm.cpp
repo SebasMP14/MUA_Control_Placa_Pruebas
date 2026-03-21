@@ -19,6 +19,21 @@ bool setup_state = false;
 unsigned long timeOUT = 6000;               // ms
 unsigned long timeOUT_invalid_frame = 30;   // ms
 unsigned long timeOUT_window = 100;         // ms
+// ACCESO DINAMICO A MEMORIA
+uint32_t dynamic_start_addr = 0;
+uint32_t dynamic_end_addr = 0;
+uint32_t dynamic_current_addr = 0;
+
+
+uint32_t bytesToUint32_BE(const uint8_t* p) {
+  return ((uint32_t)p[0] << 24) |
+         ((uint32_t)p[1] << 16) |
+         ((uint32_t)p[2] << 8)  |
+         ((uint32_t)p[3]);
+}
+
+
+
 
 uint8_t ack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0x00, 0x00, 0xAA, 0xAA, 0x0A};            // MUA to OBC ACK
 const uint8_t nack_MUA_to_OBC[TRAMA_COMM] = {0x26, 0xFF, 0x00, 0xFF, 0xFF, 0x0A};     // INVALID CHECKSUM NACK CRC
@@ -29,6 +44,93 @@ const uint8_t ACK_OBC_to_MUA = 0x04;
 RTC_SAMD51 rtc;
 
 /************************************************************************************************************
+ * ACCESO DINAMICO A MEMORIA
+ */
+bool receiveFrame(uint8_t* buffer, uint8_t* total_len, unsigned long timeout) {
+  unsigned long tiempo = millis();
+
+  while ( millis() - tiempo < timeout ) {
+    if ( Serial1.available() ) {
+      uint8_t incoming = Serial1.read();
+
+      #ifdef DEBUG_OBC
+      Serial.print("DEBUG (receiveFrame) -> first byte: 0x");
+      if (incoming < 0x10) Serial.print("0");
+      Serial.println(incoming, HEX);
+      #endif
+
+      if ( incoming != ACCESS_BOARD_ID ) {
+        continue;
+      }
+
+      buffer[0] = incoming;
+
+      // Esperar CMD y LEN
+      while ( Serial1.available() < 2 ) {
+        if ( millis() - tiempo >= timeout ) return false;
+      }
+
+      buffer[1] = Serial1.read();   // CMD
+      buffer[2] = Serial1.read();   // LEN
+
+      uint8_t payload_len = buffer[2];
+      uint8_t frame_len = payload_len + 6;   // ID + CMD + LEN + DATA + CRC(2) + STOP
+
+      #ifdef DEBUG_OBC
+      Serial.print("DEBUG (receiveFrame) -> CMD: 0x");
+      if (buffer[1] < 0x10) Serial.print("0");
+      Serial.println(buffer[1], HEX);
+
+      Serial.print("DEBUG (receiveFrame) -> LEN: ");
+      Serial.println(payload_len);
+
+      Serial.print("DEBUG (receiveFrame) -> frame_len: ");
+      Serial.println(frame_len);
+      #endif
+
+      if ( frame_len > TRAMA_SIZE ) {
+        #ifdef DEBUG_OBC
+        Serial.println("DEBUG (receiveFrame) -> frame_len mayor que TRAMA_SIZE");
+        #endif
+        return false;
+      }
+
+      // Leer resto de la trama
+      while ( Serial1.available() < (frame_len - 3) ) {
+        if ( millis() - tiempo >= timeout ) return false;
+      }
+
+      for ( uint8_t i = 3; i < frame_len; i++ ) {
+        buffer[i] = Serial1.read();
+      }
+
+      if ( buffer[frame_len - 1] != STOP_BYTE ) {
+        #ifdef DEBUG_OBC
+        Serial.println("DEBUG (receiveFrame) -> STOP byte incorrecto");
+        #endif
+        return false;
+      }
+
+      *total_len = frame_len;
+
+      #ifdef DEBUG_OBC
+      Serial.print("DEBUG (receiveFrame) -> trama recibida: ");
+      for (uint8_t i = 0; i < frame_len; i++) {
+        Serial.print("0x");
+        if (buffer[i] < 0x10) Serial.print("0");
+        Serial.print(buffer[i], HEX);
+        Serial.print(" ");
+      }
+      Serial.println();
+      #endif
+
+      return true;
+    }
+  }
+
+  return false;
+}
+/************************************************************************************************************
  * @fn      requestOperationMode
  * @brief   Espera el modo de operación de la misión, establecida por el OBC
  * @param   NONE
@@ -38,7 +140,8 @@ RTC_SAMD51 rtc;
  * - Agregar Timeout
  * - Agregar estado TRANSFER_INFO_MODE
  */
-void requestOperationMode(void) {
+
+/*void requestOperationMode(void) {
   uint8_t response[TRAMA_COMM];
 
   if ( !slidingWindowBuffer(response, timeOUT) ) {  // Solo debe ir timeOUT_invalid_frame?
@@ -129,7 +232,125 @@ void requestOperationMode(void) {
       break;
   }
 }
+*/
+//********************************************************
+// ACCESO DINAMICO A MEMORIA
+void requestOperationMode(void) {
+  uint8_t response[TRAMA_SIZE] = {0};
+  uint8_t frame_len = 0;
 
+  #ifdef DEBUG_OBC
+  Serial.println("DEBUG (requestOperationMode) -> esperando trama...");
+  #endif
+
+  if ( !receiveFrame(response, &frame_len, timeOUT) ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (requestOperationMode) -> no se recibio trama");
+    #endif
+    return;
+  }
+
+  if ( !verifyOBCResponse(response) ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (requestOperationMode) -> trama invalida");
+    #endif
+    return;
+  }
+
+  // ACK del comando recibido
+  ack_MUA_to_OBC[1] = response[1];
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (requestOperationMode) -> ACK enviado: ");
+  for (uint8_t i = 0; i < TRAMA_COMM; i++) {
+    Serial.print("0x");
+    if (ack_MUA_to_OBC[i] < 0x10) Serial.print("0");
+    Serial.print(ack_MUA_to_OBC[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+
+  Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
+
+  switch ( response[1] ) {
+    case ID_STANDBY:
+      currentMode = STAND_BY;
+      write_OPstate(ID_STANDBY);
+      break;
+
+    case ID_COUNT_MODE:
+      currentMode = COUNT_MODE;
+      write_OPstate(ID_COUNT_MODE);
+      break;
+
+    case ID_TRANSFER_MODE:
+      currentMode = TRANSFER_DATA_MODE;
+      write_OPstate(ID_TRANSFER_MODE);
+      break;
+
+    case ID_TRANSFER_SYSINFO_MODE:
+      currentMode = TRANSFER_INFO_MODE;
+      write_OPstate(ID_TRANSFER_SYSINFO_MODE);
+      break;
+
+    case ID_DYNAMIC_MEM_READ:
+      if ( !parseDynamicMemCmd(response) ) {
+        #ifdef DEBUG_OBC
+        Serial.println("DEBUG (requestOperationMode) -> LEN incorrecto para acceso dinamico");
+        #endif
+        return;
+      }
+
+      currentMode = DYNAMIC_MEM_READ_MODE;
+      write_OPstate(ID_DYNAMIC_MEM_READ);
+      break;
+
+    case ID_FINISH:
+      currentMode = FINISH;
+      write_OPstate(ID_STANDBY);
+      break;
+  }
+}
+/************************************************************************************************************
+ * @fn      parseDynamicMemCmd
+ * @brief   Parsea el payload del comando ID_DYNAMIC_MEM_READ y carga las variables globales
+ *          dynamic_start_addr, dynamic_end_addr y dynamic_current_addr.
+ * @param   response: trama completa recibida del OBC
+ * @return  true: rango válido cargado correctamente
+ * @return  false: LEN incorrecto o rango inválido (start > end)
+ */
+bool parseDynamicMemCmd(const uint8_t* response) {
+  if ( response[2] != 0x08 ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (parseDynamicMemCmd) -> LEN incorrecto, se esperaba 0x08");
+    #endif
+    return false;
+  }
+
+  uint32_t start = bytesToUint32_BE(&response[3]);
+  uint32_t end   = bytesToUint32_BE(&response[7]);
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (parseDynamicMemCmd) -> start: 0x");
+  Serial.println(start, HEX);
+  Serial.print("DEBUG (parseDynamicMemCmd) -> end:   0x");
+  Serial.println(end, HEX);
+  #endif
+
+  if ( start > end ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (parseDynamicMemCmd) -> rango invalido (start > end)");
+    #endif
+    return false;
+  }
+
+  dynamic_start_addr   = start;
+  dynamic_end_addr     = end;
+  dynamic_current_addr = start;
+
+  return true;
+}
 
 /************************************************************************************************************
  * @fn      getTimestampFromGPS
@@ -242,7 +463,161 @@ bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t add
 
   return true;
 }
+/************************************************************************************************************
+ * @fn      sendDynamicMemoryFrame
+ * @brief   Envía un bloque de datos desde la memoria flash al OBC, utilizando las variables globales 
+ *          dynamic_start_addr, dynamic_end_addr y dynamic_current_addr para manejar el rango de direcciones.
+ *          Se espera un ACK del OBC por cada bloque enviado, y se permite que el OBC corte la transferencia
+ *          con los comandos STANDBY o FINISH.
+ * @param   NONE
+ * @return  true: bloque enviado y ACK recibido correctamente ... 
+ * @return  false: error en la transmisión o ACK inválido
+ */
 
+bool sendDynamicMemoryFrame(void) {
+  // Si ya terminó el rango, volver a standby
+  if ( dynamic_current_addr > dynamic_end_addr ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> rango completado");
+    #endif
+    currentMode = STAND_BY;
+    write_OPstate(ID_STANDBY);
+    return true;
+  }
+
+  // Cantidad de bytes que faltan por enviar
+  uint32_t remaining = dynamic_end_addr - dynamic_current_addr + 1;
+
+  // Elegir tamaño del payload
+  uint8_t payload_size = (remaining >= TRAMA_DATA_SIZE) ? TRAMA_DATA_SIZE : (uint8_t)remaining;
+
+  // Tamaño total de la trama = payload + 6
+  uint8_t frame_len = payload_size + TRAMA_COMM;
+  uint8_t trama[TRAMA_SIZE] = {0};
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (sendDynamicMemoryFrame) -> dynamic_current_addr: 0x");
+  Serial.println(dynamic_current_addr, HEX);
+  Serial.print("DEBUG (sendDynamicMemoryFrame) -> payload_size: ");
+  Serial.println(payload_size);
+  #endif
+
+  // Armar trama con datos leídos desde flash
+  if ( !buildDataFrame(trama, ID_SENT_DATA, payload_size, dynamic_current_addr) ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> error al construir trama");
+    #endif
+    return false;
+  }
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (sendDynamicMemoryFrame) -> trama enviada: ");
+  for (uint8_t i = 0; i < frame_len; i++) {
+    Serial.print("0x");
+    if (trama[i] < 0x10) Serial.print("0");
+    Serial.print(trama[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+
+  // Enviar trama al OBC
+  Serial1.write(trama, frame_len);
+
+  // Esperar ACK del OBC
+  uint8_t response[TRAMA_SIZE] = {0};
+  uint8_t response_len = 0;
+
+  if ( !receiveFrame(response, &response_len, timeOUT) ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> timeout esperando ACK");
+    #endif
+    return false;
+  }
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (sendDynamicMemoryFrame) -> respuesta recibida: ");
+  for (uint8_t i = 0; i < response_len; i++) {
+    Serial.print("0x");
+    if (response[i] < 0x10) Serial.print("0");
+    Serial.print(response[i], HEX);
+    Serial.print(" ");
+  }
+  Serial.println();
+  #endif
+
+  // Aceptar solo ACK de 6 bytes para la trama enviada
+  if ( response_len != TRAMA_COMM ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> longitud de ACK incorrecta");
+    #endif
+    return false;
+  }
+
+  if ( response[1] != ID_SENT_DATA ) {
+    #ifdef DEBUG_OBC
+    Serial.print("DEBUG (sendDynamicMemoryFrame) -> ACK inesperado, CMD: 0x");
+    Serial.println(response[1], HEX);
+    #endif
+
+    // Permitir que desde OBC corten la transferencia con STANDBY o FINISH
+    if ( response[1] == ID_STANDBY ) {
+      currentMode = STAND_BY;
+      write_OPstate(ID_STANDBY);
+      return true;
+    }
+
+    if ( response[1] == ID_FINISH ) {
+      currentMode = FINISH;
+      write_OPstate(ID_STANDBY);
+      return true;
+    }
+
+    return false;
+  }
+
+  if ( !verifyCRCACK(response) ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> CRC de ACK invalido");
+    #endif
+    return false;
+  }
+
+  // Avanzar al siguiente bloque
+  dynamic_current_addr += payload_size;
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (sendDynamicMemoryFrame) -> siguiente direccion: 0x");
+  Serial.println(dynamic_current_addr, HEX);
+  #endif
+
+  // Si ya terminó, volver a standby
+  if ( dynamic_current_addr > dynamic_end_addr ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (sendDynamicMemoryFrame) -> transferencia finalizada");
+    #endif
+    currentMode = STAND_BY;
+    write_OPstate(ID_STANDBY);
+  }
+
+  return true;
+}
+/************************************************************************************************************
+ * @fn      loopTRANSFERdynamic
+ * @brief   Función principal para el modo DYNAMIC_MEM_READ_MODE, se llama en el loop() y se encarga de enviar bloques de datos al OBC
+ *          hasta completar el rango o recibir un comando de corte desde el OBC.
+ * @param   NONE
+ * @return  NONE
+ */
+
+void loopTRANSFERdynamic(void) {
+  if ( !sendDynamicMemoryFrame() ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (loopTRANSFERdynamic) -> fallo en transferencia dinamica");
+    #endif
+    return;
+  }
+}
 /************************************************************************************************************
  * @fn      verifyOBCResponse
  * @brief   Verifica el CRC y Mission ID de la trama recibida, en un caso fallido se devuelve un NACK
@@ -250,7 +625,8 @@ bool buildDataFrame(uint8_t* trama, uint8_t ID, uint8_t trama_size, uint32_t add
  * @return  true: trama recibida verificada correctamente ... 
  * @return  false: trama recibida con errores
  */
-bool verifyOBCResponse(uint8_t* recibido) {
+
+/*bool verifyOBCResponse(uint8_t* recibido) {
   if ( recibido[0] != ACCESS_BOARD_ID ) {   // Se elimina el timeout y el invalid frame
     // delay(timeOUT_invalid_frame);
     // Serial1.write(nack_IF_MUA_to_OBC, TRAMA_COMM);
@@ -261,6 +637,40 @@ bool verifyOBCResponse(uint8_t* recibido) {
   uint16_t crc_received = (recibido[TRAMA_COMM - 3] << 8) | recibido[TRAMA_COMM - 2];
 
   if ( crc_expected != crc_received ) {
+    Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
+    return false;
+  }
+
+  return true;
+}*/
+
+//********************************************************
+// ACCESO DINAMICO A MEMORIA
+bool verifyOBCResponse(uint8_t* recibido) {
+  if ( recibido[0] != ACCESS_BOARD_ID ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (verifyOBCResponse) -> ID incorrecto");
+    #endif
+    return false;
+  }
+
+  uint8_t data_len = recibido[2];
+
+  uint16_t crc_expected = crc_calculate(recibido);
+  uint16_t crc_received = ((uint16_t)recibido[data_len + 3] << 8) |
+                           recibido[data_len + 4];
+
+  #ifdef DEBUG_OBC
+  Serial.print("DEBUG (verifyOBCResponse) -> CRC esperado: 0x");
+  Serial.println(crc_expected, HEX);
+  Serial.print("DEBUG (verifyOBCResponse) -> CRC recibido: 0x");
+  Serial.println(crc_received, HEX);
+  #endif
+
+  if ( crc_expected != crc_received ) {
+    #ifdef DEBUG_OBC
+    Serial.println("DEBUG (verifyOBCResponse) -> CRC incorrecto");
+    #endif
     Serial1.write(nack_MUA_to_OBC, TRAMA_COMM);
     return false;
   }
