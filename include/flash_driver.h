@@ -39,10 +39,11 @@ extern Adafruit_SPIFlash Flash_QSPI;
 #define EXT_FLASH_SIZE            (16UL * 1024 * 1024)            // CAMBIAR a 128MB
 #define LAST_ADDRESS_SENT_DIR     SAVED_ADDRESS_SECTOR_DIR + ADDRESS_SIZE // 
 #define ADDRESS_OP_STATE_DIR      LAST_ADDRESS_SENT_DIR + ADDRESS_SIZE * 2 - 1
-#define SIZE_INFO                 12                              // Bytes de variables/info de sistema
+#define SIZE_INFO                 20                              // Bytes de variables/info de sistema OBS:era 12 pero para guardar inicio addr y fin addr se agregan 8 bytes mas
 #define SAVED_INDEX               0
 #define SENT_INDEX                4
 #define OP_STATE_INDEX            11
+#define DYNAMIC_ADDR_INDEX        12    // índices 12-15: start, 16-19: end
 // #define PAGE_SIZE                 256                             /* De la memoria flash */ 
 // #define LAST_PAGE_ADDR            (EXT_FLASH_SIZE - PAGE_SIZE)    /* Contiene la última posición escrita */
 
@@ -57,6 +58,7 @@ void read_all(void);
 void read_until(uint8_t *data, uint32_t data_length);
 bool read(uint8_t *data, uint32_t data_length, uint32_t since); 
 bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index);
+bool get_dynamic_addrs(uint32_t *start, uint32_t *end);
 bool write_OPstate(uint8_t state);
 bool write_SENT_DATAaddress(uint32_t *address);
 bool erase_all(void);

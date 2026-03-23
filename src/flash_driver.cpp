@@ -157,7 +157,36 @@ bool write_DATAinfo(uint8_t *buffer, uint32_t len, uint16_t index) {
 
   return true;
 }
-
+/************************************************************************************************************
+* @fn      get_dynamic_addrs
+* @brief   Lee las direcciones de inicio y fin del acceso dinámico a memoria desde SYSINFO
+* @param   start: Puntero donde se almacenará la dirección de inicio
+* @param   end:   Puntero donde se almacenará la dirección de fin
+* @return  true: lectura exitosa - false: error
+*/
+bool get_dynamic_addrs(uint32_t *start, uint32_t *end) {
+  uint8_t buf[8] = {0};
+  uint32_t len_bytes = Flash_QSPI.readBuffer(
+    SAVED_ADDRESS_SECTOR_DIR + DYNAMIC_ADDR_INDEX, buf, 8
+  );
+  if ( len_bytes == 0 ) {
+    #ifdef DEBUG_FLASH
+    Serial.println("ERROR (get_dynamic_addrs) -> Error en la lectura de la memoria FLASH.");
+    #endif
+    return false;
+  }
+  *start = ((uint32_t)buf[0] << 24) | ((uint32_t)buf[1] << 16) |
+           ((uint32_t)buf[2] <<  8) |  (uint32_t)buf[3];
+  *end   = ((uint32_t)buf[4] << 24) | ((uint32_t)buf[5] << 16) |
+           ((uint32_t)buf[6] <<  8) |  (uint32_t)buf[7];
+  #ifdef DEBUG_FLASH_INFO
+  Serial.print("DEBUG (get_dynamic_addrs) -> start: 0x");
+  Serial.println(*start, HEX);
+  Serial.print("DEBUG (get_dynamic_addrs) -> end:   0x");
+  Serial.println(*end, HEX);
+  #endif
+  return true;
+}
 /************************************************************************************************************
 * @fn      read_OPstate
 * @brief   Lee el espacio de memoria donde se guarda el último estado de operación del sistema.

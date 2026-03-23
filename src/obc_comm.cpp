@@ -270,9 +270,9 @@ void requestOperationMode(void) {
   }
   Serial.println();
   #endif
-
+  
   Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
-
+  Serial1.flush();//****************************************************************** */
   switch ( response[1] ) {
     case ID_STANDBY:
       currentMode = STAND_BY;
@@ -312,6 +312,23 @@ void requestOperationMode(void) {
       break;
   }
 }
+// Guarda start y end addr del acceso dinámico en los bytes 12-15 y 16-19 del sector info
+bool write_dynamic_addrs(uint32_t start, uint32_t end) {
+  uint8_t buf[8];
+  buf[0] = (start >> 24) & 0xFF;
+  buf[1] = (start >> 16) & 0xFF;
+  buf[2] = (start >>  8) & 0xFF;
+  buf[3] = (start      ) & 0xFF;
+  buf[4] = (end   >> 24) & 0xFF;
+  buf[5] = (end   >> 16) & 0xFF;
+  buf[6] = (end   >>  8) & 0xFF;
+  buf[7] = (end         ) & 0xFF;
+  return write_DATAinfo(buf, 8, DYNAMIC_ADDR_INDEX);
+}
+
+bool read_dynamic_addrs(uint32_t* start, uint32_t* end) {
+  return get_dynamic_addrs(start, end);
+}
 /************************************************************************************************************
  * @fn      parseDynamicMemCmd
  * @brief   Parsea el payload del comando ID_DYNAMIC_MEM_READ y carga las variables globales
@@ -349,6 +366,8 @@ bool parseDynamicMemCmd(const uint8_t* response) {
   dynamic_end_addr     = end;
   dynamic_current_addr = start;
 
+  // Persistir en flash para sobrevivir un eventual reset
+  write_dynamic_addrs(dynamic_start_addr, dynamic_end_addr);
   return true;
 }
 
@@ -559,7 +578,8 @@ bool sendDynamicMemoryFrame(void) {
     Serial.print("DEBUG (sendDynamicMemoryFrame) -> ACK inesperado, CMD: 0x");
     Serial.println(response[1], HEX);
     #endif
-
+    verifyCRCACK(response); 
+    
     // Permitir que desde OBC corten la transferencia con STANDBY o FINISH
     if ( response[1] == ID_STANDBY ) {
       currentMode = STAND_BY;

@@ -71,6 +71,8 @@ bool receiveFrame(uint8_t* buffer, uint8_t* total_len, unsigned long timeout);
 bool sendDynamicMemoryFrame(void);
 void loopTRANSFERdynamic(void);
 bool parseDynamicMemCmd(const uint8_t* response);
+bool write_dynamic_addrs(uint32_t start, uint32_t end);
+bool read_dynamic_addrs(uint32_t* start, uint32_t* end);
 
 extern const uint16_t crc_table[256];
 
