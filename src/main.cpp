@@ -1252,7 +1252,10 @@ void loopTRANSFER(void)
     if (verifyOBCResponse(buffer))
     { // NACK se maneja en la función
       ack_MUA_to_OBC[1] = buffer[1];
-      Serial1.write(ack_MUA_to_OBC, TRAMA_COMM); // SEND ACKNOWLEDGE FRAME
+      Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
+      Serial1.flush();
+      delay(2000);
+      Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
       Serial1.flush();
       switch (buffer[1])
       {

@@ -19,7 +19,7 @@
 #include "flash_driver.h"
 #include "power_manager.h"
 
-#define DEBUG_OBC
+// #define DEBUG_OBC
 #define TRAMA_SIZE                  45
 #define TRAMA_COMM                  6
 #define TRAMA_DATA_SIZE             36          // 
@@ -32,7 +32,6 @@
 #define ID_TRANSFER_MODE            0x02
 #define ID_SENT_DATA                0x03
 #define ID_TRANSFER_SYSINFO_MODE    0x09
-#define ACK_MUA_TO_OBC              0x07
 #define ID_FINISH                   0x08
 #define STOP_BYTE                   0x0A
 #define ID_DYNAMIC_MEM_READ         0x0B        //PRUEBA de lectura dinámica de la memoria
