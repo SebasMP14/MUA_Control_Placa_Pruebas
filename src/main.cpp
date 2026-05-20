@@ -34,10 +34,10 @@
 // #define DESACTIVE_CHANNEL_1
 // #define DESACTIVE_CHANNEL_2
 // #define FIRST_DETECTION_BOARD
-// #define SECOND_DETECTION_BOARD              // Placa con rangos modificados
-#define THIRD_DETECTION_BOARD
+#define SECOND_DETECTION_BOARD              // Placa con rangos modificados
+// #define THIRD_DETECTION_BOARD
 // #define DEBUG_NEW_POL_SETTLING
-#define PLACA_CONTROL_V3
+// #define PLACA_CONTROL_V3
 
 /**
  * FIXED_BIAS_MODE: Prueba de flujo con voltaje de polarización fijo.
@@ -206,7 +206,7 @@ void setup()
 // Serial.println("PRUEBA DE FLUJO DE PARTICULAS 22/05/2025, SOLO CHANNEL 1, Without Radiactive Coin");
 #endif
 
-  Serial1.begin(4800); // OBC (On Board Computer)
+  Serial1.begin(9600); // OBC (On Board Computer)
 #ifdef DEBUG_MAIN
   Serial.println("DEBUG (setup) -> Serial1 Iniciado");
 #endif
@@ -1254,6 +1254,10 @@ void loopTRANSFER(void)
       ack_MUA_to_OBC[1] = buffer[1];
       Serial1.write(ack_MUA_to_OBC, TRAMA_COMM); // SEND ACKNOWLEDGE FRAME
       Serial1.flush();
+      delay(1000);
+      Serial1.write(ack_MUA_to_OBC, TRAMA_COMM); // SEND ACKNOWLEDGE FRAME
+      Serial1.flush();
+      
       switch (buffer[1])
       {
       case ID_STANDBY:

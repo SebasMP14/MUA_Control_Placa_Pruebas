@@ -1,14 +1,14 @@
 #ifndef MCP4561_DRIVER_H
 #define MCP4561_DRIVER_H
 
-// #define DEBUG_MCP
+#define DEBUG_MCP
 
 #include <Arduino.h>
 #include <Wire.h>
 #include <math.h>
 
-//#define MCP_ADDRESS 0b00101110 // 0x2E:startBit, A6, ..., A0, 
- #define MCP_ADDRESS 0b00101000 // Flight model
+#define MCP_ADDRESS 0b00101110 // 0x2E:startBit, A6, ..., A0, 
+// #define MCP_ADDRESS 0b00101000 // Flight model
 
 extern const float V_to_umbral;
 

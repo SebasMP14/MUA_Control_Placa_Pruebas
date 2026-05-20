@@ -1,0 +1,26 @@
+18:52:27.399 > DEBUG (setup) -> Serial Iniciado
+18:52:27.400 > DEBUG (setup) -> Serial1 Iniciado
+18:52:27.400 > DEBUG (start_flash) -> La memoria Flash soporta QSPI.
+18:52:27.400 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+18:52:27.400 > DEBUG (start_flash) -> La mem flash Está lista
+18:52:27.401 > DEBUG (start_flash) -> ID JEDEC de la memoria flash: 0x20BA21
+18:52:27.401 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+18:52:27.401 > DEBUG (write_OPstate) -> 
+18:52:27.401 > readBuffer: address = FFF000 count = 20
+18:52:27.401 > DEBUG (write_DATAinfo) -> Datos existentes antes de la actualización: 
+18:52:27.401 > 0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x14 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 
+18:52:27.405 > eraseSector: address = FFF000
+18:52:27.405 > writeBuffer: address = FFF000 count = 20
+18:52:27.431 > DEBUG (write_DATAinfo) -> Datos actualizados correctamente:
+18:52:27.432 >  0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x0 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+18:52:28.433 > readBuffer: address = FFF00B count = 1
+18:52:28.434 > DEBUG (get_OPstate) -> Dirección: 0xFFF00B Estado leído: 0x0
+18:52:28.435 > Estado: 0x0
+18:52:28.435 > DEBUG (requestOperationMode) -> esperando trama...
+18:52:34.436 > DEBUG (requestOperationMode) -> no se recibio trama
+18:52:34.437 > DEBUG (setup) -> Setup finalizado...
+18:52:34.437 > DEBUG (requestOperationMode) -> esperando trama...
+18:52:40.438 > DEBUG (requestOperationMode) -> no se recibio trama
+18:52:40.438 > DEBUG (requestOperationMode) -> esperando trama...
+18:52:46.439 > DEBUG (requestOperationMode) -> no se recibio trama
+18:52:46.440 > DEBUG (requestOperationMode) -> esperando trama...

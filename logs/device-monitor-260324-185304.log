@@ -1,0 +1,51 @@
+18:53:07.906 > DEBUG (setup) -> Serial Iniciado
+18:53:07.911 > DEBUG (setup) -> Serial1 Iniciado
+18:53:07.911 > DEBUG (start_flash) -> La memoria Flash soporta QSPI.
+18:53:07.911 > DEBUG (start_flash) -> Memoria flash iniciada correctamente.
+18:53:07.911 > DEBUG (start_flash) -> La mem flash Está lista
+18:53:07.911 > DEBUG (start_flash) -> ID JEDEC de la memoria flash: 0x20BA21
+18:53:07.914 > DEBUG (start_flash) -> Memoria flash_QSPI inicializada correctamente.
+18:53:07.914 > DEBUG (write_OPstate) -> 
+18:53:07.914 > readBuffer: address = FFF000 count = 20
+18:53:07.914 > DEBUG (write_DATAinfo) -> Datos existentes antes de la actualización: 
+18:53:07.914 > 0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x0 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 
+18:53:07.918 > eraseSector: address = FFF000
+18:53:07.918 > writeBuffer: address = FFF000 count = 20
+18:53:07.942 > DEBUG (write_DATAinfo) -> Datos actualizados correctamente:
+18:53:07.944 >  0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x0 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+18:53:08.944 > readBuffer: address = FFF00B count = 1
+18:53:08.946 > DEBUG (get_OPstate) -> Dirección: 0xFFF00B Estado leído: 0x0
+18:53:08.947 > Estado: 0x0
+18:53:08.947 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:14.946 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:14.950 > DEBUG (setup) -> Setup finalizado...
+18:53:14.950 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:20.946 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:20.952 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:26.945 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:26.954 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:32.954 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:32.955 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:38.952 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:38.956 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:44.958 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:44.959 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:50.961 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:50.962 > DEBUG (requestOperationMode) -> esperando trama...
+18:53:56.963 > DEBUG (requestOperationMode) -> no se recibio trama
+18:53:56.964 > DEBUG (requestOperationMode) -> esperando trama...
+18:54:02.962 > DEBUG (requestOperationMode) -> no se recibio trama
+18:54:02.968 > DEBUG (requestOperationMode) -> esperando trama...
+18:54:08.963 > DEBUG (requestOperationMode) -> no se recibio trama
+18:54:08.970 > DEBUG (requestOperationMode) -> esperando trama...
+18:54:14.961 > DEBUG (requestOperationMode) -> no se recibio trama
+18:54:14.973 > DEBUG (requestOperationMode) -> esperando trama...
+18:54:20.973 > DEBUG (requestOperationMode) -> no se recibio trama
+18:54:20.973 > DEBUG (requestOperationMode) -> esperando trama...
+18:54:23.824 > DEBUG (receiveFrame) -> first byte: 0x9E
+18:54:23.825 > DEBUG (receiveFrame) -> first byte: 0xE6
+18:54:23.826 > DEBUG (receiveFrame) -> first byte: 0x80
+18:54:23.827 > DEBUG (receiveFrame) -> first byte: 0x80
+18:54:23.830 > DEBUG (receiveFrame) -> first byte: 0xF8
+18:54:23.830 > DEBUG (receiveFrame) -> first byte: 0x98
+18:54:23.837 > DEBUG (receiveFrame) -> first byte: 0x80

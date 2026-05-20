@@ -1,0 +1,48 @@
+18:56:20.783 > DEBUG (receiveFrame) -> first byte: 0xAB
+18:56:20.793 > DEBUG (receiveFrame) -> CMD: 0x14
+18:56:20.793 > DEBUG (receiveFrame) -> LEN: 0
+18:56:20.793 > DEBUG (receiveFrame) -> frame_len: 6
+18:56:20.795 > DEBUG (receiveFrame) -> trama recibida: 0xAB 0x14 0x00 0x93 0xD6 0x0A 
+18:56:20.798 > DEBUG (verifyOBCResponse) -> CRC esperado: 0x93D6
+18:56:20.798 > DEBUG (verifyOBCResponse) -> CRC recibido: 0x93D6
+18:56:20.800 > DEBUG (requestOperationMode) -> ACK enviado: 0x26 0x14 0x00 0xAA 0xAA 0x0A 
+18:56:20.802 > DEBUG (write_OPstate) -> 
+18:56:20.802 > readBuffer: address = FFF000 count = 20
+18:56:20.802 > DEBUG (write_DATAinfo) -> Datos existentes antes de la actualización: 
+18:56:20.802 > 0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x14 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 
+18:56:20.812 > eraseSector: address = FFF000
+18:56:20.812 > writeBuffer: address = FFF000 count = 20
+18:56:20.838 > DEBUG (write_DATAinfo) -> Datos actualizados correctamente:
+18:56:20.839 >  0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x14 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+18:56:20.841 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:26.844 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:26.845 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:28.785 > DEBUG (receiveFrame) -> first byte: 0xAB
+18:56:28.788 > DEBUG (receiveFrame) -> CMD: 0x14
+18:56:28.788 > DEBUG (receiveFrame) -> LEN: 0
+18:56:28.788 > DEBUG (receiveFrame) -> frame_len: 6
+18:56:28.791 > DEBUG (receiveFrame) -> trama recibida: 0xAB 0x14 0x00 0x93 0xD6 0x0A 
+18:56:28.793 > DEBUG (verifyOBCResponse) -> CRC esperado: 0x93D6
+18:56:28.793 > DEBUG (verifyOBCResponse) -> CRC recibido: 0x93D6
+18:56:28.793 > DEBUG (requestOperationMode) -> ACK enviado: 0x26 0x14 0x00 0xAA 0xAA 0x0A 
+18:56:28.800 > DEBUG (write_OPstate) -> 
+18:56:28.801 > readBuffer: address = FFF000 count = 20
+18:56:28.801 > DEBUG (write_DATAinfo) -> Datos existentes antes de la actualización: 
+18:56:28.802 > 0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x14 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 
+18:56:28.805 > eraseSector: address = FFF000
+18:56:28.805 > writeBuffer: address = FFF000 count = 20
+18:56:28.832 > DEBUG (write_DATAinfo) -> Datos actualizados correctamente:
+18:56:28.834 >  0x24 0x1C 0x0 0x0 0x48 0x9 0x0 0x0 0xFF 0xFF 0xFF 0x14 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
+18:56:28.836 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:34.834 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:34.834 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:40.837 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:40.837 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:46.844 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:46.845 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:52.846 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:52.847 > DEBUG (requestOperationMode) -> esperando trama...
+18:56:58.847 > DEBUG (requestOperationMode) -> no se recibio trama
+18:56:58.848 > DEBUG (requestOperationMode) -> esperando trama...
+18:57:04.846 > DEBUG (requestOperationMode) -> no se recibio trama
+18:57:04.846 > DEBUG (requestOperationMode) -> esperando trama...

@@ -273,6 +273,10 @@ void requestOperationMode(void) {
   
   Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
   Serial1.flush();//****************************************************************** */
+  delay(1000);
+  Serial1.write(ack_MUA_to_OBC, TRAMA_COMM);
+  Serial1.flush();//****************************************************************** */
+
   switch ( response[1] ) {
     case ID_STANDBY:
       currentMode = STAND_BY;
